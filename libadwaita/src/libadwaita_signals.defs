@@ -9,6 +9,16 @@
   )
 )
 
+(define-property appdata-resource-path
+  (of-object "AdwAboutDialog")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+  (default-value "")
+)
+
 (define-property application-icon
   (of-object "AdwAboutDialog")
   (prop-type "GParamString")
@@ -587,6 +597,16 @@
   (construct-only #f)
 )
 
+(define-property adaptive-preview
+  (of-object "AdwApplicationWindow")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
 ;; From AdwAvatar
 
 (define-property icon-name
@@ -993,6 +1013,15 @@
   (construct-only #f)
 )
 
+(define-property header-factory
+  (of-object "AdwComboRow")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 (define-property list-factory
   (of-object "AdwComboRow")
   (prop-type "GParamObject")
@@ -1029,6 +1058,16 @@
   (writable #t)
   (construct-only #f)
   (default-value "FALSE")
+)
+
+(define-property search-match-mode
+  (of-object "AdwComboRow")
+  (prop-type "GParamEnum")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "GTK_STRING_FILTER_MATCH_MODE_PREFIX")
 )
 
 ;; From AdwDialog
@@ -1226,6 +1265,16 @@
   (default-value "0")
 )
 
+(define-property max-length
+  (of-object "AdwEntryRow")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "0")
+)
+
 ;; From AdwEnumListItem
 
 (define-property value
@@ -1267,6 +1316,25 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+)
+
+(define-property item-type
+  (of-object "AdwEnumListModel")
+  (prop-type "GParamGType")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property n-items
+  (of-object "AdwEnumListModel")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+  (default-value "0")
 )
 
 ;; From AdwExpanderRow
@@ -1880,6 +1948,16 @@
   (construct-only #f)
 )
 
+(define-property separate-rows
+  (of-object "AdwPreferencesGroup")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
 ;; From AdwPreferencesPage
 
 (define-property icon-name
@@ -1930,6 +2008,25 @@
   (writable #t)
   (construct-only #f)
   (default-value "FALSE")
+)
+
+(define-property description-centered
+  (of-object "AdwPreferencesPage")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property banner
+  (of-object "AdwPreferencesPage")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
 )
 
 ;; From AdwPreferencesRow
@@ -2463,6 +2560,55 @@
   (default-value "FALSE")
 )
 
+(define-property system-supports-accent-colors
+  (of-object "AdwStyleManager")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property accent-color
+  (of-object "AdwStyleManager")
+  (prop-type "GParamEnum")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+  (default-value "ADW_ACCENT_COLOR_BLUE")
+)
+
+(define-property accent-color-rgba
+  (of-object "AdwStyleManager")
+  (prop-type "GParamBoxed")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property document-font-name
+  (of-object "AdwStyleManager")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+  (default-value "Sans 10")
+)
+
+(define-property monospace-font-name
+  (of-object "AdwStyleManager")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+  (default-value "Monospace 10")
+)
+
 ;; From AdwSwipeTracker
 
 (define-signal prepare
@@ -2696,7 +2842,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
-  (default-value "0")
+  (default-value "GDK_ACTION_NONE")
 )
 
 ;; From AdwTabPage
@@ -3305,6 +3451,36 @@
   (default-value "")
 )
 
+(define-property enable-transitions
+  (of-object "AdwViewStack")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property transition-duration
+  (of-object "AdwViewStack")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "200")
+)
+
+(define-property transition-running
+  (of-object "AdwViewStack")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
 (define-property pages
   (of-object "AdwViewStack")
   (prop-type "GParamObject")
@@ -3393,6 +3569,26 @@
   (writable #t)
   (construct-only #f)
   (default-value "TRUE")
+)
+
+(define-property starts-section
+  (of-object "AdwViewStackPage")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property section-title
+  (of-object "AdwViewStackPage")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
 )
 
 ;; From AdwViewSwitcher
@@ -3529,6 +3725,16 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+)
+
+(define-property adaptive-preview
+  (of-object "AdwWindow")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
 )
 
 ;; From AdwWindowTitle

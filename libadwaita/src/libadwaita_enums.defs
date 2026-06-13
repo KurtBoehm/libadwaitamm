@@ -1,3 +1,34 @@
+;; From adw-accent-color.h
+
+;; Original typedef:
+;; typedef enum {
+;;   ADW_ACCENT_COLOR_BLUE,
+;;   ADW_ACCENT_COLOR_TEAL,
+;;   ADW_ACCENT_COLOR_GREEN,
+;;   ADW_ACCENT_COLOR_YELLOW,
+;;   ADW_ACCENT_COLOR_ORANGE,
+;;   ADW_ACCENT_COLOR_RED,
+;;   ADW_ACCENT_COLOR_PINK,
+;;   ADW_ACCENT_COLOR_PURPLE,
+;;   ADW_ACCENT_COLOR_SLATE,
+;; } AdwAccentColor;
+
+(define-enum-extended AccentColor
+  (in-module "Adw")
+  (c-name "AdwAccentColor")
+  (values
+    '("blue" "ADW_ACCENT_COLOR_BLUE" "0")
+    '("teal" "ADW_ACCENT_COLOR_TEAL" "1")
+    '("green" "ADW_ACCENT_COLOR_GREEN" "2")
+    '("yellow" "ADW_ACCENT_COLOR_YELLOW" "3")
+    '("orange" "ADW_ACCENT_COLOR_ORANGE" "4")
+    '("red" "ADW_ACCENT_COLOR_RED" "5")
+    '("pink" "ADW_ACCENT_COLOR_PINK" "6")
+    '("purple" "ADW_ACCENT_COLOR_PURPLE" "7")
+    '("slate" "ADW_ACCENT_COLOR_SLATE" "8")
+  )
+)
+
 ;; From adw-alert-dialog.h
 
 ;; Original typedef:
@@ -35,6 +66,23 @@
     '("paused" "ADW_ANIMATION_PAUSED" "1")
     '("playing" "ADW_ANIMATION_PLAYING" "2")
     '("finished" "ADW_ANIMATION_FINISHED" "3")
+  )
+)
+
+;; From adw-banner.h
+
+;; Original typedef:
+;; typedef enum {
+;;   ADW_BANNER_BUTTON_DEFAULT,
+;;   ADW_BANNER_BUTTON_SUGGESTED,
+;; } AdwBannerButtonStyle;
+
+(define-enum-extended BannerButtonStyle
+  (in-module "Adw")
+  (c-name "AdwBannerButtonStyle")
+  (values
+    '("default" "ADW_BANNER_BUTTON_DEFAULT" "0")
+    '("suggested" "ADW_BANNER_BUTTON_SUGGESTED" "1")
   )
 )
 
@@ -128,6 +176,10 @@
 ;;   ADW_EASE_IN_BOUNCE,
 ;;   ADW_EASE_OUT_BOUNCE,
 ;;   ADW_EASE_IN_OUT_BOUNCE,
+;;   ADW_EASE,
+;;   ADW_EASE_IN,
+;;   ADW_EASE_OUT,
+;;   ADW_EASE_IN_OUT
 ;; } AdwEasing;
 
 (define-enum-extended Easing
@@ -165,6 +217,10 @@
     '("ease-in-bounce" "ADW_EASE_IN_BOUNCE" "28")
     '("ease-out-bounce" "ADW_EASE_OUT_BOUNCE" "29")
     '("ease-in-out-bounce" "ADW_EASE_IN_OUT_BOUNCE" "30")
+    '("ease" "ADW_EASE" "31")
+    '("ease-in" "ADW_EASE_IN" "32")
+    '("ease-out" "ADW_EASE_OUT" "33")
+    '("ease-in-out" "ADW_EASE_IN_OUT" "34")
   )
 )
 
@@ -238,6 +294,25 @@
   )
 )
 
+;; From adw-inline-view-switcher.h
+
+;; Original typedef:
+;; typedef enum {
+;;   ADW_INLINE_VIEW_SWITCHER_LABELS,
+;;   ADW_INLINE_VIEW_SWITCHER_ICONS,
+;;   ADW_INLINE_VIEW_SWITCHER_BOTH,
+;; } AdwInlineViewSwitcherDisplayMode;
+
+(define-enum-extended InlineViewSwitcherDisplayMode
+  (in-module "Adw")
+  (c-name "AdwInlineViewSwitcherDisplayMode")
+  (values
+    '("labels" "ADW_INLINE_VIEW_SWITCHER_LABELS" "0")
+    '("icons" "ADW_INLINE_VIEW_SWITCHER_ICONS" "1")
+    '("both" "ADW_INLINE_VIEW_SWITCHER_BOTH" "2")
+  )
+)
+
 ;; From adw-leaflet.h
 
 ;; Original typedef:
@@ -290,6 +365,23 @@
   (values
     '("back" "ADW_NAVIGATION_DIRECTION_BACK" "0")
     '("forward" "ADW_NAVIGATION_DIRECTION_FORWARD" "1")
+  )
+)
+
+;; From adw-sidebar.h
+
+;; Original typedef:
+;; typedef enum {
+;;   ADW_SIDEBAR_MODE_SIDEBAR,
+;;   ADW_SIDEBAR_MODE_PAGE,
+;; } AdwSidebarMode;
+
+(define-enum-extended SidebarMode
+  (in-module "Adw")
+  (c-name "AdwSidebarMode")
+  (values
+    '("sidebar" "ADW_SIDEBAR_MODE_SIDEBAR" "0")
+    '("page" "ADW_SIDEBAR_MODE_PAGE" "1")
   )
 )
 
@@ -424,6 +516,55 @@
   (values
     '("narrow" "ADW_VIEW_SWITCHER_POLICY_NARROW" "0")
     '("wide" "ADW_VIEW_SWITCHER_POLICY_WIDE" "1")
+  )
+)
+
+;; From adw-wrap-layout.h
+
+;; Original typedef:
+;; typedef enum {
+;;   ADW_JUSTIFY_NONE,
+;;   ADW_JUSTIFY_FILL,
+;;   ADW_JUSTIFY_SPREAD,
+;; } AdwJustifyMode;
+
+(define-enum-extended JustifyMode
+  (in-module "Adw")
+  (c-name "AdwJustifyMode")
+  (values
+    '("none" "ADW_JUSTIFY_NONE" "0")
+    '("fill" "ADW_JUSTIFY_FILL" "1")
+    '("spread" "ADW_JUSTIFY_SPREAD" "2")
+  )
+)
+
+;; Original typedef:
+;; typedef enum {
+;;   ADW_PACK_START_TO_END,
+;;   ADW_PACK_END_TO_START,
+;; } AdwPackDirection;
+
+(define-enum-extended PackDirection
+  (in-module "Adw")
+  (c-name "AdwPackDirection")
+  (values
+    '("start-to-end" "ADW_PACK_START_TO_END" "0")
+    '("end-to-start" "ADW_PACK_END_TO_START" "1")
+  )
+)
+
+;; Original typedef:
+;; typedef enum {
+;;   ADW_WRAP_MINIMUM,
+;;   ADW_WRAP_NATURAL,
+;; } AdwWrapPolicy;
+
+(define-enum-extended WrapPolicy
+  (in-module "Adw")
+  (c-name "AdwWrapPolicy")
+  (values
+    '("minimum" "ADW_WRAP_MINIMUM" "0")
+    '("natural" "ADW_WRAP_NATURAL" "1")
   )
 )
 
