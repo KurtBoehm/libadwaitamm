@@ -1,4 +1,4 @@
-/* Copyright (c) 2024 Kurt Böhm <kurbo96@gmail.com>
+/* Copyright (c) 2024, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -18,59 +18,174 @@
 
 _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
-_PINCLUDE(gtkmm/private/widget_p.h)
+_PINCLUDE(glibmm/private/object_p.h)
 
-#include <gtkmm.h>
-
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
+#include <glibmm/object.h>
+#include <glibmm/ustring.h>
+#include <glibmm/value.h>
+#include <glibmm/wrap.h>
 #include <adwaita.h>
-#include <libadwaitamm/breakpointcondition.h>
+#include <libadwaitamm/lengthunit.h>
 
-namespace Adw
-{
+namespace Adw {
+class BreakpointCondition {
+  _CLASS_BOXEDTYPE(BreakpointCondition, AdwBreakpointCondition, NONE, adw_breakpoint_condition_copy, adw_breakpoint_condition_free)
+
+public:
+  // Enumerations
+  _WRAP_ENUM(LengthType, AdwBreakpointConditionLengthType, newin "1.4")
+  _WRAP_ENUM(RatioType, AdwBreakpointConditionRatioType, newin "1.4")
+
+  // Factory methods
+
+  /** Creates a condition that triggers on length changes.
+   * 
+   * @newin{1.4}
+   * 
+   * @param type The length type.
+   * @param value The length value.
+   * @param unit The length unit.
+   * @return The newly created condition.
+   */
+  static BreakpointCondition create_length(LengthType type, double value, LengthUnit unit);
+
+  /** Creates a condition that triggers on ratio changes.
+   * 
+   * The ratio is represented as @a width divided by @a height.
+   * 
+   * @newin{1.4}
+   * 
+   * @param type The ratio type.
+   * @param width Ratio width.
+   * @param height Ratio height.
+   * @return The newly created condition.
+   */
+  static BreakpointCondition create_ratio(RatioType type, int width, int height);
+
+  /** Creates a condition that triggers when @a condition_1 and @a condition_2 are both
+   * true.
+   * 
+   * @newin{1.4}
+   * 
+   * @param condition_1 First condition.
+   * @param condition_2 Second condition.
+   * @return The newly created condition.
+   */
+  static BreakpointCondition create_and(BreakpointCondition condition_1, BreakpointCondition condition_2);
+
+  /** Creates a condition that triggers when either @a condition_1 or @a condition_2 is
+   * true.
+   * 
+   * @newin{1.4}
+   * 
+   * @param condition_1 First condition.
+   * @param condition_2 Second condition.
+   * @return The newly created condition.
+   */
+  static BreakpointCondition create_or(BreakpointCondition condition_1, BreakpointCondition condition_2);
+
+  /** Parses a condition from a string.
+   * 
+   * Length conditions are specified as `<type>: <value>[<unit>]`, where:
+   * 
+   * - `<type>` can be `min-width`, `max-width`, `min-height` or `max-height`
+   * - `<value>` is a fractional number
+   * - `<unit>` can be `px`, `pt` or `sp`
+   * 
+   * If the unit is omitted, `px` is assumed.
+   * 
+   * See new_length().
+   * 
+   * Examples:
+   * 
+   * - `min-width: 500px`
+   * - `min-height: 400pt`
+   * - `max-width: 100sp`
+   * - `max-height: 500`
+   * 
+   * Ratio conditions are specified as `<type>: <width>[/<height>]`, where:
+   * 
+   * - `<type>` can be `min-aspect-ratio` or `max-aspect-ratio`
+   * - `<width>` and `<height>` are integer numbers
+   * 
+   * See new_ratio().
+   * 
+   * The ratio is represented as `<width>` divided by `<height>`.
+   * 
+   * If `<height>` is omitted, it's assumed to be 1.
+   * 
+   * Examples:
+   * 
+   * - `min-aspect-ratio: 4/3`
+   * - `max-aspect-ratio: 1`
+   * 
+   * The logical operators `and`, `or` can be used to compose a complex condition
+   * as follows:
+   * 
+   * - `<condition> and <condition>`: the condition is true when both
+   * `<condition>`s are true, same as when using
+   * new_and()
+   * - `<condition> or <condition>`: the condition is true when either of the
+   * `<condition>`s is true, same as when using
+   * new_or()
+   * 
+   * Examples:
+   * 
+   * - `min-width: 400px and max-aspect-ratio: 4/3`
+   * - `max-width: 360sp or max-width: 360px`
+   * 
+   * Conditions can be further nested using parentheses, for example:
+   * 
+   * - `min-width: 400px and (max-aspect-ratio: 4/3 or max-height: 400px)`
+   * 
+   * If parentheses are omitted, the first operator takes priority.
+   * 
+   * @newin{1.4}
+   * 
+   * @param str The string specifying the condition.
+   * @return The parsed condition.
+   */
+  static BreakpointCondition parse(const Glib::ustring& str);
+
+  // Methods
+  _WRAP_METHOD(Glib::ustring to_string() const, adw_breakpoint_condition_to_string, newin "1.4")
+
+  AdwBreakpointCondition* steal() {
+    AdwBreakpointCondition* tmp = gobject_;
+    gobject_ = nullptr;
+    return tmp;
+  }
+};
 
 class Breakpoint : public Glib::Object {
   _CLASS_GOBJECT(Breakpoint, AdwBreakpoint, ADW_BREAKPOINT, Glib::Object, GObject)
   _STRUCT_NOT_HIDDEN
-  _UNMANAGEABLE
-  _DO_NOT_DERIVE_GTYPE
-  _NO_WRAP_FUNCTION
 
 protected:
+  // Constructors
   _CTOR_DEFAULT
   _WRAP_CTOR(Breakpoint(BreakpointCondition condition), adw_breakpoint_new)
 
 public:
+  // Constructors
   _WRAP_CREATE(BreakpointCondition condition)
 
-  _IGNORE(adw_breakpoint_add_setters_valist)
+  // Methods
+  _WRAP_METHOD(BreakpointCondition get_condition() const, adw_breakpoint_get_condition, newin "1.4")
+  _WRAP_METHOD(void set_condition(BreakpointCondition condition), adw_breakpoint_set_condition, newin "1.4")
+
+  _WRAP_METHOD(void add_setter(Glib::Object& object, const Glib::ustring& property, const Glib::ValueBase& value), adw_breakpoint_add_setter, newin "1.4")
+
+  // TODO Add adw_breakpoint_add_settersv?
   _IGNORE(adw_breakpoint_add_setters)
-  // TODO Add?
   _IGNORE(adw_breakpoint_add_settersv)
+  _IGNORE(adw_breakpoint_add_setters_valist)
 
-  _WRAP_METHOD(void add_setter(Glib::Object& obj, const Glib::ustring& property, const Glib::ValueBase& value), adw_breakpoint_add_setter)
-  _WRAP_METHOD(BreakpointCondition get_condition() const, adw_breakpoint_get_condition)
-  _WRAP_METHOD(void set_condition(BreakpointCondition& condition), adw_breakpoint_set_condition)
+  // Properties
+  _WRAP_PROPERTY("condition", BreakpointCondition, newin "1.4")
 
-  _WRAP_PROPERTY("condition", BreakpointCondition)
-
-  _WRAP_SIGNAL(void apply(), "apply", no_default_handler)
-  _WRAP_SIGNAL(void unapply(), "unapply", no_default_handler)
+  // Signals
+  _WRAP_SIGNAL(void apply(), "apply", no_default_handler, newin "1.4")
+  _WRAP_SIGNAL(void unapply(), "unapply", no_default_handler, newin "1.4")
 };
-
 } // namespace Adw
-
-namespace Glib
-{
-  /** A Glib::wrap() method for this object.
-   *
-   * @param object The C instance.
-   * @param take_copy False if the result should take ownership of the C instance. True if it should take a new copy or ref.
-   * @result A C++ instance that wraps this C instance.
-   *
-   * @relates Adw::Breakpoint
-   */
-  Adw::Breakpoint* wrap(AdwBreakpoint* object, bool take_copy = false);
-}

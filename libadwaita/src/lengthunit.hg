@@ -1,4 +1,4 @@
-/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -16,4 +16,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Adw {}
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+
+#include <gtkmm.h>
+#include <adwaita.h>
+
+namespace Adw {
+// Enumerations
+_WRAP_ENUM(LengthUnit, AdwLengthUnit)
+
+// Functions
+inline double length_unit_to_px(LengthUnit unit, double value, Gtk::Settings* settings) {
+  return adw_length_unit_to_px(static_cast<AdwLengthUnit>(unit), value, settings ? settings->gobj() : nullptr);
+}
+inline double length_unit_from_px(LengthUnit unit, double value, Gtk::Settings* settings) {
+  return adw_length_unit_from_px(static_cast<AdwLengthUnit>(unit), value, settings ? settings->gobj() : nullptr);
+}
+} // namespace Adw

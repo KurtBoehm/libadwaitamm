@@ -26,11 +26,10 @@ _PINCLUDE(gtkmm/private/widget_p.h)
 // But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
 // cannot forward-declare a struct type Foo.
 #include <adwaita.h>
+#include <libadwaitamm/lengthunit.h>
 
 namespace Adw
 {
-_WRAP_ENUM(LengthUnit, AdwLengthUnit)
-
 class Clamp : public Gtk::Widget, public Gtk::Orientable {
   _CLASS_GTKOBJECT(Clamp, AdwClamp, ADW_CLAMP, Gtk::Widget, GtkWidget)
   _STRUCT_NOT_HIDDEN

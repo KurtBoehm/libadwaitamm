@@ -42,7 +42,7 @@ public:
   _WRAP_METHOD(Gtk::Widget* get_content() const, adw_application_window_get_content)
 
   _WRAP_METHOD(void add_breakpoint(Adw::Breakpoint* breakpoint), adw_application_window_add_breakpoint, newin "1.4")
-  _WRAP_METHOD(Adw::Breakpoint* get_current_breakpoint() const, adw_application_window_get_current_breakpoint, newin "1.4")
+  _WRAP_METHOD(Glib::RefPtr<Adw::Breakpoint> get_current_breakpoint() const, adw_application_window_get_current_breakpoint, newin "1.4")
 
   _WRAP_METHOD(std::vector<Adw::Dialog*> get_dialogs() const, adw_application_window_get_dialogs, newin "1.5")
   _WRAP_METHOD(Adw::Dialog* get_visible_dialog() const, adw_application_window_get_visible_dialog, newin "1.5")

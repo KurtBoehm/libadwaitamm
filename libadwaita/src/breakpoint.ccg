@@ -1,4 +1,4 @@
-/* Copyright (c) 2024 Kurt Böhm <kurbo96@gmail.com>
+/* Copyright (c) 2024, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -16,15 +16,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <gtkmm.h>
+#include <glibmm/wrap.h>
+#include <adwaita.h>
+#include <libadwaitamm/breakpoint.h>
+#include <libadwaitamm/private/breakpoint_p.h>
 
-namespace Glib
-{
-
-Adw::Breakpoint* wrap(AdwBreakpoint* object, bool take_copy)
-{
-  return dynamic_cast<Adw::Breakpoint*> (Glib::wrap_auto ((GObject*)(object), take_copy));
-  //We use dynamic_cast<> in case of multiple inheritance.
+namespace Adw {
+BreakpointCondition BreakpointCondition::create_length(LengthType type, double value, LengthUnit unit) {
+  return Glib::wrap(
+    adw_breakpoint_condition_new_length(
+      static_cast<AdwBreakpointConditionLengthType>(type),
+      value,
+      static_cast<AdwLengthUnit>(unit)),
+    false);
 }
 
-} /* namespace Glib */
+BreakpointCondition BreakpointCondition::create_ratio(RatioType type, int width, int height) {
+  return Glib::wrap(
+    adw_breakpoint_condition_new_ratio(
+      static_cast<AdwBreakpointConditionRatioType>(type),
+      width,
+      height),
+    false);
+}
+
+BreakpointCondition BreakpointCondition::create_and(BreakpointCondition condition_1, BreakpointCondition condition_2) {
+  return Glib::wrap(adw_breakpoint_condition_new_and(condition_1.steal(), condition_2.steal()), false);
+}
+
+BreakpointCondition BreakpointCondition::create_or(BreakpointCondition condition_1, BreakpointCondition condition_2) {
+  return Glib::wrap(adw_breakpoint_condition_new_or(condition_1.steal(), condition_2.steal()), false);
+}
+
+BreakpointCondition BreakpointCondition::parse(const Glib::ustring& str) {
+  return Glib::wrap(adw_breakpoint_condition_parse(str.c_str()), false);
+}
+} // namespace Adw

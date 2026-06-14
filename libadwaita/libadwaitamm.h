@@ -51,7 +51,11 @@
 #include <libadwaitamm/avatar.h>
 #include <libadwaitamm/banner.h>
 #include <libadwaitamm/bin.h>
+#include <libadwaitamm/bottomsheet.h>
+#include <libadwaitamm/breakpoint.h>
+#include <libadwaitamm/breakpointbin.h>
 #include <libadwaitamm/buttoncontent.h>
+#include <libadwaitamm/buttonrow.h>
 #include <libadwaitamm/carousel.h>
 #include <libadwaitamm/carouselindicatordots.h>
 #include <libadwaitamm/carouselindicatorlines.h>
@@ -70,6 +74,7 @@
 #include <libadwaitamm/headerbar.h>
 #include <libadwaitamm/leaflet.h>
 #include <libadwaitamm/leafletpage.h>
+#include <libadwaitamm/lengthunit.h>
 #include <libadwaitamm/messagedialog.h>
 #include <libadwaitamm/navigationdirection.h>
 #include <libadwaitamm/passwordentryrow.h>

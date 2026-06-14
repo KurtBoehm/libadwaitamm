@@ -1,0 +1,89 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(gtkmm/private/widget_p.h)
+
+#include <gtkmm.h>
+#include <adwaita.h>
+
+namespace Adw {
+class BottomSheet : public Gtk::Widget {
+  _CLASS_GTKOBJECT(BottomSheet, AdwBottomSheet, ADW_BOTTOM_SHEET, Gtk::Widget, GtkWidget)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+public:
+  // Constructors
+  _CTOR_DEFAULT
+
+  // Methods
+  _WRAP_METHOD(Gtk::Widget* get_content() const, adw_bottom_sheet_get_content, newin "1.6")
+  _WRAP_METHOD(void set_content(Gtk::Widget* content), adw_bottom_sheet_set_content, newin "1.6")
+
+  _WRAP_METHOD(Gtk::Widget* get_sheet() const, adw_bottom_sheet_get_sheet, newin "1.6")
+  _WRAP_METHOD(void set_sheet(Gtk::Widget* sheet), adw_bottom_sheet_set_sheet, newin "1.6")
+
+  _WRAP_METHOD(Gtk::Widget* get_bottom_bar() const, adw_bottom_sheet_get_bottom_bar, newin "1.6")
+  _WRAP_METHOD(void set_bottom_bar(Gtk::Widget* bottom_bar), adw_bottom_sheet_set_bottom_bar, newin "1.6")
+
+  _WRAP_METHOD(bool get_open() const, adw_bottom_sheet_get_open, newin "1.6")
+  _WRAP_METHOD(void set_open(bool open), adw_bottom_sheet_set_open, newin "1.6")
+
+  _WRAP_METHOD(float get_align() const, adw_bottom_sheet_get_align, newin "1.6")
+  _WRAP_METHOD(void set_align(float align), adw_bottom_sheet_set_align, newin "1.6")
+
+  _WRAP_METHOD(bool get_full_width() const, adw_bottom_sheet_get_full_width, newin "1.6")
+  _WRAP_METHOD(void set_full_width(bool full_width), adw_bottom_sheet_set_full_width, newin "1.6")
+
+  _WRAP_METHOD(bool get_show_drag_handle() const, adw_bottom_sheet_get_show_drag_handle, newin "1.6")
+  _WRAP_METHOD(void set_show_drag_handle(bool show_drag_handle), adw_bottom_sheet_set_show_drag_handle, newin "1.6")
+
+  _WRAP_METHOD(bool get_modal() const, adw_bottom_sheet_get_modal, newin "1.6")
+  _WRAP_METHOD(void set_modal(bool modal), adw_bottom_sheet_set_modal, newin "1.6")
+
+  _WRAP_METHOD(bool get_can_open() const, adw_bottom_sheet_get_can_open, newin "1.6")
+  _WRAP_METHOD(void set_can_open(bool can_open), adw_bottom_sheet_set_can_open, newin "1.6")
+
+  _WRAP_METHOD(bool get_can_close() const, adw_bottom_sheet_get_can_close, newin "1.6")
+  _WRAP_METHOD(void set_can_close(bool can_close), adw_bottom_sheet_set_can_close, newin "1.6")
+
+  _WRAP_METHOD(int get_sheet_height() const, adw_bottom_sheet_get_sheet_height, newin "1.6")
+
+  _WRAP_METHOD(int get_bottom_bar_height() const, adw_bottom_sheet_get_bottom_bar_height, newin "1.6")
+
+  _WRAP_METHOD(bool get_reveal_bottom_bar() const, adw_bottom_sheet_get_reveal_bottom_bar, newin "1.7")
+  _WRAP_METHOD(void set_reveal_bottom_bar(bool reveal), adw_bottom_sheet_set_reveal_bottom_bar, newin "1.7")
+
+  // Properties
+  _WRAP_PROPERTY("content", Gtk::Widget*)
+  _WRAP_PROPERTY("sheet", Gtk::Widget*)
+  _WRAP_PROPERTY("bottom-bar", Gtk::Widget*)
+  _WRAP_PROPERTY("open", bool)
+  _WRAP_PROPERTY("align", float)
+  _WRAP_PROPERTY("full-width", bool)
+  _WRAP_PROPERTY("show-drag-handle", bool)
+  _WRAP_PROPERTY("modal", bool)
+  _WRAP_PROPERTY("can-open", bool)
+  _WRAP_PROPERTY("can-close", bool)
+  _WRAP_PROPERTY("sheet-height", int)
+  _WRAP_PROPERTY("bottom-bar-height", int)
+  _WRAP_PROPERTY("reveal-bottom-bar", bool)
+};
+} // namespace Adw

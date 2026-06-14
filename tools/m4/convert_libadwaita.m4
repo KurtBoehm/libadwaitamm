@@ -40,14 +40,13 @@ _CONVERSION(`AdwAnimationTarget*', `Glib::RefPtr<AnimationTarget>', __RP2P)
 _CONVERSION(`Glib::RefPtr<AnimationTarget>', `AdwAnimationTarget*', __FP2P)
 _CONVERSION(`const Glib::RefPtr<AnimationTarget>&', `AdwAnimationTarget*', __CONVERT_REFPTR_TO_P($3))
 
-_CONVERSION(`AdwBreakpoint*', `Adw::Breakpoint*', __RP2P)
-_CONVERSION(`Adw::Breakpoint*', `AdwBreakpoint*', __FP2P)
-
 _CONVERSION(`AdwBreakpointCondition*', `BreakpointCondition*', __RP2P)
 _CONVERSION(`BreakpointCondition*', `AdwBreakpointCondition*', __FP2P)
-_CONVERSION(`BreakpointCondition', `AdwBreakpointCondition*', `($3).gobj()')
-_CONVERSION(`BreakpointCondition&', `AdwBreakpointCondition*', `($3).gobj()')
+_CONVERSION(`BreakpointCondition', `AdwBreakpointCondition*', `($3).steal()')
 _CONVERSION(`AdwBreakpointCondition*', `BreakpointCondition', `Glib::wrap($3, true)')
+
+_CONVERSION(`AdwBreakpoint*', `Glib::RefPtr<Adw::Breakpoint>', __RP2P)
+_CONVERSION(`Adw::Breakpoint*', `AdwBreakpoint*', __FP2P)
 
 
 dnl ============================================================================

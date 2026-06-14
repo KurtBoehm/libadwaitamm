@@ -55,7 +55,7 @@ public:
   _WRAP_METHOD(bool close(), adw_dialog_close)
   _WRAP_METHOD(void force_close(), adw_dialog_force_close)
   _WRAP_METHOD(void add_breakpoint(Adw::Breakpoint* breakpoint), adw_dialog_add_breakpoint)
-  _WRAP_METHOD(Adw::Breakpoint* get_current_breakpoint() const, adw_dialog_get_current_breakpoint)
+  _WRAP_METHOD(Glib::RefPtr<Adw::Breakpoint> get_current_breakpoint() const, adw_dialog_get_current_breakpoint)
   _WRAP_METHOD(void present(Gtk::Widget* parent), adw_dialog_present)
 
   _WRAP_PROPERTY("can-close", bool)
