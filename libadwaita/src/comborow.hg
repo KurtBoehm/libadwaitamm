@@ -1,4 +1,4 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -16,53 +16,63 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <libadwaitamm/actionrow.h>
-
 _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(libadwaitamm/private/actionrow_p.h)
 
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
+#include <gtkmm/stringfilter.h>
 #include <adwaita.h>
+#include <libadwaitamm/actionrow.h>
 
-namespace Adw
-{
-
+namespace Adw {
 class ComboRow : public Adw::ActionRow {
   _CLASS_GTKOBJECT(ComboRow, AdwComboRow, ADW_COMBO_ROW, Adw::ActionRow, AdwActionRow)
   _STRUCT_NOT_HIDDEN
 
 public:
+  // Constructors
   _CTOR_DEFAULT
 
-#m4 _CONVERSION(`gpointer',`Glib::RefPtr<Glib::ObjectBase>',`Glib::make_refptr_for_instance<Glib::ObjectBase>(Glib::wrap_auto(G_OBJECT($3)))')
-
-  _WRAP_METHOD(bool enable_search() const, adw_combo_row_get_enable_search)
-  _WRAP_METHOD(Glib::RefPtr<Gtk::Expression<Glib::ustring>> get_expression() const, adw_combo_row_get_expression, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<Gtk::ListItemFactory> get_factory() const, adw_combo_row_get_factory, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<Gtk::ListItemFactory> get_list_factory() const, adw_combo_row_get_list_factory, refreturn)
+  // Methods
   _WRAP_METHOD(Glib::RefPtr<Gio::ListModel> get_model() const, adw_combo_row_get_model, refreturn)
-  _WRAP_METHOD(guint get_selected() const, adw_combo_row_get_selected)
-  _WRAP_METHOD(Glib::RefPtr<Glib::ObjectBase> get_selected_item() const, adw_combo_row_get_selected_item, refreturn)
-  _WRAP_METHOD(bool get_use_subtitle() const, adw_combo_row_get_use_subtitle)
-  _WRAP_METHOD(void set_enable_search(bool enable_search) const, adw_combo_row_set_enable_search)
-  _WRAP_METHOD(void set_factory(const Glib::RefPtr<Gtk::ListItemFactory>& factory), adw_combo_row_set_factory)
-  _WRAP_METHOD(void set_list_factory(const Glib::RefPtr<Gtk::ListItemFactory>& factory), adw_combo_row_set_list_factory)
-  _WRAP_METHOD(void set_use_subtitle(bool use_subtitle) const, adw_combo_row_set_use_subtitle)
-  _WRAP_METHOD(void set_selected(guint position) const, adw_combo_row_set_selected)
-  _WRAP_METHOD(void set_expression(const Glib::RefPtr<Gtk::Expression<Glib::ustring>>& expression), adw_combo_row_set_expression)
   _WRAP_METHOD(void set_model(const Glib::RefPtr<Gio::ListModel>& model), adw_combo_row_set_model)
 
-  _WRAP_PROPERTY("enable_search", bool)
-  _WRAP_PROPERTY("expression", Glib::RefPtr<Gtk::Expression<Glib::ustring>>)
-  _WRAP_PROPERTY("selected_item", Glib::RefPtr<Glib::ObjectBase>)
-  _WRAP_PROPERTY("selected", guint)
-  _WRAP_PROPERTY("factory", Glib::RefPtr<Gtk::ListItemFactory>)
-  _WRAP_PROPERTY("list_factory", Glib::RefPtr<Gtk::ListItemFactory>)
-  _WRAP_PROPERTY("model", Glib::RefPtr<Gio::ListModel>)
-  _WRAP_PROPERTY("use_subtitle", bool)
-};
+  _WRAP_METHOD(guint get_selected() const, adw_combo_row_get_selected)
+  _WRAP_METHOD(void set_selected(guint position), adw_combo_row_set_selected)
 
+  _WRAP_METHOD(Glib::RefPtr<Glib::ObjectBase> get_selected_item() const, adw_combo_row_get_selected_item, refreturn)
+
+  _WRAP_METHOD(Glib::RefPtr<Gtk::ListItemFactory> get_factory() const, adw_combo_row_get_factory, refreturn)
+  _WRAP_METHOD(void set_factory(const Glib::RefPtr<Gtk::ListItemFactory>& factory), adw_combo_row_set_factory)
+
+  _WRAP_METHOD(Glib::RefPtr<Gtk::ListItemFactory> get_header_factory() const, adw_combo_row_get_header_factory, refreturn, newin "1.6")
+  _WRAP_METHOD(void set_header_factory(const Glib::RefPtr<Gtk::ListItemFactory>& factory), adw_combo_row_set_header_factory, newin "1.6")
+
+  _WRAP_METHOD(Glib::RefPtr<Gtk::ListItemFactory> get_list_factory() const, adw_combo_row_get_list_factory, refreturn)
+  _WRAP_METHOD(void set_list_factory(const Glib::RefPtr<Gtk::ListItemFactory>& factory), adw_combo_row_set_list_factory)
+
+  _WRAP_METHOD(Glib::RefPtr<Gtk::Expression<Glib::ustring>> get_expression() const, adw_combo_row_get_expression, refreturn)
+  _WRAP_METHOD(void set_expression(const Glib::RefPtr<Gtk::Expression<Glib::ustring>>& expression), adw_combo_row_set_expression)
+
+  _WRAP_METHOD(bool get_use_subtitle() const, adw_combo_row_get_use_subtitle)
+  _WRAP_METHOD(void set_use_subtitle(bool use_subtitle), adw_combo_row_set_use_subtitle)
+
+  _WRAP_METHOD(bool get_enable_search() const, adw_combo_row_get_enable_search, newin "1.4")
+  _WRAP_METHOD(void set_enable_search(bool enable_search), adw_combo_row_set_enable_search, newin "1.4")
+
+  _WRAP_METHOD(Gtk::StringFilter::MatchMode get_search_match_mode() const, adw_combo_row_get_search_match_mode, newin "1.6")
+  _WRAP_METHOD(void set_search_match_mode(Gtk::StringFilter::MatchMode search_match_mode), adw_combo_row_set_search_match_mode, newin "1.6")
+
+  // Properties
+  _WRAP_PROPERTY("model", Glib::RefPtr<Gio::ListModel>)
+  _WRAP_PROPERTY("selected", guint)
+  _WRAP_PROPERTY("selected-item", Glib::RefPtr<Glib::ObjectBase>)
+  _WRAP_PROPERTY("factory", Glib::RefPtr<Gtk::ListItemFactory>)
+  _WRAP_PROPERTY("header-factory", Glib::RefPtr<Gtk::ListItemFactory>, newin "1.6")
+  _WRAP_PROPERTY("list-factory", Glib::RefPtr<Gtk::ListItemFactory>)
+  _WRAP_PROPERTY("expression", Glib::RefPtr<Gtk::Expression<Glib::ustring>>)
+  _WRAP_PROPERTY("use-subtitle", bool)
+  _WRAP_PROPERTY("enable-search", bool, newin "1.4")
+  _WRAP_PROPERTY("search-match-mode", Gtk::StringFilter::MatchMode, newin "1.6")
+};
 } // namespace Adw

@@ -1,4 +1,4 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -21,16 +21,10 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
 #include <gtkmm.h>
+#include <adwaita.h>
 #include <libadwaitamm/carousel.h>
 
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
-#include <adwaita.h>
-
-namespace Adw
-{
-
+namespace Adw {
 class CarouselIndicatorDots : public Gtk::Widget, public Gtk::Orientable {
   _CLASS_GTKOBJECT(CarouselIndicatorDots, AdwCarouselIndicatorDots, ADW_CAROUSEL_INDICATOR_DOTS, Gtk::Widget, GtkWidget)
   _IMPLEMENTS_INTERFACE(Gtk::Orientable)
@@ -38,11 +32,14 @@ class CarouselIndicatorDots : public Gtk::Widget, public Gtk::Orientable {
   _DO_NOT_DERIVE_GTYPE
 
 public:
+  // Constructors
   _CTOR_DEFAULT
+
+  // Methods
   _WRAP_METHOD(Adw::Carousel* get_carousel() const, adw_carousel_indicator_dots_get_carousel)
   _WRAP_METHOD(void set_carousel(Adw::Carousel* carousel), adw_carousel_indicator_dots_set_carousel)
 
+  // Properties
   _WRAP_PROPERTY("carousel", Adw::Carousel*)
 };
-
 } // namespace Adw

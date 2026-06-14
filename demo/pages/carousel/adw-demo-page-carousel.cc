@@ -85,7 +85,7 @@ void DemoPageCarousel::notify_indicators_cb() {
 }
 
 void DemoPageCarousel::carousel_return_cb() {
-  carousel->scroll_to(carousel->get_nth_page(0), true);
+  carousel->scroll_to(*carousel->get_nth_page(0), true);
 }
 
 } // namespace Adw

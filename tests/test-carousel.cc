@@ -42,7 +42,7 @@ static void test_adw_carousel_add_remove(void) {
   g_assert_true(carousel.get_n_pages() == 1);
   g_assert_true(notified == 1);
 
-  carousel.prepend(&child2);
+  carousel.prepend(child2);
   allocate_carousel(carousel);
 
   g_assert_true(carousel.get_n_pages() == 2);
@@ -51,7 +51,7 @@ static void test_adw_carousel_add_remove(void) {
   g_assert_true(carousel.get_position() == 1);
   g_assert_true(notified == 2);
 
-  carousel.insert(&child3, 1);
+  carousel.insert(child3, 1);
   allocate_carousel(carousel);
   g_assert_true(carousel.get_n_pages() == 3);
   g_assert_true(carousel.get_nth_page(0)->gobj() == (GtkWidget*)child2.gobj());
@@ -60,14 +60,14 @@ static void test_adw_carousel_add_remove(void) {
   g_assert_true(carousel.get_position() == 2);
   g_assert_true(notified == 3);
 
-  carousel.scroll_to(&child3, false);
-  carousel.remove(&child2);
+  carousel.scroll_to(child3, false);
+  carousel.remove(child2);
   allocate_carousel(carousel);
   g_assert_true(carousel.get_n_pages() == 2);
   g_assert_true(carousel.get_position() == 0);
   g_assert_true(notified == 4);
 
-  carousel.remove(&child1);
+  carousel.remove(child1);
   g_assert_true(carousel.get_n_pages() == 1);
   g_assert_true(notified == 5);
 }
@@ -100,46 +100,46 @@ static void test_adw_carousel_reorder(void) {
   assert_carousel_positions(carousel, child1, child2, child3, child4, 0);
 
   /* No-op */
-  carousel.reorder(&child1, 0);
+  carousel.reorder(child1, 0);
   assert_carousel_positions(carousel, child1, child2, child3, child4, 0);
-  carousel.reorder(&child2, 1);
+  carousel.reorder(child2, 1);
   assert_carousel_positions(carousel, child1, child2, child3, child4, 0);
-  carousel.reorder(&child3, 2);
+  carousel.reorder(child3, 2);
   assert_carousel_positions(carousel, child1, child2, child3, child4, 0);
-  carousel.reorder(&child4, 3);
-  assert_carousel_positions(carousel, child1, child2, child3, child4, 0);
-
-  carousel.reorder(&child4, 4);
-  assert_carousel_positions(carousel, child1, child2, child3, child4, 0);
-  carousel.reorder(&child4, -1);
+  carousel.reorder(child4, 3);
   assert_carousel_positions(carousel, child1, child2, child3, child4, 0);
 
-  carousel.scroll_to(&child1, false);
+  carousel.reorder(child4, 4);
   assert_carousel_positions(carousel, child1, child2, child3, child4, 0);
-  carousel.reorder(&child2, 2);
+  carousel.reorder(child4, -1);
+  assert_carousel_positions(carousel, child1, child2, child3, child4, 0);
+
+  carousel.scroll_to(child1, false);
+  assert_carousel_positions(carousel, child1, child2, child3, child4, 0);
+  carousel.reorder(child2, 2);
   assert_carousel_positions(carousel, child1, child3, child2, child4, 0);
-  carousel.reorder(&child2, 1);
+  carousel.reorder(child2, 1);
   assert_carousel_positions(carousel, child1, child2, child3, child4, 0);
 
-  carousel.scroll_to(&child2, false);
+  carousel.scroll_to(child2, false);
   assert_carousel_positions(carousel, child1, child2, child3, child4, 1);
-  carousel.reorder(&child2, 2);
+  carousel.reorder(child2, 2);
   assert_carousel_positions(carousel, child1, child3, child2, child4, 2);
-  carousel.reorder(&child2, 1);
+  carousel.reorder(child2, 1);
   assert_carousel_positions(carousel, child1, child2, child3, child4, 1);
 
-  carousel.scroll_to(&child3, false);
+  carousel.scroll_to(child3, false);
   assert_carousel_positions(carousel, child1, child2, child3, child4, 2);
-  carousel.reorder(&child2, 2);
+  carousel.reorder(child2, 2);
   assert_carousel_positions(carousel, child1, child3, child2, child4, 1);
-  carousel.reorder(&child2, 1);
+  carousel.reorder(child2, 1);
   assert_carousel_positions(carousel, child1, child2, child3, child4, 2);
 
-  carousel.scroll_to(&child4, false);
+  carousel.scroll_to(child4, false);
   assert_carousel_positions(carousel, child1, child2, child3, child4, 3);
-  carousel.reorder(&child2, 2);
+  carousel.reorder(child2, 2);
   assert_carousel_positions(carousel, child1, child3, child2, child4, 3);
-  carousel.reorder(&child2, 1);
+  carousel.reorder(child2, 1);
   assert_carousel_positions(carousel, child1, child2, child3, child4, 3);
 }
 

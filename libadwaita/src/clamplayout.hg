@@ -1,4 +1,4 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -21,16 +21,10 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/layoutmanager_p.h)
 
 #include <gtkmm.h>
-
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
-#include <libadwaitamm/clamp.h>
 #include <adwaita.h>
+#include <libadwaitamm/clamp.h>
 
-namespace Adw
-{
-
+namespace Adw {
 class ClampLayout : public Gtk::LayoutManager, public Gtk::Orientable {
   _CLASS_GOBJECT(ClampLayout, AdwClampLayout, ADW_CLAMP_LAYOUT, Gtk::LayoutManager, GtkLayoutManager)
   _IMPLEMENTS_INTERFACE(Gtk::Orientable)
@@ -38,21 +32,26 @@ class ClampLayout : public Gtk::LayoutManager, public Gtk::Orientable {
   _DO_NOT_DERIVE_GTYPE
 
 protected:
+  // Constructors
   _CTOR_DEFAULT
 
 public:
+  // Creation
   _WRAP_CREATE()
 
+  // Methods
   _WRAP_METHOD(int get_maximum_size() const, adw_clamp_layout_get_maximum_size)
-  _WRAP_METHOD(int get_tightening_threshold() const, adw_clamp_layout_get_tightening_threshold)
-  _WRAP_METHOD(void get_maximum_size(int maximum_size), adw_clamp_layout_set_maximum_size)
-  _WRAP_METHOD(void get_tightening_threshold(int tightening_threshold), adw_clamp_layout_set_tightening_threshold)
-  _WRAP_METHOD(void set_unit(LengthUnit unit), adw_clamp_layout_set_unit)
-  _WRAP_METHOD(LengthUnit get_unit() const, adw_clamp_layout_get_unit)
+  _WRAP_METHOD(void set_maximum_size(int maximum_size), adw_clamp_layout_set_maximum_size)
 
-  _WRAP_PROPERTY("maximum_size", int)
-  _WRAP_PROPERTY("tightening_threshold", int)
+  _WRAP_METHOD(int get_tightening_threshold() const, adw_clamp_layout_get_tightening_threshold)
+  _WRAP_METHOD(void set_tightening_threshold(int tightening_threshold), adw_clamp_layout_set_tightening_threshold)
+
+  _WRAP_METHOD(LengthUnit get_unit() const, adw_clamp_layout_get_unit, newin "1.4")
+  _WRAP_METHOD(void set_unit(LengthUnit unit), adw_clamp_layout_set_unit, newin "1.4")
+
+  // Properties
+  _WRAP_PROPERTY("maximum-size", int)
+  _WRAP_PROPERTY("tightening-threshold", int)
   _WRAP_PROPERTY("unit", LengthUnit)
 };
-
 } // namespace Adw

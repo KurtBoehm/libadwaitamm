@@ -30,84 +30,63 @@ class AlertDialog : public Adw::Dialog {
   _DO_NOT_DERIVE_GTYPE
 
 public:
-  // ===============================================================================================
   // Enumerations
-  // ===============================================================================================
   _WRAP_ENUM(ResponseAppearance, AdwResponseAppearance, newin "1.5")
 
-  // ===============================================================================================
   // Constructors
-  // ===============================================================================================
   _WRAP_CTOR(AlertDialog(const Glib::ustring& heading, const Glib::ustring& body), adw_alert_dialog_new)
 
   // Methods
   _WRAP_METHOD(Glib::ustring get_heading() const, adw_alert_dialog_get_heading, newin "1.5")
   _WRAP_METHOD(void set_heading(const Glib::ustring& heading), adw_alert_dialog_set_heading, newin "1.5")
 
-  // Heading markup
   _WRAP_METHOD(bool get_heading_use_markup() const, adw_alert_dialog_get_heading_use_markup, newin "1.5")
   _WRAP_METHOD(void set_heading_use_markup(bool use_markup), adw_alert_dialog_set_heading_use_markup, newin "1.5")
 
   _IGNORE(adw_alert_dialog_format_heading, adw_alert_dialog_format_heading_markup)
 
-  // Body
   _WRAP_METHOD(Glib::ustring get_body() const, adw_alert_dialog_get_body, newin "1.5")
   _WRAP_METHOD(void set_body(const Glib::ustring& body), adw_alert_dialog_set_body, newin "1.5")
 
-  // Body markup
   _WRAP_METHOD(bool get_body_use_markup() const, adw_alert_dialog_get_body_use_markup, newin "1.5")
   _WRAP_METHOD(void set_body_use_markup(bool use_markup), adw_alert_dialog_set_body_use_markup, newin "1.5")
 
   _IGNORE(adw_alert_dialog_format_body, adw_alert_dialog_format_body_markup)
 
-  // Extra child
   _WRAP_METHOD(Gtk::Widget* get_extra_child() const, adw_alert_dialog_get_extra_child, newin "1.5")
   _WRAP_METHOD(void set_extra_child(Gtk::Widget* child), adw_alert_dialog_set_extra_child, newin "1.5")
 
-  // Layout
   _WRAP_METHOD(bool get_prefer_wide_layout() const, adw_alert_dialog_get_prefer_wide_layout, newin "1.6")
   _WRAP_METHOD(void set_prefer_wide_layout(bool prefer_wide_layout), adw_alert_dialog_set_prefer_wide_layout, newin "1.6")
 
-  // Responses
   _WRAP_METHOD(void add_response(const Glib::ustring& id, const Glib::ustring& label), adw_alert_dialog_add_response, newin "1.5")
   _IGNORE(adw_alert_dialog_add_responses)
   _WRAP_METHOD(void remove_response(const Glib::ustring& id), adw_alert_dialog_remove_response, newin "1.5")
 
-  // Response label
   _WRAP_METHOD(Glib::ustring get_response_label(const Glib::ustring& response) const, adw_alert_dialog_get_response_label, newin "1.5")
   _WRAP_METHOD(void set_response_label(const Glib::ustring& response, const Glib::ustring& label), adw_alert_dialog_set_response_label, newin "1.5")
 
-  // Response appearance
   _WRAP_METHOD(AlertDialog::ResponseAppearance get_response_appearance(const Glib::ustring& response) const, adw_alert_dialog_get_response_appearance, newin "1.5")
   _WRAP_METHOD(void set_response_appearance(const Glib::ustring& response, ResponseAppearance appearance), adw_alert_dialog_set_response_appearance, newin "1.5")
 
-  // Response enabled
   _WRAP_METHOD(bool get_response_enabled(const Glib::ustring& response) const, adw_alert_dialog_get_response_enabled, newin "1.5")
   _WRAP_METHOD(void set_response_enabled(const Glib::ustring& response, bool enabled), adw_alert_dialog_set_response_enabled, newin "1.5")
 
-  // Default response
   _WRAP_METHOD(Glib::ustring get_default_response() const, adw_alert_dialog_get_default_response, newin "1.5")
   _WRAP_METHOD(void set_default_response(const Glib::ustring& response), adw_alert_dialog_set_default_response, newin "1.5")
 
-  // Close response
   _WRAP_METHOD(Glib::ustring get_close_response() const, adw_alert_dialog_get_close_response, newin "1.5")
   _WRAP_METHOD(void set_close_response(const Glib::ustring& response), adw_alert_dialog_set_close_response, newin "1.5")
 
-  // Response existence
   _WRAP_METHOD(bool has_response(const Glib::ustring& response) const, adw_alert_dialog_has_response, newin "1.5")
 
-  // Async API
   _WRAP_METHOD(void choose(Gtk::Widget* parent, const Glib::RefPtr<Gio::Cancellable>& cancellable, GAsyncReadyCallback callback, gpointer user_data), adw_alert_dialog_choose, newin "1.5")
   _WRAP_METHOD(Glib::ustring choose_finish(const Glib::RefPtr<Gio::AsyncResult>& result), adw_alert_dialog_choose_finish, newin "1.5")
 
-  // ===============================================================================================
   // Signals
-  // ===============================================================================================
   _WRAP_SIGNAL(void response(const Glib::ustring& response), "response", newin "1.5")
 
-  // ===============================================================================================
   // Virtual functions
-  // ===============================================================================================
   _WRAP_VFUNC(void response(const Glib::ustring& response), response)
 };
 } // namespace Adw

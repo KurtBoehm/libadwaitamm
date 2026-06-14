@@ -9,6 +9,8 @@ dnl ============================================================================
 
 _CONVERSION(`Glib::Object&', `GObject*', `($3).gobj()')
 
+_CONVERSION(`gpointer', `Glib::RefPtr<Glib::ObjectBase>', `Glib::make_refptr_for_instance<Glib::ObjectBase>(Glib::wrap_auto(G_OBJECT($3)))')
+
 _CONVERSION(`const Glib::RefPtr<Gtk::Application>&', `GtkApplication*', __CONVERT_REFPTR_TO_P($3))
 
 
