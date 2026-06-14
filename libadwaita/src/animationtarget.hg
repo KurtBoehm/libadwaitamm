@@ -1,4 +1,4 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -21,16 +21,72 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
 #include <glibmm.h>
+#include <adwaita.h>
 
-namespace Adw
-{
-
+namespace Adw {
 class AnimationTarget : public Glib::Object {
   _CLASS_GOBJECT(AnimationTarget, AdwAnimationTarget, ADW_ANIMATION_TARGET, Glib::Object, GObject)
 
 protected:
+  // Constructors
   _CTOR_DEFAULT
-
 };
 
+class NoneAnimationTarget : public AnimationTarget {
+  _CLASS_GOBJECT(NoneAnimationTarget, AdwNoneAnimationTarget, ADW_NONE_ANIMATION_TARGET, AnimationTarget, AdwAnimationTarget)
+  _DO_NOT_DERIVE_GTYPE
+
+protected:
+  // Constructors
+  _CTOR_DEFAULT
+
+public:
+  // Construction
+  _WRAP_CREATE()
+};
+
+class CallbackAnimationTarget : public AnimationTarget {
+  _CLASS_GOBJECT(CallbackAnimationTarget, AdwCallbackAnimationTarget, ADW_CALLBACK_ANIMATION_TARGET, AnimationTarget, AdwAnimationTarget)
+  _DO_NOT_DERIVE_GTYPE
+
+  static void callback_function(double value, gpointer user_data);
+
+public:
+  using SlotTarget = sigc::slot<void(double)>;
+
+protected:
+  // Constructors
+  _CTOR_DEFAULT
+
+  CallbackAnimationTarget(const SlotTarget& slot_target);
+
+public:
+  // Construction
+  _WRAP_CREATE(const SlotTarget& slot_target)
+};
+
+class PropertyAnimationTarget : public AnimationTarget {
+  _CLASS_GOBJECT(PropertyAnimationTarget, AdwPropertyAnimationTarget, ADW_PROPERTY_ANIMATION_TARGET, AnimationTarget, AdwAnimationTarget)
+  _DO_NOT_DERIVE_GTYPE
+
+  // Constructors
+  PropertyAnimationTarget(const Glib::RefPtr<Glib::Object>& object, const Glib::ustring& property_name);
+  _WRAP_CTOR(PropertyAnimationTarget(const Glib::RefPtr<Glib::Object>& object, GParamSpec* pspec), adw_property_animation_target_new_for_pspec)
+
+protected:
+  _CTOR_DEFAULT
+
+public:
+  // Construction
+  _WRAP_CREATE(const Glib::RefPtr<Glib::Object>& object, const Glib::ustring& property_name)
+  _WRAP_CREATE(const Glib::RefPtr<Glib::Object>& object, GParamSpec* pspec)
+
+  // Methods
+  _WRAP_METHOD(Glib::RefPtr<Glib::Object> get_object() const, adw_property_animation_target_get_object, refreturn, newin "1.2")
+  _WRAP_METHOD(GParamSpec* get_pspec() const, adw_property_animation_target_get_pspec, newin "1.2")
+
+  // Properties
+  _WRAP_PROPERTY("object", Glib::RefPtr<Glib::Object>)
+  _WRAP_PROPERTY("pspec", GParamSpec*)
+};
 } // namespace Adw

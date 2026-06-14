@@ -22,7 +22,7 @@
 #undef LIBADWAITA_DISABLE_DEPRECATED
 
 #include <glibmm_generate_extra_defs/generate_extra_defs.h>
-#include <libadwaita-1/adwaita.h>
+#include <adwaita.h>
 #include <iostream>
 
 int main(int, char**)

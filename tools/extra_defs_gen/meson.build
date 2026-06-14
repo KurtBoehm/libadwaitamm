@@ -6,27 +6,25 @@
 
 glibmm_generate_extra_defs_dep = cpp_compiler.find_library(
   'glibmm_generate_extra_defs-2.68',
-# or:  'glibmm_generate_extra_defs-2.4',
   required: glibmm_dep.type_name() != 'internal',
 )
 if not glibmm_generate_extra_defs_dep.found()
   glibmm_generate_extra_defs_dep = dependency(
-    '', fallback: ['glibmm-2.68', 'glibmm_generate_extra_defs_dep'],
-# or:    '', fallback: ['glibmm-2.4', 'glibmm_generate_extra_defs_dep'],
+    '',
+    fallback: ['glibmm-2.68', 'glibmm_generate_extra_defs_dep'],
   )
 endif
 
-generate_defs_exe = executable('generate_defs_libadwaita', 'generate_defs_libadwaita.cc',
+generate_defs_exe = executable(
+  'generate_defs_libadwaita',
+  'generate_defs_libadwaita.cc',
   dependencies: [libadwaitamm_build_dep, glibmm_generate_extra_defs_dep],
   implicit_include_directories: false,
   install: false,
 )
 
 # Install m4 files for reuse by other *mm projects, when building from git.
-m4_basefiles = [
-  'convert.m4',
-  'convert_libadwaita.m4',
-]
+m4_basefiles = ['convert.m4', 'convert_libadwaita.m4']
 m4_files = []
 foreach file : m4_basefiles
   m4_files += '..' / 'm4' / file

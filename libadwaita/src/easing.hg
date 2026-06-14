@@ -21,7 +21,7 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 
 #include <glibmm.h>
 #include <gtkmm.h>
-#include <libadwaita-1/adwaita.h>
+#include <adwaita.h>
 
 namespace Adw {
 

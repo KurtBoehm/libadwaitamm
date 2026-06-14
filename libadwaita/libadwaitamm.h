@@ -41,15 +41,17 @@
 #include <libadwaitammconfig.h>
 #include <libadwaitamm/aboutdialog.h>
 #include <libadwaitamm/aboutwindow.h>
+#include <libadwaitamm/accentcolor.h>
 #include <libadwaitamm/actionrow.h>
+#include <libadwaitamm/alertdialog.h>
 #include <libadwaitamm/animation.h>
 #include <libadwaitamm/animationtarget.h>
 #include <libadwaitamm/application.h>
 #include <libadwaitamm/applicationwindow.h>
 #include <libadwaitamm/avatar.h>
+#include <libadwaitamm/banner.h>
 #include <libadwaitamm/bin.h>
 #include <libadwaitamm/buttoncontent.h>
-#include <libadwaitamm/callbackanimationtarget.h>
 #include <libadwaitamm/carousel.h>
 #include <libadwaitamm/carouselindicatordots.h>
 #include <libadwaitamm/carouselindicatorlines.h>
@@ -75,7 +77,6 @@
 #include <libadwaitamm/preferencespage.h>
 #include <libadwaitamm/preferencesrow.h>
 #include <libadwaitamm/preferenceswindow.h>
-#include <libadwaitamm/propertyanimationtarget.h>
 #include <libadwaitamm/splitbutton.h>
 #include <libadwaitamm/springanimation.h>
 #include <libadwaitamm/springparams.h>

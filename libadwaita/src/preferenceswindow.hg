@@ -27,7 +27,7 @@ _PINCLUDE(libadwaitamm/private/window_p.h)
 // cannot forward-declare a struct type Foo.
 #include <libadwaitamm/toast.h>
 #include <libadwaitamm/preferencespage.h>
-#include <libadwaita-1/adwaita.h>
+#include <adwaita.h>
 
 namespace Adw
 {

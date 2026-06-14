@@ -17,7 +17,7 @@
  */
 
 #include <gtkmm.h>
-#include <libadwaita-1/adwaita.h>
+#include <adwaita.h>
 
 namespace Adw
 {

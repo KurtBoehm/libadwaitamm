@@ -1,0 +1,64 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(gtkmm/private/widget_p.h)
+
+#include <gtkmm.h>
+#include <adwaita.h>
+
+namespace Adw {
+// Banner widget
+class Banner : public Gtk::Widget {
+  _CLASS_GTKOBJECT(Banner, AdwBanner, ADW_BANNER, Gtk::Widget, GtkWidget)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+public:
+  // Enumerations
+  _WRAP_ENUM(ButtonStyle, AdwBannerButtonStyle, newin "1.3")
+
+  // Constructors
+  _CTOR_DEFAULT
+  _WRAP_CTOR(Banner(const Glib::ustring& title), adw_banner_new)
+
+  // Methods
+  _WRAP_METHOD(Glib::ustring get_title() const, adw_banner_get_title, newin "1.3")
+  _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_banner_set_title, newin "1.3")
+
+  _WRAP_METHOD(Glib::ustring get_button_label() const, adw_banner_get_button_label, newin "1.3")
+  _WRAP_METHOD(void set_button_label(const Glib::ustring& label), adw_banner_set_button_label, newin "1.3")
+
+  _WRAP_METHOD(bool get_revealed() const, adw_banner_get_revealed, newin "1.3")
+  _WRAP_METHOD(void set_revealed(bool revealed), adw_banner_set_revealed, newin "1.3")
+
+  _WRAP_METHOD(bool get_use_markup() const, adw_banner_get_use_markup, newin "1.3")
+  _WRAP_METHOD(void set_use_markup(bool use_markup), adw_banner_set_use_markup, newin "1.3")
+
+  _WRAP_METHOD(Banner::ButtonStyle get_button_style() const, adw_banner_get_button_style, newin "1.7")
+  _WRAP_METHOD(void set_button_style(ButtonStyle style), adw_banner_set_button_style, newin "1.7")
+
+  // Properties
+  _WRAP_PROPERTY("title", Glib::ustring)
+  _WRAP_PROPERTY("button-label", Glib::ustring)
+  _WRAP_PROPERTY("revealed", bool)
+  _WRAP_PROPERTY("use-markup", bool)
+  _WRAP_PROPERTY("button-style", ButtonStyle)
+};
+} // namespace Adw

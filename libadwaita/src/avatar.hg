@@ -1,4 +1,4 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -21,42 +21,42 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
 #include <gtkmm.h>
+#include <adwaita.h>
 
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
-#include <libadwaita-1/adwaita.h>
-
-namespace Adw
-{
-
+namespace Adw {
 class Avatar : public Gtk::Widget {
   _CLASS_GTKOBJECT(Avatar, AdwAvatar, ADW_AVATAR, Gtk::Widget, GtkWidget)
   _STRUCT_NOT_HIDDEN
   _DO_NOT_DERIVE_GTYPE
 
 public:
+  // Constructors
   _CTOR_DEFAULT
   _WRAP_CTOR(Avatar(int size, const Glib::ustring& text, bool show_initials), adw_avatar_new)
- 
-  _WRAP_METHOD(Glib::RefPtr<Gdk::Texture> draw_to_texture(int scale_factor), adw_avatar_draw_to_texture, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<Gdk::Paintable> get_custom_image() const, adw_avatar_get_custom_image, refreturn)
-  _WRAP_METHOD(Glib::ustring get_icon_name() const, adw_avatar_get_icon_name)
-  _WRAP_METHOD(bool get_show_initials() const, adw_avatar_get_show_initials)
-  _WRAP_METHOD(int get_size() const, adw_avatar_get_size)
-  _WRAP_METHOD(Glib::ustring get_text() const, adw_avatar_get_text)
 
-  _WRAP_METHOD(void set_custom_image(const Glib::RefPtr<Gdk::Paintable> &custom_image), adw_avatar_set_custom_image)
-  _WRAP_METHOD(void set_icon_name(const Glib::ustring &icon_name), adw_avatar_set_icon_name)
-  _WRAP_METHOD(void set_show_initials(bool show_initials), adw_avatar_set_show_initials)
-  _WRAP_METHOD(void set_size(int size), adw_avatar_set_size)
+  // Methods
+  _WRAP_METHOD(Glib::ustring get_icon_name() const, adw_avatar_get_icon_name)
+  _WRAP_METHOD(void set_icon_name(const Glib::ustring& icon_name), adw_avatar_set_icon_name)
+
+  _WRAP_METHOD(Glib::ustring get_text() const, adw_avatar_get_text)
   _WRAP_METHOD(void set_text(const Glib::ustring& text), adw_avatar_set_text)
 
-  _WRAP_PROPERTY("size", int)
-  _WRAP_PROPERTY("custom_image", Glib::RefPtr<Gdk::Paintable>)
-  _WRAP_PROPERTY("show_initials", bool)
-  _WRAP_PROPERTY("text", Glib::ustring)
-  _WRAP_PROPERTY("icon_name", Glib::ustring)
-};
+  _WRAP_METHOD(bool get_show_initials() const, adw_avatar_get_show_initials)
+  _WRAP_METHOD(void set_show_initials(bool show_initials), adw_avatar_set_show_initials)
 
+  _WRAP_METHOD(Glib::RefPtr<Gdk::Paintable> get_custom_image() const, adw_avatar_get_custom_image, refreturn)
+  _WRAP_METHOD(void set_custom_image(const Glib::RefPtr<Gdk::Paintable>& custom_image), adw_avatar_set_custom_image)
+
+  _WRAP_METHOD(int get_size() const, adw_avatar_get_size)
+  _WRAP_METHOD(void set_size(int size), adw_avatar_set_size)
+
+  _WRAP_METHOD(Glib::RefPtr<Gdk::Texture> draw_to_texture(int scale_factor), adw_avatar_draw_to_texture, refreturn)
+
+  // Properties
+  _WRAP_PROPERTY("icon-name", Glib::ustring)
+  _WRAP_PROPERTY("text", Glib::ustring)
+  _WRAP_PROPERTY("show-initials", bool)
+  _WRAP_PROPERTY("custom-image", Glib::RefPtr<Gdk::Paintable>)
+  _WRAP_PROPERTY("size", int)
+};
 } // namespace Adw

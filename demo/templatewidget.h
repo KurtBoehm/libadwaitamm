@@ -178,7 +178,7 @@ public:
 template <typename CppObjectClass, typename CppBaseObjectClass>
 class TemplateWidget : public CppBaseObjectClass {
 public:
-  struct TemplateWidgetClass;
+  class TemplateWidgetClass;
 
   TemplateWidget(GtkWidget *obj)
       : CppBaseObjectClass(

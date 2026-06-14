@@ -27,7 +27,7 @@ _PINCLUDE(gtkmm/private/widget_p.h)
 // cannot forward-declare a struct type Foo.
 #include <libadwaitamm/squeezerpage.h>
 #include <libadwaitamm/foldthresholdpolicy.h>
-#include <libadwaita-1/adwaita.h>
+#include <adwaita.h>
 
 namespace Adw
 {

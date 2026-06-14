@@ -26,7 +26,7 @@ _PINCLUDE(gtkmm/private/widget_p.h)
 // But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
 // cannot forward-declare a struct type Foo.
 #include <libadwaitamm/viewstack.h>
-#include <libadwaita-1/adwaita.h>
+#include <adwaita.h>
 
 namespace Adw
 {

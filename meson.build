@@ -108,7 +108,6 @@ libadwaita_dep = dependency('libadwaita-1', version: libadwaita_req)
 libadwaitamm_build_dep = [glibmm_dep, gtkmm_dep, libadwaita_dep]
 libadwaitamm_requires = ' '.join([
   'glibmm-2.68', glibmm_req,
-# or:  'glibmm-2.4', glibmm_req,
   'libadwaita-1', libadwaita_req,
 ])
 

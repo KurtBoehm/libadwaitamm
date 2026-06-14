@@ -1,4 +1,4 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -21,28 +21,34 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/application_p.h)
 
 #include <gtkmm.h>
+#include <adwaita.h>
 #include <libadwaitamm/stylemanager.h>
 
-namespace Adw
-{
-
+namespace Adw {
 class Application : public Gtk::Application {
   _CLASS_GOBJECT(Application, AdwApplication, ADW_APPLICATION, Gtk::Application, GtkApplication)
 
 private:
-   const Glib::Class& custom_class_init();
+  // Custom class initialization
+  const Glib::Class& custom_class_init();
 
 protected:
+  // Lifetime management
   _UNMANAGEABLE
   _CUSTOM_DTOR
 
+  // Constructors
   _IGNORE(adw_application_new)
   Application(const Glib::ustring& application_id, Gio::Application::Flags flags);
+
 public:
+  // Construction
   _WRAP_CREATE(const Glib::ustring& application_id, Gio::Application::Flags flags)
 
+  // Methods
   _WRAP_METHOD(Glib::RefPtr<StyleManager> get_style_manager() const, adw_application_get_style_manager, refreturn)
+
+  // Properties
   _WRAP_PROPERTY("style-manager", Glib::RefPtr<StyleManager>)
 };
-
 } // namespace Adw

@@ -25,7 +25,7 @@ _PINCLUDE(libadwaitamm/private/animation_p.h)
 #include <libadwaitamm/easing.h>
 #include <libadwaitamm/animation.h>
 #include <libadwaitamm/animationtarget.h>
-#include <libadwaita-1/adwaita.h>
+#include <adwaita.h>
 
 namespace Adw
 {

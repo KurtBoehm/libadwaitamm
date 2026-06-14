@@ -1,4 +1,4 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -17,9 +17,25 @@
  */
 
 #include <glibmm.h>
-#include <libadwaita-1/adwaita.h>
+#include <adwaita.h>
 
-namespace Adw
-{
+namespace Adw {
+// CallbackAnimationTarget
+void CallbackAnimationTarget::callback_function(double value, gpointer user_data) {
+  auto the_slot = static_cast<SlotTarget*>(user_data);
+  try {
+    (*the_slot)(value);
+  } catch (...) {
+    Glib::exception_handlers_invoke();
+  }
+}
 
-} // namespace Adw
+CallbackAnimationTarget::CallbackAnimationTarget(const SlotTarget &slot_target) {
+  auto slot_copy = new SlotTarget(slot_target);
+  gobject_ = G_OBJECT(adw_callback_animation_target_new(callback_function, slot_copy, Glib::destroy_notify_delete<SlotTarget>));
+}
+
+// PropertyAnimationTarget
+PropertyAnimationTarget::PropertyAnimationTarget(const Glib::RefPtr<Glib::Object>& object, const Glib::ustring& property_name)
+  : _CONSTRUCT("object", Glib::unwrap(object), "pspec", g_object_class_find_property(G_OBJECT_GET_CLASS(object->gobj()), property_name.c_str())) {}
+}

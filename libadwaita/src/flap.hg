@@ -28,7 +28,7 @@ _PINCLUDE(gtkmm/private/widget_p.h)
 #include <libadwaitamm/foldthresholdpolicy.h>
 #include <libadwaitamm/springparams.h>
 #include <libadwaitamm/swipeable.h>
-#include <libadwaita-1/adwaita.h>
+#include <adwaita.h>
 
 namespace Adw
 {
