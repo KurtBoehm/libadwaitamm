@@ -1,4 +1,4 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -19,13 +19,9 @@
 _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 
-#include <glibmm.h>
-#include <gtkmm.h>
 #include <adwaita.h>
 
 namespace Adw {
-
 _WRAP_ENUM(Easing, AdwEasing)
 double ease(Adw::Easing ease, double);
-
 } // namespace Adw

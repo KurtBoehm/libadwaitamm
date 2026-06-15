@@ -1,4 +1,4 @@
-/* Copyright (c) 2024 Kurt Böhm <kurbo96@gmail.com>
+/* Copyright (c) 2024, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -19,61 +19,77 @@
 _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/window_p.h)
-#include <libadwaitamm/breakpoint.h>
 
 #include <gtkmm.h>
+#include <adwaita.h>
+#include <libadwaitamm/breakpoint.h>
 
-namespace Adw
-{
-class Dialog : public Gtk::Window {
-  _CLASS_GTKOBJECT(Dialog, AdwDialog, ADW_DIALOG, Gtk::Window, GtkWindow)
+namespace Adw {
+class Dialog : public Gtk::Widget {
+  _CLASS_GTKOBJECT(Dialog, AdwDialog, ADW_DIALOG, Gtk::Widget, GtkWidget)
   _UNMANAGEABLE
 
 public:
-  _WRAP_ENUM(PresentationMode, AdwDialogPresentationMode)
+  // Enumerations
+  _WRAP_ENUM(PresentationMode, AdwDialogPresentationMode, newin "1.5")
 
-  _WRAP_CTOR(Dialog(), adw_dialog_new)
+  // Constructors
+  _WRAP_CTOR(Dialog(), adw_dialog_new, newin "1.5")
 
-  _WRAP_METHOD(Gtk::Widget* get_child() const, adw_dialog_get_child)
-  _WRAP_METHOD(void set_child(Gtk::Widget* child), adw_dialog_set_child)
-  _WRAP_METHOD(Glib::ustring get_title() const, adw_dialog_get_title)
-  _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_dialog_set_title)
-  _WRAP_METHOD(bool get_can_close() const, adw_dialog_get_can_close)
-  _WRAP_METHOD(void set_can_close(bool can_close), adw_dialog_set_can_close)
-  _WRAP_METHOD(int get_content_width() const, adw_dialog_get_content_width)
-  _WRAP_METHOD(void set_content_width(int content_width), adw_dialog_set_content_width)
-  _WRAP_METHOD(int get_content_height() const, adw_dialog_get_content_height)
-  _WRAP_METHOD(void set_content_height(int content_height), adw_dialog_set_content_height)
-  _WRAP_METHOD(bool get_follows_content_size() const, adw_dialog_get_follows_content_size)
-  _WRAP_METHOD(void set_follows_content_size(bool follows_content_size), adw_dialog_set_follows_content_size)
-  _WRAP_METHOD(Dialog::PresentationMode get_presentation_mode() const, adw_dialog_get_presentation_mode)
-  _WRAP_METHOD(void set_presentation_mode(PresentationMode presentation_mode), adw_dialog_set_presentation_mode)
-  _WRAP_METHOD(Gtk::Widget* get_focus() const, adw_dialog_get_focus)
-  _WRAP_METHOD(void set_focus(Gtk::Widget* focus), adw_dialog_set_focus)
-  _WRAP_METHOD(Gtk::Widget* get_default_widget() const, adw_dialog_get_default_widget)
-  _WRAP_METHOD(void set_default_widget(Gtk::Widget* default_widget), adw_dialog_set_default_widget)
-  _WRAP_METHOD(bool close(), adw_dialog_close)
-  _WRAP_METHOD(void force_close(), adw_dialog_force_close)
-  _WRAP_METHOD(void add_breakpoint(Adw::Breakpoint* breakpoint), adw_dialog_add_breakpoint)
-  _WRAP_METHOD(Glib::RefPtr<Adw::Breakpoint> get_current_breakpoint() const, adw_dialog_get_current_breakpoint)
-  _WRAP_METHOD(void present(Gtk::Widget* parent), adw_dialog_present)
+  // Methods
+  _WRAP_METHOD(Gtk::Widget* get_child() const, adw_dialog_get_child, newin "1.5")
+  _WRAP_METHOD(void set_child(Gtk::Widget* child), adw_dialog_set_child, newin "1.5")
 
-  _WRAP_PROPERTY("can-close", bool)
-  _WRAP_PROPERTY("child", Gtk::Widget*)
-  _WRAP_PROPERTY("content-height", int)
-  _WRAP_PROPERTY("content-width", int)
-  _WRAP_PROPERTY("current-breakpoint", Adw::Breakpoint*)
-  _WRAP_PROPERTY("default-widget", Gtk::Widget*)
-  _WRAP_PROPERTY("focus-widget", Gtk::Widget*)
-  _WRAP_PROPERTY("follows-content-size", bool)
-  _WRAP_PROPERTY("presentation-mode", Dialog::PresentationMode)
-  _WRAP_PROPERTY("title", Glib::ustring)
+  _WRAP_METHOD(Glib::ustring get_title() const, adw_dialog_get_title, newin "1.5")
+  _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_dialog_set_title, newin "1.5")
 
-  _WRAP_SIGNAL(void close_attempt(), "close_attempt", no_default_handler)
-  _WRAP_SIGNAL(void closed(), "closed", no_default_handler)
+  _WRAP_METHOD(bool get_can_close() const, adw_dialog_get_can_close, newin "1.5")
+  _WRAP_METHOD(void set_can_close(bool can_close), adw_dialog_set_can_close, newin "1.5")
 
+  _WRAP_METHOD(int get_content_width() const, adw_dialog_get_content_width, newin "1.5")
+  _WRAP_METHOD(void set_content_width(int content_width), adw_dialog_set_content_width, newin "1.5")
+
+  _WRAP_METHOD(int get_content_height() const, adw_dialog_get_content_height, newin "1.5")
+  _WRAP_METHOD(void set_content_height(int content_height), adw_dialog_set_content_height, newin "1.5")
+
+  _WRAP_METHOD(bool get_follows_content_size() const, adw_dialog_get_follows_content_size, newin "1.5")
+  _WRAP_METHOD(void set_follows_content_size(bool follows_content_size), adw_dialog_set_follows_content_size, newin "1.5")
+
+  _WRAP_METHOD(Dialog::PresentationMode get_presentation_mode() const, adw_dialog_get_presentation_mode, newin "1.5")
+  _WRAP_METHOD(void set_presentation_mode(PresentationMode presentation_mode), adw_dialog_set_presentation_mode, newin "1.5")
+
+  _WRAP_METHOD(Gtk::Widget* get_focus() const, adw_dialog_get_focus, newin "1.5")
+  _WRAP_METHOD(void set_focus(Gtk::Widget* focus), adw_dialog_set_focus, newin "1.5")
+
+  _WRAP_METHOD(Gtk::Widget* get_default_widget() const, adw_dialog_get_default_widget, newin "1.5")
+  _WRAP_METHOD(void set_default_widget(Gtk::Widget* default_widget), adw_dialog_set_default_widget, newin "1.5")
+
+  _WRAP_METHOD(bool close(), adw_dialog_close, newin "1.5")
+  _WRAP_METHOD(void force_close(), adw_dialog_force_close, newin "1.5")
+
+  _WRAP_METHOD(void add_breakpoint(Adw::Breakpoint& breakpoint), adw_dialog_add_breakpoint, newin "1.5")
+  _WRAP_METHOD(Glib::RefPtr<Adw::Breakpoint> get_current_breakpoint() const, adw_dialog_get_current_breakpoint, newin "1.5")
+
+  _WRAP_METHOD(void present(Gtk::Widget* parent), adw_dialog_present, newin "1.5")
+
+  // Properties
+  _WRAP_PROPERTY("child", Gtk::Widget*, newin "1.5")
+  _WRAP_PROPERTY("title", Glib::ustring, newin "1.5")
+  _WRAP_PROPERTY("can-close", bool, newin "1.5")
+  _WRAP_PROPERTY("content-width", int, newin "1.5")
+  _WRAP_PROPERTY("content-height", int, newin "1.5")
+  _WRAP_PROPERTY("follows-content-size", bool, newin "1.5")
+  _WRAP_PROPERTY("presentation-mode", Dialog::PresentationMode, newin "1.5")
+  _WRAP_PROPERTY("focus-widget", Gtk::Widget*, newin "1.5")
+  _WRAP_PROPERTY("default-widget", Gtk::Widget*, newin "1.5")
+  _WRAP_PROPERTY("current-breakpoint", Adw::Breakpoint*, newin "1.5")
+
+  // Signals
+  _WRAP_SIGNAL(void close_attempt(), "close-attempt", newin "1.5")
+  _WRAP_SIGNAL(void closed(), "closed", newin "1.5")
+
+  // Virtual functions
   _WRAP_VFUNC(void close_attempt(), close_attempt)
   _WRAP_VFUNC(void closed(), closed)
 };
-
 } // namespace Adw

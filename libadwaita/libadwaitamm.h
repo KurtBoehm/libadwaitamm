@@ -66,7 +66,6 @@
 #include <libadwaitamm/dialog.h>
 #include <libadwaitamm/easing.h>
 #include <libadwaitamm/entryrow.h>
-#include <libadwaitamm/enumlistitem.h>
 #include <libadwaitamm/enumlistmodel.h>
 #include <libadwaitamm/expanderrow.h>
 #include <libadwaitamm/flap.h>

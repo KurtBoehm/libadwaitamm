@@ -1,4 +1,4 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -22,14 +22,30 @@ _PINCLUDE(glibmm/private/object_p.h)
 
 #include <glibmm.h>
 #include <gtkmm.h>
-
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
 #include <adwaita.h>
 
-namespace Adw
-{
+namespace Adw {
+class EnumListItem : public Glib::Object {
+  _CLASS_GOBJECT(EnumListItem, AdwEnumListItem, ADW_ENUM_LIST_ITEM, Glib::Object, GObject)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+protected:
+  _CTOR_DEFAULT
+
+public:
+  _WRAP_CREATE()
+
+  // Methods
+  _WRAP_METHOD(int get_value() const, adw_enum_list_item_get_value, deprecated "Use Gtk::EnumListItem::get_value() instead.")
+  _WRAP_METHOD(Glib::ustring get_name() const, adw_enum_list_item_get_name, deprecated "Use Gtk::EnumListItem::get_name() instead.")
+  _WRAP_METHOD(Glib::ustring get_nick() const, adw_enum_list_item_get_nick, deprecated "Use Gtk::EnumListItem::get_nick() instead.")
+
+  // Properties
+  _WRAP_PROPERTY("name", Glib::ustring)
+  _WRAP_PROPERTY("nick", Glib::ustring)
+  _WRAP_PROPERTY("value", int)
+};
 
 class EnumListModel : public Glib::Object, public Gio::ListModel {
   _CLASS_GOBJECT(EnumListModel, AdwEnumListModel, ADW_ENUM_LIST_MODEL, Glib::Object, GObject)
@@ -44,10 +60,11 @@ protected:
 public:
   _WRAP_CREATE(GType enum_type)
 
-  _WRAP_METHOD(guint find_position(int value) const, adw_enum_list_model_find_position)
-  _WRAP_METHOD(GType get_enum_type() const, adw_enum_list_model_get_enum_type)
+  // Methods
+  _WRAP_METHOD(GType get_enum_type() const, adw_enum_list_model_get_enum_type, deprecated "Use Gtk::EnumList::get_enum_type() instead.")
+  _WRAP_METHOD(guint find_position(int value) const, adw_enum_list_model_find_position, deprecated "Use Gtk::EnumList::find_position() instead.")
 
+  // Properties
   _WRAP_PROPERTY("enum-type", GType)
 };
-
 } // namespace Adw

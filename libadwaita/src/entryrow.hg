@@ -16,53 +16,65 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <libadwaitamm/preferencesrow.h>
-
 _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(libadwaitamm/private/preferencesrow_p.h)
 
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
 #include <adwaita.h>
+#include <libadwaitamm/preferencesrow.h>
 
-namespace Adw
-{
-
+namespace Adw {
 class EntryRow : public Adw::PreferencesRow, public Gtk::Editable {
   _CLASS_GTKOBJECT(EntryRow, AdwEntryRow, ADW_ENTRY_ROW, Adw::PreferencesRow, AdwPreferencesRow)
   _IMPLEMENTS_INTERFACE(Gtk::Editable)
   _STRUCT_NOT_HIDDEN
 
 public:
+  // Constructors
   _CTOR_DEFAULT
 
-  _WRAP_METHOD(void add_prefix(Gtk::Widget& widget), adw_entry_row_add_prefix)
-  _WRAP_METHOD(void add_suffix(Gtk::Widget& widget), adw_entry_row_add_suffix)
-  _WRAP_METHOD(bool get_activates_default() const, adw_entry_row_get_activates_default)
-  _WRAP_METHOD(Pango::AttrList get_attributes() const, adw_entry_row_get_attributes)
-  _WRAP_METHOD(bool get_enable_moji_completion() const, adw_entry_row_get_enable_emoji_completion)
-  _WRAP_METHOD(Gtk::InputHints get_input_hints() const, adw_entry_row_get_input_hints)
-  _WRAP_METHOD(Gtk::InputPurpose get_input_purpose() const, adw_entry_row_get_input_purpose)
-  _WRAP_METHOD(bool get_show_apply_button() const, adw_entry_row_get_show_apply_button)
-  _WRAP_METHOD(void remove(Gtk::Widget& widget), adw_entry_row_remove)
-  _WRAP_METHOD(void set_activates_default(bool activates), adw_entry_row_set_activates_default)
-  _WRAP_METHOD(void set_attributes(Pango::AttrList& attributes), adw_entry_row_set_attributes)
-  _WRAP_METHOD(void set_enable_emoji_completion(bool activates), adw_entry_row_set_enable_emoji_completion)
-  _WRAP_METHOD(void set_input_hints(Gtk::InputHints hints), adw_entry_row_set_input_hints)
-  _WRAP_METHOD(void set_input_purpose(Gtk::InputPurpose purpose) , adw_entry_row_set_input_purpose)
-  _WRAP_METHOD(void set_show_apply_button(bool activates), adw_entry_row_set_show_apply_button)
+  // Methods
+  _WRAP_METHOD(void add_prefix(Gtk::Widget& widget), adw_entry_row_add_prefix, newin "1.2")
+  _WRAP_METHOD(void add_suffix(Gtk::Widget& widget), adw_entry_row_add_suffix, newin "1.2")
+  _WRAP_METHOD(void remove(Gtk::Widget& widget), adw_entry_row_remove, newin "1.2")
 
-  _WRAP_PROPERTY("activates-default", bool)
-  _WRAP_PROPERTY("attributes", Pango::AttrList)
-  _WRAP_PROPERTY("enable-emoji-completion", bool)
-  _WRAP_PROPERTY("input-hints", Gtk::InputHints)
-  _WRAP_PROPERTY("input-purpose", Gtk::InputPurpose)
-  _WRAP_PROPERTY("show-apply-button", bool)
+  _WRAP_METHOD(bool get_show_apply_button() const, adw_entry_row_get_show_apply_button, newin "1.2")
+  _WRAP_METHOD(void set_show_apply_button(bool show_apply_button), adw_entry_row_set_show_apply_button, newin "1.2")
 
-  _WRAP_SIGNAL(void apply(), "apply", no_default_handler)
-  _WRAP_SIGNAL(void entry_activated(), "entry-activated", no_default_handler)
+  _WRAP_METHOD(Gtk::InputHints get_input_hints() const, adw_entry_row_get_input_hints, newin "1.2")
+  _WRAP_METHOD(void set_input_hints(Gtk::InputHints hints), adw_entry_row_set_input_hints, newin "1.2")
+
+  _WRAP_METHOD(Gtk::InputPurpose get_input_purpose() const, adw_entry_row_get_input_purpose, newin "1.2")
+  _WRAP_METHOD(void set_input_purpose(Gtk::InputPurpose purpose), adw_entry_row_set_input_purpose, newin "1.2")
+
+  _WRAP_METHOD(bool get_enable_emoji_completion() const, adw_entry_row_get_enable_emoji_completion, newin "1.2")
+  _WRAP_METHOD(void set_enable_emoji_completion(bool enable_emoji_completion), adw_entry_row_set_enable_emoji_completion, newin "1.2")
+
+  _WRAP_METHOD(Pango::AttrList get_attributes() const, adw_entry_row_get_attributes, newin "1.2")
+  _WRAP_METHOD(void set_attributes(Pango::AttrList& attributes), adw_entry_row_set_attributes, newin "1.2")
+
+  _WRAP_METHOD(bool get_activates_default() const, adw_entry_row_get_activates_default, newin "1.2")
+  _WRAP_METHOD(void set_activates_default(bool activates), adw_entry_row_set_activates_default, newin "1.2")
+
+  _WRAP_METHOD(guint get_text_length() const, adw_entry_row_get_text_length, newin "1.5")
+
+  _WRAP_METHOD(int get_max_length() const, adw_entry_row_get_max_length, newin "1.6")
+  _WRAP_METHOD(void set_max_length(int max_length), adw_entry_row_set_max_length, newin "1.6")
+
+  _WRAP_METHOD(bool grab_focus_without_selecting(), adw_entry_row_grab_focus_without_selecting, newin "1.3")
+
+  // Properties
+  _WRAP_PROPERTY("show-apply-button", bool, newin "1.2")
+  _WRAP_PROPERTY("input-hints", Gtk::InputHints, newin "1.2")
+  _WRAP_PROPERTY("input-purpose", Gtk::InputPurpose, newin "1.2")
+  _WRAP_PROPERTY("enable-emoji-completion", bool, newin "1.2")
+  _WRAP_PROPERTY("attributes", Pango::AttrList, newin "1.2")
+  _WRAP_PROPERTY("activates-default", bool, newin "1.2")
+  _WRAP_PROPERTY("text-length", guint, newin "1.5")
+  _WRAP_PROPERTY("max-length", int, newin "1.6")
+
+  // Signals
+  _WRAP_SIGNAL(void apply(), "apply", no_default_handler, newin "1.2")
+  _WRAP_SIGNAL(void entry_activated(), "entry-activated", no_default_handler, newin "1.2")
 };
-
 } // namespace Adw

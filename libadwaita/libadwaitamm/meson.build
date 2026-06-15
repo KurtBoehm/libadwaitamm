@@ -48,7 +48,6 @@ hg_ccg_basenames = [
   'dialog',
   'easing',
   'entryrow',
-  'enumlistitem',
   'enumlistmodel',
   'expanderrow',
   'flap',

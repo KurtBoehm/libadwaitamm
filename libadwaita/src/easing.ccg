@@ -1,4 +1,4 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -16,13 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <gtkmm.h>
-#include <glibmm.h>
-
 namespace Adw {
-
 double ease(Adw::Easing ease, double d) {
   return adw_easing_ease(static_cast<AdwEasing>(ease), d);
 }
-
-} // namespace Adw
+}
