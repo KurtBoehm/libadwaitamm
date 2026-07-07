@@ -20,7 +20,7 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/window_p.h)
 
-#include <gtkmm.h>
+#include <gtkmm/widget.h>
 #include <adwaita.h>
 #include <libadwaitamm/breakpoint.h>
 
@@ -34,7 +34,7 @@ public:
   _WRAP_ENUM(PresentationMode, AdwDialogPresentationMode, newin "1.5")
 
   // Constructors
-  _WRAP_CTOR(Dialog(), adw_dialog_new, newin "1.5")
+  _WRAP_CTOR(Dialog(), adw_dialog_new)
 
   // Methods
   _WRAP_METHOD(Gtk::Widget* get_child() const, adw_dialog_get_child, newin "1.5")
@@ -67,7 +67,7 @@ public:
   _WRAP_METHOD(bool close(), adw_dialog_close, newin "1.5")
   _WRAP_METHOD(void force_close(), adw_dialog_force_close, newin "1.5")
 
-  _WRAP_METHOD(void add_breakpoint(Adw::Breakpoint& breakpoint), adw_dialog_add_breakpoint, newin "1.5")
+  _WRAP_METHOD(void add_breakpoint(const Glib::RefPtr<Adw::Breakpoint>& breakpoint), adw_dialog_add_breakpoint, newin "1.5")
   _WRAP_METHOD(Glib::RefPtr<Adw::Breakpoint> get_current_breakpoint() const, adw_dialog_get_current_breakpoint, newin "1.5")
 
   _WRAP_METHOD(void present(Gtk::Widget* parent), adw_dialog_present, newin "1.5")
@@ -82,7 +82,7 @@ public:
   _WRAP_PROPERTY("presentation-mode", Dialog::PresentationMode, newin "1.5")
   _WRAP_PROPERTY("focus-widget", Gtk::Widget*, newin "1.5")
   _WRAP_PROPERTY("default-widget", Gtk::Widget*, newin "1.5")
-  _WRAP_PROPERTY("current-breakpoint", Adw::Breakpoint*, newin "1.5")
+  _WRAP_PROPERTY("current-breakpoint", Glib::RefPtr<Adw::Breakpoint>, newin "1.5")
 
   // Signals
   _WRAP_SIGNAL(void close_attempt(), "close-attempt", newin "1.5")

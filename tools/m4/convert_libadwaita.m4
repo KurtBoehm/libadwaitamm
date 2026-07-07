@@ -48,6 +48,7 @@ _CONVERSION(`BreakpointCondition', `AdwBreakpointCondition*', `($3).steal()')
 _CONVERSION(`AdwBreakpointCondition*', `BreakpointCondition', `Glib::wrap($3, true)')
 
 _CONVERSION(`AdwBreakpoint*', `Glib::RefPtr<Adw::Breakpoint>', __RP2P)
+_CONVERSION(`const Glib::RefPtr<Adw::Breakpoint>&', `AdwBreakpoint*', __CONVERT_REFPTR_TO_P($3))
 _CONVERSION(`Adw::Breakpoint*', `AdwBreakpoint*', __FP2P)
 _CONVERSION(`Adw::Breakpoint&', `AdwBreakpoint*', `($3).gobj()')
 
