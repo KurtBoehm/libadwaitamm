@@ -94,7 +94,7 @@ public:
    * 
    * If the unit is omitted, `px` is assumed.
    * 
-   * See new_length().
+   * See create_length().
    * 
    * Examples:
    * 
@@ -108,7 +108,7 @@ public:
    * - `<type>` can be `min-aspect-ratio` or `max-aspect-ratio`
    * - `<width>` and `<height>` are integer numbers
    * 
-   * See new_ratio().
+   * See create_ratio().
    * 
    * The ratio is represented as `<width>` divided by `<height>`.
    * 
@@ -124,10 +124,10 @@ public:
    * 
    * - `<condition> and <condition>`: the condition is true when both
    * `<condition>`s are true, same as when using
-   * new_and()
+   * create_and()
    * - `<condition> or <condition>`: the condition is true when either of the
    * `<condition>`s is true, same as when using
-   * new_or()
+   * create_or()
    * 
    * Examples:
    * 
@@ -150,6 +150,15 @@ public:
   // Methods
   _WRAP_METHOD(Glib::ustring to_string() const, adw_breakpoint_condition_to_string, newin "1.4")
 
+  /** Releases ownership of the underlying AdwBreakpointCondition and
+   * returns it, leaving this wrapper empty.
+   *
+   * This exists only to support create_and() and create_or(), which call
+   * adw_breakpoint_condition_new_and()/adw_breakpoint_condition_new_or() on throwaway
+   * copies of their arguments; those C functions take ownership of both conditions
+   * passed to them, so the copies must be steal()'d rather than left to free
+   * themselves normally. Not intended for use outside this file.
+   */
   AdwBreakpointCondition* steal() {
     AdwBreakpointCondition* tmp = gobject_;
     gobject_ = nullptr;
