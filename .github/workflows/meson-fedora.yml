@@ -14,6 +14,13 @@ jobs:
       image: fedora:44
       options: --security-opt seccomp=unconfined
     steps:
+      - name: Cache dnf packages
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/dnf
+          key: dnf-fedora44-${{ hashFiles('.github/workflows/*.yml') }}
+          restore-keys: |
+            dnf-fedora44-
       - name: Setup git
         run: |
           id
@@ -48,6 +55,8 @@ jobs:
         env:
           LANG: en_US.UTF-8
           LC_ALL: en_US.UTF-8
+          GSK_RENDERER: cairo
+          LIBGL_ALWAYS_SOFTWARE: "1"
         run: |
           sudo -u user -E --  /home/user/libadwaitamm-src/.github/scripts/run-tests.sh
       - uses: actions/upload-artifact@v7
