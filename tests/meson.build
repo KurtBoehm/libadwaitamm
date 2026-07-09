@@ -25,6 +25,7 @@ if cpp.get_argument_syntax() != 'msvc'
 endif
 
 test_names = [
+  'test-about-dialog',
   'test-about-window',
   'test-action-row',
   'test-alert-dialog',
