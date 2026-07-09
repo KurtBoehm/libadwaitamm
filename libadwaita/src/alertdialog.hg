@@ -27,7 +27,6 @@ namespace Adw {
 class AlertDialog : public Adw::Dialog {
   _CLASS_GTKOBJECT(AlertDialog, AdwAlertDialog, ADW_ALERT_DIALOG, Adw::Dialog, AdwDialog)
   _STRUCT_NOT_HIDDEN
-  _DO_NOT_DERIVE_GTYPE
 
 public:
   // Enumerations

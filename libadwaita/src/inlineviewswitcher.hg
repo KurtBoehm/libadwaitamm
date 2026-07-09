@@ -1,0 +1,58 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(gtkmm/private/widget_p.h)
+
+#include <libadwaitamm/viewstack.h>
+#include <adwaita.h>
+
+namespace Adw {
+class InlineViewSwitcher : public Gtk::Widget {
+  _CLASS_GTKOBJECT(InlineViewSwitcher, AdwInlineViewSwitcher, ADW_INLINE_VIEW_SWITCHER, Gtk::Widget, GtkWidget)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+public:
+  // Enumerations
+  _WRAP_ENUM(DisplayMode, AdwInlineViewSwitcherDisplayMode, newin "1.7")
+
+  // Constructors
+  _CTOR_DEFAULT
+
+  // Methods
+  _WRAP_METHOD(ViewStack* get_stack() const, adw_inline_view_switcher_get_stack, newin "1.7")
+  _WRAP_METHOD(void set_stack(ViewStack* stack), adw_inline_view_switcher_set_stack, newin "1.7")
+
+  _WRAP_METHOD(InlineViewSwitcher::DisplayMode get_display_mode() const, adw_inline_view_switcher_get_display_mode, newin "1.7")
+  _WRAP_METHOD(void set_display_mode(DisplayMode mode), adw_inline_view_switcher_set_display_mode, newin "1.7")
+
+  _WRAP_METHOD(bool get_homogeneous() const, adw_inline_view_switcher_get_homogeneous, newin "1.7")
+  _WRAP_METHOD(void set_homogeneous(bool homogeneous), adw_inline_view_switcher_set_homogeneous, newin "1.7")
+
+  _WRAP_METHOD(bool get_can_shrink() const, adw_inline_view_switcher_get_can_shrink, newin "1.7")
+  _WRAP_METHOD(void set_can_shrink(bool can_shrink), adw_inline_view_switcher_set_can_shrink, newin "1.7")
+
+  // Properties
+  _WRAP_PROPERTY("stack", ViewStack*, newin "1.7")
+  _WRAP_PROPERTY("display-mode", InlineViewSwitcher::DisplayMode, newin "1.7")
+  _WRAP_PROPERTY("homogeneous", bool, newin "1.7")
+  _WRAP_PROPERTY("can-shrink", bool, newin "1.7")
+};
+} // namespace Adw

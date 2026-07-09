@@ -1,6 +1,3 @@
-untracked/build_scripts/
-untracked/doc/
-untracked/skeleton/
-*.swp
-*.swo
-build
+/untracked/
+
+.DS_Store

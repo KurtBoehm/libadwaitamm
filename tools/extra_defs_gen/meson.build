@@ -7,6 +7,7 @@
 glibmm_generate_extra_defs_dep = cpp_compiler.find_library(
   'glibmm_generate_extra_defs-2.68',
   required: glibmm_dep.type_name() != 'internal',
+  dirs: ['/opt/homebrew/lib'],
 )
 if not glibmm_generate_extra_defs_dep.found()
   glibmm_generate_extra_defs_dep = dependency(

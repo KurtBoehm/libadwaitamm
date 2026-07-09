@@ -71,8 +71,10 @@
 #include <libadwaitamm/flap.h>
 #include <libadwaitamm/foldthresholdpolicy.h>
 #include <libadwaitamm/headerbar.h>
+#include <libadwaitamm/inlineviewswitcher.h>
+#include <libadwaitamm/layout.h>
+#include <libadwaitamm/layoutslot.h>
 #include <libadwaitamm/leaflet.h>
-#include <libadwaitamm/leafletpage.h>
 #include <libadwaitamm/lengthunit.h>
 #include <libadwaitamm/messagedialog.h>
 #include <libadwaitamm/navigationdirection.h>

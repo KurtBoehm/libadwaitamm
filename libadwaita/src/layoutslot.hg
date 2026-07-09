@@ -1,4 +1,4 @@
-/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -16,20 +16,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <gtkmm.h>
-#include <libadwaitamm/selectionlistmodelimpl.h>
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(gtkmm/private/widget_p.h)
+
+#include <gtkmm/widget.h>
+#include <adwaita.h>
 
 namespace Adw {
-// Based on what Gtk::Stack does.
-Glib::RefPtr<Gtk::SelectionModel> Leaflet::get_pages() const {
-  GtkSelectionModel* pages = adw_leaflet_get_pages(const_cast<AdwLeaflet*>(gobj()));
-  g_assert(G_IS_LIST_MODEL(pages));
+class LayoutSlot : public Gtk::Widget {
+  _CLASS_GTKOBJECT(LayoutSlot, AdwLayoutSlot, ADW_LAYOUT_SLOT, Gtk::Widget, GtkWidget)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
 
-  // Look up current C++ wrapper instance:
-  Glib::ObjectBase* pCppObject = Glib::ObjectBase::_get_current_wrapper((GObject*)pages);
-  if (!pCppObject) {
-    pCppObject = new Adw::SelectionListModelImpl((GObject*)pages);
-  }
-  return Glib::make_refptr_for_instance<Gtk::SelectionModel>(dynamic_cast<Gtk::SelectionModel*>(pCppObject));
-}
+public:
+  // Constructors
+  _WRAP_CTOR(LayoutSlot(const Glib::ustring& id), adw_layout_slot_new, newin "1.6")
+
+  // Methods
+  _WRAP_METHOD(Glib::ustring get_slot_id() const, adw_layout_slot_get_slot_id, newin "1.6")
+
+  // Properties
+  _WRAP_PROPERTY("id", Glib::ustring, newin "1.6")
+};
 } // namespace Adw

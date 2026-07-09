@@ -59,6 +59,6 @@ public:
   _WRAP_PROPERTY("button-label", Glib::ustring)
   _WRAP_PROPERTY("revealed", bool)
   _WRAP_PROPERTY("use-markup", bool)
-  _WRAP_PROPERTY("button-style", ButtonStyle)
+  _WRAP_PROPERTY("button-style", Banner::ButtonStyle)
 };
 } // namespace Adw

@@ -490,6 +490,97 @@
   (default-value "FALSE")
 )
 
+;; From AdwAlertDialog
+
+(define-signal response
+  (of-object "AdwAlertDialog")
+  (return-type "void")
+  (flags "Run Last")
+  (detailed #t)
+  (parameters
+    '("const-gchar*" "p0")
+  )
+)
+
+(define-property heading
+  (of-object "AdwAlertDialog")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property heading-use-markup
+  (of-object "AdwAlertDialog")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property body
+  (of-object "AdwAlertDialog")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property body-use-markup
+  (of-object "AdwAlertDialog")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property extra-child
+  (of-object "AdwAlertDialog")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property prefer-wide-layout
+  (of-object "AdwAlertDialog")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property default-response
+  (of-object "AdwAlertDialog")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property close-response
+  (of-object "AdwAlertDialog")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "close")
+)
+
 ;; From AdwAnimation
 
 (define-signal done
@@ -658,6 +749,64 @@
   (default-value "-1")
 )
 
+;; From AdwBanner
+
+(define-signal button-clicked
+  (of-object "AdwBanner")
+  (return-type "void")
+  (flags "Run Last")
+)
+
+(define-property title
+  (of-object "AdwBanner")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property button-label
+  (of-object "AdwBanner")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property revealed
+  (of-object "AdwBanner")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property use-markup
+  (of-object "AdwBanner")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property button-style
+  (of-object "AdwBanner")
+  (prop-type "GParamEnum")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "ADW_BANNER_BUTTON_DEFAULT")
+)
+
 ;; From AdwBin
 
 (define-property child
@@ -669,7 +818,140 @@
   (construct-only #f)
 )
 
-;; AdwBreakpointCondition is neither a GObject nor a GInterface. Not checked for signals and properties.
+;; From AdwBottomSheet
+
+(define-signal close-attempt
+  (of-object "AdwBottomSheet")
+  (return-type "void")
+  (flags "Run Last")
+)
+
+(define-property content
+  (of-object "AdwBottomSheet")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property sheet
+  (of-object "AdwBottomSheet")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property bottom-bar
+  (of-object "AdwBottomSheet")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property open
+  (of-object "AdwBottomSheet")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property align
+  (of-object "AdwBottomSheet")
+  (prop-type "GParamFloat")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "0.5")
+)
+
+(define-property full-width
+  (of-object "AdwBottomSheet")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property show-drag-handle
+  (of-object "AdwBottomSheet")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property modal
+  (of-object "AdwBottomSheet")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property can-open
+  (of-object "AdwBottomSheet")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property can-close
+  (of-object "AdwBottomSheet")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property sheet-height
+  (of-object "AdwBottomSheet")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+  (default-value "0")
+)
+
+(define-property bottom-bar-height
+  (of-object "AdwBottomSheet")
+  (prop-type "GParamInt")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+  (default-value "0")
+)
+
+(define-property reveal-bottom-bar
+  (of-object "AdwBottomSheet")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
 
 ;; From AdwBreakpoint
 
@@ -691,6 +973,26 @@
   (docs "")
   (readable #t)
   (writable #t)
+  (construct-only #f)
+)
+
+;; From AdwBreakpointBin
+
+(define-property child
+  (of-object "AdwBreakpointBin")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property current-breakpoint
+  (of-object "AdwBreakpointBin")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #f)
   (construct-only #f)
 )
 
@@ -734,6 +1036,34 @@
   (writable #t)
   (construct-only #f)
   (default-value "FALSE")
+)
+
+;; From AdwButtonRow
+
+(define-signal activated
+  (of-object "AdwButtonRow")
+  (return-type "void")
+  (flags "Run Last")
+)
+
+(define-property start-icon-name
+  (of-object "AdwButtonRow")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property end-icon-name
+  (of-object "AdwButtonRow")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
 )
 
 ;; From AdwCallbackAnimationTarget
@@ -1180,8 +1510,6 @@
   (construct-only #f)
 )
 
-;; AdwEasing is neither a GObject nor a GInterface. Not checked for signals and properties.
-
 ;; From AdwEntryRow
 
 (define-signal apply
@@ -1583,8 +1911,6 @@
   (default-value "TRUE")
 )
 
-;; AdwFoldThresholdPolicy is neither a GObject nor a GInterface. Not checked for signals and properties.
-
 ;; From AdwHeaderBar
 
 (define-property title-widget
@@ -1654,6 +1980,47 @@
   (writable #t)
   (construct-only #f)
   (default-value "TRUE")
+)
+
+;; From AdwInlineViewSwitcher
+
+(define-property stack
+  (of-object "AdwInlineViewSwitcher")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property display-mode
+  (of-object "AdwInlineViewSwitcher")
+  (prop-type "GParamEnum")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "ADW_INLINE_VIEW_SWITCHER_LABELS")
+)
+
+(define-property homogeneous
+  (of-object "AdwInlineViewSwitcher")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property can-shrink
+  (of-object "AdwInlineViewSwitcher")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
 )
 
 ;; From AdwLeaflet
@@ -1912,8 +2279,6 @@
   (construct-only #f)
   (default-value "close")
 )
-
-;; AdwNavigationDirection is neither a GObject nor a GInterface. Not checked for signals and properties.
 
 ;; From AdwPasswordEntryRow
 
@@ -2609,6 +2974,8 @@
   (default-value "Monospace 10")
 )
 
+;; From AdwSwipeable
+
 ;; From AdwSwipeTracker
 
 (define-signal prepare
@@ -2723,8 +3090,6 @@
   (construct-only #f)
   (default-value "FALSE")
 )
-
-;; From AdwSwipeable
 
 ;; From AdwTabBar
 
@@ -3218,16 +3583,16 @@
 
 ;; From AdwToast
 
-(define-signal dismissed
-  (of-object "AdwToast")
-  (return-type "void")
-  (flags "Run First")
-)
-
 (define-signal button-clicked
   (of-object "AdwToast")
   (return-type "void")
   (flags "Run Last")
+)
+
+(define-signal dismissed
+  (of-object "AdwToast")
+  (return-type "void")
+  (flags "Run First")
 )
 
 (define-property title

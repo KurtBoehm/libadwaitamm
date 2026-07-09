@@ -1,4 +1,4 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -21,19 +21,13 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
 #include <gtkmm.h>
-
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
 #include <libadwaitamm/foldthresholdpolicy.h>
 #include <libadwaitamm/springparams.h>
 #include <libadwaitamm/swipeable.h>
 #include <adwaita.h>
 
-namespace Adw
-{
-
-class Flap : public Gtk::Widget, Gtk::Orientable, Adw::Swipeable {
+namespace Adw {
+class Flap : public Gtk::Widget, public Gtk::Orientable, public Adw::Swipeable {
   _CLASS_GTKOBJECT(Flap, AdwFlap, ADW_FLAP, Gtk::Widget, GtkWidget)
   _STRUCT_NOT_HIDDEN
   _IMPLEMENTS_INTERFACE(Gtk::Orientable)
@@ -41,60 +35,76 @@ class Flap : public Gtk::Widget, Gtk::Orientable, Adw::Swipeable {
   _DO_NOT_DERIVE_GTYPE
 
 public:
-  _WRAP_ENUM(FoldPolicy, AdwFlapFoldPolicy)
-  _WRAP_ENUM(TransitionType, AdwFlapTransitionType)
+  // Enumerations
+  _WRAP_ENUM(FoldPolicy, AdwFlapFoldPolicy, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_ENUM(TransitionType, AdwFlapTransitionType, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
 
+  // Constructors
   _CTOR_DEFAULT
 
-  _WRAP_METHOD(Gtk::Widget* get_content() const, adw_flap_get_content)
-  _WRAP_METHOD(Gtk::Widget* get_flap() const, adw_flap_get_flap)
-  _WRAP_METHOD(Gtk::PackType get_flap_position() const, adw_flap_get_flap_position)
-  _WRAP_METHOD(guint get_fold_duration() const, adw_flap_get_fold_duration)
-  _WRAP_METHOD(Flap::FoldPolicy get_fold_policy() const, adw_flap_get_fold_policy)
-  _WRAP_METHOD(FoldThresholdPolicy get_fold_threshold_policy() const, adw_flap_get_fold_threshold_policy)
-  _WRAP_METHOD(bool get_folded() const, adw_flap_get_folded)
-  _WRAP_METHOD(bool get_locked() const, adw_flap_get_locked)
-  _WRAP_METHOD(bool get_modal() const, adw_flap_get_modal)
-  _WRAP_METHOD(bool get_reveal_flap() const, adw_flap_get_reveal_flap)
-  // No refreturn
-  _WRAP_METHOD(Glib::RefPtr<SpringParams> get_reveal_params() const, adw_flap_get_reveal_params)
-  _WRAP_METHOD(double get_reveal_progress() const, adw_flap_get_reveal_progress)
-  _WRAP_METHOD(Gtk::Widget* get_separator() const, adw_flap_get_separator)
-  _WRAP_METHOD(bool get_swipe_to_close() const, adw_flap_get_swipe_to_close)
-  _WRAP_METHOD(bool get_swipe_to_open() const, adw_flap_get_swipe_to_open)
-  _WRAP_METHOD(Flap::TransitionType get_transition_type() const, adw_flap_get_transition_type)
-  _WRAP_METHOD(void set_content(Gtk::Widget& widget), adw_flap_set_content)
-  _WRAP_METHOD(void set_flap(Gtk::Widget* widget), adw_flap_set_flap)
-  _WRAP_METHOD(void set_flap_position(Gtk::PackType position), adw_flap_set_flap_position)
-  _WRAP_METHOD(void set_fold_duration(guint duration), adw_flap_set_fold_duration)
-  _WRAP_METHOD(void set_fold_policy(FoldPolicy policy), adw_flap_set_fold_policy)
-  _WRAP_METHOD(void set_fold_threshold_policy(FoldThresholdPolicy), adw_flap_set_fold_threshold_policy)
-  _WRAP_METHOD(void set_locked(bool locked), adw_flap_set_locked)
-  _WRAP_METHOD(void set_modal(bool modal), adw_flap_set_modal)
-  _WRAP_METHOD(void set_reveal_flap(bool reveal_flap), adw_flap_set_reveal_flap)
-  _WRAP_METHOD(void set_reveal_params(const Glib::RefPtr<SpringParams>& params), adw_flap_set_reveal_params)
-  _WRAP_METHOD(void set_separator(Gtk::Widget* separator), adw_flap_set_separator)
-  _WRAP_METHOD(void set_swipe_to_close(bool locked), adw_flap_set_swipe_to_close)
-  _WRAP_METHOD(void set_swipe_to_open(bool locked), adw_flap_set_swipe_to_open)
-  _WRAP_METHOD(void set_transition_type(TransitionType transition_type), adw_flap_set_transition_type)
+  // Methods
+  _WRAP_METHOD(Gtk::Widget* get_content() const, adw_flap_get_content, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_content(Gtk::Widget* content), adw_flap_set_content, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
 
+  _WRAP_METHOD(Gtk::Widget* get_flap() const, adw_flap_get_flap, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_flap(Gtk::Widget* flap), adw_flap_set_flap, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(Gtk::Widget* get_separator() const, adw_flap_get_separator, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_separator(Gtk::Widget* separator), adw_flap_set_separator, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(Gtk::PackType get_flap_position() const, adw_flap_get_flap_position, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_flap_position(Gtk::PackType position), adw_flap_set_flap_position, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_reveal_flap() const, adw_flap_get_reveal_flap, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_reveal_flap(bool reveal_flap), adw_flap_set_reveal_flap, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(Glib::RefPtr<SpringParams> get_reveal_params() const, adw_flap_get_reveal_params, refreturn deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_reveal_params(const Glib::RefPtr<SpringParams>& params), adw_flap_set_reveal_params, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(double get_reveal_progress() const, adw_flap_get_reveal_progress, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(Flap::FoldPolicy get_fold_policy() const, adw_flap_get_fold_policy, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_fold_policy(FoldPolicy policy), adw_flap_set_fold_policy, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(FoldThresholdPolicy get_fold_threshold_policy() const, adw_flap_get_fold_threshold_policy, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_fold_threshold_policy(FoldThresholdPolicy policy), adw_flap_set_fold_threshold_policy, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(guint get_fold_duration() const, adw_flap_get_fold_duration, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_fold_duration(guint duration), adw_flap_set_fold_duration, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_folded() const, adw_flap_get_folded, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_locked() const, adw_flap_get_locked, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_locked(bool locked), adw_flap_set_locked, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(Flap::TransitionType get_transition_type() const, adw_flap_get_transition_type, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_transition_type(TransitionType transition_type), adw_flap_set_transition_type, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_modal() const, adw_flap_get_modal, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_modal(bool modal), adw_flap_set_modal, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_swipe_to_open() const, adw_flap_get_swipe_to_open, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_swipe_to_open(bool swipe_to_open), adw_flap_set_swipe_to_open, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_swipe_to_close() const, adw_flap_get_swipe_to_close, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_swipe_to_close(bool swipe_to_close), adw_flap_set_swipe_to_close, deprecated "Adw::Flap is deprecated in libadwaita 1.4.")
+
+  // Properties
   _WRAP_PROPERTY("content", Gtk::Widget*)
   _WRAP_PROPERTY("flap", Gtk::Widget*)
+  _WRAP_PROPERTY("separator", Gtk::Widget*)
   _WRAP_PROPERTY("flap-position", Gtk::PackType)
-  _WRAP_PROPERTY("fold-duration", guint)
-  _WRAP_PROPERTY("fold-policy", Flap::FoldPolicy)
-  _WRAP_PROPERTY("fold-threshold-policy", FoldThresholdPolicy)
-  _WRAP_PROPERTY("folded", bool)
-  _WRAP_PROPERTY("locked", bool)
-  _WRAP_PROPERTY("modal", bool)
   _WRAP_PROPERTY("reveal-flap", bool)
   _WRAP_PROPERTY("reveal-params", Glib::RefPtr<SpringParams>)
   _WRAP_PROPERTY("reveal-progress", double)
-  _WRAP_PROPERTY("separator", Gtk::Widget*)
-  _WRAP_PROPERTY("swipe-to-close", bool)
-  _WRAP_PROPERTY("swipe-to-open", bool)
+  _WRAP_PROPERTY("fold-policy", Flap::FoldPolicy)
+  _WRAP_PROPERTY("fold-threshold-policy", FoldThresholdPolicy)
+  _WRAP_PROPERTY("fold-duration", guint)
+  _WRAP_PROPERTY("folded", bool)
+  _WRAP_PROPERTY("locked", bool)
   _WRAP_PROPERTY("transition-type", Flap::TransitionType)
-
+  _WRAP_PROPERTY("modal", bool)
+  _WRAP_PROPERTY("swipe-to-open", bool)
+  _WRAP_PROPERTY("swipe-to-close", bool)
 };
-
 } // namespace Adw

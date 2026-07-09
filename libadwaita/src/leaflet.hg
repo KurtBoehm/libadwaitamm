@@ -1,4 +1,4 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -20,21 +20,44 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
+#include <glibmm.h>
 #include <gtkmm.h>
-
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
 #include <gtkmm/selectionmodel.h>
-#include <libadwaitamm/leafletpage.h>
 #include <libadwaitamm/navigationdirection.h>
+#include <libadwaitamm/foldthresholdpolicy.h>
 #include <libadwaitamm/springparams.h>
 #include <libadwaitamm/swipeable.h>
-#include <libadwaitamm/foldthresholdpolicy.h>
 #include <adwaita.h>
 
-namespace Adw
-{
+namespace Adw {
+class LeafletPage : public Glib::Object {
+  _CLASS_GOBJECT(LeafletPage, AdwLeafletPage, ADW_LEAFLET_PAGE, Glib::Object, GObject)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+protected:
+  // Constructors
+  _CTOR_DEFAULT
+
+public:
+  // Creation
+  _WRAP_CREATE()
+
+  // Properties
+  _WRAP_METHOD(Gtk::Widget* get_child() const, adw_leaflet_page_get_child, deprecated "AdwLeafletPage is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(Glib::ustring get_name() const, adw_leaflet_page_get_name, deprecated "AdwLeafletPage is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_name(const Glib::ustring& name), adw_leaflet_page_set_name, deprecated "AdwLeafletPage is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_navigatable() const, adw_leaflet_page_get_navigatable, deprecated "AdwLeafletPage is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_navigatable(bool navigatable), adw_leaflet_page_set_navigatable, deprecated "AdwLeafletPage is deprecated in libadwaita 1.4.")
+
+  // Properties
+  _WRAP_PROPERTY("child", Gtk::Widget*, deprecated "AdwLeafletPage is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("name", Glib::ustring, deprecated "AdwLeafletPage is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("navigatable", bool, deprecated "AdwLeafletPage is deprecated in libadwaita 1.4.")
+};
+
 class Leaflet : public Gtk::Widget, public Gtk::Orientable, public Adw::Swipeable {
   _CLASS_GTKOBJECT(Leaflet, AdwLeaflet, ADW_LEAFLET, Gtk::Widget, GtkWidget)
   _IMPLEMENTS_INTERFACE(Gtk::Orientable)
@@ -43,60 +66,88 @@ class Leaflet : public Gtk::Widget, public Gtk::Orientable, public Adw::Swipeabl
   _DO_NOT_DERIVE_GTYPE
 
 public:
-  _WRAP_ENUM(TransitionType, AdwLeafletTransitionType)
+  // Enumerations
+  _WRAP_ENUM(TransitionType, AdwLeafletTransitionType, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
 
+  // Constructors
   _CTOR_DEFAULT
 
-  _WRAP_METHOD(Glib::RefPtr<LeafletPage> append(Gtk::Widget& child), adw_leaflet_append, refreturn)
-  _WRAP_METHOD(Gtk::Widget* get_adjacent_child(NavigationDirection direction) const, adw_leaflet_get_adjacent_child)
-  _WRAP_METHOD(bool get_can_navigate_back() const, adw_leaflet_get_can_navigate_back)
-  _WRAP_METHOD(bool get_can_navigate_forward() const, adw_leaflet_get_can_navigate_forward)
-  _WRAP_METHOD(bool get_can_unfold() const, adw_leaflet_get_can_unfold)
-  _WRAP_METHOD(Gtk::Widget* get_child_by_name(const Glib::ustring& name) const, adw_leaflet_get_child_by_name)
-  // No refreturn
-  _WRAP_METHOD(Glib::RefPtr<SpringParams> get_child_transition_params() const, adw_leaflet_get_child_transition_params)
-  _WRAP_METHOD(bool get_child_transition_running() const, adw_leaflet_get_child_transition_running)
-  _WRAP_METHOD(FoldThresholdPolicy get_fold_threshold_policy() const, adw_leaflet_get_fold_threshold_policy)
-  _WRAP_METHOD(bool get_folded() const, adw_leaflet_get_folded)
-  _WRAP_METHOD(bool get_homogeneous() const, adw_leaflet_get_homogeneous)
-  _WRAP_METHOD(guint get_mode_transition_duration() const, adw_leaflet_get_mode_transition_duration)
-  _WRAP_METHOD(Glib::RefPtr<LeafletPage> get_page(Gtk::Widget& child) const, adw_leaflet_get_page, refreturn)
+  // Methods
+  _WRAP_METHOD(Glib::RefPtr<LeafletPage> append(Gtk::Widget& child), adw_leaflet_append, refreturn, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(Glib::RefPtr<LeafletPage> prepend(Gtk::Widget& child), adw_leaflet_prepend, refreturn, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(Glib::RefPtr<LeafletPage> insert_child_after(Gtk::Widget& child, Gtk::Widget* sibling), adw_leaflet_insert_child_after, refreturn, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void reorder_child_after(Gtk::Widget& child, Gtk::Widget* sibling), adw_leaflet_reorder_child_after, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void remove(Gtk::Widget& child), adw_leaflet_remove, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(Glib::RefPtr<LeafletPage> get_page(Gtk::Widget& child) const, adw_leaflet_get_page, refreturn, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_can_unfold() const, adw_leaflet_get_can_unfold, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_can_unfold(bool can_unfold), adw_leaflet_set_can_unfold, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_folded() const, adw_leaflet_get_folded, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(FoldThresholdPolicy get_fold_threshold_policy() const, adw_leaflet_get_fold_threshold_policy, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_fold_threshold_policy(FoldThresholdPolicy policy), adw_leaflet_set_fold_threshold_policy, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_homogeneous() const, adw_leaflet_get_homogeneous, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_homogeneous(bool homogeneous), adw_leaflet_set_homogeneous, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(Gtk::Widget* get_visible_child() const, adw_leaflet_get_visible_child, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_visible_child(Gtk::Widget& visible_child), adw_leaflet_set_visible_child, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(Glib::ustring get_visible_child_name() const, adw_leaflet_get_visible_child_name, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_visible_child_name(const Glib::ustring& name), adw_leaflet_set_visible_child_name, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(Leaflet::TransitionType get_transition_type() const, adw_leaflet_get_transition_type, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_transition_type(TransitionType transition), adw_leaflet_set_transition_type, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(guint get_mode_transition_duration() const, adw_leaflet_get_mode_transition_duration, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_mode_transition_duration(guint duration), adw_leaflet_set_mode_transition_duration, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(Glib::RefPtr<SpringParams> get_child_transition_params() const, adw_leaflet_get_child_transition_params, refreturn, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_child_transition_params(const Glib::RefPtr<SpringParams>& params), adw_leaflet_set_child_transition_params, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_child_transition_running() const, adw_leaflet_get_child_transition_running, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_can_navigate_back() const, adw_leaflet_get_can_navigate_back, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_can_navigate_back(bool can_navigate_back), adw_leaflet_set_can_navigate_back, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_can_navigate_forward() const, adw_leaflet_get_can_navigate_forward, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_can_navigate_forward(bool can_navigate_forward), adw_leaflet_set_can_navigate_forward, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(Gtk::Widget* get_adjacent_child(NavigationDirection direction) const, adw_leaflet_get_adjacent_child, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(bool navigate(NavigationDirection direction), adw_leaflet_navigate, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(Gtk::Widget* get_child_by_name(const Glib::ustring& name) const, adw_leaflet_get_child_by_name, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
 
   _IGNORE(adw_leaflet_get_pages)
+  /** Returns a Gio::ListModel that contains the pages of the leaflet.
+   * 
+   * This can be used to keep an up-to-date view. The model also implements
+   * Gtk::SelectionModel and can be used to track and change the visible
+   * page.
+   * 
+   * Deprecated: 1.4: See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+   * 
+   * @deprecated AdwLeaflet is deprecated in libadwaita 1.4.
+   *
+   * @return A Gtk::SelectionModel for the leaflet's children.
+   */
   Glib::RefPtr<Gtk::SelectionModel> get_pages() const;
 
-  _WRAP_METHOD(Leaflet::TransitionType get_transition_type() const, adw_leaflet_get_transition_type)
-  _WRAP_METHOD(Gtk::Widget* get_visible_child() const, adw_leaflet_get_visible_child)
-  _WRAP_METHOD(Glib::ustring get_visible_child_name() const, adw_leaflet_get_visible_child_name)
-  _WRAP_METHOD(Glib::RefPtr<LeafletPage> insert_child_after(Gtk::Widget& child, Gtk::Widget* sibling), adw_leaflet_insert_child_after, refreturn)
-  _WRAP_METHOD(bool navigate(NavigationDirection direction), adw_leaflet_navigate)
-  _WRAP_METHOD(Glib::RefPtr<LeafletPage> prepend(Gtk::Widget& child), adw_leaflet_prepend, refreturn)
-  _WRAP_METHOD(void remove(Gtk::Widget& child), adw_leaflet_remove)
-  _WRAP_METHOD(void reorder_child_after(Gtk::Widget& child, Gtk::Widget* sibling), adw_leaflet_reorder_child_after)
-  _WRAP_METHOD(void set_can_navigate_back(bool can_navigate_back), adw_leaflet_set_can_navigate_back)
-  _WRAP_METHOD(void set_can_navigate_forward(bool can_navigate_forward), adw_leaflet_set_can_navigate_forward)
-  _WRAP_METHOD(void set_can_unfold(bool can_unfold), adw_leaflet_set_can_unfold)
-  _WRAP_METHOD(void set_child_transition_params(const Glib::RefPtr<SpringParams>& params), adw_leaflet_set_child_transition_params)
-  _WRAP_METHOD(void set_fold_threshold_policy(FoldThresholdPolicy policy), adw_leaflet_set_fold_threshold_policy)
-  _WRAP_METHOD(void set_homogeneous(bool homogeneous), adw_leaflet_set_homogeneous)
-  _WRAP_METHOD(void set_mode_transition_duration(guint duration), adw_leaflet_set_mode_transition_duration)
-  _WRAP_METHOD(void set_transition_type(TransitionType transition), adw_leaflet_set_transition_type)
-  _WRAP_METHOD(void set_visible_child(Gtk::Widget& child), adw_leaflet_set_visible_child)
-  _WRAP_METHOD(void set_visible_child_name(const Glib::ustring& name), adw_leaflet_set_visible_child_name)
-
-  _WRAP_PROPERTY("can-navigate-back", bool)
-  _WRAP_PROPERTY("can-navigate-forward", bool)
-  _WRAP_PROPERTY("can-unfold", bool)
-  _WRAP_PROPERTY("child-transition-params", Glib::RefPtr<SpringParams>)
-  _WRAP_PROPERTY("child-transition-running", bool)
-  _WRAP_PROPERTY("fold-threshold-policy", FoldThresholdPolicy)
-  _WRAP_PROPERTY("folded", bool)
-  _WRAP_PROPERTY("homogeneous", bool)
-  _WRAP_PROPERTY("mode-transition-duration", guint)
-  _WRAP_PROPERTY("pages", Glib::RefPtr<Gtk::SelectionModel>)
-  _WRAP_PROPERTY("transition-type", Leaflet::TransitionType)
-  _WRAP_PROPERTY("visible-child", Gtk::Widget*)
-  _WRAP_PROPERTY("visible-child-name", Glib::ustring)
+  // Properties
+  _WRAP_PROPERTY("can-unfold", bool, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("folded", bool, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("fold-threshold-policy", FoldThresholdPolicy, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("homogeneous", bool, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("visible-child", Gtk::Widget*, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("visible-child-name", Glib::ustring, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("transition-type", Leaflet::TransitionType, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("mode-transition-duration", guint, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("child-transition-params", Glib::RefPtr<SpringParams>, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("child-transition-running", bool, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("can-navigate-back", bool, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("can-navigate-forward", bool, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("pages", Glib::RefPtr<Gtk::SelectionModel>, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
 };
 
 } // namespace Adw

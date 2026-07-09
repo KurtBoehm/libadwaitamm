@@ -1,4 +1,4 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -20,37 +20,31 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
-#include <glibmm.h>
 #include <gtkmm.h>
-
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
 #include <adwaita.h>
 
-namespace Adw
-{
-
-class LeafletPage : public Glib::Object {
-  _CLASS_GOBJECT(LeafletPage, AdwLeafletPage, ADW_LEAFLET_PAGE, Glib::Object, GObject)
+namespace Adw {
+class Layout : public Glib::Object {
+  _CLASS_GOBJECT(Layout, AdwLayout, ADW_LAYOUT, Glib::Object, GObject)
   _STRUCT_NOT_HIDDEN
   _DO_NOT_DERIVE_GTYPE
 
 protected:
+  // Constructors
   _CTOR_DEFAULT
 
 public:
-  _WRAP_CREATE()
+  // Constructors
+  _WRAP_CTOR(Layout(Gtk::Widget* content), adw_layout_new)
 
-  _WRAP_METHOD(Gtk::Widget* get_child() const, adw_leaflet_page_get_child)
-  _WRAP_METHOD(Glib::ustring get_name() const, adw_leaflet_page_get_name)
-  _WRAP_METHOD(bool get_navigatable() const, adw_leaflet_page_get_navigatable)
-  _WRAP_METHOD(void set_name(const Glib::ustring& name), adw_leaflet_page_set_name)
-  _WRAP_METHOD(void set_navigatable(bool navigatable), adw_leaflet_page_set_navigatable)
+  // Methods
+  _WRAP_METHOD(Gtk::Widget* get_content() const, adw_layout_get_content, newin "1.6")
 
-  _WRAP_PROPERTY("child", Gtk::Widget*)
+  _WRAP_METHOD(Glib::ustring get_name() const, adw_layout_get_name, newin "1.6")
+  _WRAP_METHOD(void set_name(const Glib::ustring& name), adw_layout_set_name, newin "1.6")
+
+  // Properties
+  _WRAP_PROPERTY("content", Gtk::Widget*)
   _WRAP_PROPERTY("name", Glib::ustring)
-  _WRAP_PROPERTY("navigatable", bool)
 };
-
 } // namespace Adw
