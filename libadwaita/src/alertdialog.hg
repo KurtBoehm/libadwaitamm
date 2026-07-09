@@ -21,17 +21,19 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(libadwaitamm/private/dialog_p.h)
 
 #include <adwaita.h>
+#include <giomm/asyncresult.h>
+#include <giomm/cancellable.h>
 #include <libadwaitamm/dialog.h>
 
 namespace Adw {
+// Enumerations
+_WRAP_ENUM(ResponseAppearance, AdwResponseAppearance, newin "1.5")
+
 class AlertDialog : public Adw::Dialog {
   _CLASS_GTKOBJECT(AlertDialog, AdwAlertDialog, ADW_ALERT_DIALOG, Adw::Dialog, AdwDialog)
   _STRUCT_NOT_HIDDEN
 
 public:
-  // Enumerations
-  _WRAP_ENUM(ResponseAppearance, AdwResponseAppearance, newin "1.5")
-
   // Constructors
   _WRAP_CTOR(AlertDialog(const Glib::ustring& heading, const Glib::ustring& body), adw_alert_dialog_new)
 
@@ -65,7 +67,7 @@ public:
   _WRAP_METHOD(Glib::ustring get_response_label(const Glib::ustring& response) const, adw_alert_dialog_get_response_label, newin "1.5")
   _WRAP_METHOD(void set_response_label(const Glib::ustring& response, const Glib::ustring& label), adw_alert_dialog_set_response_label, newin "1.5")
 
-  _WRAP_METHOD(AlertDialog::ResponseAppearance get_response_appearance(const Glib::ustring& response) const, adw_alert_dialog_get_response_appearance, newin "1.5")
+  _WRAP_METHOD(ResponseAppearance get_response_appearance(const Glib::ustring& response) const, adw_alert_dialog_get_response_appearance, newin "1.5")
   _WRAP_METHOD(void set_response_appearance(const Glib::ustring& response, ResponseAppearance appearance), adw_alert_dialog_set_response_appearance, newin "1.5")
 
   _WRAP_METHOD(bool get_response_enabled(const Glib::ustring& response) const, adw_alert_dialog_get_response_enabled, newin "1.5")
@@ -79,8 +81,28 @@ public:
 
   _WRAP_METHOD(bool has_response(const Glib::ustring& response) const, adw_alert_dialog_has_response, newin "1.5")
 
-  _WRAP_METHOD(void choose(Gtk::Widget* parent, const Glib::RefPtr<Gio::Cancellable>& cancellable, GAsyncReadyCallback callback, gpointer user_data), adw_alert_dialog_choose, newin "1.5")
+  /** Shows the dialog to the user and calls @a slot when a response is chosen.
+   *
+   * @newin{1,5}
+   *
+   * @param parent The parent widget.
+   * @param cancellable A cancellable object to cancel the operation.
+   * @param slot A callback to call when the operation is complete.
+   */
+  void choose(Gtk::Widget* parent, const Glib::RefPtr<Gio::Cancellable>& cancellable, const Gio::SlotAsyncReady& slot);
+  _IGNORE(adw_alert_dialog_choose)
+
   _WRAP_METHOD(Glib::ustring choose_finish(const Glib::RefPtr<Gio::AsyncResult>& result), adw_alert_dialog_choose_finish, newin "1.5")
+
+  // Properties
+  _WRAP_PROPERTY("heading", Glib::ustring, newin "1.5")
+  _WRAP_PROPERTY("heading-use-markup", bool, newin "1.5")
+  _WRAP_PROPERTY("body", Glib::ustring, newin "1.5")
+  _WRAP_PROPERTY("body-use-markup", bool, newin "1.5")
+  _WRAP_PROPERTY("extra-child", Gtk::Widget*, newin "1.5")
+  _WRAP_PROPERTY("prefer-wide-layout", bool, newin "1.6")
+  _WRAP_PROPERTY("default-response", Glib::ustring, newin "1.5")
+  _WRAP_PROPERTY("close-response", Glib::ustring, newin "1.5")
 
   // Signals
   _WRAP_SIGNAL(void response(const Glib::ustring& response), "response", newin "1.5")

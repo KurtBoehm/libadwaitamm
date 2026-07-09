@@ -21,11 +21,9 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/window_p.h)
 
 #include <gtkmm.h>
+#include <libadwaitamm/alertdialog.h>
 
-namespace Adw
-{
-  _WRAP_ENUM(ResponseAppearance, AdwResponseAppearance)
-
+namespace Adw {
 class MessageDialog : public Gtk::Window {
   _CLASS_GTKOBJECT(MessageDialog, AdwMessageDialog, ADW_MESSAGE_Dialog, Gtk::Window, GtkWindow)
   _UNMANAGEABLE

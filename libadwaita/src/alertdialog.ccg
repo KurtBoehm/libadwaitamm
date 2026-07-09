@@ -16,4 +16,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Adw {}
+namespace Adw {
+namespace {
+static void AlertDialog_choose_callback(GObject* source_object, GAsyncResult* res, void* data) {
+  auto slot = static_cast<Gio::SlotAsyncReady*>(data);
+  auto result = Glib::wrap(res, true);
+
+  try {
+    (*slot)(result);
+  } catch (...) {
+    Glib::exception_handlers_invoke();
+  }
+
+  delete slot;
+}
+} // anonymous namespace
+
+void AlertDialog::choose(Gtk::Widget* parent, const Glib::RefPtr<Gio::Cancellable>& cancellable, const Gio::SlotAsyncReady& slot) {
+  auto slot_copy = new Gio::SlotAsyncReady(slot);
+
+  adw_alert_dialog_choose(
+    gobj(),
+    parent ? parent->gobj() : nullptr,
+    Glib::unwrap(cancellable),
+    &AlertDialog_choose_callback,
+    slot_copy
+  );
+}
+} // namespace Adw
