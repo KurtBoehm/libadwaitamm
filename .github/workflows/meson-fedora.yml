@@ -1,4 +1,4 @@
-name: C/C++ CI Fedora 40
+name: CI Fedora 44
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: fedora:40
+      image: fedora:44
       options: --security-opt seccomp=unconfined
     steps:
       - name: Setup git
@@ -19,7 +19,7 @@ jobs:
           id
           ls -la
           dnf -y install git
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           path: "libadwaitamm-src"
       - name: Setup dependencies
@@ -41,7 +41,7 @@ jobs:
         working-directory: /home/user/libadwaitamm-src/builddir
         run: |
           sudo -u user --  /home/user/libadwaitamm-src/.github/scripts/run-tests.sh
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: testlog.txt
