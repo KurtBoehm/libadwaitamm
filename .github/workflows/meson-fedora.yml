@@ -28,19 +28,28 @@ jobs:
           adduser -m -U -d /home/user  user
           mv libadwaitamm-src /home/user
           chown -R user:user /home/user/libadwaitamm-src
-          dnf -y install gcc-c++ gtkmm4.0-devel meson itstool libadwaita-devel mm-common weston
+          dnf -y install gcc-c++ gtkmm4.0-devel meson itstool libadwaita-devel mm-common weston glibc-langpack-en
       - name: Configure
         working-directory: /home/user/libadwaitamm-src
+        env:
+          LANG: en_US.UTF-8
+          LC_ALL: en_US.UTF-8
         run: |
-          sudo -u user -- meson setup builddir
+          sudo -u user -E -- meson setup builddir
       - name: Build
         working-directory: /home/user/libadwaitamm-src/builddir
+        env:
+          LANG: en_US.UTF-8
+          LC_ALL: en_US.UTF-8
         run: |
-          sudo -u user -- meson compile
+          sudo -u user -E -- meson compile
       - name: Test
         working-directory: /home/user/libadwaitamm-src/builddir
+        env:
+          LANG: en_US.UTF-8
+          LC_ALL: en_US.UTF-8
         run: |
-          sudo -u user --  /home/user/libadwaitamm-src/.github/scripts/run-tests.sh
+          sudo -u user -E --  /home/user/libadwaitamm-src/.github/scripts/run-tests.sh
       - uses: actions/upload-artifact@v7
         if: failure()
         with:
