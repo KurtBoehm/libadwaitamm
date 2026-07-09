@@ -1,4 +1,5 @@
-/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -13,14 +14,16 @@
  * See the GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
-#include <gtkmm.h>
+#include <gtkmm/widget.h>
+#include <gdkmm/paintable.h>
+#include <gdkmm/texture.h>
 #include <adwaita.h>
 
 namespace Adw {
@@ -50,7 +53,7 @@ public:
   _WRAP_METHOD(int get_size() const, adw_avatar_get_size)
   _WRAP_METHOD(void set_size(int size), adw_avatar_set_size)
 
-  _WRAP_METHOD(Glib::RefPtr<Gdk::Texture> draw_to_texture(int scale_factor), adw_avatar_draw_to_texture, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Gdk::Texture> draw_to_texture(int scale_factor), adw_avatar_draw_to_texture)
 
   // Properties
   _WRAP_PROPERTY("icon-name", Glib::ustring)

@@ -2,8 +2,6 @@
  * Copyright (C) 2026 Kurt Böhm
  *
  * SPDX-License-Identifier: LGPL-2.1-or-later
- *
- * Author: Kurt Böhm <kurbo96@gmail.com>
  */
 
 #include <libadwaitamm.h>

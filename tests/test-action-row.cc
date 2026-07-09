@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 Purism SPC
+ * Copyright (C) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
@@ -42,6 +43,20 @@ static void test_adw_action_row_icon_name(void) {
   g_assert_true(row.get_icon_name() == "dummy-icon-name");
 }
 
+static void test_adw_action_row_activatable_widget(void) {
+  Adw::ActionRow row;
+
+  g_assert_null(row.get_activatable_widget());
+
+  auto *widget = Gtk::make_managed<Gtk::CheckButton>();
+  row.add_prefix(*widget);
+  row.set_activatable_widget(*widget);
+  g_assert_true(row.get_activatable_widget() == widget);
+
+  row.set_activatable_widget(row);
+  g_assert_true(row.get_activatable_widget() == &row);
+}
+
 static void test_adw_action_row_title_lines(void) {
   Adw::ActionRow row;
   g_assert_true(row.get_title_lines() == 0);
@@ -75,6 +90,18 @@ static void test_adw_action_row_subtitle_lines(void) {
   g_assert_true(row.get_subtitle_lines() == 1);
 }
 
+static void test_adw_action_row_subtitle_selectable(void) {
+  Adw::ActionRow row;
+
+  g_assert_false(row.get_subtitle_selectable());
+
+  row.set_subtitle_selectable(true);
+  g_assert_true(row.get_subtitle_selectable());
+
+  row.set_subtitle_selectable(false);
+  g_assert_false(row.get_subtitle_selectable());
+}
+
 static void test_adw_action_row_activate(void) {
   Adw::ActionRow row;
 
@@ -85,18 +112,23 @@ static void test_adw_action_row_activate(void) {
   g_assert_cmpint(activated, ==, 1);
 }
 
-int
-main (int   argc,
-      char *argv[])
-{
-  gtk_test_init (&argc, &argv, NULL);
+int main(int argc, char *argv[]) {
+  gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/ActionRow/add_remove", test_adw_action_row_add_remove);
+  g_test_add_func("/Adwaita/ActionRow/add_remove",
+                  test_adw_action_row_add_remove);
   g_test_add_func("/Adwaita/ActionRow/subtitle", test_adw_action_row_subtitle);
-  g_test_add_func("/Adwaita/ActionRow/icon_name", test_adw_action_row_icon_name);
-  g_test_add_func("/Adwaita/ActionRow/title_lines", test_adw_action_row_title_lines);
-  g_test_add_func("/Adwaita/ActionRow/subtitle_lines", test_adw_action_row_subtitle_lines);
+  g_test_add_func("/Adwaita/ActionRow/icon_name",
+                  test_adw_action_row_icon_name);
+  g_test_add_func("/Adwaita/ActionRow/activatable_widget",
+                  test_adw_action_row_activatable_widget);
+  g_test_add_func("/Adwaita/ActionRow/title_lines",
+                  test_adw_action_row_title_lines);
+  g_test_add_func("/Adwaita/ActionRow/subtitle_lines",
+                  test_adw_action_row_subtitle_lines);
+  g_test_add_func("/Adwaita/ActionRow/subtitle_selectable",
+                  test_adw_action_row_subtitle_selectable);
   g_test_add_func("/Adwaita/ActionRow/activate", test_adw_action_row_activate);
 
   return g_test_run();

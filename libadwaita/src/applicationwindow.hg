@@ -1,4 +1,5 @@
-/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>, 2026 Kurt Böhm <kurbo96@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -13,7 +14,7 @@
  * See the GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 _DEFS(libadwaitamm,libadwaita)
@@ -21,6 +22,7 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/applicationwindow_p.h)
 
 #include <gtkmm/applicationwindow.h>
+#include <giomm/listmodel.h>
 #include <adwaita.h>
 #include <libadwaitamm/breakpoint.h>
 #include <libadwaitamm/dialog.h>
@@ -41,7 +43,7 @@ public:
   _WRAP_METHOD(void set_content(Gtk::Widget* content), adw_application_window_set_content)
   _WRAP_METHOD(Gtk::Widget* get_content() const, adw_application_window_get_content)
 
-  _WRAP_METHOD(void add_breakpoint(Adw::Breakpoint* breakpoint), adw_application_window_add_breakpoint, newin "1.4")
+  _WRAP_METHOD(void add_breakpoint(const Glib::RefPtr<Adw::Breakpoint>& breakpoint), adw_application_window_add_breakpoint, newin "1.4")
   _WRAP_METHOD(Glib::RefPtr<Adw::Breakpoint> get_current_breakpoint() const, adw_application_window_get_current_breakpoint, newin "1.4")
 
   _WRAP_METHOD(std::vector<Adw::Dialog*> get_dialogs() const, adw_application_window_get_dialogs, newin "1.5")
@@ -52,7 +54,7 @@ public:
 
   // Properties
   _WRAP_PROPERTY("content", Gtk::Widget*)
-  _WRAP_PROPERTY("current-breakpoint", Adw::Breakpoint*)
+  _WRAP_PROPERTY("current-breakpoint", Glib::RefPtr<Adw::Breakpoint>)
   _WRAP_PROPERTY("dialogs", Glib::RefPtr<Gio::ListModel>)
   _WRAP_PROPERTY("visible-dialog", Adw::Dialog*)
   _WRAP_PROPERTY("adaptive-preview", bool)
