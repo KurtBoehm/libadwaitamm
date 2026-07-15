@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2021 Purism SPC
+ * Copyright (C) 2026 Kurt Böhm
  *
  * SPDX-License-Identifier: LGPL-2.1-or-later
  *
@@ -82,6 +83,29 @@ static void test_adw_button_content_use_underline(void) {
   g_assert_true(notified == 2);
 }
 
+static void test_adw_button_content_can_shrink(void) {
+  Adw::ButtonContent content;
+  bool can_shrink;
+
+  notified = 0;
+  content.property_can_shrink().signal_changed().connect(
+      sigc::ptr_fun(notify_cb));
+
+  can_shrink = content.get_property<bool>("can-shrink");
+  g_assert_false(can_shrink);
+
+  content.set_can_shrink(false);
+  g_assert_true(notified == 0);
+
+  content.set_can_shrink(true);
+  g_assert_true(content.get_can_shrink());
+  g_assert_true(notified == 1);
+
+  content.set_property<bool>("can-shrink", false);
+  g_assert_false(content.get_can_shrink());
+  g_assert_true(notified == 2);
+}
+
 static void test_adw_button_content_style_class_button(void) {
   Gtk::Window window;
   Gtk::Button button;
@@ -122,6 +146,8 @@ int main(int argc, char *argv[]) {
                   test_adw_button_content_label);
   g_test_add_func("/Adwaita/ButtonContent/use_underline",
                   test_adw_button_content_use_underline);
+  g_test_add_func("/Adwaita/ButtonContent/can_shrink",
+                  test_adw_button_content_can_shrink);
   g_test_add_func("/Adwaita/ButtonContent/style_class_button",
                   test_adw_button_content_style_class_button);
   g_test_add_func("/Adwaita/ButtonContent/style_class_split_button",
