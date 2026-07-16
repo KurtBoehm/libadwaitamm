@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  *
  * Author: Alexander Mikhaylenko <alexander.mikhaylenko@puri.sm>
+ * Author: Kurt Böhm <kurbo96@gmail.com>
  */
 
 #include <libadwaitamm.h>

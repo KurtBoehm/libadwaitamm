@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 Kurt Böhm
+ * Copyright (C) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */

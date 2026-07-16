@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2020 Alexander Mikhaylenko <alexm@gnome.org>
+ * Copyright (C) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
@@ -22,6 +23,10 @@ static void test_adw_carousel_indicator_lines_carousel(void) {
 
   lines.set_carousel(&carousel);
   g_assert_true(lines.get_carousel()->gobj() == carousel.gobj());
+  g_assert_true(notified == 1);
+
+  // Setting the same carousel again should not notify
+  lines.set_carousel(&carousel);
   g_assert_true(notified == 1);
 
   lines.set_carousel(nullptr);
