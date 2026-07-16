@@ -34,11 +34,26 @@ static void test_adw_carousel_indicator_dots_carousel(void) {
   g_assert_true(notified == 2);
 }
 
+static void test_adw_carousel_indicator_dots_orientation(void) {
+  Adw::CarouselIndicatorDots dots;
+
+  notified = 0;
+  dots.property_orientation().signal_changed().connect(
+      sigc::ptr_fun(notify_cb));
+
+  g_assert_true(dots.get_orientation() == Gtk::Orientation::HORIZONTAL);
+  dots.set_orientation(Gtk::Orientation::VERTICAL);
+  g_assert_true(dots.get_orientation() == Gtk::Orientation::VERTICAL);
+  g_assert_true(notified == 1);
+}
+
 int main(int argc, char *argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
   g_test_add_func("/Adwaita/CarouselIndicatorDots/carousel",
                   test_adw_carousel_indicator_dots_carousel);
+  g_test_add_func("/Adwaita/CarouselIndicatorDots/orientation",
+                  test_adw_carousel_indicator_dots_orientation);
   return g_test_run();
 }

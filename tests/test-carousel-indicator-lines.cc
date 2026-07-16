@@ -12,8 +12,8 @@ int notified;
 static void notify_cb() { notified++; }
 
 static void test_adw_carousel_indicator_lines_carousel(void) {
-    Adw::CarouselIndicatorLines lines;
-    Adw::Carousel carousel;
+  Adw::CarouselIndicatorLines lines;
+  Adw::Carousel carousel;
 
   notified = 0;
   lines.property_carousel().signal_changed().connect(sigc::ptr_fun(notify_cb));
@@ -34,11 +34,26 @@ static void test_adw_carousel_indicator_lines_carousel(void) {
   g_assert_true(notified == 2);
 }
 
+static void test_adw_carousel_indicator_lines_orientation(void) {
+  Adw::CarouselIndicatorLines dots;
+
+  notified = 0;
+  dots.property_orientation().signal_changed().connect(
+      sigc::ptr_fun(notify_cb));
+
+  g_assert_true(dots.get_orientation() == Gtk::Orientation::HORIZONTAL);
+  dots.set_orientation(Gtk::Orientation::VERTICAL);
+  g_assert_true(dots.get_orientation() == Gtk::Orientation::VERTICAL);
+  g_assert_true(notified == 1);
+}
+
 int main(int argc, char *argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
   g_test_add_func("/Adwaita/CarouselInidicatorLines/carousel",
                   test_adw_carousel_indicator_lines_carousel);
+  g_test_add_func("/Adwaita/CarouselIndicatorLines/orientation",
+                  test_adw_carousel_indicator_lines_orientation);
   return g_test_run();
 }

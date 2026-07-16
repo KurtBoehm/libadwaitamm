@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2019 Alexander Mikhaylenko <exalm7659@gmail.com>
+ * Copyright (C) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
@@ -343,6 +344,55 @@ static void test_adw_carousel_page_changed(void) {
   g_assert_true(page_changed_count == 3);
 }
 
+static void test_adw_carousel_orientation(void) {
+  Adw::Carousel carousel;
+
+  notified = 0;
+  carousel.property_orientation().signal_changed().connect(
+      sigc::ptr_fun(notify_cb));
+
+  /* AdwCarousel defaults to horizontal */
+  g_assert_true(carousel.get_orientation() == Gtk::Orientation::HORIZONTAL);
+
+  carousel.set_orientation(Gtk::Orientation::VERTICAL);
+  g_assert_true(carousel.get_orientation() == Gtk::Orientation::VERTICAL);
+  g_assert_true(notified == 1);
+
+  carousel.set_property<Gtk::Orientation>("orientation",
+                                          Gtk::Orientation::HORIZONTAL);
+  g_assert_true(carousel.get_orientation() == Gtk::Orientation::HORIZONTAL);
+  g_assert_true(notified == 2);
+
+  /* Setting the same value should not notify */
+  carousel.set_orientation(Gtk::Orientation::HORIZONTAL);
+  g_assert_true(notified == 2);
+}
+
+static void test_adw_carousel_swipeable(void) {
+  Adw::Carousel carousel;
+  Gtk::Label child1;
+  Gtk::Label child2;
+  Gtk::Label child3;
+
+  carousel.append(child1);
+  carousel.append(child2);
+  carousel.append(child3);
+  allocate_carousel(carousel);
+
+  auto snap_points = carousel.get_snap_points();
+  g_assert_true(snap_points.size() == 3);
+  g_assert_true(snap_points[0] == 0);
+  g_assert_true(snap_points[1] == 1);
+  g_assert_true(snap_points[2] == 2);
+
+  g_assert_true(carousel.get_progress() == 0);
+  carousel.scroll_to(child2, false);
+  allocate_carousel(carousel);
+  g_assert_true(carousel.get_progress() == 1);
+
+  g_assert_true(carousel.get_cancel_progress() == 1);
+}
+
 int main(int argc, char *argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
@@ -364,5 +414,8 @@ int main(int argc, char *argv[]) {
                   test_adw_carousel_reveal_duration);
   g_test_add_func("/Adwaita/Carousel/page_changed",
                   test_adw_carousel_page_changed);
+  g_test_add_func("/Adwaita/Carousel/orientation",
+                  test_adw_carousel_orientation);
+  g_test_add_func("/Adwaita/Carousel/swipeable", test_adw_carousel_swipeable);
   return g_test_run();
 }
