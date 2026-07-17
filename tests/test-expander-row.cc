@@ -7,12 +7,36 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
+int notified;
+static void notify_cb() { notified++; }
+
 static void test_adw_expander_row_add_remove(void) {
   Adw::ExpanderRow row;
   Gtk::ListBoxRow child;
 
   row.add_row(child);
   row.remove(child);
+}
+
+static void test_adw_expander_row_add_prefix_suffix(void) {
+  Adw::ExpanderRow row;
+  Gtk::Button prefix, suffix;
+
+  row.add_prefix(prefix);
+  row.add_suffix(suffix);
+
+  row.remove(prefix);
+  row.remove(suffix);
+}
+
+static void test_adw_expander_row_add_action(void) {
+  Adw::ExpanderRow row;
+  Gtk::Button action;
+
+  // Deprecated since 1.4 in favor of add_suffix(), but still part of the
+  // public API and should keep working.
+  row.add_action(action);
+  row.remove(action);
 }
 
 static void test_adw_expander_row_subtitle(void) {
@@ -67,6 +91,39 @@ static void test_adw_expander_row_enable_expansion(void) {
   g_assert_true(row.get_expanded());
 }
 
+static void test_adw_expander_row_title_lines(void) {
+  Adw::ExpanderRow row;
+
+  notified = 0;
+  row.property_title_lines().signal_changed().connect(sigc::ptr_fun(notify_cb));
+
+  g_assert_cmpint(row.get_title_lines(), ==, 0);
+
+  row.set_title_lines(0);
+  g_assert_true(notified == 0);
+
+  row.set_title_lines(3);
+  g_assert_cmpint(row.get_title_lines(), ==, 3);
+  g_assert_true(notified == 1);
+}
+
+static void test_adw_expander_row_subtitle_lines(void) {
+  Adw::ExpanderRow row;
+
+  notified = 0;
+  row.property_subtitle_lines().signal_changed().connect(
+      sigc::ptr_fun(notify_cb));
+
+  g_assert_cmpint(row.get_subtitle_lines(), ==, 0);
+
+  row.set_subtitle_lines(0);
+  g_assert_true(notified == 0);
+
+  row.set_subtitle_lines(2);
+  g_assert_cmpint(row.get_subtitle_lines(), ==, 2);
+  g_assert_true(notified == 1);
+}
+
 static void test_adw_expander_row_show_enable_switch(void) {
   Adw::ExpanderRow row;
 
@@ -85,6 +142,10 @@ int main(int argc, char *argv[]) {
 
   g_test_add_func("/Adwaita/ExpanderRow/add_remove",
                   test_adw_expander_row_add_remove);
+  g_test_add_func("/Adwaita/ExpanderRow/add_prefix_suffix",
+                  test_adw_expander_row_add_prefix_suffix);
+  g_test_add_func("/Adwaita/ExpanderRow/add_action",
+                  test_adw_expander_row_add_action);
   g_test_add_func("/Adwaita/ExpanderRow/subtitle",
                   test_adw_expander_row_subtitle);
   g_test_add_func("/Adwaita/ExpanderRow/icon_name",
@@ -93,6 +154,10 @@ int main(int argc, char *argv[]) {
                   test_adw_expander_row_expanded);
   g_test_add_func("/Adwaita/ExpanderRow/enable_expansion",
                   test_adw_expander_row_enable_expansion);
+  g_test_add_func("/Adwaita/ExpanderRow/title_lines",
+                  test_adw_expander_row_title_lines);
+  g_test_add_func("/Adwaita/ExpanderRow/subtitle_lines",
+                  test_adw_expander_row_subtitle_lines);
   g_test_add_func("/Adwaita/ExpanderRow/show_enable_switch",
                   test_adw_expander_row_show_enable_switch);
 

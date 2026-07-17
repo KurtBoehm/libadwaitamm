@@ -1,5 +1,3 @@
-# tests
-
 test_env = [
   'G_TEST_SRCDIR=@0@'.format(meson.current_source_dir()),
   'G_TEST_BUILDDIR=@0@'.format(meson.current_build_dir()),
@@ -24,9 +22,25 @@ if cpp.get_argument_syntax() != 'msvc'
   use_pie = true
 endif
 
+# Same GResource bundle the C test suite uses, so tests that construct
+# widgets from AppStream metadata (e.g. AboutDialog/AboutWindow) can find it.
+test_resources = gnome.compile_resources(
+  'adwaita-test-resources',
+  'tests.gresources.xml',
+  source_dir: join_paths(meson.current_source_dir()),
+  c_name: 'test',
+)
+
+# Tests that need the compiled-in AppStream metadata resource.
+tests_needing_resources = [
+  'test-about-dialog',
+  'test-about-window',
+]
+
 test_names = [
   'test-about-dialog',
   'test-about-window',
+  'test-accent-color',
   'test-action-row',
   'test-alert-dialog',
   'test-animation',
@@ -46,9 +60,11 @@ test_names = [
   'test-clamp',
   'test-clamp-layout',
   'test-clamp-scrollable',
+  'test-dialog',
   'test-combo-row',
   'test-easing',
   'test-entry-row',
+  'test-enum-list-model',
   'test-expander-row',
   'test-flap',
   'test-header-bar',
@@ -75,7 +91,12 @@ test_names = [
 ]
 
 foreach test_name : test_names
-  t = executable(test_name, [test_name + '.cc'],
+  test_sources = [test_name + '.cc']
+  if tests_needing_resources.contains(test_name)
+    test_sources += test_resources
+  endif
+
+  t = executable(test_name, test_sources,
                      cpp_args: test_cppflags,
                     link_args: test_link_args,
                  dependencies: libadwaitamm_own_dep,

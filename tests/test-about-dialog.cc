@@ -7,6 +7,8 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
+#include "adwaita-test-resources.h"
+
 int notified;
 int activated_links;
 Glib::ustring last_activated_uri;
@@ -17,6 +19,48 @@ static bool activate_link_cb(const Glib::ustring &uri) {
   activated_links++;
   last_activated_uri = uri;
   return true;
+}
+
+static void test_adw_about_dialog_from_appdata(void) {
+  const Glib::ustring resource_path =
+      "/org/gnome/Adwaita1/Test/org.gnome.Adwaita1.Test.metainfo.xml";
+
+  {
+    Adw::AboutDialog dialog(resource_path, "1.0");
+
+    g_assert_true(dialog.get_appdata_resource_path() == resource_path);
+    g_assert_true(dialog.get_release_notes() == "<p>Testing Build</p>\n");
+    g_assert_true(dialog.get_release_notes_version() == "1.0");
+    g_assert_true(dialog.get_version() == "1.0");
+    g_assert_true(dialog.get_application_icon() == "org.gnome.Adwaita1.Test");
+    g_assert_true(dialog.get_application_name() == "Adwaita Test");
+    g_assert_true(dialog.get_developer_name() == "The GNOME Project");
+    g_assert_true(dialog.get_issue_url() ==
+                  "https://github.com/KurtBoehm/libadwaitamm/issues");
+    g_assert_true(dialog.get_support_url() ==
+                  "https://github.com/KurtBoehm/libadwaitamm/issues");
+    g_assert_true(dialog.get_website() ==
+                  "https://github.com/KurtBoehm/libadwaitamm");
+    g_assert_true(dialog.get_license_type() == Gtk::License::LGPL_2_1);
+  }
+
+  {
+    Adw::AboutDialog dialog(resource_path, "0.1");
+
+    g_assert_true(dialog.get_release_notes() == "<p>Testing Build Older</p>\n");
+    g_assert_true(dialog.get_release_notes_version() == "0.1");
+    g_assert_true(dialog.get_version() == "1.0");
+  }
+
+  {
+    // The C test passes NULL here; the constructor's own conversion falls
+    // back to "" for a null release_notes_version, so this is equivalent.
+    Adw::AboutDialog dialog(resource_path, "");
+
+    g_assert_true(dialog.get_release_notes() == "");
+    g_assert_true(dialog.get_release_notes_version() == "");
+    g_assert_true(dialog.get_version() == "1.0");
+  }
 }
 
 static void test_adw_about_dialog_application_name(void) {
@@ -345,6 +389,11 @@ int main(int argc, char *argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
+  GResource *test_resources = test_get_resource();
+  g_resources_register(test_resources);
+
+  g_test_add_func("/Adwaita/AboutDialog/from_appdata",
+                  test_adw_about_dialog_from_appdata);
   g_test_add_func("/Adwaita/AboutDialog/application_name",
                   test_adw_about_dialog_application_name);
   g_test_add_func("/Adwaita/AboutDialog/application_icon",

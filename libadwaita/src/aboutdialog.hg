@@ -32,83 +32,83 @@ class AboutDialog : public Adw::Dialog {
 public:
   // Constructors
   _CTOR_DEFAULT
-  _WRAP_CTOR(AboutDialog(const Glib::ustring& resource_path, const Glib::ustring& release_notes_version), adw_about_dialog_new_from_appdata)
+  _WRAP_CTOR(AboutDialog(const Glib::ustring& appdata_resource_path, const Glib::ustring& release_notes_version), adw_about_dialog_new_from_appdata)
 
   // Conversions
 #m4 _CONVERSION(`const char* const*',`std::vector<Glib::ustring>',`Glib::ArrayHandler<Glib::ustring>::array_to_vector($3, Glib::OWNERSHIP_NONE)')
 #m4 _CONVERSION(`const std::vector<Glib::ustring>&',`const char**',`Glib::ArrayHandler<Glib::ustring>::vector_to_array($3).data ()')
 
   // Methods
-  _WRAP_METHOD(Glib::ustring get_appdata_resource_path(), adw_about_dialog_get_appdata_resource_path, newin "1.9")
+  _WRAP_METHOD(Glib::ustring get_appdata_resource_path() const, adw_about_dialog_get_appdata_resource_path, newin "1.9")
 
-  _WRAP_METHOD(Glib::ustring get_application_name(), adw_about_dialog_get_application_name, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_application_name() const, adw_about_dialog_get_application_name, newin "1.5")
   _WRAP_METHOD(void set_application_name(const Glib::ustring& application_name), adw_about_dialog_set_application_name, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_application_icon(), adw_about_dialog_get_application_icon, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_application_icon() const, adw_about_dialog_get_application_icon, newin "1.5")
   _WRAP_METHOD(void set_application_icon(const Glib::ustring& application_icon), adw_about_dialog_set_application_icon, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_developer_name(), adw_about_dialog_get_developer_name, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_developer_name() const, adw_about_dialog_get_developer_name, newin "1.5")
   _WRAP_METHOD(void set_developer_name(const Glib::ustring& developer_name), adw_about_dialog_set_developer_name, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_version(), adw_about_dialog_get_version, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_version() const, adw_about_dialog_get_version, newin "1.5")
   _WRAP_METHOD(void set_version(const Glib::ustring& version), adw_about_dialog_set_version, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_release_notes_version(), adw_about_dialog_get_release_notes_version, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_release_notes_version() const, adw_about_dialog_get_release_notes_version, newin "1.5")
   _WRAP_METHOD(void set_release_notes_version(const Glib::ustring& version), adw_about_dialog_set_release_notes_version, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_release_notes(), adw_about_dialog_get_release_notes, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_release_notes() const, adw_about_dialog_get_release_notes, newin "1.5")
   _WRAP_METHOD(void set_release_notes(const Glib::ustring& release_notes), adw_about_dialog_set_release_notes, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_comments(), adw_about_dialog_get_comments, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_comments() const, adw_about_dialog_get_comments, newin "1.5")
   _WRAP_METHOD(void set_comments(const Glib::ustring& comments), adw_about_dialog_set_comments, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_website(), adw_about_dialog_get_website, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_website() const, adw_about_dialog_get_website, newin "1.5")
   _WRAP_METHOD(void set_website(const Glib::ustring& website), adw_about_dialog_set_website, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_support_url(), adw_about_dialog_get_support_url, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_support_url() const, adw_about_dialog_get_support_url, newin "1.5")
   _WRAP_METHOD(void set_support_url(const Glib::ustring& support_url), adw_about_dialog_set_support_url, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_issue_url(), adw_about_dialog_get_issue_url, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_issue_url() const, adw_about_dialog_get_issue_url, newin "1.5")
   _WRAP_METHOD(void set_issue_url(const Glib::ustring& issue_url), adw_about_dialog_set_issue_url, newin "1.5")
 
   _WRAP_METHOD(void add_link(const Glib::ustring& title, const Glib::ustring& url), adw_about_dialog_add_link, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_debug_info(), adw_about_dialog_get_debug_info, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_debug_info() const, adw_about_dialog_get_debug_info, newin "1.5")
   _WRAP_METHOD(void set_debug_info(const Glib::ustring& debug_info), adw_about_dialog_set_debug_info, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_debug_info_filename(), adw_about_dialog_get_debug_info_filename, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_debug_info_filename() const, adw_about_dialog_get_debug_info_filename, newin "1.5")
   _WRAP_METHOD(void set_debug_info_filename(const Glib::ustring& filename), adw_about_dialog_set_debug_info_filename, newin "1.5")
 
-  _WRAP_METHOD(std::vector<Glib::ustring> get_developers(), adw_about_dialog_get_developers, newin "1.5")
+  _WRAP_METHOD(std::vector<Glib::ustring> get_developers() const, adw_about_dialog_get_developers, newin "1.5")
   _WRAP_METHOD(void set_developers(const std::vector<Glib::ustring>& developers), adw_about_dialog_set_developers, newin "1.5")
 
-  _WRAP_METHOD(std::vector<Glib::ustring> get_designers(), adw_about_dialog_get_designers, newin "1.5")
+  _WRAP_METHOD(std::vector<Glib::ustring> get_designers() const, adw_about_dialog_get_designers, newin "1.5")
   _WRAP_METHOD(void set_designers(const std::vector<Glib::ustring>& designers), adw_about_dialog_set_designers, newin "1.5")
 
-  _WRAP_METHOD(std::vector<Glib::ustring> get_artists(), adw_about_dialog_get_artists, newin "1.5")
+  _WRAP_METHOD(std::vector<Glib::ustring> get_artists() const, adw_about_dialog_get_artists, newin "1.5")
   _WRAP_METHOD(void set_artists(const std::vector<Glib::ustring>& artists), adw_about_dialog_set_artists, newin "1.5")
 
-  _WRAP_METHOD(std::vector<Glib::ustring> get_documenters(), adw_about_dialog_get_documenters, newin "1.5")
+  _WRAP_METHOD(std::vector<Glib::ustring> get_documenters() const, adw_about_dialog_get_documenters, newin "1.5")
   _WRAP_METHOD(void set_documenters(const std::vector<Glib::ustring>& documenters), adw_about_dialog_set_documenters, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_translator_credits(), adw_about_dialog_get_translator_credits, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_translator_credits() const, adw_about_dialog_get_translator_credits, newin "1.5")
   _WRAP_METHOD(void set_translator_credits(const Glib::ustring& translator_credits), adw_about_dialog_set_translator_credits, newin "1.5")
 
   _WRAP_METHOD(void add_credit_section(const Glib::ustring& name, const std::vector<Glib::ustring>& people), adw_about_dialog_add_credit_section, newin "1.5")
   _WRAP_METHOD(void add_acknowledgement_section(const Glib::ustring& name, const std::vector<Glib::ustring>& people), adw_about_dialog_add_acknowledgement_section, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_copyright(), adw_about_dialog_get_copyright, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_copyright() const, adw_about_dialog_get_copyright, newin "1.5")
   _WRAP_METHOD(void set_copyright(const Glib::ustring& copyright), adw_about_dialog_set_copyright, newin "1.5")
 
-  _WRAP_METHOD(Gtk::License get_license_type(), adw_about_dialog_get_license_type, newin "1.5")
+  _WRAP_METHOD(Gtk::License get_license_type() const, adw_about_dialog_get_license_type, newin "1.5")
   _WRAP_METHOD(void set_license_type(Gtk::License license_type), adw_about_dialog_set_license_type, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_license(), adw_about_dialog_get_license, newin "1.5")
+  _WRAP_METHOD(Glib::ustring get_license() const, adw_about_dialog_get_license, newin "1.5")
   _WRAP_METHOD(void set_license(const Glib::ustring& license), adw_about_dialog_set_license, newin "1.5")
 
   _WRAP_METHOD(void add_legal_section(const Glib::ustring& title, const Glib::ustring& copyright, Gtk::License license_type, const Glib::ustring& license), adw_about_dialog_add_legal_section, newin "1.5")
 
-  _WRAP_METHOD(Glib::ustring get_other_apps_title(), adw_about_dialog_get_other_apps_title, newin "1.10")
+  _WRAP_METHOD(Glib::ustring get_other_apps_title() const, adw_about_dialog_get_other_apps_title, newin "1.10")
   _WRAP_METHOD(void set_other_apps_title(const Glib::ustring& title), adw_about_dialog_set_other_apps_title, newin "1.10")
 
   _WRAP_METHOD(void add_other_app(const Glib::ustring& appid, const Glib::ustring& name, const Glib::ustring& summary), adw_about_dialog_add_other_app, newin "1.7")

@@ -36,6 +36,29 @@ static void test_adw_flap_flap(void) {
   g_assert_true(notified == 2);
 }
 
+static void test_adw_flap_content(void) {
+  Adw::Flap flap;
+  Gtk::Widget *widget = nullptr;
+
+  notified = 0;
+  flap.property_content().signal_changed().connect(sigc::ptr_fun(notify_cb));
+
+  widget = flap.get_property<Gtk::Widget *>("content");
+  g_assert_null(widget);
+
+  flap.set_content(nullptr);
+  g_assert_true(notified == 0);
+
+  widget = Gtk::make_managed<Gtk::Button>();
+  flap.set_content(widget);
+  g_assert_true(flap.get_content()->gobj() == widget->gobj());
+  g_assert_true(notified == 1);
+
+  flap.set_property<Gtk::Widget *>("content", nullptr);
+  g_assert_null(flap.get_content());
+  g_assert_true(notified == 2);
+}
+
 static void test_adw_flap_separator(void) {
   Adw::Flap flap;
   Gtk::Widget *widget = nullptr;
@@ -305,11 +328,33 @@ static void test_adw_flap_swipe_to_close(void) {
   g_assert_true(notified == 2);
 }
 
+static void test_adw_flap_fold_threshold_policy(void) {
+  Adw::Flap flap;
+
+  notified = 0;
+  flap.property_fold_threshold_policy().signal_changed().connect(
+      sigc::ptr_fun(notify_cb));
+
+  Adw::FoldThresholdPolicy initial = flap.get_fold_threshold_policy();
+  Adw::FoldThresholdPolicy other =
+      (initial == Adw::FoldThresholdPolicy::MINIMUM)
+          ? Adw::FoldThresholdPolicy::NATURAL
+          : Adw::FoldThresholdPolicy::MINIMUM;
+
+  flap.set_fold_threshold_policy(initial);
+  g_assert_true(notified == 0);
+
+  flap.set_fold_threshold_policy(other);
+  g_assert_true(flap.get_fold_threshold_policy() == other);
+  g_assert_true(notified == 1);
+}
+
 int main(int argc, char *argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
   g_test_add_func("/Adwaita/Flap/flap", test_adw_flap_flap);
+  g_test_add_func("/Adwaita/Flap/content", test_adw_flap_content);
   g_test_add_func("/Adwaita/Flap/separator", test_adw_flap_separator);
   g_test_add_func("/Adwaita/Flap/flap_position", test_adw_flap_flap_position);
   g_test_add_func("/Adwaita/Flap/reveal_flap", test_adw_flap_reveal_flap);
@@ -324,6 +369,8 @@ int main(int argc, char *argv[]) {
   g_test_add_func("/Adwaita/Flap/modal", test_adw_flap_modal);
   g_test_add_func("/Adwaita/Flap/swipe_to_open", test_adw_flap_swipe_to_open);
   g_test_add_func("/Adwaita/Flap/swipe_to_close", test_adw_flap_swipe_to_close);
+  g_test_add_func("/Adwaita/Flap/fold_threshold_policy",
+                  test_adw_flap_fold_threshold_policy);
 
   return g_test_run();
 }

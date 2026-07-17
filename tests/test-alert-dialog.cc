@@ -213,6 +213,17 @@ static void test_adw_alert_dialog_add_responses(void) {
                 Adw::ResponseAppearance::DEFAULT);
 }
 
+static void test_adw_alert_dialog_remove_response(void) {
+  Adw::AlertDialog dialog("", "");
+
+  dialog.add_response("response1", "Response 1");
+  dialog.add_response("response2", "Response 2");
+  dialog.remove_response("response1");
+
+  g_assert_false(dialog.has_response("response1"));
+  g_assert_true(dialog.get_response_label("response2") == "Response 2");
+}
+
 static void test_adw_alert_dialog_response_label(void) {
   Adw::AlertDialog dialog("", "");
 
@@ -352,6 +363,8 @@ int main(int argc, char *argv[]) {
                   test_adw_alert_dialog_add_response);
   g_test_add_func("/Adwaita/AlertDialog/add_responses",
                   test_adw_alert_dialog_add_responses);
+  g_test_add_func("/Adwaita/AlertDialog/remove_response",
+                  test_adw_alert_dialog_remove_response);
   g_test_add_func("/Adwaita/AlertDialog/response_label",
                   test_adw_alert_dialog_response_label);
   g_test_add_func("/Adwaita/AlertDialog/response_enabled",

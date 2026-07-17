@@ -22,5 +22,5 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 #include <adwaita.h>
 
 namespace Adw {
-  _WRAP_ENUM(FoldThresholdPolicy, AdwFoldThresholdPolicy)
+_WRAP_ENUM(FoldThresholdPolicy, AdwFoldThresholdPolicy)
 } // namespace Adw

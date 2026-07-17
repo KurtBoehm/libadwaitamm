@@ -50,10 +50,10 @@ static void test_adw_action_row_activatable_widget(void) {
 
   auto *widget = Gtk::make_managed<Gtk::CheckButton>();
   row.add_prefix(*widget);
-  row.set_activatable_widget(*widget);
+  row.set_activatable_widget(widget);
   g_assert_true(row.get_activatable_widget() == widget);
 
-  row.set_activatable_widget(row);
+  row.set_activatable_widget(&row);
   g_assert_true(row.get_activatable_widget() == &row);
 }
 
