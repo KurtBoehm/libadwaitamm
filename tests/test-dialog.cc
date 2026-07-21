@@ -25,6 +25,10 @@ static void test_adw_dialog_child(void) {
   dialog.set_child(widget);
   g_assert_true(dialog.get_child()->gobj() == widget->gobj());
   g_assert_true(notified == 1);
+
+  dialog.property_child() = nullptr;
+  g_assert_null(dialog.get_child());
+  g_assert_true(notified == 2);
 }
 
 static void test_adw_dialog_title(void) {
@@ -41,6 +45,10 @@ static void test_adw_dialog_title(void) {
   dialog.set_title("Dummy title");
   g_assert_true(dialog.get_title() == "Dummy title");
   g_assert_true(notified == 1);
+
+  dialog.property_title() = "Title 2";
+  g_assert_true(dialog.get_title() == "Title 2");
+  g_assert_true(notified == 2);
 }
 
 static void test_adw_dialog_can_close(void) {
@@ -58,6 +66,10 @@ static void test_adw_dialog_can_close(void) {
   dialog.set_can_close(false);
   g_assert_false(dialog.get_can_close());
   g_assert_true(notified == 1);
+
+  dialog.property_can_close() = true;
+  g_assert_true(dialog.get_can_close());
+  g_assert_true(notified == 2);
 }
 
 static void test_adw_dialog_content_size(void) {
@@ -102,6 +114,10 @@ static void test_adw_dialog_follows_content_size(void) {
   dialog.set_follows_content_size(true);
   g_assert_true(dialog.get_follows_content_size());
   g_assert_true(notified == 1);
+
+  dialog.property_follows_content_size() = false;
+  g_assert_false(dialog.get_follows_content_size());
+  g_assert_true(notified == 2);
 }
 
 static void test_adw_dialog_presentation_mode(void) {
@@ -121,6 +137,12 @@ static void test_adw_dialog_presentation_mode(void) {
   g_assert_true(dialog.get_presentation_mode() ==
                 Adw::Dialog::PresentationMode::FLOATING);
   g_assert_true(notified == 1);
+
+  dialog.property_presentation_mode() =
+      Adw::Dialog::PresentationMode::BOTTOM_SHEET;
+  g_assert_true(dialog.get_presentation_mode() ==
+                Adw::Dialog::PresentationMode::BOTTOM_SHEET);
+  g_assert_true(notified == 2);
 }
 
 static void test_adw_dialog_default_widget(void) {

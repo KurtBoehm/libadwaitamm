@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 Purism SPC
+ * Copyright (C) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
@@ -99,6 +100,14 @@ static void test_adw_expander_row_title_lines(void) {
 
   g_assert_cmpint(row.get_title_lines(), ==, 0);
 
+  g_test_expect_message(
+      ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+      "adw_action_row_set_title_lines: assertion 'title_lines >= 0' failed");
+  row.set_title_lines(-1);
+  g_test_assert_expected_messages();
+
+  g_assert_cmpint(row.get_title_lines(), ==, 0);
+
   row.set_title_lines(0);
   g_assert_true(notified == 0);
 
@@ -113,6 +122,14 @@ static void test_adw_expander_row_subtitle_lines(void) {
   notified = 0;
   row.property_subtitle_lines().signal_changed().connect(
       sigc::ptr_fun(notify_cb));
+
+  g_assert_cmpint(row.get_subtitle_lines(), ==, 0);
+
+  g_test_expect_message(ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                        "adw_action_row_set_subtitle_lines: assertion "
+                        "'subtitle_lines >= 0' failed");
+  row.set_subtitle_lines(-1);
+  g_test_assert_expected_messages();
 
   g_assert_cmpint(row.get_subtitle_lines(), ==, 0);
 

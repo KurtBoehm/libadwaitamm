@@ -1,9 +1,11 @@
 /*
  * Copyright (C) 2020 Purism SPC
+ * Copyright (C) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.1-or-later
  *
  * Author: Alexander Mikhaylenko <alexander.mikhaylenko@puri.sm>
+ * Author: Kurt Böhm <kurbo96@gmail.com>
  */
 
 #include <libadwaitamm.h>

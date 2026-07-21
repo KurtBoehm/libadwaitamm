@@ -24,7 +24,16 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 
 namespace Adw {
 _WRAP_ENUM(Easing, AdwEasing)
-double ease(Adw::Easing ease, double);
+
+/** Computes easing with @a ease for @a d.
+ *
+ * @a d should generally be in the [0, 1] range.
+ *
+ * @param ease An easing value.
+ * @param d A value to ease.
+ * @return The easing for @a d.
+ */
+double ease(Adw::Easing ease, double d);
 
 /** Computes the linear interpolation between @a a and @a b for @a t.
  *
