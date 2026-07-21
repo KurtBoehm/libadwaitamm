@@ -72,18 +72,21 @@ public:
   _WRAP_METHOD(void set_reveal_bottom_bar(bool reveal), adw_bottom_sheet_set_reveal_bottom_bar, newin "1.7")
 
   // Properties
-  _WRAP_PROPERTY("content", Gtk::Widget*)
-  _WRAP_PROPERTY("sheet", Gtk::Widget*)
-  _WRAP_PROPERTY("bottom-bar", Gtk::Widget*)
-  _WRAP_PROPERTY("open", bool)
-  _WRAP_PROPERTY("align", float)
-  _WRAP_PROPERTY("full-width", bool)
-  _WRAP_PROPERTY("show-drag-handle", bool)
-  _WRAP_PROPERTY("modal", bool)
-  _WRAP_PROPERTY("can-open", bool)
-  _WRAP_PROPERTY("can-close", bool)
-  _WRAP_PROPERTY("sheet-height", int)
-  _WRAP_PROPERTY("bottom-bar-height", int)
-  _WRAP_PROPERTY("reveal-bottom-bar", bool)
+  _WRAP_PROPERTY("content", Gtk::Widget*, newin "1.6")
+  _WRAP_PROPERTY("sheet", Gtk::Widget*, newin "1.6")
+  _WRAP_PROPERTY("bottom-bar", Gtk::Widget*, newin "1.6")
+  _WRAP_PROPERTY("open", bool, newin "1.6")
+  _WRAP_PROPERTY("align", float, newin "1.6")
+  _WRAP_PROPERTY("full-width", bool, newin "1.6")
+  _WRAP_PROPERTY("show-drag-handle", bool, newin "1.6")
+  _WRAP_PROPERTY("modal", bool, newin "1.6")
+  _WRAP_PROPERTY("can-open", bool, newin "1.6")
+  _WRAP_PROPERTY("can-close", bool, newin "1.6")
+  _WRAP_PROPERTY("sheet-height", int, newin "1.6")
+  _WRAP_PROPERTY("bottom-bar-height", int, newin "1.6")
+  _WRAP_PROPERTY("reveal-bottom-bar", bool, newin "1.7")
+
+  // Signals
+  _WRAP_SIGNAL(void close_attempt(), "close-attempt", no_default_handler, newin "1.6")
 };
 } // namespace Adw

@@ -52,8 +52,8 @@ public:
   _WRAP_METHOD(void set_can_shrink(bool can_shrink), adw_button_content_set_can_shrink, newin "1.4")
 
   // Properties
-  _WRAP_PROPERTY("label", Glib::ustring)
   _WRAP_PROPERTY("icon-name", Glib::ustring)
+  _WRAP_PROPERTY("label", Glib::ustring)
   _WRAP_PROPERTY("use-underline", bool)
   _WRAP_PROPERTY("can-shrink", bool, newin "1.4")
 };

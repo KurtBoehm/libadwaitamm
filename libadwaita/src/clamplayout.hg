@@ -53,6 +53,6 @@ public:
   // Properties
   _WRAP_PROPERTY("maximum-size", int)
   _WRAP_PROPERTY("tightening-threshold", int)
-  _WRAP_PROPERTY("unit", LengthUnit)
+  _WRAP_PROPERTY("unit", LengthUnit, newin "1.4")
 };
 } // namespace Adw

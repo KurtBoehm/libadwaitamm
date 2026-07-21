@@ -65,9 +65,9 @@ public:
   _WRAP_METHOD(void set_search_match_mode(Gtk::StringFilter::MatchMode search_match_mode), adw_combo_row_set_search_match_mode, newin "1.6")
 
   // Properties
-  _WRAP_PROPERTY("model", Glib::RefPtr<Gio::ListModel>)
   _WRAP_PROPERTY("selected", guint)
   _WRAP_PROPERTY("selected-item", Glib::RefPtr<Glib::ObjectBase>)
+  _WRAP_PROPERTY("model", Glib::RefPtr<Gio::ListModel>)
   _WRAP_PROPERTY("factory", Glib::RefPtr<Gtk::ListItemFactory>)
   _WRAP_PROPERTY("header-factory", Glib::RefPtr<Gtk::ListItemFactory>, newin "1.6")
   _WRAP_PROPERTY("list-factory", Glib::RefPtr<Gtk::ListItemFactory>)

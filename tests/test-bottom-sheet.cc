@@ -168,6 +168,17 @@ static void test_adw_bottom_sheet_reveal_bottom_bar(void) {
   g_assert_true(notified == 1);
 }
 
+static void test_adw_bottom_sheet_close_attempt(void) {
+  Adw::BottomSheet sheet;
+
+  int close_attempt_count = 0;
+  sheet.signal_close_attempt().connect(
+      [&close_attempt_count]() { close_attempt_count++; });
+
+  g_signal_emit_by_name(sheet.gobj(), "close-attempt");
+  g_assert_true(close_attempt_count == 1);
+}
+
 static void test_adw_bottom_sheet_heights(void) {
   Adw::BottomSheet sheet;
 
@@ -198,6 +209,8 @@ int main(int argc, char *argv[]) {
                   test_adw_bottom_sheet_can_close);
   g_test_add_func("/Adwaita/BottomSheet/reveal_bottom_bar",
                   test_adw_bottom_sheet_reveal_bottom_bar);
+  g_test_add_func("/Adwaita/BottomSheet/close_attempt",
+                  test_adw_bottom_sheet_close_attempt);
   g_test_add_func("/Adwaita/BottomSheet/heights",
                   test_adw_bottom_sheet_heights);
 

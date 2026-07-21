@@ -41,7 +41,7 @@ public:
   _WRAP_METHOD(Glib::RefPtr<Adw::Breakpoint> get_current_breakpoint() const, adw_breakpoint_bin_get_current_breakpoint, newin "1.4")
 
   // Properties
-  _WRAP_PROPERTY("child", Gtk::Widget*)
-  _WRAP_PROPERTY("current-breakpoint", Adw::Breakpoint*)
+  _WRAP_PROPERTY("child", Gtk::Widget*, newin "1.4")
+  _WRAP_PROPERTY("current-breakpoint", Adw::Breakpoint*, newin "1.4")
 };
 } // namespace Adw

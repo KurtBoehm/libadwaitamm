@@ -17,36 +17,127 @@ int unapply_count;
 static void on_unapply() { unapply_count++; }
 
 static void test_adw_breakpoint_condition_length(void) {
-  auto condition = Adw::BreakpointCondition::create_length(
-      Adw::BreakpointCondition::LengthType::MAX_WIDTH, 400,
-      Adw::LengthUnit::PX);
-  Glib::ustring str = condition.to_string();
-  g_assert_true(str.find("max-width") != Glib::ustring::npos);
+  g_assert_true(Adw::BreakpointCondition::create_length(
+                    Adw::BreakpointCondition::LengthType::MAX_WIDTH, 400,
+                    Adw::LengthUnit::PX)
+                    .to_string() == "max-width: 400px");
+
+  g_assert_true(Adw::BreakpointCondition::create_length(
+                    Adw::BreakpointCondition::LengthType::MIN_HEIGHT, 200,
+                    Adw::LengthUnit::PT)
+                    .to_string() == "min-height: 200pt");
+
+  g_assert_true(Adw::BreakpointCondition::create_length(
+                    Adw::BreakpointCondition::LengthType::MIN_HEIGHT, 200.5,
+                    Adw::LengthUnit::PT)
+                    .to_string() == "min-height: 200.5pt");
 }
 
 static void test_adw_breakpoint_condition_ratio(void) {
-  auto condition = Adw::BreakpointCondition::create_ratio(
-      Adw::BreakpointCondition::RatioType::MAX_ASPECT_RATIO, 4, 3);
-  Glib::ustring str = condition.to_string();
-  g_assert_true(str.find("aspect-ratio") != Glib::ustring::npos);
+  g_assert_true(Adw::BreakpointCondition::create_ratio(
+                    Adw::BreakpointCondition::RatioType::MIN_ASPECT_RATIO, 4,
+                    3)
+                    .to_string() == "min-aspect-ratio: 4/3");
+
+  // Ratios are simplified.
+  g_assert_true(Adw::BreakpointCondition::create_ratio(
+                    Adw::BreakpointCondition::RatioType::MIN_ASPECT_RATIO, 2,
+                    1)
+                    .to_string() == "min-aspect-ratio: 2");
+  g_assert_true(Adw::BreakpointCondition::create_ratio(
+                    Adw::BreakpointCondition::RatioType::MIN_ASPECT_RATIO, 0,
+                    2)
+                    .to_string() == "min-aspect-ratio: 0");
 }
 
 static void test_adw_breakpoint_condition_and_or(void) {
-  auto and_condition = Adw::BreakpointCondition::create_and(
-      Adw::BreakpointCondition::parse("min-width: 400px"),
-      Adw::BreakpointCondition::parse("max-aspect-ratio: 4/3"));
-  g_assert_true(and_condition.to_string().find(" and ") != Glib::ustring::npos);
+  auto condition_1 = Adw::BreakpointCondition::create_length(
+      Adw::BreakpointCondition::LengthType::MAX_WIDTH, 400,
+      Adw::LengthUnit::PX);
+  auto condition_2 = Adw::BreakpointCondition::create_ratio(
+      Adw::BreakpointCondition::RatioType::MIN_ASPECT_RATIO, 4, 3);
+  auto condition_3 = Adw::BreakpointCondition::create_ratio(
+      Adw::BreakpointCondition::RatioType::MAX_ASPECT_RATIO, 2, 1);
 
-  auto or_condition = Adw::BreakpointCondition::create_or(
-      Adw::BreakpointCondition::parse("max-width: 360sp"),
-      Adw::BreakpointCondition::parse("max-width: 360px"));
-  g_assert_true(or_condition.to_string().find(" or ") != Glib::ustring::npos);
+  g_assert_true(
+      Adw::BreakpointCondition::create_and(condition_1, condition_2)
+          .to_string() == "max-width: 400px and min-aspect-ratio: 4/3");
+
+  g_assert_true(
+      Adw::BreakpointCondition::create_or(condition_1, condition_2)
+          .to_string() == "max-width: 400px or min-aspect-ratio: 4/3");
+
+  // Nested conditions of the same kind don't get parentheses...
+  g_assert_true(
+      Adw::BreakpointCondition::create_and(
+          condition_1,
+          Adw::BreakpointCondition::create_and(condition_2, condition_3))
+          .to_string() ==
+      "max-width: 400px and min-aspect-ratio: 4/3 and max-aspect-ratio: 2");
+
+  // ...but nested conditions of a different kind do.
+  g_assert_true(
+      Adw::BreakpointCondition::create_and(
+          condition_1,
+          Adw::BreakpointCondition::create_or(condition_2, condition_3))
+          .to_string() ==
+      "max-width: 400px and (min-aspect-ratio: 4/3 or max-aspect-ratio: 2)");
+
+  g_assert_true(
+      Adw::BreakpointCondition::create_or(
+          Adw::BreakpointCondition::create_and(condition_1, condition_2),
+          condition_3)
+          .to_string() ==
+      "(max-width: 400px and min-aspect-ratio: 4/3) or max-aspect-ratio: 2");
 }
 
 static void test_adw_breakpoint_condition_parse(void) {
-  auto condition = Adw::BreakpointCondition::parse("min-width: 400px");
-  Glib::ustring str = condition.to_string();
-  g_assert_true(str.find("min-width") != Glib::ustring::npos);
+  auto check = [](const char *input, const char *expected) {
+    g_assert_true(Adw::BreakpointCondition::parse(input).to_string() ==
+                  expected);
+  };
+
+  // Length: unit defaults to px, and trailing zeroes are dropped.
+  check("max-width: 400px", "max-width: 400px");
+  check("max-width: 400", "max-width: 400px");
+  check("max-width: 400pt", "max-width: 400pt");
+  check("max-width:400pt", "max-width: 400pt");
+  check("max-width: 400.0px", "max-width: 400px");
+  check("max-width: 400.5px", "max-width: 400.5px");
+  check("      max-width        :        400     pt       ",
+        "max-width: 400pt");
+
+  // Ratio: height defaults to 1, and the ratio is simplified.
+  check("max-aspect-ratio: 4/3", "max-aspect-ratio: 4/3");
+  check("max-aspect-ratio: 2", "max-aspect-ratio: 2");
+  check("max-aspect-ratio: 2/1", "max-aspect-ratio: 2");
+  check("max-aspect-ratio: 0/3", "max-aspect-ratio: 0");
+  check("max-aspect-ratio:4/3", "max-aspect-ratio: 4/3");
+  check("       max-aspect-ratio   :         4/3       ",
+        "max-aspect-ratio: 4/3");
+
+  // Parentheses can be used to group a single condition.
+  check("(max-width: 100px)", "max-width: 100px");
+  check("(((max-width: 100px)))", "max-width: 100px");
+  check("   (   max-width   :   100px   )   ", "max-width: 100px");
+
+  // Multiple conditions, with and without parentheses.
+  check("max-width: 100px and max-height: 200px",
+        "max-width: 100px and max-height: 200px");
+  check("max-width: 100px or max-height: 200px",
+        "max-width: 100px or max-height: 200px");
+  check("(max-width: 100px) and max-height: 200px",
+        "max-width: 100px and max-height: 200px");
+  check("max-width: 100px and (max-height: 200px)",
+        "max-width: 100px and max-height: 200px");
+  check("(max-width: 100px and max-height: 200px)",
+        "max-width: 100px and max-height: 200px");
+
+  // Without parentheses, the first operator takes priority.
+  check("max-width: 100px and max-height: 200px or max-aspect-ratio: 3/2 and "
+        "min-aspect-ratio: 1/2",
+        "((max-width: 100px and max-height: 200px) or max-aspect-ratio: "
+        "3/2) and min-aspect-ratio: 1/2");
 }
 
 static void test_adw_breakpoint_condition_property(void) {

@@ -169,6 +169,7 @@ public:
 class Breakpoint : public Glib::Object {
   _CLASS_GOBJECT(Breakpoint, AdwBreakpoint, ADW_BREAKPOINT, Glib::Object, GObject)
   _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
 
 protected:
   // Constructors

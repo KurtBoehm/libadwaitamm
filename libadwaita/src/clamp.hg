@@ -46,8 +46,8 @@ public:
   _WRAP_METHOD(int get_tightening_threshold() const, adw_clamp_get_tightening_threshold)
   _WRAP_METHOD(void set_tightening_threshold(int tightening_threshold), adw_clamp_set_tightening_threshold)
 
-  _WRAP_METHOD(void set_unit(LengthUnit unit), adw_clamp_set_unit, newin "1.4")
   _WRAP_METHOD(LengthUnit get_unit() const, adw_clamp_get_unit, newin "1.4")
+  _WRAP_METHOD(void set_unit(LengthUnit unit), adw_clamp_set_unit, newin "1.4")
 
   // Properties
   _WRAP_PROPERTY("child", Gtk::Widget*)

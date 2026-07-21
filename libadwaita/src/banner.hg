@@ -25,14 +25,15 @@ _PINCLUDE(gtkmm/private/widget_p.h)
 
 namespace Adw {
 // Banner widget
-class Banner : public Gtk::Widget {
+class Banner : public Gtk::Widget, public Gtk::Actionable {
   _CLASS_GTKOBJECT(Banner, AdwBanner, ADW_BANNER, Gtk::Widget, GtkWidget)
+  _IMPLEMENTS_INTERFACE(Gtk::Actionable)
   _STRUCT_NOT_HIDDEN
   _DO_NOT_DERIVE_GTYPE
 
 public:
   // Enumerations
-  _WRAP_ENUM(ButtonStyle, AdwBannerButtonStyle, newin "1.3")
+  _WRAP_ENUM(ButtonStyle, AdwBannerButtonStyle, newin "1.7")
 
   // Constructors
   _CTOR_DEFAULT
@@ -55,11 +56,11 @@ public:
   _WRAP_METHOD(void set_button_style(ButtonStyle style), adw_banner_set_button_style, newin "1.7")
 
   // Properties
-  _WRAP_PROPERTY("title", Glib::ustring)
-  _WRAP_PROPERTY("button-label", Glib::ustring)
-  _WRAP_PROPERTY("revealed", bool)
-  _WRAP_PROPERTY("use-markup", bool)
-  _WRAP_PROPERTY("button-style", Banner::ButtonStyle)
+  _WRAP_PROPERTY("title", Glib::ustring, newin "1.3")
+  _WRAP_PROPERTY("button-label", Glib::ustring, newin "1.3")
+  _WRAP_PROPERTY("revealed", bool, newin "1.3")
+  _WRAP_PROPERTY("use-markup", bool, newin "1.3")
+  _WRAP_PROPERTY("button-style", Banner::ButtonStyle, newin "1.7")
 
   // Signals
   _WRAP_SIGNAL(void button_clicked(), "button-clicked", no_default_handler, newin "1.3")
