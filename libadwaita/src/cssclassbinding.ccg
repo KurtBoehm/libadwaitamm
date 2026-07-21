@@ -1,0 +1,62 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+namespace Adw {
+namespace {
+struct CssClassBindingMapSlots {
+  CssClassBinding::SlotMapToClass map_to_class;
+  CssClassBinding::SlotMapToProperty map_to_property;
+};
+
+gboolean CssClassBinding_map_to_class_callback(AdwCssClassBinding*, const GValue* property_value, gpointer user_data) {
+  auto slots = static_cast<CssClassBindingMapSlots*>(user_data);
+  try {
+    return slots->map_to_class(*reinterpret_cast<const Glib::ValueBase*>(property_value));
+  } catch (...) {
+    Glib::exception_handlers_invoke();
+    return FALSE;
+  }
+}
+
+void CssClassBinding_map_to_property_callback(AdwCssClassBinding*, gboolean class_applied, GValue* property_value, gpointer user_data) {
+  auto slots = static_cast<CssClassBindingMapSlots*>(user_data);
+  try {
+    slots->map_to_property(class_applied, *reinterpret_cast<Glib::ValueBase*>(property_value));
+  } catch (...) {
+    Glib::exception_handlers_invoke();
+  }
+}
+} // anonymous namespace
+
+Glib::RefPtr<CssClassBinding> CssClassBinding::bind_property_to_css_class_full(
+    const Glib::RefPtr<Glib::Object>& source, const Glib::ustring& source_property,
+    Gtk::Widget* target, const Glib::ustring& target_css_class, Glib::Binding::Flags flags,
+    const SlotMapToClass& map_to_class, const SlotMapToProperty& map_to_property) {
+  auto slots = new CssClassBindingMapSlots{map_to_class, map_to_property};
+
+  auto binding = adw_bind_property_to_css_class_full(
+    Glib::unwrap(source), source_property.c_str(),
+    target ? target->gobj() : nullptr, target_css_class.c_str(),
+    static_cast<GBindingFlags>(flags),
+    slots->map_to_class ? &CssClassBinding_map_to_class_callback : nullptr,
+    slots->map_to_property ? &CssClassBinding_map_to_property_callback : nullptr,
+    slots, Glib::destroy_notify_delete<CssClassBindingMapSlots>);
+
+  return Glib::wrap(binding, true);
+}
+} // namespace Adw

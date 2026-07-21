@@ -90,6 +90,10 @@ test_names = [
   'test-window-title',
 ]
 
+if libadwaita_has_1_10
+  test_names += 'test-css-class-binding'
+endif
+
 foreach test_name : test_names
   test_sources = [test_name + '.cc']
   if tests_needing_resources.contains(test_name)

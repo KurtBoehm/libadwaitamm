@@ -66,6 +66,9 @@ int main(int, char**)
   std::cout << get_defs(ADW_TYPE_CLAMP_LAYOUT);
   std::cout << get_defs(ADW_TYPE_CLAMP_SCROLLABLE);
   std::cout << get_defs(ADW_TYPE_COMBO_ROW);
+#if ADW_CHECK_VERSION(1, 10, 0)
+  std::cout << get_defs(ADW_TYPE_CSS_CLASS_BINDING);
+#endif
   std::cout << get_defs(ADW_TYPE_DIALOG);
   std::cout << get_defs(ADW_TYPE_ENTRY_ROW);
   std::cout << get_defs(ADW_TYPE_ENUM_LIST_ITEM);

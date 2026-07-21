@@ -90,6 +90,10 @@ hg_ccg_basenames = [
   'windowtitle',
 ]
 
+if libadwaita_has_1_10
+  hg_ccg_basenames += 'cssclassbinding'
+endif
+
 extra_cc_files = [
   'init.cc',
   'selectionlistmodelimpl.cc',
