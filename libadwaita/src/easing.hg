@@ -20,8 +20,28 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 
 #include <adwaita.h>
+#include <gtkmm/widget.h>
 
 namespace Adw {
 _WRAP_ENUM(Easing, AdwEasing)
 double ease(Adw::Easing ease, double);
+
+/** Computes the linear interpolation between @a a and @a b for @a t.
+ *
+ * @param a The start.
+ * @param b The end.
+ * @param t The interpolation rate.
+ * @return The computed value.
+ */
+double lerp(double a, double b, double t);
+
+/** Checks whether animations are enabled for @a widget.
+ *
+ * This should be used when implementing an animated widget to know whether
+ * to animate it or not.
+ *
+ * @param widget A widget.
+ * @return Whether animations are enabled for @a widget.
+ */
+bool get_enable_animations(Gtk::Widget& widget);
 } // namespace Adw

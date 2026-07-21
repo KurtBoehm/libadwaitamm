@@ -1,4 +1,6 @@
-;; Include generated API definition files
+;; Hand-written file: include the other libadwaita_*.defs files.
+;; Add a new (include ...) line here if a new libadwaita_*.defs file is
+;; ever introduced. See tools/README.md for how each one is produced.
 (include libadwaita_enums.defs)
 (include libadwaita_methods.defs)
 (include libadwaita_signals.defs)

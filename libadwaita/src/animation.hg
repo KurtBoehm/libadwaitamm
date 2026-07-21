@@ -56,11 +56,11 @@ public:
   _WRAP_METHOD(void set_follow_enable_animations_setting(bool setting), adw_animation_set_follow_enable_animations_setting, newin "1.3")
 
   // Properties
-  _WRAP_PROPERTY("follow-enable-animations-setting", bool, newin "1.3")
-  _WRAP_PROPERTY("state", Animation::State)
+  _WRAP_PROPERTY("widget", Gtk::Widget*)
   _WRAP_PROPERTY("target", Glib::RefPtr<AnimationTarget>)
   _WRAP_PROPERTY("value", double)
-  _WRAP_PROPERTY("widget", Gtk::Widget*)
+  _WRAP_PROPERTY("state", Animation::State)
+  _WRAP_PROPERTY("follow-enable-animations-setting", bool, newin "1.3")
 
   // Signals
   _WRAP_SIGNAL(void done(), "done", no_default_handler)

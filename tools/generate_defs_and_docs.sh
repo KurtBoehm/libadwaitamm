@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# libadwaitamm/codegen/generate_defs_and_docs.sh
+# libadwaitamm/tools/generate_defs_and_docs.sh
 
 # Global environment variables:
 # GMMPROC_GEN_SOURCE_DIR  Top directory where source files are searched for.
@@ -13,6 +13,17 @@
 # configuration variables checkoutroot and buildroot, respectively.
 # Usually you can leave GMMPROC_GEN_SOURCE_DIR undefined.
 # If you have set buildroot=None, GMMPROC_GEN_BUILD_DIR can also be undefined.
+#
+# This script is the jhbuild/no-meson-run-target path for regenerating the
+# defs. If you already have a configured meson build directory, it's simpler
+# to build the extra_defs_gen executable once and then run:
+#   ninja -C <builddir> gen-signals
+# which regenerates only libadwaita_signals.defs (see tools/generate_signals.sh).
+# This script additionally regenerates libadwaita_docs.xml, libadwaita_enums.defs,
+# and libadwaita_methods.defs, which have no meson run_target of their own.
+#
+# See tools/README.md for an overview of all the libadwaita_*.defs files,
+# which ones are generated vs. hand-written, and how to regenerate each.
 
 # Generated files:
 #   libadwaitamm/libadwaita/src/libadwaita_docs.xml
@@ -76,14 +87,14 @@ done
 shopt -s nullglob # Skip a filename pattern that matches no file
 
 # Enums
-echo === libadwaita_enum.defs ===
+echo === libadwaita_enums.defs ===
 "$gen_enums" /usr/include/libadwaita-1/*.h "$build_prefix"/libadwaita/*.h  > "$out_dir/libadwaita_enums.defs"
 
 # Functions and methods
-echo === libadwaita_method.defs ===
+echo === libadwaita_methods.defs ===
 "$gen_methods" /usr/include/libadwaita-1/*.h "$build_prefix"/libadwaita/*.h  > "$out_dir/libadwaita_methods.defs"
 
 # Properties and signals
-echo === libadwaita_signal.defs ===
+echo === libadwaita_signals.defs ===
 "$extra_defs_gen_dir"/generate_defs_libadwaita > "$out_dir/libadwaita_signals.defs"
 

@@ -87,7 +87,7 @@ public:
   _WRAP_METHOD(GParamSpec* get_pspec() const, adw_property_animation_target_get_pspec, newin "1.2")
 
   // Properties
-  _WRAP_PROPERTY("object", Glib::RefPtr<Glib::Object>)
-  _WRAP_PROPERTY("pspec", GParamSpec*)
+  _WRAP_PROPERTY("object", Glib::RefPtr<Glib::Object>, newin "1.2")
+  _WRAP_PROPERTY("pspec", GParamSpec*, newin "1.2")
 };
 } // namespace Adw

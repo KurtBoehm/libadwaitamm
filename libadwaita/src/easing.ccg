@@ -20,4 +20,12 @@ namespace Adw {
 double ease(Adw::Easing ease, double d) {
   return adw_easing_ease(static_cast<AdwEasing>(ease), d);
 }
+
+double lerp(double a, double b, double t) {
+  return adw_lerp(a, b, t);
+}
+
+bool get_enable_animations(Gtk::Widget& widget) {
+  return adw_get_enable_animations(widget.gobj());
+}
 }

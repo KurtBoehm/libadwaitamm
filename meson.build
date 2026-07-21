@@ -257,6 +257,12 @@ if maintainer_mode
     run_target('gen-signals',
                command: ['tools' / 'generate_signals.sh', generate_defs_exe ],
                depends: [generate_defs_exe])
+
+    # Regenerates libadwaita_vfuncs.defs from installed libadwaita headers.
+    # See tools/README.md and the header comment in
+    # tools/generate_vfuncs_defs.py.
+    run_target('gen-vfuncs',
+               command: ['tools' / 'generate_vfuncs_defs.py'])
 endif
 
 # Print a summary.

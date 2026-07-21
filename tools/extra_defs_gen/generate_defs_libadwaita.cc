@@ -16,6 +16,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// libadwaitamm/tools/extra_defs_gen/generate_defs_libadwaita.cc
+//
+// Prints libadwaita_signals.defs (properties and signals) to stdout, one
+// get_defs() call per wrapped GObject type. Built as the
+// generate_defs_libadwaita executable; run via `ninja gen-signals` in a
+// maintainer-mode meson build (see tools/generate_signals.sh) or from
+// tools/generate_defs_and_docs.sh. See tools/README.md.
+//
+// When a class is added to (or removed from) libadwaita/src/*.hg, add (or
+// remove) its ADW_TYPE_* here too, in alphabetical order by type name (not
+// grouped by .hg file) -- otherwise its properties/signals are silently
+// left out of libadwaita_signals.defs.
+
 // We always need to generate the .defs for all types because the code
 // using deprecated API is generated unconditionally and only disabled
 // at compile time.
@@ -61,9 +74,12 @@ int main(int, char**)
   std::cout << get_defs(ADW_TYPE_FLAP);
   std::cout << get_defs(ADW_TYPE_HEADER_BAR);
   std::cout << get_defs(ADW_TYPE_INLINE_VIEW_SWITCHER);
+  std::cout << get_defs(ADW_TYPE_LAYOUT);
+  std::cout << get_defs(ADW_TYPE_LAYOUT_SLOT);
   std::cout << get_defs(ADW_TYPE_LEAFLET);
   std::cout << get_defs(ADW_TYPE_LEAFLET_PAGE);
   std::cout << get_defs(ADW_TYPE_MESSAGE_DIALOG);
+  std::cout << get_defs(ADW_TYPE_NONE_ANIMATION_TARGET);
   std::cout << get_defs(ADW_TYPE_PASSWORD_ENTRY_ROW);
   std::cout << get_defs(ADW_TYPE_PREFERENCES_GROUP);
   std::cout << get_defs(ADW_TYPE_PREFERENCES_PAGE);

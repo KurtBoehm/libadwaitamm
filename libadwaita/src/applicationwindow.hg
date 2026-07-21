@@ -54,9 +54,9 @@ public:
 
   // Properties
   _WRAP_PROPERTY("content", Gtk::Widget*)
-  _WRAP_PROPERTY("current-breakpoint", Glib::RefPtr<Adw::Breakpoint>)
-  _WRAP_PROPERTY("dialogs", Glib::RefPtr<Gio::ListModel>)
-  _WRAP_PROPERTY("visible-dialog", Adw::Dialog*)
-  _WRAP_PROPERTY("adaptive-preview", bool)
+  _WRAP_PROPERTY("current-breakpoint", Glib::RefPtr<Adw::Breakpoint>, newin "1.4")
+  _WRAP_PROPERTY("dialogs", Glib::RefPtr<Gio::ListModel>, newin "1.5")
+  _WRAP_PROPERTY("visible-dialog", Adw::Dialog*, newin "1.5")
+  _WRAP_PROPERTY("adaptive-preview", bool, newin "1.7")
 };
 } // namespace Adw

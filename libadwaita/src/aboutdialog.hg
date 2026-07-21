@@ -113,9 +113,6 @@ public:
 
   _WRAP_METHOD(void add_other_app(const Glib::ustring& appid, const Glib::ustring& name, const Glib::ustring& summary), adw_about_dialog_add_other_app, newin "1.7")
 
-  // Signals
-  _WRAP_SIGNAL(bool activate_link(const Glib::ustring& uri), "activate-link", no_default_handler)
-
   // Properties
   _WRAP_PROPERTY("appdata-resource-path", Glib::ustring, newin "1.9")
   _WRAP_PROPERTY("application-name", Glib::ustring, newin "1.5")
@@ -139,5 +136,8 @@ public:
   _WRAP_PROPERTY("license-type", Gtk::License, newin "1.5")
   _WRAP_PROPERTY("license", Glib::ustring, newin "1.5")
   _WRAP_PROPERTY("other-apps-title", Glib::ustring, newin "1.10")
+
+  // Signals
+  _WRAP_SIGNAL(bool activate_link(const Glib::ustring& uri), "activate-link", no_default_handler)
 };
 } // namespace Adw
