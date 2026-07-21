@@ -60,11 +60,53 @@ static void test_adw_accent_color_to_standalone_rgba(void) {
   Adw::accent_color_to_standalone_rgba(Adw::AccentColor::BLUE, false, rgba);
   g_assert_cmphex(rgba_to_hex(rgba), ==, 0x0461be);
 
-  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::BLUE, true, rgba);
-  g_assert_cmphex(rgba_to_hex(rgba), ==, 0x81d0ff);
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::TEAL, false, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0x007184);
+
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::GREEN, false, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0x15772e);
+
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::YELLOW, false, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0x905300);
+
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::ORANGE, false, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0xb62200);
+
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::RED, false, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0xc00023);
+
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::PINK, false, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0xa2326c);
+
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::PURPLE, false, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0x8939a4);
 
   Adw::accent_color_to_standalone_rgba(Adw::AccentColor::SLATE, false, rgba);
   g_assert_cmphex(rgba_to_hex(rgba), ==, 0x526678);
+
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::BLUE, true, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0x81d0ff);
+
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::TEAL, true, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0x7bdff4);
+
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::GREEN, true, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0x8de698);
+
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::YELLOW, true, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0xffc057);
+
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::ORANGE, true, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0xff9c5b);
+
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::RED, true, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0xff888c);
+
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::PINK, true, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0xffa0d8);
+
+  Adw::accent_color_to_standalone_rgba(Adw::AccentColor::PURPLE, true, rgba);
+  g_assert_cmphex(rgba_to_hex(rgba), ==, 0xfba7ff);
 
   Adw::accent_color_to_standalone_rgba(Adw::AccentColor::SLATE, true, rgba);
   g_assert_cmphex(rgba_to_hex(rgba), ==, 0xbbd1e5);
@@ -89,6 +131,12 @@ static void test_adw_accent_color_rgba_to_standalone(void) {
   rgba = hex_to_rgba(0x000000);
   Adw::rgba_to_standalone(rgba, false, standalone);
   g_assert_cmphex(rgba_to_hex(standalone), ==, 0x000000);
+  Adw::rgba_to_standalone(rgba, true, standalone);
+  g_assert_cmphex(rgba_to_hex(standalone), ==, 0xcecece);
+
+  rgba = hex_to_rgba(0x959595);
+  Adw::rgba_to_standalone(rgba, false, standalone);
+  g_assert_cmphex(rgba_to_hex(standalone), ==, 0x636363);
   Adw::rgba_to_standalone(rgba, true, standalone);
   g_assert_cmphex(rgba_to_hex(standalone), ==, 0xcecece);
 }

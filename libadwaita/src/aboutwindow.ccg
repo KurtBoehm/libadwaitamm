@@ -17,4 +17,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Adw {}
+namespace Adw {
+AboutWindow::AboutWindow(const Glib::ustring& appdata_resource_path, const Glib::ustring& release_notes_version)
+  : AboutWindow(ADW_ABOUT_WINDOW(adw_about_window_new_from_appdata(appdata_resource_path.c_str(), release_notes_version.empty() ? nullptr : release_notes_version.c_str()))) {}
+} // namespace Adw

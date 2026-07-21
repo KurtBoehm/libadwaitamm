@@ -24,14 +24,25 @@ static void test_adw_action_row_add_remove(void) {
 static void test_adw_action_row_subtitle(void) {
   Adw::ActionRow row;
 
+  int notified = 0;
+  row.property_subtitle().signal_changed().connect(
+      [&notified]() { notified++; });
+
   g_assert_true(row.get_subtitle() == "");
+  g_assert_cmpint(notified, ==, 0);
 
   row.set_subtitle("Dummy subtitle");
   g_assert_true(row.get_subtitle() == "Dummy subtitle");
+  g_assert_cmpint(notified, ==, 1);
+
+  row.set_subtitle("<b>Dummy subtitle</b>");
+  g_assert_true(row.get_subtitle() == "<b>Dummy subtitle</b>");
+  g_assert_cmpint(notified, ==, 2);
 
   row.set_use_markup(false);
   row.set_subtitle("Invalid <b>markup");
   g_assert_true(row.get_subtitle() == "Invalid <b>markup");
+  g_assert_cmpint(notified, ==, 3);
 }
 
 static void test_adw_action_row_icon_name(void) {
