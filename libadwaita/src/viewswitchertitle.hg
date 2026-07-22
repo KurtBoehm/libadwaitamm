@@ -17,17 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
+#include <adwaita.h>
 #include <gtkmm.h>
 #include <libadwaitamm/viewstack.h>
-#include <adwaita.h>
 
 namespace Adw {
 class ViewSwitcherTitle : public Gtk::Widget {
-  _CLASS_GTKOBJECT(ViewSwitcherTitle, AdwViewSwitcherTitle, ADW_VIEW_SWITCHER_TITLE, Gtk::Widget, GtkWidget)
+  _CLASS_GTKOBJECT(ViewSwitcherTitle, AdwViewSwitcherTitle, ADW_VIEW_SWITCHER_TITLE, Gtk::Widget,
+                   GtkWidget)
   _STRUCT_NOT_HIDDEN
   _DO_NOT_DERIVE_GTYPE
 
@@ -38,11 +39,14 @@ public:
   _WRAP_METHOD(Glib::ustring get_subtitle() const, adw_view_switcher_title_get_subtitle)
   _WRAP_METHOD(Glib::ustring get_title() const, adw_view_switcher_title_get_title)
   _WRAP_METHOD(bool get_title_visible() const, adw_view_switcher_title_get_title_visible)
-  _WRAP_METHOD(bool get_view_switcher_enabled() const, adw_view_switcher_title_get_view_switcher_enabled)
-  _WRAP_METHOD(void set_stack(ViewStack* stack) , adw_view_switcher_title_set_stack)
-  _WRAP_METHOD(void set_subtitle(const Glib::ustring& subtitle) , adw_view_switcher_title_set_subtitle)
+  _WRAP_METHOD(bool get_view_switcher_enabled() const,
+               adw_view_switcher_title_get_view_switcher_enabled)
+  _WRAP_METHOD(void set_stack(ViewStack* stack), adw_view_switcher_title_set_stack)
+  _WRAP_METHOD(void set_subtitle(const Glib::ustring& subtitle),
+               adw_view_switcher_title_set_subtitle)
   _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_view_switcher_title_set_title)
-  _WRAP_METHOD(void set_view_switcher_enabled(bool enabled), adw_view_switcher_title_set_view_switcher_enabled)
+  _WRAP_METHOD(void set_view_switcher_enabled(bool enabled),
+               adw_view_switcher_title_set_view_switcher_enabled)
 
   _WRAP_PROPERTY("stack", ViewStack*)
   _WRAP_PROPERTY("subtitle", Glib::ustring)

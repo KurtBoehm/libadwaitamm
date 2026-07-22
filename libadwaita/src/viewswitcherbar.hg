@@ -17,17 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
+#include <adwaita.h>
 #include <gtkmm.h>
 #include <libadwaitamm/viewstack.h>
-#include <adwaita.h>
 
 namespace Adw {
 class ViewSwitcherBar : public Gtk::Widget {
-  _CLASS_GTKOBJECT(ViewSwitcherBar, AdwViewSwitcherBar, ADW_VIEW_SWITCHER_BAR, Gtk::Widget, GtkWidget)
+  _CLASS_GTKOBJECT(ViewSwitcherBar, AdwViewSwitcherBar, ADW_VIEW_SWITCHER_BAR, Gtk::Widget,
+                   GtkWidget)
   _STRUCT_NOT_HIDDEN
   _DO_NOT_DERIVE_GTYPE
 

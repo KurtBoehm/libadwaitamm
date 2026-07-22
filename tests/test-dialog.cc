@@ -169,7 +169,7 @@ static void test_adw_dialog_focus_widget() {
   dialog.set_focus(widget);
   // Not asserting notified count strictly since focus assignment can be a
   // no-op without a realized/mapped surface.
-  () notified;
+  (void)notified;
 }
 
 static void test_adw_dialog_close_force_close() {

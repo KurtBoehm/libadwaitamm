@@ -17,13 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
+#include <adwaita.h>
 #include <glibmm.h>
 #include <gtkmm.h>
-#include <adwaita.h>
 
 namespace Adw {
 class Toast : public Glib::Object {
@@ -48,17 +48,19 @@ public:
   _WRAP_METHOD(guint get_timeout() const, adw_toast_get_timeout)
   _WRAP_METHOD(Glib::ustring get_title() const, adw_toast_get_title)
 
-  _WRAP_METHOD(void set_action_name(const Glib::ustring &action_name), adw_toast_set_action_name)
-  _WRAP_METHOD(void set_button_label(const Glib::ustring &button_label), adw_toast_set_button_label)
-  _WRAP_METHOD(void set_custom_title(Gtk::Widget *widget), adw_toast_set_custom_title)
-  _WRAP_METHOD(void set_detailed_action_name(const Glib::ustring& detailed_action_name), adw_toast_set_detailed_action_name)
+  _WRAP_METHOD(void set_action_name(const Glib::ustring& action_name), adw_toast_set_action_name)
+  _WRAP_METHOD(void set_button_label(const Glib::ustring& button_label), adw_toast_set_button_label)
+  _WRAP_METHOD(void set_custom_title(Gtk::Widget* widget), adw_toast_set_custom_title)
+  _WRAP_METHOD(void set_detailed_action_name(const Glib::ustring& detailed_action_name),
+               adw_toast_set_detailed_action_name)
   _WRAP_METHOD(void set_priority(Priority priority), adw_toast_set_priority)
   _WRAP_METHOD(void set_timeout(guint timeout), adw_toast_set_timeout)
   _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_toast_set_title)
 
-#m4 _CONVERSION(`GVariant*',`Glib::VariantBase',`Glib::wrap($3,true)')
+#m4 _CONVERSION(`GVariant*', `Glib::VariantBase', `Glib::wrap($3, true)')
   _WRAP_METHOD(Glib::VariantBase get_action_target_value() const, adw_toast_get_action_target_value)
-  _WRAP_METHOD(void set_action_target_value(const Glib::VariantBase &target_value), adw_toast_set_action_target_value)
+  _WRAP_METHOD(void set_action_target_value(const Glib::VariantBase& target_value),
+               adw_toast_set_action_target_value)
 
   _WRAP_PROPERTY("action-name", Glib::ustring)
   _WRAP_PROPERTY("action-target", Glib::VariantBase)

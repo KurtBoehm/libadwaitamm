@@ -17,13 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
+#include <adwaita.h>
 #include <glibmm.h>
 #include <gtkmm.h>
-#include <adwaita.h>
 
 namespace Adw {
 class TabPage : public Glib::Object {
@@ -40,7 +40,8 @@ public:
   _WRAP_METHOD(Gtk::Widget* get_child() const, adw_tab_page_get_child)
   _WRAP_METHOD(Glib::RefPtr<Gio::Icon> get_icon() const, adw_tab_page_get_icon, refreturn)
   _WRAP_METHOD(bool get_indicator_activatable() const, adw_tab_page_get_indicator_activatable)
-  _WRAP_METHOD(Glib::RefPtr<Gio::Icon> get_indicator_icon() const, adw_tab_page_get_indicator_icon, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Gio::Icon> get_indicator_icon() const, adw_tab_page_get_indicator_icon,
+               refreturn)
   _WRAP_METHOD(Glib::ustring get_indicator_tooltip() const, adw_tab_page_get_indicator_tooltip)
   _WRAP_METHOD(bool get_loading() const, adw_tab_page_get_loading)
   _WRAP_METHOD(bool get_needs_attention() const, adw_tab_page_get_needs_attention)
@@ -50,9 +51,12 @@ public:
   _WRAP_METHOD(Glib::ustring get_title() const, adw_tab_page_get_title)
   _WRAP_METHOD(Glib::ustring get_tooltip() const, adw_tab_page_get_tooltip)
   _WRAP_METHOD(void set_icon(const Glib::RefPtr<Gio::Icon>& icon), adw_tab_page_set_icon)
-  _WRAP_METHOD(void set_indicator_activatable(bool activatable), adw_tab_page_set_indicator_activatable)
-  _WRAP_METHOD(void set_indicator_icon(const Glib::RefPtr<Gio::Icon>& indicator_icon), adw_tab_page_set_indicator_icon)
-  _WRAP_METHOD(void set_indicator_tooltip(const Glib::ustring& indicator_tooltip), adw_tab_page_set_indicator_tooltip)
+  _WRAP_METHOD(void set_indicator_activatable(bool activatable),
+               adw_tab_page_set_indicator_activatable)
+  _WRAP_METHOD(void set_indicator_icon(const Glib::RefPtr<Gio::Icon>& indicator_icon),
+               adw_tab_page_set_indicator_icon)
+  _WRAP_METHOD(void set_indicator_tooltip(const Glib::ustring& indicator_tooltip),
+               adw_tab_page_set_indicator_tooltip)
   _WRAP_METHOD(void set_loading(bool loading), adw_tab_page_set_loading)
   _WRAP_METHOD(void set_needs_attention(bool needs_attention), adw_tab_page_set_needs_attention)
   _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_tab_page_set_title)

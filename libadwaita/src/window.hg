@@ -17,12 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/window_p.h)
 
-#include <gtkmm.h>
 #include <adwaita.h>
+#include <gtkmm.h>
 
 namespace Adw {
 class Window : public Gtk::Window {

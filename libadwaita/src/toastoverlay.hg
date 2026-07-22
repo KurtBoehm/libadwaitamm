@@ -17,13 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
+#include <adwaita.h>
 #include <gtkmm.h>
 #include <libadwaitamm/toast.h>
-#include <adwaita.h>
 
 namespace Adw {
 class ToastOverlay : public Gtk::Widget {
@@ -36,7 +36,7 @@ public:
 
   _WRAP_METHOD(void add_toast(Toast* toast), adw_toast_overlay_add_toast)
   _WRAP_METHOD(Gtk::Widget* get_child() const, adw_toast_overlay_get_child)
-  _WRAP_METHOD(void set_child(Gtk::Widget *child), adw_toast_overlay_set_child)
+  _WRAP_METHOD(void set_child(Gtk::Widget* child), adw_toast_overlay_set_child)
 
   _WRAP_PROPERTY("child", Gtk::Widget*)
 };

@@ -17,12 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
-#include <gtkmm.h>
 #include <adwaita.h>
+#include <gtkmm.h>
 
 namespace Adw {
 class WindowTitle : public Gtk::Widget {
@@ -32,7 +32,8 @@ class WindowTitle : public Gtk::Widget {
 
 public:
   _CTOR_DEFAULT
-  _WRAP_CTOR(WindowTitle(const Glib::ustring& title, const Glib::ustring& subtitle), adw_window_title_new)
+  _WRAP_CTOR(WindowTitle(const Glib::ustring& title, const Glib::ustring& subtitle),
+             adw_window_title_new)
 
   _WRAP_METHOD(Glib::ustring get_subtitle() const, adw_window_title_get_subtitle)
   _WRAP_METHOD(Glib::ustring get_title() const, adw_window_title_get_title)

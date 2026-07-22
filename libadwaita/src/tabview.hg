@@ -17,13 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
+#include <adwaita.h>
 #include <gtkmm.h>
 #include <libadwaitamm/tabpage.h>
-#include <adwaita.h>
 
 namespace Adw {
 class TabView : public Gtk::Widget {
@@ -39,44 +39,67 @@ public:
   _WRAP_METHOD(Glib::RefPtr<TabPage> add_page(Gtk::Widget& child, const Glib::RefPtr<TabPage>& parent{:?}), adw_tab_view_add_page, refreturn)
   _WRAP_METHOD(void add_shortcuts(Shortcuts shortcuts), adw_tab_view_add_shortcuts)
   _WRAP_METHOD(Glib::RefPtr<TabPage> append(Gtk::Widget& child), adw_tab_view_append, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<TabPage> append_pinned(Gtk::Widget& child), adw_tab_view_append_pinned, refreturn)
-  _WRAP_METHOD(void close_other_pages(const Glib::RefPtr<TabPage>& page), adw_tab_view_close_other_pages)
+  _WRAP_METHOD(Glib::RefPtr<TabPage> append_pinned(Gtk::Widget& child), adw_tab_view_append_pinned,
+               refreturn)
+  _WRAP_METHOD(void close_other_pages(const Glib::RefPtr<TabPage>& page),
+               adw_tab_view_close_other_pages)
   _WRAP_METHOD(void close_page(const Glib::RefPtr<TabPage>& page), adw_tab_view_close_page)
-  _WRAP_METHOD(void close_page_finish(const Glib::RefPtr<TabPage>& page, bool confirm), adw_tab_view_close_page_finish)
-  _WRAP_METHOD(void close_pages_after(const Glib::RefPtr<TabPage>& page), adw_tab_view_close_pages_after)
-  _WRAP_METHOD(void close_pages_before(const Glib::RefPtr<TabPage>& page), adw_tab_view_close_pages_before)
-  _WRAP_METHOD(Glib::RefPtr<Gio::Icon> get_default_icon() const, adw_tab_view_get_default_icon, refreturn)
+  _WRAP_METHOD(void close_page_finish(const Glib::RefPtr<TabPage>& page, bool confirm),
+               adw_tab_view_close_page_finish)
+  _WRAP_METHOD(void close_pages_after(const Glib::RefPtr<TabPage>& page),
+               adw_tab_view_close_pages_after)
+  _WRAP_METHOD(void close_pages_before(const Glib::RefPtr<TabPage>& page),
+               adw_tab_view_close_pages_before)
+  _WRAP_METHOD(Glib::RefPtr<Gio::Icon> get_default_icon() const, adw_tab_view_get_default_icon,
+               refreturn)
   _WRAP_METHOD(bool get_is_transferring_page() const, adw_tab_view_get_is_transferring_page)
-  _WRAP_METHOD(Glib::RefPtr<Gio::MenuModel> get_menu_model() const, adw_tab_view_get_menu_model, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Gio::MenuModel> get_menu_model() const, adw_tab_view_get_menu_model,
+               refreturn)
   _WRAP_METHOD(int get_n_pages() const, adw_tab_view_get_n_pages)
   _WRAP_METHOD(int get_n_pinned_pages() const, adw_tab_view_get_n_pinned_pages)
-  _WRAP_METHOD(Glib::RefPtr<TabPage> get_nth_page(int position) const, adw_tab_view_get_nth_page, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<TabPage> get_page(Gtk::Widget *child) const, adw_tab_view_get_page, refreturn)
-  _WRAP_METHOD(int get_page_position(const Glib::RefPtr<TabPage>& page) const, adw_tab_view_get_page_position)
+  _WRAP_METHOD(Glib::RefPtr<TabPage> get_nth_page(int position) const, adw_tab_view_get_nth_page,
+               refreturn)
+  _WRAP_METHOD(Glib::RefPtr<TabPage> get_page(Gtk::Widget* child) const, adw_tab_view_get_page,
+               refreturn)
+  _WRAP_METHOD(int get_page_position(const Glib::RefPtr<TabPage>& page) const,
+               adw_tab_view_get_page_position)
 
   _IGNORE(adw_tab_view_get_pages)
   Glib::RefPtr<Gtk::SelectionModel> get_pages() const;
 
-  _WRAP_METHOD(Glib::RefPtr<TabPage> get_selected_page() const, adw_tab_view_get_selected_page, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<TabPage> get_selected_page() const, adw_tab_view_get_selected_page,
+               refreturn)
   _WRAP_METHOD(TabView::Shortcuts get_shortcuts() const, adw_tab_view_get_shortcuts)
-  _WRAP_METHOD(Glib::RefPtr<TabPage> insert(Gtk::Widget& child, int position), adw_tab_view_insert, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<TabPage> insert_pinned(Gtk::Widget& child, int position), adw_tab_view_insert_pinned, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<TabPage> insert(Gtk::Widget& child, int position), adw_tab_view_insert,
+               refreturn)
+  _WRAP_METHOD(Glib::RefPtr<TabPage> insert_pinned(Gtk::Widget& child, int position),
+               adw_tab_view_insert_pinned, refreturn)
   _WRAP_METHOD(Glib::RefPtr<TabPage> prepend(Gtk::Widget& child), adw_tab_view_prepend, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<TabPage> prepend_pinned(Gtk::Widget& child), adw_tab_view_prepend_pinned, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<TabPage> prepend_pinned(Gtk::Widget& child),
+               adw_tab_view_prepend_pinned, refreturn)
   _WRAP_METHOD(void remove_shortcuts(Shortcuts shortcuts), adw_tab_view_remove_shortcuts)
-  _WRAP_METHOD(bool reorder_backward(const Glib::RefPtr<TabPage>& page), adw_tab_view_reorder_backward)
+  _WRAP_METHOD(bool reorder_backward(const Glib::RefPtr<TabPage>& page),
+               adw_tab_view_reorder_backward)
   _WRAP_METHOD(bool reorder_first(const Glib::RefPtr<TabPage>& page), adw_tab_view_reorder_first)
-  _WRAP_METHOD(bool reorder_forward(const Glib::RefPtr<TabPage>& page), adw_tab_view_reorder_forward)
+  _WRAP_METHOD(bool reorder_forward(const Glib::RefPtr<TabPage>& page),
+               adw_tab_view_reorder_forward)
   _WRAP_METHOD(bool reorder_last(const Glib::RefPtr<TabPage>& page), adw_tab_view_reorder_last)
-  _WRAP_METHOD(bool reorder_page(const Glib::RefPtr<TabPage>& page, int position), adw_tab_view_reorder_page)
+  _WRAP_METHOD(bool reorder_page(const Glib::RefPtr<TabPage>& page, int position),
+               adw_tab_view_reorder_page)
   _WRAP_METHOD(bool select_next_page(), adw_tab_view_select_next_page)
   _WRAP_METHOD(bool select_previous_page(), adw_tab_view_select_previous_page)
-  _WRAP_METHOD(void set_default_icon(const Glib::RefPtr<Gio::Icon>& default_icon), adw_tab_view_set_default_icon)
-  _WRAP_METHOD(void set_menu_model(const Glib::RefPtr<Gio::MenuModel>& menu_model), adw_tab_view_set_menu_model)
-  _WRAP_METHOD(void set_page_pinned(const Glib::RefPtr<TabPage>& page, bool pinned), adw_tab_view_set_page_pinned)
-  _WRAP_METHOD(void set_selected_page(const Glib::RefPtr<TabPage>& selected_page), adw_tab_view_set_selected_page)
+  _WRAP_METHOD(void set_default_icon(const Glib::RefPtr<Gio::Icon>& default_icon),
+               adw_tab_view_set_default_icon)
+  _WRAP_METHOD(void set_menu_model(const Glib::RefPtr<Gio::MenuModel>& menu_model),
+               adw_tab_view_set_menu_model)
+  _WRAP_METHOD(void set_page_pinned(const Glib::RefPtr<TabPage>& page, bool pinned),
+               adw_tab_view_set_page_pinned)
+  _WRAP_METHOD(void set_selected_page(const Glib::RefPtr<TabPage>& selected_page),
+               adw_tab_view_set_selected_page)
   _WRAP_METHOD(void set_shortcuts(Shortcuts shortcuts), adw_tab_view_set_shortcuts)
-  _WRAP_METHOD(void transfer_page(const Glib::RefPtr<TabPage>& page, TabView* other_view, int position), adw_tab_view_transfer_page)
+  _WRAP_METHOD(void transfer_page(const Glib::RefPtr<TabPage>& page, TabView* other_view,
+                                  int position),
+               adw_tab_view_transfer_page)
 
   _WRAP_PROPERTY("default-icon", Glib::RefPtr<Gio::Icon>)
   _WRAP_PROPERTY("is-transferring-page", bool)
@@ -87,13 +110,17 @@ public:
   _WRAP_PROPERTY("selected-page", Glib::RefPtr<TabPage>)
   _WRAP_PROPERTY("shortcuts", TabView::Shortcuts)
 
-#m4 _CONVERSION(`AdwTabPage*',`const Glib::RefPtr<TabPage>&', `Glib::wrap($3, true)')
+#m4 _CONVERSION(`AdwTabPage*', `const Glib::RefPtr<TabPage>&', `Glib::wrap($3, true)')
   _WRAP_SIGNAL(bool close_page(const Glib::RefPtr<TabPage>& page), "close-page", no_default_handler)
   _WRAP_SIGNAL(TabView* create_window(), "create-window", no_default_handler)
-  _WRAP_SIGNAL(void indicator_activated(const Glib::RefPtr<TabPage>& page), "indicator-activated", no_default_handler)
-  _WRAP_SIGNAL(void page_attached(const Glib::RefPtr<TabPage>& page, int position), "page-attached", no_default_handler)
-  _WRAP_SIGNAL(void page_detached(const Glib::RefPtr<TabPage>& page, int position), "page-detached", no_default_handler)
-  _WRAP_SIGNAL(void page_reordered(const Glib::RefPtr<TabPage>& page, int position), "page-reordered", no_default_handler)
+  _WRAP_SIGNAL(void indicator_activated(const Glib::RefPtr<TabPage>& page), "indicator-activated",
+               no_default_handler)
+  _WRAP_SIGNAL(void page_attached(const Glib::RefPtr<TabPage>& page, int position), "page-attached",
+               no_default_handler)
+  _WRAP_SIGNAL(void page_detached(const Glib::RefPtr<TabPage>& page, int position), "page-detached",
+               no_default_handler)
+  _WRAP_SIGNAL(void page_reordered(const Glib::RefPtr<TabPage>& page, int position),
+               "page-reordered", no_default_handler)
   _WRAP_SIGNAL(void setup_menu(const Glib::RefPtr<TabPage>& page), "setup-menu", no_default_handler)
 };
 } // namespace Adw

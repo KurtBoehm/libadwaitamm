@@ -131,7 +131,7 @@ static void test_adw_entry_row_attributes() {
   // Content equality on Pango::AttrList isn't cheap to assert generically;
   // just confirm the getter round-trips without crashing.
   Pango::AttrList roundtrip = row.get_attributes();
-  () roundtrip;
+  (void)roundtrip;
 }
 
 static void test_adw_entry_row_max_length() {

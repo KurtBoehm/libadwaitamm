@@ -17,13 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
+#include <adwaita.h>
 #include <glibmm.h>
 #include <gtkmm.h>
-#include <adwaita.h>
 
 namespace Adw {
 class ViewStackPage : public Glib::Object {
@@ -46,9 +46,11 @@ public:
   _WRAP_METHOD(bool get_use_underline() const, adw_view_stack_page_get_use_underline)
   _WRAP_METHOD(bool get_visible() const, adw_view_stack_page_get_visible)
   _WRAP_METHOD(void set_badge_number(guint badge_number), adw_view_stack_page_set_badge_number)
-  _WRAP_METHOD(void set_icon_name(const Glib::ustring& icon_name), adw_view_stack_page_set_icon_name)
+  _WRAP_METHOD(void set_icon_name(const Glib::ustring& icon_name),
+               adw_view_stack_page_set_icon_name)
   _WRAP_METHOD(void set_name(const Glib::ustring& name), adw_view_stack_page_set_name)
-  _WRAP_METHOD(void set_needs_attention(bool needs_attention), adw_view_stack_page_set_needs_attention)
+  _WRAP_METHOD(void set_needs_attention(bool needs_attention),
+               adw_view_stack_page_set_needs_attention)
   _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_view_stack_page_set_title)
   _WRAP_METHOD(void set_use_underline(bool use_underline), adw_view_stack_page_set_use_underline)
   _WRAP_METHOD(void set_visible(bool visible), adw_view_stack_page_set_visible)

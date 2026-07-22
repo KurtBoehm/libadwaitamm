@@ -16,12 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
-#include <gtkmm.h>
 #include <adwaita.h>
+#include <gtkmm.h>
 
 namespace Adw {
 class ToolbarView : public Gtk::Widget {
@@ -48,7 +48,8 @@ public:
   _WRAP_METHOD(ToolbarView::Style get_top_bar_style() const, adw_toolbar_view_get_top_bar_style)
   _WRAP_METHOD(void set_top_bar_style(Style style), adw_toolbar_view_set_top_bar_style)
 
-  _WRAP_METHOD(ToolbarView::Style get_bottom_bar_style() const, adw_toolbar_view_get_bottom_bar_style)
+  _WRAP_METHOD(ToolbarView::Style get_bottom_bar_style() const,
+               adw_toolbar_view_get_bottom_bar_style)
   _WRAP_METHOD(void set_bottom_bar_style(Style style), adw_toolbar_view_set_bottom_bar_style)
 
   _WRAP_METHOD(bool get_reveal_top_bars() const, adw_toolbar_view_get_reveal_top_bars)
@@ -57,11 +58,15 @@ public:
   _WRAP_METHOD(bool get_reveal_bottom_bars() const, adw_toolbar_view_get_reveal_bottom_bars)
   _WRAP_METHOD(void set_reveal_bottom_bars(bool reveal), adw_toolbar_view_set_reveal_bottom_bars)
 
-  _WRAP_METHOD(bool get_extend_content_to_top_edge() const, adw_toolbar_view_get_extend_content_to_top_edge)
-  _WRAP_METHOD(void set_extend_content_to_top_edge(bool extend), adw_toolbar_view_set_extend_content_to_top_edge)
+  _WRAP_METHOD(bool get_extend_content_to_top_edge() const,
+               adw_toolbar_view_get_extend_content_to_top_edge)
+  _WRAP_METHOD(void set_extend_content_to_top_edge(bool extend),
+               adw_toolbar_view_set_extend_content_to_top_edge)
 
-  _WRAP_METHOD(bool get_extend_content_to_bottom_edge() const, adw_toolbar_view_get_extend_content_to_bottom_edge)
-  _WRAP_METHOD(void set_extend_content_to_bottom_edge(bool extend), adw_toolbar_view_set_extend_content_to_bottom_edge)
+  _WRAP_METHOD(bool get_extend_content_to_bottom_edge() const,
+               adw_toolbar_view_get_extend_content_to_bottom_edge)
+  _WRAP_METHOD(void set_extend_content_to_bottom_edge(bool extend),
+               adw_toolbar_view_set_extend_content_to_bottom_edge)
 
   _WRAP_METHOD(int get_top_bar_height() const, adw_toolbar_view_get_top_bar_height)
   _WRAP_METHOD(int get_bottom_bar_height() const, adw_toolbar_view_get_bottom_bar_height)

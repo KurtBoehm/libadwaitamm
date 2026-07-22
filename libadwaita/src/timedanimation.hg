@@ -17,16 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(libadwaitamm/private/animation_p.h)
 
+#include <adwaita.h>
 #include <glibmm.h>
 #include <gtkmm.h>
-#include <libadwaitamm/easing.h>
 #include <libadwaitamm/animation.h>
 #include <libadwaitamm/animationtarget.h>
-#include <adwaita.h>
+#include <libadwaitamm/easing.h>
 
 namespace Adw {
 class TimedAnimation : public Animation {
@@ -35,10 +35,13 @@ class TimedAnimation : public Animation {
 
 protected:
   _CTOR_DEFAULT
-  _WRAP_CTOR(TimedAnimation(Gtk::Widget* widget, double value_from, double value_to, guint duration, const Glib::RefPtr<AnimationTarget> &target), adw_timed_animation_new)
+  _WRAP_CTOR(TimedAnimation(Gtk::Widget* widget, double value_from, double value_to, guint duration,
+                            const Glib::RefPtr<AnimationTarget>& target),
+             adw_timed_animation_new)
 
 public:
-  _WRAP_CREATE(Gtk::Widget* widget, double value_from, double value_to, guint duration, const Glib::RefPtr<AnimationTarget> &target)
+  _WRAP_CREATE(Gtk::Widget* widget, double value_from, double value_to, guint duration,
+               const Glib::RefPtr<AnimationTarget>& target)
 
   _WRAP_METHOD(bool get_alternate() const, adw_timed_animation_get_alternate)
   _WRAP_METHOD(guint get_duration() const, adw_timed_animation_get_duration)
