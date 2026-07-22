@@ -89,8 +89,8 @@ public:
    *
    * @newin{1,9}
    */
-  _IGNORE(adw_sidebar_item_get_section)
   Glib::RefPtr<SidebarSection> get_section() const;
+  _IGNORE(adw_sidebar_item_get_section)
 
   _WRAP_METHOD(guint get_index() const, adw_sidebar_item_get_index, newin "1.9")
   _WRAP_METHOD(guint get_section_index() const, adw_sidebar_item_get_section_index, newin "1.9")

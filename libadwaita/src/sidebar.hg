@@ -66,8 +66,8 @@ public:
    *
    * @newin{1,9}
    */
-  _IGNORE(adw_sidebar_get_items)
   Glib::RefPtr<Gtk::SelectionModel> get_items() const;
+  _IGNORE(adw_sidebar_get_items)
 
   _WRAP_METHOD(std::vector<Glib::RefPtr<SidebarSection>> get_sections() const,
                adw_sidebar_get_sections, newin "1.9")
@@ -82,16 +82,16 @@ public:
    * @newin{1,9}
    * @param section A section to append.
    */
-  _IGNORE(adw_sidebar_append)
   void append(const Glib::RefPtr<SidebarSection>& section);
+  _IGNORE(adw_sidebar_append)
 
   /** Prepends @a section to @a self.
    *
    * @newin{1,9}
    * @param section A section to prepend.
    */
-  _IGNORE(adw_sidebar_prepend)
   void prepend(const Glib::RefPtr<SidebarSection>& section);
+  _IGNORE(adw_sidebar_prepend)
 
   /** Inserts @a section at @a position to @a self.
    *
@@ -102,8 +102,8 @@ public:
    * @param section A section to insert.
    * @param position The position to insert @a section at.
    */
-  _IGNORE(adw_sidebar_insert)
   void insert(const Glib::RefPtr<SidebarSection>& section, int position);
+  _IGNORE(adw_sidebar_insert)
 
   _WRAP_METHOD(void remove(const Glib::RefPtr<SidebarSection>& section), adw_sidebar_remove,
                newin "1.9")
@@ -119,8 +119,8 @@ public:
    * @param actions The actions to accept from the dragged content.
    * @param types The types to accept from the dragged content.
    */
-  _IGNORE(adw_sidebar_setup_drop_target)
   void setup_drop_target(Gdk::DragAction actions, const std::vector<GType>& types);
+  _IGNORE(adw_sidebar_setup_drop_target)
 
   _WRAP_METHOD(bool get_drop_preload() const, adw_sidebar_get_drop_preload, newin "1.9")
   _WRAP_METHOD(void set_drop_preload(bool preload), adw_sidebar_set_drop_preload, newin "1.9")

@@ -66,10 +66,10 @@ public:
    * @param model The list model to bind.
    * @param slot_create_widget A slot that creates a widget for each item.
    */
-  _IGNORE(adw_preferences_group_bind_model)
   void
   bind_model(const Glib::RefPtr<Gio::ListModel>& model,
              const sigc::slot<Gtk::Widget*(const Glib::RefPtr<Glib::Object>&)>& slot_create_widget);
+  _IGNORE(adw_preferences_group_bind_model)
 
   // Properties
   _WRAP_PROPERTY("title", Glib::ustring)

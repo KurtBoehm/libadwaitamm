@@ -101,8 +101,8 @@ public:
                deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 
   /** @deprecated Adw::Squeezer is deprecated in libadwaita 1.4. */
-  _IGNORE(adw_squeezer_get_pages)
   Glib::RefPtr<Gtk::SelectionModel> get_pages() const;
+  _IGNORE(adw_squeezer_get_pages)
 
   // Properties
   _WRAP_PROPERTY("visible-child", Gtk::Widget*,

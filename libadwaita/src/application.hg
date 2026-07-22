@@ -39,8 +39,8 @@ protected:
   _CUSTOM_DTOR
 
   // Creation
-  _IGNORE(adw_application_new)
   Application(const Glib::ustring& application_id, Gio::Application::Flags flags);
+  _IGNORE(adw_application_new)
 
 public:
   // Creation

@@ -50,12 +50,12 @@ public:
                adw_tab_bar_set_start_action_widget)
   _WRAP_METHOD(void set_view(TabView* view), adw_tab_bar_set_view)
 
-  _IGNORE(adw_tab_bar_setup_extra_drop_target)
   void setup_extra_drop_target(Gdk::DragAction actions, const std::vector<GType> types) {
     adw_tab_bar_setup_extra_drop_target(
       const_cast<AdwTabBar*>(gobj()), static_cast<GdkDragAction>(actions),
       Glib::ArrayHandler<GType>::vector_to_array(types).data(), types.size());
   }
+  _IGNORE(adw_tab_bar_setup_extra_drop_target)
 
   _WRAP_PROPERTY("autohide", bool)
   _WRAP_PROPERTY("end-action-widget", Gtk::Widget*)

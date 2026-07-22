@@ -51,8 +51,8 @@ public:
   _WRAP_METHOD(Glib::RefPtr<ViewStackPage> get_page(Gtk::Widget& child) const,
                adw_view_stack_get_page, refreturn)
 
-  _IGNORE(adw_view_stack_get_pages)
   Glib::RefPtr<Gtk::SelectionModel> get_pages() const;
+  _IGNORE(adw_view_stack_get_pages)
 
   _WRAP_METHOD(bool get_vhomogeneous() const, adw_view_stack_get_vhomogeneous)
   _WRAP_METHOD(Gtk::Widget* get_visible_child() const, adw_view_stack_get_visible_child)

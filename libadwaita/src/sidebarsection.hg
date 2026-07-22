@@ -71,8 +71,8 @@ public:
    * @newin{1,9}
    * @param item An item to append.
    */
-  _IGNORE(adw_sidebar_section_append)
   void append(const Glib::RefPtr<SidebarItem>& item);
+  _IGNORE(adw_sidebar_section_append)
 
   /** Prepends @a item to the section.
    *
@@ -82,8 +82,8 @@ public:
    * @newin{1,9}
    * @param item An item to prepend.
    */
-  _IGNORE(adw_sidebar_section_prepend)
   void prepend(const Glib::RefPtr<SidebarItem>& item);
+  _IGNORE(adw_sidebar_section_prepend)
 
   /** Inserts @a item at @a position in the section.
    *
@@ -97,8 +97,8 @@ public:
    * @param item An item to insert.
    * @param position The position to insert @a item at.
    */
-  _IGNORE(adw_sidebar_section_insert)
   void insert(const Glib::RefPtr<SidebarItem>& item, int position);
+  _IGNORE(adw_sidebar_section_insert)
 
   _WRAP_METHOD(void remove(const Glib::RefPtr<SidebarItem>& item), adw_sidebar_section_remove,
                newin "1.9")
@@ -117,17 +117,17 @@ public:
    * @param slot_create_item A slot that creates an item for each item in
    *   @a model.
    */
-  _IGNORE(adw_sidebar_section_bind_model)
   void bind_model(const Glib::RefPtr<Gio::ListModel>& model,
                   const sigc::slot<Glib::RefPtr<SidebarItem>(const Glib::RefPtr<Glib::Object>&)>&
                     slot_create_item);
+  _IGNORE(adw_sidebar_section_bind_model)
 
   /** Gets the sidebar @a self is in.
    *
    * @newin{1,9}
    */
-  _IGNORE(adw_sidebar_section_get_sidebar)
   Sidebar* get_sidebar() const;
+  _IGNORE(adw_sidebar_section_get_sidebar)
 
   // Properties
   _WRAP_PROPERTY("title", Glib::ustring, newin "1.9")

@@ -33,7 +33,6 @@ class Swipeable : public Glib::Interface {
 public:
   _WRAP_METHOD(double get_distance() const, adw_swipeable_get_distance)
 
-  _IGNORE(adw_swipeable_get_snap_points)
   std::vector<double> get_snap_points() const {
     int snap_points;
     double* p = adw_swipeable_get_snap_points(const_cast<AdwSwipeable*>(gobj()), &snap_points);
@@ -44,6 +43,7 @@ public:
       return {};
     }
   }
+  _IGNORE(adw_swipeable_get_snap_points)
 
   _WRAP_METHOD(double get_progress() const, adw_swipeable_get_progress)
 

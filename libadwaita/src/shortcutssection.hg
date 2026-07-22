@@ -52,8 +52,8 @@ public:
    * @newin{1,8}
    * @param item The item to add.
    */
-  _IGNORE(adw_shortcuts_section_add)
   void add(const Glib::RefPtr<ShortcutsItem>& item);
+  _IGNORE(adw_shortcuts_section_add)
 
   // Properties
   _WRAP_PROPERTY("title", Glib::ustring, newin "1.8")

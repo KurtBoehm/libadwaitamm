@@ -50,8 +50,8 @@ public:
    * @param max The maximum allowable value.
    * @param step The step increment.
    */
-  _IGNORE(adw_spin_row_new_with_range)
   explicit SpinRow(double min, double max, double step);
+  _IGNORE(adw_spin_row_new_with_range)
 
   // Methods
   _WRAP_METHOD(void configure(const Glib::RefPtr<Gtk::Adjustment>& adjustment, double climb_rate,
