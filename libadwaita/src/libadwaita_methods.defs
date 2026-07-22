@@ -1280,10 +1280,6 @@
 
 
 
-;; From adwaita.h
-
-
-
 ;; From adw-alert-dialog.h
 
 (define-function adw_alert_dialog_new
@@ -1574,6 +1570,80 @@
 
 
 
+;; From adw-animation-target.h
+
+(define-function adw_none_animation_target_new
+  (c-name "adw_none_animation_target_new")
+  (is-constructor-of "AdwNoneAnimationTarget")
+  (return-type "AdwAnimationTarget*")
+)
+
+(define-function adw_callback_animation_target_new
+  (c-name "adw_callback_animation_target_new")
+  (is-constructor-of "AdwCallbackAnimationTarget")
+  (return-type "AdwAnimationTarget*")
+  (parameters
+    '("AdwAnimationTargetFunc" "callback")
+    '("gpointer" "user_data")
+    '("GDestroyNotify" "destroy")
+  )
+)
+
+(define-function adw_property_animation_target_new
+  (c-name "adw_property_animation_target_new")
+  (is-constructor-of "AdwPropertyAnimationTarget")
+  (return-type "AdwAnimationTarget*")
+  (parameters
+    '("GObject*" "object")
+    '("const-char*" "property_name")
+  )
+)
+
+(define-function adw_property_animation_target_new_for_pspec
+  (c-name "adw_property_animation_target_new_for_pspec")
+  (return-type "AdwAnimationTarget*")
+  (parameters
+    '("GObject*" "object")
+    '("GParamSpec*" "pspec")
+  )
+)
+
+(define-method get_object
+  (of-object "AdwPropertyAnimationTarget")
+  (c-name "adw_property_animation_target_get_object")
+  (return-type "GObject*")
+)
+
+(define-method get_pspec
+  (of-object "AdwPropertyAnimationTarget")
+  (c-name "adw_property_animation_target_get_pspec")
+  (return-type "GParamSpec*")
+)
+
+
+
+;; From adw-animation-util.h
+
+(define-function adw_lerp
+  (c-name "adw_lerp")
+  (return-type "double")
+  (parameters
+    '("double" "a")
+    '("double" "b")
+    '("double" "t")
+  )
+)
+
+(define-function adw_get_enable_animations
+  (c-name "adw_get_enable_animations")
+  (return-type "gboolean")
+  (parameters
+    '("GtkWidget*" "widget")
+  )
+)
+
+
+
 ;; From adw-animation.h
 
 (define-method get_widget
@@ -1656,100 +1726,6 @@
 
 
 
-;; From adw-animation-target.h
-
-(define-function adw_none_animation_target_new
-  (c-name "adw_none_animation_target_new")
-  (is-constructor-of "AdwNoneAnimationTarget")
-  (return-type "AdwAnimationTarget*")
-)
-
-(define-function adw_callback_animation_target_new
-  (c-name "adw_callback_animation_target_new")
-  (is-constructor-of "AdwCallbackAnimationTarget")
-  (return-type "AdwAnimationTarget*")
-  (parameters
-    '("AdwAnimationTargetFunc" "callback")
-    '("gpointer" "user_data")
-    '("GDestroyNotify" "destroy")
-  )
-)
-
-(define-function adw_property_animation_target_new
-  (c-name "adw_property_animation_target_new")
-  (is-constructor-of "AdwPropertyAnimationTarget")
-  (return-type "AdwAnimationTarget*")
-  (parameters
-    '("GObject*" "object")
-    '("const-char*" "property_name")
-  )
-)
-
-(define-function adw_property_animation_target_new_for_pspec
-  (c-name "adw_property_animation_target_new_for_pspec")
-  (return-type "AdwAnimationTarget*")
-  (parameters
-    '("GObject*" "object")
-    '("GParamSpec*" "pspec")
-  )
-)
-
-(define-method get_object
-  (of-object "AdwPropertyAnimationTarget")
-  (c-name "adw_property_animation_target_get_object")
-  (return-type "GObject*")
-)
-
-(define-method get_pspec
-  (of-object "AdwPropertyAnimationTarget")
-  (c-name "adw_property_animation_target_get_pspec")
-  (return-type "GParamSpec*")
-)
-
-
-
-;; From adw-animation-util.h
-
-(define-function adw_lerp
-  (c-name "adw_lerp")
-  (return-type "double")
-  (parameters
-    '("double" "a")
-    '("double" "b")
-    '("double" "t")
-  )
-)
-
-(define-function adw_get_enable_animations
-  (c-name "adw_get_enable_animations")
-  (return-type "gboolean")
-  (parameters
-    '("GtkWidget*" "widget")
-  )
-)
-
-
-
-;; From adw-application.h
-
-(define-function adw_application_new
-  (c-name "adw_application_new")
-  (is-constructor-of "AdwApplication")
-  (return-type "AdwApplication*")
-  (parameters
-    '("const-char*" "application_id")
-    '("GApplicationFlags" "flags")
-  )
-)
-
-(define-method get_style_manager
-  (of-object "AdwApplication")
-  (c-name "adw_application_get_style_manager")
-  (return-type "AdwStyleManager*")
-)
-
-
-
 ;; From adw-application-window.h
 
 (define-function adw_application_window_new
@@ -1816,6 +1792,26 @@
   (parameters
     '("gboolean" "adaptive_preview")
   )
+)
+
+
+
+;; From adw-application.h
+
+(define-function adw_application_new
+  (c-name "adw_application_new")
+  (is-constructor-of "AdwApplication")
+  (return-type "AdwApplication*")
+  (parameters
+    '("const-char*" "application_id")
+    '("GApplicationFlags" "flags")
+  )
+)
+
+(define-method get_style_manager
+  (of-object "AdwApplication")
+  (c-name "adw_application_get_style_manager")
+  (return-type "AdwStyleManager*")
 )
 
 
@@ -2520,6 +2516,56 @@
 
 
 
+;; From adw-carousel-indicator-dots.h
+
+(define-function adw_carousel_indicator_dots_new
+  (c-name "adw_carousel_indicator_dots_new")
+  (is-constructor-of "AdwCarouselIndicatorDots")
+  (return-type "GtkWidget*")
+)
+
+(define-method get_carousel
+  (of-object "AdwCarouselIndicatorDots")
+  (c-name "adw_carousel_indicator_dots_get_carousel")
+  (return-type "AdwCarousel*")
+)
+
+(define-method set_carousel
+  (of-object "AdwCarouselIndicatorDots")
+  (c-name "adw_carousel_indicator_dots_set_carousel")
+  (return-type "none")
+  (parameters
+    '("AdwCarousel*" "carousel")
+  )
+)
+
+
+
+;; From adw-carousel-indicator-lines.h
+
+(define-function adw_carousel_indicator_lines_new
+  (c-name "adw_carousel_indicator_lines_new")
+  (is-constructor-of "AdwCarouselIndicatorLines")
+  (return-type "GtkWidget*")
+)
+
+(define-method get_carousel
+  (of-object "AdwCarouselIndicatorLines")
+  (c-name "adw_carousel_indicator_lines_get_carousel")
+  (return-type "AdwCarousel*")
+)
+
+(define-method set_carousel
+  (of-object "AdwCarouselIndicatorLines")
+  (c-name "adw_carousel_indicator_lines_set_carousel")
+  (return-type "none")
+  (parameters
+    '("AdwCarousel*" "carousel")
+  )
+)
+
+
+
 ;; From adw-carousel.h
 
 (define-function adw_carousel_new
@@ -2713,126 +2759,6 @@
 
 
 
-;; From adw-carousel-indicator-dots.h
-
-(define-function adw_carousel_indicator_dots_new
-  (c-name "adw_carousel_indicator_dots_new")
-  (is-constructor-of "AdwCarouselIndicatorDots")
-  (return-type "GtkWidget*")
-)
-
-(define-method get_carousel
-  (of-object "AdwCarouselIndicatorDots")
-  (c-name "adw_carousel_indicator_dots_get_carousel")
-  (return-type "AdwCarousel*")
-)
-
-(define-method set_carousel
-  (of-object "AdwCarouselIndicatorDots")
-  (c-name "adw_carousel_indicator_dots_set_carousel")
-  (return-type "none")
-  (parameters
-    '("AdwCarousel*" "carousel")
-  )
-)
-
-
-
-;; From adw-carousel-indicator-lines.h
-
-(define-function adw_carousel_indicator_lines_new
-  (c-name "adw_carousel_indicator_lines_new")
-  (is-constructor-of "AdwCarouselIndicatorLines")
-  (return-type "GtkWidget*")
-)
-
-(define-method get_carousel
-  (of-object "AdwCarouselIndicatorLines")
-  (c-name "adw_carousel_indicator_lines_get_carousel")
-  (return-type "AdwCarousel*")
-)
-
-(define-method set_carousel
-  (of-object "AdwCarouselIndicatorLines")
-  (c-name "adw_carousel_indicator_lines_set_carousel")
-  (return-type "none")
-  (parameters
-    '("AdwCarousel*" "carousel")
-  )
-)
-
-
-
-;; From adw-clamp.h
-
-(define-function adw_clamp_new
-  (c-name "adw_clamp_new")
-  (is-constructor-of "AdwClamp")
-  (return-type "GtkWidget*")
-)
-
-(define-method get_child
-  (of-object "AdwClamp")
-  (c-name "adw_clamp_get_child")
-  (return-type "GtkWidget*")
-)
-
-(define-method set_child
-  (of-object "AdwClamp")
-  (c-name "adw_clamp_set_child")
-  (return-type "none")
-  (parameters
-    '("GtkWidget*" "child")
-  )
-)
-
-(define-method get_maximum_size
-  (of-object "AdwClamp")
-  (c-name "adw_clamp_get_maximum_size")
-  (return-type "int")
-)
-
-(define-method set_maximum_size
-  (of-object "AdwClamp")
-  (c-name "adw_clamp_set_maximum_size")
-  (return-type "none")
-  (parameters
-    '("int" "maximum_size")
-  )
-)
-
-(define-method get_tightening_threshold
-  (of-object "AdwClamp")
-  (c-name "adw_clamp_get_tightening_threshold")
-  (return-type "int")
-)
-
-(define-method set_tightening_threshold
-  (of-object "AdwClamp")
-  (c-name "adw_clamp_set_tightening_threshold")
-  (return-type "none")
-  (parameters
-    '("int" "tightening_threshold")
-  )
-)
-
-(define-method get_unit
-  (of-object "AdwClamp")
-  (c-name "adw_clamp_get_unit")
-  (return-type "AdwLengthUnit")
-)
-
-(define-method set_unit
-  (of-object "AdwClamp")
-  (c-name "adw_clamp_set_unit")
-  (return-type "none")
-  (parameters
-    '("AdwLengthUnit" "unit")
-  )
-)
-
-
-
 ;; From adw-clamp-layout.h
 
 (define-function adw_clamp_layout_new
@@ -2950,6 +2876,76 @@
 (define-method set_unit
   (of-object "AdwClampScrollable")
   (c-name "adw_clamp_scrollable_set_unit")
+  (return-type "none")
+  (parameters
+    '("AdwLengthUnit" "unit")
+  )
+)
+
+
+
+;; From adw-clamp.h
+
+(define-function adw_clamp_new
+  (c-name "adw_clamp_new")
+  (is-constructor-of "AdwClamp")
+  (return-type "GtkWidget*")
+)
+
+(define-method get_child
+  (of-object "AdwClamp")
+  (c-name "adw_clamp_get_child")
+  (return-type "GtkWidget*")
+)
+
+(define-method set_child
+  (of-object "AdwClamp")
+  (c-name "adw_clamp_set_child")
+  (return-type "none")
+  (parameters
+    '("GtkWidget*" "child")
+  )
+)
+
+(define-method get_maximum_size
+  (of-object "AdwClamp")
+  (c-name "adw_clamp_get_maximum_size")
+  (return-type "int")
+)
+
+(define-method set_maximum_size
+  (of-object "AdwClamp")
+  (c-name "adw_clamp_set_maximum_size")
+  (return-type "none")
+  (parameters
+    '("int" "maximum_size")
+  )
+)
+
+(define-method get_tightening_threshold
+  (of-object "AdwClamp")
+  (c-name "adw_clamp_get_tightening_threshold")
+  (return-type "int")
+)
+
+(define-method set_tightening_threshold
+  (of-object "AdwClamp")
+  (c-name "adw_clamp_set_tightening_threshold")
+  (return-type "none")
+  (parameters
+    '("int" "tightening_threshold")
+  )
+)
+
+(define-method get_unit
+  (of-object "AdwClamp")
+  (c-name "adw_clamp_get_unit")
+  (return-type "AdwLengthUnit")
+)
+
+(define-method set_unit
+  (of-object "AdwClamp")
+  (c-name "adw_clamp_set_unit")
   (return-type "none")
   (parameters
     '("AdwLengthUnit" "unit")
@@ -4240,6 +4236,25 @@
 
 
 
+;; From adw-layout-slot.h
+
+(define-function adw_layout_slot_new
+  (c-name "adw_layout_slot_new")
+  (is-constructor-of "AdwLayoutSlot")
+  (return-type "GtkWidget*")
+  (parameters
+    '("const-char*" "id")
+  )
+)
+
+(define-method get_slot_id
+  (of-object "AdwLayoutSlot")
+  (c-name "adw_layout_slot_get_slot_id")
+  (return-type "const-char*")
+)
+
+
+
 ;; From adw-layout.h
 
 (define-function adw_layout_new
@@ -4270,25 +4285,6 @@
   (parameters
     '("const-char*" "name")
   )
-)
-
-
-
-;; From adw-layout-slot.h
-
-(define-function adw_layout_slot_new
-  (c-name "adw_layout_slot_new")
-  (is-constructor-of "AdwLayoutSlot")
-  (return-type "GtkWidget*")
-  (parameters
-    '("const-char*" "id")
-  )
-)
-
-(define-method get_slot_id
-  (of-object "AdwLayoutSlot")
-  (c-name "adw_layout_slot_get_slot_id")
-  (return-type "const-char*")
 )
 
 
@@ -6371,196 +6367,6 @@
 
 
 
-;; From adw-sidebar.h
-
-(define-function adw_sidebar_new
-  (c-name "adw_sidebar_new")
-  (is-constructor-of "AdwSidebar")
-  (return-type "GtkWidget*")
-)
-
-(define-method get_mode
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_get_mode")
-  (return-type "AdwSidebarMode")
-)
-
-(define-method set_mode
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_set_mode")
-  (return-type "none")
-  (parameters
-    '("AdwSidebarMode" "mode")
-  )
-)
-
-(define-method get_selected
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_get_selected")
-  (return-type "guint")
-)
-
-(define-method set_selected
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_set_selected")
-  (return-type "none")
-  (parameters
-    '("guint" "selected")
-  )
-)
-
-(define-method get_selected_item
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_get_selected_item")
-  (return-type "AdwSidebarItem*")
-)
-
-(define-method get_filter
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_get_filter")
-  (return-type "GtkFilter*")
-)
-
-(define-method set_filter
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_set_filter")
-  (return-type "none")
-  (parameters
-    '("GtkFilter*" "filter")
-  )
-)
-
-(define-method get_placeholder
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_get_placeholder")
-  (return-type "GtkWidget*")
-)
-
-(define-method set_placeholder
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_set_placeholder")
-  (return-type "none")
-  (parameters
-    '("GtkWidget*" "placeholder")
-  )
-)
-
-(define-method get_items
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_get_items")
-  (return-type "GtkSelectionModel*")
-)
-
-(define-method get_sections
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_get_sections")
-  (return-type "GListModel*")
-)
-
-(define-method get_item
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_get_item")
-  (return-type "AdwSidebarItem*")
-  (parameters
-    '("guint" "index")
-  )
-)
-
-(define-method get_section
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_get_section")
-  (return-type "AdwSidebarSection*")
-  (parameters
-    '("guint" "index")
-  )
-)
-
-(define-method append
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_append")
-  (return-type "none")
-  (parameters
-    '("AdwSidebarSection*" "section")
-  )
-)
-
-(define-method prepend
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_prepend")
-  (return-type "none")
-  (parameters
-    '("AdwSidebarSection*" "section")
-  )
-)
-
-(define-method insert
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_insert")
-  (return-type "none")
-  (parameters
-    '("AdwSidebarSection*" "section")
-    '("int" "position")
-  )
-)
-
-(define-method remove
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_remove")
-  (return-type "none")
-  (parameters
-    '("AdwSidebarSection*" "section")
-  )
-)
-
-(define-method remove_all
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_remove_all")
-  (return-type "none")
-)
-
-(define-method setup_drop_target
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_setup_drop_target")
-  (return-type "none")
-  (parameters
-    '("GdkDragAction" "actions")
-    '("GType*" "types")
-    '("gsize" "n_types")
-  )
-)
-
-(define-method get_drop_preload
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_get_drop_preload")
-  (return-type "gboolean")
-)
-
-(define-method set_drop_preload
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_set_drop_preload")
-  (return-type "none")
-  (parameters
-    '("gboolean" "preload")
-  )
-)
-
-(define-method get_menu_model
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_get_menu_model")
-  (return-type "GMenuModel*")
-)
-
-(define-method set_menu_model
-  (of-object "AdwSidebar")
-  (c-name "adw_sidebar_set_menu_model")
-  (return-type "none")
-  (parameters
-    '("GMenuModel*" "menu_model")
-  )
-)
-
-
-
 ;; From adw-sidebar-item.h
 
 (define-function adw_sidebar_item_new
@@ -6858,39 +6664,191 @@
 
 
 
-;; From adw-spinner.h
+;; From adw-sidebar.h
 
-(define-function adw_spinner_new
-  (c-name "adw_spinner_new")
-  (is-constructor-of "AdwSpinner")
+(define-function adw_sidebar_new
+  (c-name "adw_sidebar_new")
+  (is-constructor-of "AdwSidebar")
   (return-type "GtkWidget*")
 )
 
+(define-method get_mode
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_get_mode")
+  (return-type "AdwSidebarMode")
+)
 
-
-;; From adw-spinner-paintable.h
-
-(define-function adw_spinner_paintable_new
-  (c-name "adw_spinner_paintable_new")
-  (is-constructor-of "AdwSpinnerPaintable")
-  (return-type "AdwSpinnerPaintable*")
+(define-method set_mode
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_set_mode")
+  (return-type "none")
   (parameters
-    '("GtkWidget*" "widget")
+    '("AdwSidebarMode" "mode")
   )
 )
 
-(define-method get_widget
-  (of-object "AdwSpinnerPaintable")
-  (c-name "adw_spinner_paintable_get_widget")
+(define-method get_selected
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_get_selected")
+  (return-type "guint")
+)
+
+(define-method set_selected
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_set_selected")
+  (return-type "none")
+  (parameters
+    '("guint" "selected")
+  )
+)
+
+(define-method get_selected_item
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_get_selected_item")
+  (return-type "AdwSidebarItem*")
+)
+
+(define-method get_filter
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_get_filter")
+  (return-type "GtkFilter*")
+)
+
+(define-method set_filter
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_set_filter")
+  (return-type "none")
+  (parameters
+    '("GtkFilter*" "filter")
+  )
+)
+
+(define-method get_placeholder
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_get_placeholder")
   (return-type "GtkWidget*")
 )
 
-(define-method set_widget
-  (of-object "AdwSpinnerPaintable")
-  (c-name "adw_spinner_paintable_set_widget")
+(define-method set_placeholder
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_set_placeholder")
   (return-type "none")
   (parameters
-    '("GtkWidget*" "widget")
+    '("GtkWidget*" "placeholder")
+  )
+)
+
+(define-method get_items
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_get_items")
+  (return-type "GtkSelectionModel*")
+)
+
+(define-method get_sections
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_get_sections")
+  (return-type "GListModel*")
+)
+
+(define-method get_item
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_get_item")
+  (return-type "AdwSidebarItem*")
+  (parameters
+    '("guint" "index")
+  )
+)
+
+(define-method get_section
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_get_section")
+  (return-type "AdwSidebarSection*")
+  (parameters
+    '("guint" "index")
+  )
+)
+
+(define-method append
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_append")
+  (return-type "none")
+  (parameters
+    '("AdwSidebarSection*" "section")
+  )
+)
+
+(define-method prepend
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_prepend")
+  (return-type "none")
+  (parameters
+    '("AdwSidebarSection*" "section")
+  )
+)
+
+(define-method insert
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_insert")
+  (return-type "none")
+  (parameters
+    '("AdwSidebarSection*" "section")
+    '("int" "position")
+  )
+)
+
+(define-method remove
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_remove")
+  (return-type "none")
+  (parameters
+    '("AdwSidebarSection*" "section")
+  )
+)
+
+(define-method remove_all
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_remove_all")
+  (return-type "none")
+)
+
+(define-method setup_drop_target
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_setup_drop_target")
+  (return-type "none")
+  (parameters
+    '("GdkDragAction" "actions")
+    '("GType*" "types")
+    '("gsize" "n_types")
+  )
+)
+
+(define-method get_drop_preload
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_get_drop_preload")
+  (return-type "gboolean")
+)
+
+(define-method set_drop_preload
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_set_drop_preload")
+  (return-type "none")
+  (parameters
+    '("gboolean" "preload")
+  )
+)
+
+(define-method get_menu_model
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_get_menu_model")
+  (return-type "GMenuModel*")
+)
+
+(define-method set_menu_model
+  (of-object "AdwSidebar")
+  (c-name "adw_sidebar_set_menu_model")
+  (return-type "none")
+  (parameters
+    '("GMenuModel*" "menu_model")
   )
 )
 
@@ -7064,6 +7022,44 @@
     '("double" "min")
     '("double" "max")
   )
+)
+
+
+
+;; From adw-spinner-paintable.h
+
+(define-function adw_spinner_paintable_new
+  (c-name "adw_spinner_paintable_new")
+  (is-constructor-of "AdwSpinnerPaintable")
+  (return-type "AdwSpinnerPaintable*")
+  (parameters
+    '("GtkWidget*" "widget")
+  )
+)
+
+(define-method get_widget
+  (of-object "AdwSpinnerPaintable")
+  (c-name "adw_spinner_paintable_get_widget")
+  (return-type "GtkWidget*")
+)
+
+(define-method set_widget
+  (of-object "AdwSpinnerPaintable")
+  (c-name "adw_spinner_paintable_set_widget")
+  (return-type "none")
+  (parameters
+    '("GtkWidget*" "widget")
+  )
+)
+
+
+
+;; From adw-spinner.h
+
+(define-function adw_spinner_new
+  (c-name "adw_spinner_new")
+  (is-constructor-of "AdwSpinner")
+  (return-type "GtkWidget*")
 )
 
 
@@ -7795,48 +7791,6 @@
 
 
 
-;; From adw-swipeable.h
-
-(define-method get_distance
-  (of-object "AdwSwipeable")
-  (c-name "adw_swipeable_get_distance")
-  (return-type "double")
-)
-
-(define-method get_snap_points
-  (of-object "AdwSwipeable")
-  (c-name "adw_swipeable_get_snap_points")
-  (return-type "double*")
-  (parameters
-    '("int*" "n_snap_points")
-  )
-)
-
-(define-method get_progress
-  (of-object "AdwSwipeable")
-  (c-name "adw_swipeable_get_progress")
-  (return-type "double")
-)
-
-(define-method get_cancel_progress
-  (of-object "AdwSwipeable")
-  (c-name "adw_swipeable_get_cancel_progress")
-  (return-type "double")
-)
-
-(define-method get_swipe_area
-  (of-object "AdwSwipeable")
-  (c-name "adw_swipeable_get_swipe_area")
-  (return-type "none")
-  (parameters
-    '("AdwNavigationDirection" "navigation_direction")
-    '("gboolean" "is_drag")
-    '("GdkRectangle*" "rect")
-  )
-)
-
-
-
 ;; From adw-swipe-tracker.h
 
 (define-function adw_swipe_tracker_new
@@ -7965,6 +7919,48 @@
   (return-type "none")
   (parameters
     '("double" "delta")
+  )
+)
+
+
+
+;; From adw-swipeable.h
+
+(define-method get_distance
+  (of-object "AdwSwipeable")
+  (c-name "adw_swipeable_get_distance")
+  (return-type "double")
+)
+
+(define-method get_snap_points
+  (of-object "AdwSwipeable")
+  (c-name "adw_swipeable_get_snap_points")
+  (return-type "double*")
+  (parameters
+    '("int*" "n_snap_points")
+  )
+)
+
+(define-method get_progress
+  (of-object "AdwSwipeable")
+  (c-name "adw_swipeable_get_progress")
+  (return-type "double")
+)
+
+(define-method get_cancel_progress
+  (of-object "AdwSwipeable")
+  (c-name "adw_swipeable_get_cancel_progress")
+  (return-type "double")
+)
+
+(define-method get_swipe_area
+  (of-object "AdwSwipeable")
+  (c-name "adw_swipeable_get_swipe_area")
+  (return-type "none")
+  (parameters
+    '("AdwNavigationDirection" "navigation_direction")
+    '("gboolean" "is_drag")
+    '("GdkRectangle*" "rect")
   )
 )
 
@@ -9015,6 +9011,46 @@
 
 
 
+;; From adw-toast-overlay.h
+
+(define-function adw_toast_overlay_new
+  (c-name "adw_toast_overlay_new")
+  (is-constructor-of "AdwToastOverlay")
+  (return-type "GtkWidget*")
+)
+
+(define-method get_child
+  (of-object "AdwToastOverlay")
+  (c-name "adw_toast_overlay_get_child")
+  (return-type "GtkWidget*")
+)
+
+(define-method set_child
+  (of-object "AdwToastOverlay")
+  (c-name "adw_toast_overlay_set_child")
+  (return-type "none")
+  (parameters
+    '("GtkWidget*" "child")
+  )
+)
+
+(define-method add_toast
+  (of-object "AdwToastOverlay")
+  (c-name "adw_toast_overlay_add_toast")
+  (return-type "none")
+  (parameters
+    '("AdwToast*" "toast")
+  )
+)
+
+(define-method dismiss_all
+  (of-object "AdwToastOverlay")
+  (c-name "adw_toast_overlay_dismiss_all")
+  (return-type "none")
+)
+
+
+
 ;; From adw-toast.h
 
 (define-function adw_toast_new
@@ -9177,46 +9213,6 @@
 (define-method dismiss
   (of-object "AdwToast")
   (c-name "adw_toast_dismiss")
-  (return-type "none")
-)
-
-
-
-;; From adw-toast-overlay.h
-
-(define-function adw_toast_overlay_new
-  (c-name "adw_toast_overlay_new")
-  (is-constructor-of "AdwToastOverlay")
-  (return-type "GtkWidget*")
-)
-
-(define-method get_child
-  (of-object "AdwToastOverlay")
-  (c-name "adw_toast_overlay_get_child")
-  (return-type "GtkWidget*")
-)
-
-(define-method set_child
-  (of-object "AdwToastOverlay")
-  (c-name "adw_toast_overlay_set_child")
-  (return-type "none")
-  (parameters
-    '("GtkWidget*" "child")
-  )
-)
-
-(define-method add_toast
-  (of-object "AdwToastOverlay")
-  (c-name "adw_toast_overlay_add_toast")
-  (return-type "none")
-  (parameters
-    '("AdwToast*" "toast")
-  )
-)
-
-(define-method dismiss_all
-  (of-object "AdwToastOverlay")
-  (c-name "adw_toast_overlay_dismiss_all")
   (return-type "none")
 )
 
@@ -10028,46 +10024,6 @@
 
 
 
-;; From adw-view-switcher.h
-
-(define-function adw_view_switcher_new
-  (c-name "adw_view_switcher_new")
-  (is-constructor-of "AdwViewSwitcher")
-  (return-type "GtkWidget*")
-)
-
-(define-method get_policy
-  (of-object "AdwViewSwitcher")
-  (c-name "adw_view_switcher_get_policy")
-  (return-type "AdwViewSwitcherPolicy")
-)
-
-(define-method set_policy
-  (of-object "AdwViewSwitcher")
-  (c-name "adw_view_switcher_set_policy")
-  (return-type "none")
-  (parameters
-    '("AdwViewSwitcherPolicy" "policy")
-  )
-)
-
-(define-method get_stack
-  (of-object "AdwViewSwitcher")
-  (c-name "adw_view_switcher_get_stack")
-  (return-type "AdwViewStack*")
-)
-
-(define-method set_stack
-  (of-object "AdwViewSwitcher")
-  (c-name "adw_view_switcher_set_stack")
-  (return-type "none")
-  (parameters
-    '("AdwViewStack*" "stack")
-  )
-)
-
-
-
 ;; From adw-view-switcher-sidebar.h
 
 (define-function adw_view_switcher_sidebar_new
@@ -10214,6 +10170,90 @@
 
 
 
+;; From adw-view-switcher.h
+
+(define-function adw_view_switcher_new
+  (c-name "adw_view_switcher_new")
+  (is-constructor-of "AdwViewSwitcher")
+  (return-type "GtkWidget*")
+)
+
+(define-method get_policy
+  (of-object "AdwViewSwitcher")
+  (c-name "adw_view_switcher_get_policy")
+  (return-type "AdwViewSwitcherPolicy")
+)
+
+(define-method set_policy
+  (of-object "AdwViewSwitcher")
+  (c-name "adw_view_switcher_set_policy")
+  (return-type "none")
+  (parameters
+    '("AdwViewSwitcherPolicy" "policy")
+  )
+)
+
+(define-method get_stack
+  (of-object "AdwViewSwitcher")
+  (c-name "adw_view_switcher_get_stack")
+  (return-type "AdwViewStack*")
+)
+
+(define-method set_stack
+  (of-object "AdwViewSwitcher")
+  (c-name "adw_view_switcher_set_stack")
+  (return-type "none")
+  (parameters
+    '("AdwViewStack*" "stack")
+  )
+)
+
+
+
+;; From adw-window-title.h
+
+(define-function adw_window_title_new
+  (c-name "adw_window_title_new")
+  (is-constructor-of "AdwWindowTitle")
+  (return-type "GtkWidget*")
+  (parameters
+    '("const-char*" "title")
+    '("const-char*" "subtitle")
+  )
+)
+
+(define-method get_title
+  (of-object "AdwWindowTitle")
+  (c-name "adw_window_title_get_title")
+  (return-type "const-char*")
+)
+
+(define-method set_title
+  (of-object "AdwWindowTitle")
+  (c-name "adw_window_title_set_title")
+  (return-type "none")
+  (parameters
+    '("const-char*" "title")
+  )
+)
+
+(define-method get_subtitle
+  (of-object "AdwWindowTitle")
+  (c-name "adw_window_title_get_subtitle")
+  (return-type "const-char*")
+)
+
+(define-method set_subtitle
+  (of-object "AdwWindowTitle")
+  (c-name "adw_window_title_set_subtitle")
+  (return-type "none")
+  (parameters
+    '("const-char*" "subtitle")
+  )
+)
+
+
+
 ;; From adw-window.h
 
 (define-function adw_window_new
@@ -10276,50 +10316,6 @@
   (return-type "none")
   (parameters
     '("gboolean" "adaptive_preview")
-  )
-)
-
-
-
-;; From adw-window-title.h
-
-(define-function adw_window_title_new
-  (c-name "adw_window_title_new")
-  (is-constructor-of "AdwWindowTitle")
-  (return-type "GtkWidget*")
-  (parameters
-    '("const-char*" "title")
-    '("const-char*" "subtitle")
-  )
-)
-
-(define-method get_title
-  (of-object "AdwWindowTitle")
-  (c-name "adw_window_title_get_title")
-  (return-type "const-char*")
-)
-
-(define-method set_title
-  (of-object "AdwWindowTitle")
-  (c-name "adw_window_title_set_title")
-  (return-type "none")
-  (parameters
-    '("const-char*" "title")
-  )
-)
-
-(define-method get_subtitle
-  (of-object "AdwWindowTitle")
-  (c-name "adw_window_title_get_subtitle")
-  (return-type "const-char*")
-)
-
-(define-method set_subtitle
-  (of-object "AdwWindowTitle")
-  (c-name "adw_window_title_set_subtitle")
-  (return-type "none")
-  (parameters
-    '("const-char*" "subtitle")
   )
 )
 
@@ -10785,5 +10781,9 @@
     '("AdwWrapPolicy" "wrap_policy")
   )
 )
+
+
+
+;; From adwaita.h
 
 

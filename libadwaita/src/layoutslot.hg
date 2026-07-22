@@ -31,7 +31,7 @@ class LayoutSlot : public Gtk::Widget {
 
 public:
   // Constructors
-  _WRAP_CTOR(LayoutSlot(const Glib::ustring& id), adw_layout_slot_new, newin "1.6")
+  _WRAP_CTOR(LayoutSlot(const Glib::ustring& id), adw_layout_slot_new)
 
   // Methods
   _WRAP_METHOD(Glib::ustring get_slot_id() const, adw_layout_slot_get_slot_id, newin "1.6")

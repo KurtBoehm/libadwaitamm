@@ -196,6 +196,17 @@ static void test_adw_message_dialog_add_responses(void) {
                 Adw::ResponseAppearance::DEFAULT);
 }
 
+static void test_adw_message_dialog_remove_response(void) {
+  Adw::MessageDialog dialog(nullptr, "", "");
+
+  dialog.add_response("response1", "Response 1");
+  dialog.add_response("response2", "Response 2");
+  dialog.remove_response("response1");
+
+  g_assert_false(dialog.has_response("response1"));
+  g_assert_true(dialog.get_response_label("response2") == "Response 2");
+}
+
 static void test_adw_message_dialog_response_label(void) {
   Adw::MessageDialog dialog(nullptr, "", "");
 
@@ -291,6 +302,30 @@ static void test_adw_message_dialog_close_response(void) {
   g_assert_true(notified == 2);
 }
 
+static void test_adw_message_dialog_choose(void) {
+  Adw::MessageDialog dialog(nullptr, "Heading", "Body");
+
+  dialog.add_response("cancel", "Cancel");
+  dialog.add_response("save", "Save");
+  dialog.set_close_response("cancel");
+
+  Glib::ustring chosen_response;
+  bool got_result = false;
+
+  auto slot = [&](const Glib::RefPtr<Gio::AsyncResult> &result) {
+    chosen_response = dialog.choose_finish(result);
+    got_result = true;
+  };
+
+  dialog.choose(Glib::RefPtr<Gio::Cancellable>(), slot);
+  g_signal_emit_by_name(dialog.gobj(), "response", "save");
+
+  while (!got_result)
+    g_main_context_iteration(nullptr, TRUE);
+
+  g_assert_true(chosen_response == "save");
+}
+
 int main(int argc, char *argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
@@ -310,6 +345,8 @@ int main(int argc, char *argv[]) {
                   test_adw_message_dialog_add_response);
   g_test_add_func("/Adwaita/MessageDialog/add_responses",
                   test_adw_message_dialog_add_responses);
+  g_test_add_func("/Adwaita/MessageDialog/remove_response",
+                  test_adw_message_dialog_remove_response);
   g_test_add_func("/Adwaita/MessageDialog/response_label",
                   test_adw_message_dialog_response_label);
   g_test_add_func("/Adwaita/MessageDialog/response_enabled",
@@ -322,6 +359,8 @@ int main(int argc, char *argv[]) {
                   test_adw_message_dialog_default_response);
   g_test_add_func("/Adwaita/MessageDialog/close_response",
                   test_adw_message_dialog_close_response);
+  g_test_add_func("/Adwaita/MessageDialog/choose",
+                  test_adw_message_dialog_choose);
 
   return g_test_run();
 }

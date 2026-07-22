@@ -74,6 +74,15 @@ fi
 
 out_dir="$root_dir/libadwaita/src"
 
+# Where the installed libadwaita-1 headers live. On systems where pkg-config
+# knows about libadwaita-1 (e.g. Homebrew), use that; otherwise fall back to
+# the traditional /usr/include location.
+system_include_dir="/usr/include/libadwaita-1"
+if pkg_includedir="$(pkg-config --variable=includedir libadwaita-1 2>/dev/null)" \
+    && [ -d "$pkg_includedir/libadwaita-1" ]; then
+  system_include_dir="$pkg_includedir/libadwaita-1"
+fi
+
 # Documentation
 echo === libadwaita_docs.xml ===
 params="--with-properties --no-recursion"
@@ -88,11 +97,11 @@ shopt -s nullglob # Skip a filename pattern that matches no file
 
 # Enums
 echo === libadwaita_enums.defs ===
-"$gen_enums" /usr/include/libadwaita-1/*.h "$build_prefix"/libadwaita/*.h  > "$out_dir/libadwaita_enums.defs"
+"$gen_enums" "$system_include_dir"/*.h "$build_prefix"/libadwaita/*.h  > "$out_dir/libadwaita_enums.defs"
 
 # Functions and methods
 echo === libadwaita_methods.defs ===
-"$gen_methods" /usr/include/libadwaita-1/*.h "$build_prefix"/libadwaita/*.h  > "$out_dir/libadwaita_methods.defs"
+"$gen_methods" "$system_include_dir"/*.h "$build_prefix"/libadwaita/*.h  > "$out_dir/libadwaita_methods.defs"
 
 # Properties and signals
 echo === libadwaita_signals.defs ===

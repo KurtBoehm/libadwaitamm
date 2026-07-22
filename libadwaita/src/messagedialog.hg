@@ -36,6 +36,7 @@ public:
   _WRAP_CTOR(MessageDialog(Gtk::Window* transient_for, const Glib::ustring& heading, const Glib::ustring& body), adw_message_dialog_new)
 
   _WRAP_METHOD(void add_response(const Glib::ustring& id, const Glib::ustring& label), adw_message_dialog_add_response, deprecated "Use Adw::AlertDialog::add_response() instead.")
+  _WRAP_METHOD(void remove_response(const Glib::ustring& id), adw_message_dialog_remove_response, deprecated "Use Adw::AlertDialog::remove_response() instead.")
   _WRAP_METHOD(Glib::ustring get_body() const, adw_message_dialog_get_body, deprecated "Use Adw::AlertDialog::get_body() instead.")
   _WRAP_METHOD(bool get_body_use_markup() const, adw_message_dialog_get_body_use_markup, deprecated "Use Adw::AlertDialog::get_body_use_markup() instead.")
   _WRAP_METHOD(Glib::ustring get_close_response() const, adw_message_dialog_get_close_response, deprecated "Use Adw::AlertDialog::get_close_response() instead.")
@@ -88,7 +89,5 @@ public:
  _IGNORE(adw_message_dialog_format_body_markup)
  _IGNORE(adw_message_dialog_format_heading)
  _IGNORE(adw_message_dialog_format_heading_markup)
-
 };
-
 } // namespace Adw

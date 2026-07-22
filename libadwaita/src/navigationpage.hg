@@ -30,8 +30,8 @@ class NavigationPage : public Gtk::Widget {
 
 public:
   // Constructors
-  _WRAP_CTOR(NavigationPage(Gtk::Widget* child, const Glib::ustring& title), adw_navigation_page_new, newin "1.4")
-  _WRAP_CTOR(NavigationPage(Gtk::Widget* child, const Glib::ustring& title, const Glib::ustring& tag), adw_navigation_page_new_with_tag, newin "1.4")
+  _WRAP_CTOR(NavigationPage(Gtk::Widget* child, const Glib::ustring& title), adw_navigation_page_new)
+  _WRAP_CTOR(NavigationPage(Gtk::Widget* child, const Glib::ustring& title, const Glib::ustring& tag), adw_navigation_page_new_with_tag)
 
   // Methods
   _WRAP_METHOD(Gtk::Widget* get_child() const, adw_navigation_page_get_child, newin "1.4")

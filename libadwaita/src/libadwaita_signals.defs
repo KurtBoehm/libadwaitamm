@@ -2023,6 +2023,39 @@
   (default-value "FALSE")
 )
 
+;; From AdwLayout
+
+(define-property content
+  (of-object "AdwLayout")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property name
+  (of-object "AdwLayout")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+;; From AdwLayoutSlot
+
+(define-property id
+  (of-object "AdwLayoutSlot")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+  (default-value "")
+)
+
 ;; From AdwLeaflet
 
 (define-property can-unfold
@@ -2278,6 +2311,401 @@
   (writable #t)
   (construct-only #f)
   (default-value "close")
+)
+
+;; From AdwMultiLayoutView
+
+(define-property layout
+  (of-object "AdwMultiLayoutView")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property layout-name
+  (of-object "AdwMultiLayoutView")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+;; From AdwNavigationPage
+
+(define-signal hidden
+  (of-object "AdwNavigationPage")
+  (return-type "void")
+  (flags "Run Last")
+)
+
+(define-signal showing
+  (of-object "AdwNavigationPage")
+  (return-type "void")
+  (flags "Run Last")
+)
+
+(define-signal shown
+  (of-object "AdwNavigationPage")
+  (return-type "void")
+  (flags "Run Last")
+)
+
+(define-signal hiding
+  (of-object "AdwNavigationPage")
+  (return-type "void")
+  (flags "Run Last")
+)
+
+(define-property child
+  (of-object "AdwNavigationPage")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property tag
+  (of-object "AdwNavigationPage")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property title
+  (of-object "AdwNavigationPage")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property can-pop
+  (of-object "AdwNavigationPage")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+;; From AdwNavigationSplitView
+
+(define-property sidebar
+  (of-object "AdwNavigationSplitView")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property content
+  (of-object "AdwNavigationSplitView")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property sidebar-position
+  (of-object "AdwNavigationSplitView")
+  (prop-type "GParamEnum")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "GTK_PACK_START")
+)
+
+(define-property collapsed
+  (of-object "AdwNavigationSplitView")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property show-content
+  (of-object "AdwNavigationSplitView")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property min-sidebar-width
+  (of-object "AdwNavigationSplitView")
+  (prop-type "GParamDouble")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "180")
+)
+
+(define-property max-sidebar-width
+  (of-object "AdwNavigationSplitView")
+  (prop-type "GParamDouble")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "280")
+)
+
+(define-property sidebar-width-fraction
+  (of-object "AdwNavigationSplitView")
+  (prop-type "GParamDouble")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "0.25")
+)
+
+(define-property sidebar-width-unit
+  (of-object "AdwNavigationSplitView")
+  (prop-type "GParamEnum")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "ADW_LENGTH_UNIT_SP")
+)
+
+;; From AdwNavigationView
+
+(define-signal pushed
+  (of-object "AdwNavigationView")
+  (return-type "void")
+  (flags "Run Last")
+)
+
+(define-signal popped
+  (of-object "AdwNavigationView")
+  (return-type "void")
+  (flags "Run Last")
+  (parameters
+    '("AdwNavigationPage*" "p0")
+  )
+)
+
+(define-signal replaced
+  (of-object "AdwNavigationView")
+  (return-type "void")
+  (flags "Run Last")
+)
+
+(define-signal get-next-page
+  (of-object "AdwNavigationView")
+  (return-type "AdwNavigationPage*")
+  (flags "Run Last")
+)
+
+(define-property visible-page
+  (of-object "AdwNavigationView")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property visible-page-tag
+  (of-object "AdwNavigationView")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property hhomogeneous
+  (of-object "AdwNavigationView")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property vhomogeneous
+  (of-object "AdwNavigationView")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property animate-transitions
+  (of-object "AdwNavigationView")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property pop-on-escape
+  (of-object "AdwNavigationView")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property navigation-stack
+  (of-object "AdwNavigationView")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+;; From AdwNoneAnimationTarget
+
+;; From AdwOverlaySplitView
+
+(define-property content
+  (of-object "AdwOverlaySplitView")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property sidebar
+  (of-object "AdwOverlaySplitView")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property sidebar-position
+  (of-object "AdwOverlaySplitView")
+  (prop-type "GParamEnum")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "GTK_PACK_START")
+)
+
+(define-property show-sidebar
+  (of-object "AdwOverlaySplitView")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property collapsed
+  (of-object "AdwOverlaySplitView")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property pin-sidebar
+  (of-object "AdwOverlaySplitView")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property enable-show-gesture
+  (of-object "AdwOverlaySplitView")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property enable-hide-gesture
+  (of-object "AdwOverlaySplitView")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property min-sidebar-width
+  (of-object "AdwOverlaySplitView")
+  (prop-type "GParamDouble")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "180")
+)
+
+(define-property max-sidebar-width
+  (of-object "AdwOverlaySplitView")
+  (prop-type "GParamDouble")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "280")
+)
+
+(define-property sidebar-width-fraction
+  (of-object "AdwOverlaySplitView")
+  (prop-type "GParamDouble")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "0.25")
+)
+
+(define-property sidebar-width-unit
+  (of-object "AdwOverlaySplitView")
+  (prop-type "GParamEnum")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "ADW_LENGTH_UNIT_SP")
 )
 
 ;; From AdwPasswordEntryRow

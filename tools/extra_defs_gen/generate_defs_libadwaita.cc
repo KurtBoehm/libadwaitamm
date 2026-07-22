@@ -82,7 +82,22 @@ int main(int, char**) {
   std::cout << get_defs(ADW_TYPE_LEAFLET);
   std::cout << get_defs(ADW_TYPE_LEAFLET_PAGE);
   std::cout << get_defs(ADW_TYPE_MESSAGE_DIALOG);
+#if ADW_CHECK_VERSION(1, 6, 0)
+  std::cout << get_defs(ADW_TYPE_MULTI_LAYOUT_VIEW);
+#endif
+#if ADW_CHECK_VERSION(1, 4, 0)
+  std::cout << get_defs(ADW_TYPE_NAVIGATION_PAGE);
+#endif
+#if ADW_CHECK_VERSION(1, 4, 0)
+  std::cout << get_defs(ADW_TYPE_NAVIGATION_SPLIT_VIEW);
+#endif
+#if ADW_CHECK_VERSION(1, 4, 0)
+  std::cout << get_defs(ADW_TYPE_NAVIGATION_VIEW);
+#endif
   std::cout << get_defs(ADW_TYPE_NONE_ANIMATION_TARGET);
+#if ADW_CHECK_VERSION(1, 4, 0)
+  std::cout << get_defs(ADW_TYPE_OVERLAY_SPLIT_VIEW);
+#endif
   std::cout << get_defs(ADW_TYPE_PASSWORD_ENTRY_ROW);
   std::cout << get_defs(ADW_TYPE_PREFERENCES_GROUP);
   std::cout << get_defs(ADW_TYPE_PREFERENCES_PAGE);

@@ -44,6 +44,16 @@ Without Meson (e.g. jhbuild), `generate_defs_and_docs.sh` calls the same executa
 **Important:** `generate_defs_libadwaita.cc` lists every wrapped type by hand, alphabetically by type name (not grouped by `.hg` file).
 When you add a new `.hg` file (or a new class within an existing one), add its `ADW_TYPE_*` there too — otherwise its properties and signals silently never make it into `libadwaita_signals.defs`.
 
+`tools/update_extra_defs_types.py` automates that bookkeeping: it scans `libadwaita/src/*.hg` for `_CLASS_GOBJECT`/`_CLASS_GTKOBJECT`/`_CLASS_INTERFACE` type macros, adds any missing from `generate_defs_libadwaita.cc` (guarding with `#if ADW_CHECK_VERSION(...)` when every wrapped member's `newin` tag postdates the project's minimum libadwaita version) and removes any whose `.hg` class is gone, validating additions against the installed headers along the way. It never touches untouched, pre-existing lines.
+
+```sh
+tools/update_extra_defs_types.py
+# preview without writing:
+tools/update_extra_defs_types.py --dry-run
+# for CI: exit 1 if the file is out of date
+tools/update_extra_defs_types.py --check
+```
+
 ### `vfuncs.defs` (virtual functions)
 
 `tools/generate_vfuncs_defs.py` scans installed libadwaita headers for `AdwFooClass` struct vfuncs (function-pointer members up to a `/*< private >*/` marker) and emits a `(define-vfunc ...)` for every one it finds, dropping the leading `self` parameter (implicit via `of-object`, like `define-method`) and converting common C/GLib types to gmmproc `.defs` spelling (e.g. `const char *` → `const-gchar*`) via a small alias table in the script – extend it there if a type comes out wrong.
