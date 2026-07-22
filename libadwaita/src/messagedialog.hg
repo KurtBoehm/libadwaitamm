@@ -1,4 +1,5 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -21,49 +22,63 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/window_p.h)
 
 #include <gtkmm.h>
+#include <giomm/asyncresult.h>
+#include <giomm/cancellable.h>
 #include <libadwaitamm/alertdialog.h>
 
 namespace Adw {
 class MessageDialog : public Gtk::Window {
-  _CLASS_GTKOBJECT(MessageDialog, AdwMessageDialog, ADW_MESSAGE_Dialog, Gtk::Window, GtkWindow)
+  _CLASS_GTKOBJECT(MessageDialog, AdwMessageDialog, ADW_MESSAGE_DIALOG, Gtk::Window, GtkWindow)
   _UNMANAGEABLE
 
 public:
   _WRAP_CTOR(MessageDialog(Gtk::Window* transient_for, const Glib::ustring& heading, const Glib::ustring& body), adw_message_dialog_new)
 
-  _WRAP_METHOD(void add_response(const Glib::ustring& id, const Glib::ustring& label), adw_message_dialog_add_response)
-  _WRAP_METHOD(Glib::ustring get_body() const, adw_message_dialog_get_body)
-  _WRAP_METHOD(bool get_body_use_markup() const, adw_message_dialog_get_body_use_markup)
-  _WRAP_METHOD(Glib::ustring get_close_response() const, adw_message_dialog_get_close_response)
-  _WRAP_METHOD(Glib::ustring get_default_response() const, adw_message_dialog_get_default_response)
-  _WRAP_METHOD(Gtk::Widget* get_extra_child() const, adw_message_dialog_get_extra_child)
-  _WRAP_METHOD(Glib::ustring get_heading() const, adw_message_dialog_get_heading)
-  _WRAP_METHOD(bool get_heading_use_markup() const, adw_message_dialog_get_heading_use_markup)
-  _WRAP_METHOD(ResponseAppearance get_response_appearance(const Glib::ustring& response) const, adw_message_dialog_get_response_appearance)
-  _WRAP_METHOD(bool get_response_enabled(const Glib::ustring& response) const, adw_message_dialog_get_response_enabled)
-  _WRAP_METHOD(Glib::ustring get_response_label(const Glib::ustring& response) const, adw_message_dialog_get_response_label)
-  _WRAP_METHOD(bool has_response(const Glib::ustring& response) const, adw_message_dialog_has_response)
-  _WRAP_METHOD(void response(const Glib::ustring& response), adw_message_dialog_response)
-  _WRAP_METHOD(void set_body(const Glib::ustring& body), adw_message_dialog_set_body)
-  _WRAP_METHOD(void set_body_use_markup(bool use_markup), adw_message_dialog_set_body_use_markup)
-  _WRAP_METHOD(void set_close_response(const Glib::ustring& response), adw_message_dialog_set_close_response)
-  _WRAP_METHOD(void set_default_response(const Glib::ustring& response), adw_message_dialog_set_default_response)
-  _WRAP_METHOD(void set_extra_child(Gtk::Widget* child), adw_message_dialog_set_extra_child)
-  _WRAP_METHOD(void set_heading(const Glib::ustring& heading), adw_message_dialog_set_heading)
-  _WRAP_METHOD(void set_heading_use_markup(bool use_markup), adw_message_dialog_set_heading_use_markup)
-  _WRAP_METHOD(void set_response_appearance(const Glib::ustring& response, ResponseAppearance appearance), adw_message_dialog_set_response_appearance)
-  _WRAP_METHOD(void set_response_enabled(const Glib::ustring& response, bool enabled), adw_message_dialog_set_response_enabled)
-  _WRAP_METHOD(void set_response_label(const Glib::ustring& response, const Glib::ustring& label), adw_message_dialog_set_response_label)
+  _WRAP_METHOD(void add_response(const Glib::ustring& id, const Glib::ustring& label), adw_message_dialog_add_response, deprecated "Use Adw::AlertDialog::add_response() instead.")
+  _WRAP_METHOD(Glib::ustring get_body() const, adw_message_dialog_get_body, deprecated "Use Adw::AlertDialog::get_body() instead.")
+  _WRAP_METHOD(bool get_body_use_markup() const, adw_message_dialog_get_body_use_markup, deprecated "Use Adw::AlertDialog::get_body_use_markup() instead.")
+  _WRAP_METHOD(Glib::ustring get_close_response() const, adw_message_dialog_get_close_response, deprecated "Use Adw::AlertDialog::get_close_response() instead.")
+  _WRAP_METHOD(Glib::ustring get_default_response() const, adw_message_dialog_get_default_response, deprecated "Use Adw::AlertDialog::get_default_response() instead.")
+  _WRAP_METHOD(Gtk::Widget* get_extra_child() const, adw_message_dialog_get_extra_child, deprecated "Use Adw::AlertDialog::get_extra_child() instead.")
+  _WRAP_METHOD(Glib::ustring get_heading() const, adw_message_dialog_get_heading, deprecated "Use Adw::AlertDialog::get_heading() instead.")
+  _WRAP_METHOD(bool get_heading_use_markup() const, adw_message_dialog_get_heading_use_markup, deprecated "Use Adw::AlertDialog::get_heading_use_markup() instead.")
+  _WRAP_METHOD(ResponseAppearance get_response_appearance(const Glib::ustring& response) const, adw_message_dialog_get_response_appearance, deprecated "Use Adw::AlertDialog::get_response_appearance() instead.")
+  _WRAP_METHOD(bool get_response_enabled(const Glib::ustring& response) const, adw_message_dialog_get_response_enabled, deprecated "Use Adw::AlertDialog::get_response_enabled() instead.")
+  _WRAP_METHOD(Glib::ustring get_response_label(const Glib::ustring& response) const, adw_message_dialog_get_response_label, deprecated "Use Adw::AlertDialog::get_response_label() instead.")
+  _WRAP_METHOD(bool has_response(const Glib::ustring& response) const, adw_message_dialog_has_response, deprecated "Use Adw::AlertDialog::has_response() instead.")
+  _WRAP_METHOD(void response(const Glib::ustring& response), adw_message_dialog_response, deprecated "Use Adw::AlertDialog instead.")
+  _WRAP_METHOD(void set_body(const Glib::ustring& body), adw_message_dialog_set_body, deprecated "Use Adw::AlertDialog::set_body() instead.")
+  _WRAP_METHOD(void set_body_use_markup(bool use_markup), adw_message_dialog_set_body_use_markup, deprecated "Use Adw::AlertDialog::set_body_use_markup() instead.")
+  _WRAP_METHOD(void set_close_response(const Glib::ustring& response), adw_message_dialog_set_close_response, deprecated "Use Adw::AlertDialog::set_close_response() instead.")
+  _WRAP_METHOD(void set_default_response(const Glib::ustring& response), adw_message_dialog_set_default_response, deprecated "Use Adw::AlertDialog::set_default_response() instead.")
+  _WRAP_METHOD(void set_extra_child(Gtk::Widget* child), adw_message_dialog_set_extra_child, deprecated "Use Adw::AlertDialog::set_extra_child() instead.")
+  _WRAP_METHOD(void set_heading(const Glib::ustring& heading), adw_message_dialog_set_heading, deprecated "Use Adw::AlertDialog::set_heading() instead.")
+  _WRAP_METHOD(void set_heading_use_markup(bool use_markup), adw_message_dialog_set_heading_use_markup, deprecated "Use Adw::AlertDialog::set_heading_use_markup() instead.")
+  _WRAP_METHOD(void set_response_appearance(const Glib::ustring& response, ResponseAppearance appearance), adw_message_dialog_set_response_appearance, deprecated "Use Adw::AlertDialog::set_response_appearance() instead.")
+  _WRAP_METHOD(void set_response_enabled(const Glib::ustring& response, bool enabled), adw_message_dialog_set_response_enabled, deprecated "Use Adw::AlertDialog::set_response_enabled() instead.")
+  _WRAP_METHOD(void set_response_label(const Glib::ustring& response, const Glib::ustring& label), adw_message_dialog_set_response_label, deprecated "Use Adw::AlertDialog::set_response_label() instead.")
 
- _WRAP_PROPERTY("body", Glib::ustring)
- _WRAP_PROPERTY("body-use-markup", bool)
- _WRAP_PROPERTY("close-response", Glib::ustring)
- _WRAP_PROPERTY("default-response", Glib::ustring)
- _WRAP_PROPERTY("extra-child", Gtk::Widget*)
- _WRAP_PROPERTY("heading", Glib::ustring)
- _WRAP_PROPERTY("heading-use-markup", bool)
+  /** Shows the dialog to the user and calls @a slot when a response is chosen.
+   *
+   * @deprecated Use Adw::AlertDialog::choose() instead.
+   *
+   * @param cancellable A cancellable object to cancel the operation.
+   * @param slot A callback to call when the operation is complete.
+   */
+  void choose(const Glib::RefPtr<Gio::Cancellable>& cancellable, const Gio::SlotAsyncReady& slot);
+  _IGNORE(adw_message_dialog_choose)
 
- _WRAP_SIGNAL(void response(const Glib::ustring& response), "response", detail_name response)
+  _WRAP_METHOD(Glib::ustring choose_finish(const Glib::RefPtr<Gio::AsyncResult>& result), adw_message_dialog_choose_finish, deprecated "Use Adw::AlertDialog::choose_finish() instead.")
+
+ _WRAP_PROPERTY("body", Glib::ustring, deprecated "Use Adw::AlertDialog::property_body() instead.")
+ _WRAP_PROPERTY("body-use-markup", bool, deprecated "Use Adw::AlertDialog::property_body_use_markup() instead.")
+ _WRAP_PROPERTY("close-response", Glib::ustring, deprecated "Use Adw::AlertDialog::property_close_response() instead.")
+ _WRAP_PROPERTY("default-response", Glib::ustring, deprecated "Use Adw::AlertDialog::property_default_response() instead.")
+ _WRAP_PROPERTY("extra-child", Gtk::Widget*, deprecated "Use Adw::AlertDialog::property_extra_child() instead.")
+ _WRAP_PROPERTY("heading", Glib::ustring, deprecated "Use Adw::AlertDialog::property_heading() instead.")
+ _WRAP_PROPERTY("heading-use-markup", bool, deprecated "Use Adw::AlertDialog::property_heading_use_markup() instead.")
+
+ _WRAP_SIGNAL(void response(const Glib::ustring& response), "response", detail_name response, deprecated "Use Adw::AlertDialog instead.")
 
  _WRAP_VFUNC(void response(const Glib::ustring& response), response)
 

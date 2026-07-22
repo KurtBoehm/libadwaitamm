@@ -1,4 +1,5 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -27,9 +28,7 @@ _PINCLUDE(libadwaitamm/private/animation_p.h)
 #include <libadwaitamm/animationtarget.h>
 #include <adwaita.h>
 
-namespace Adw
-{
-
+namespace Adw {
 class TimedAnimation : public Animation {
   _CLASS_GOBJECT(TimedAnimation, AdwTimedAnimation, ADW_TIMED_ANIMATION, Animation, AdwAnimation)
   _DO_NOT_DERIVE_GTYPE
@@ -64,5 +63,4 @@ public:
   _WRAP_PROPERTY("value-from", double)
   _WRAP_PROPERTY("value-to", double)
 };
-
 } // namespace Adw

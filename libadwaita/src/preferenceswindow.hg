@@ -1,4 +1,5 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -16,22 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <libadwaitamm/window.h>
-
 _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(libadwaitamm/private/window_p.h)
 
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
 #include <libadwaitamm/toast.h>
 #include <libadwaitamm/preferencespage.h>
+#include <libadwaitamm/window.h>
 #include <adwaita.h>
 
-namespace Adw
-{
-
+namespace Adw {
 class PreferencesWindow : public Adw::Window {
   _CLASS_GTKOBJECT(PreferencesWindow, AdwPreferencesWindow, ADW_PREFERENCES_WINDOW, Adw::Window, AdwWindow)
   _UNMANAGEABLE
@@ -59,5 +54,4 @@ public:
   _WRAP_PROPERTY("visible_page", PreferencesPage*)
   _WRAP_PROPERTY("visible_page_name", Glib::ustring)
 };
-
 } // namespace Adw

@@ -1,0 +1,105 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(gtkmm/private/widget_p.h)
+
+#include <gtkmm.h>
+#include <giomm/listmodel.h>
+#include <libadwaitamm/navigationpage.h>
+#include <adwaita.h>
+
+namespace Adw {
+#m4 _CONVERSION(`GListModel*', `std::vector<NavigationPage*>', `listmodel_to_vector<Adw::NavigationPage>($3)')
+
+class NavigationView : public Gtk::Widget {
+  _CLASS_GTKOBJECT(NavigationView, AdwNavigationView, ADW_NAVIGATION_VIEW, Gtk::Widget, GtkWidget)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+public:
+  // Constructors
+  _CTOR_DEFAULT
+
+  // Methods
+  _WRAP_METHOD(void add(NavigationPage* page), adw_navigation_view_add, newin "1.4")
+  _WRAP_METHOD(void remove(NavigationPage* page), adw_navigation_view_remove, newin "1.4")
+
+  _WRAP_METHOD(NavigationPage* find_page(const Glib::ustring& tag) const, adw_navigation_view_find_page, newin "1.4")
+
+  _WRAP_METHOD(void push(NavigationPage* page), adw_navigation_view_push, newin "1.4")
+  _WRAP_METHOD(void push_by_tag(const Glib::ustring& tag), adw_navigation_view_push_by_tag, newin "1.4")
+
+  _WRAP_METHOD(bool pop(), adw_navigation_view_pop, newin "1.4")
+  _WRAP_METHOD(bool pop_to_page(NavigationPage* page), adw_navigation_view_pop_to_page, newin "1.4")
+  _WRAP_METHOD(bool pop_to_tag(const Glib::ustring& tag), adw_navigation_view_pop_to_tag, newin "1.4")
+
+  /** Replaces the current navigation stack with @a pages.
+   *
+   * @newin{1,4}
+   *
+   * @param pages The new navigation stack.
+   */
+  void replace(const std::vector<NavigationPage*>& pages);
+  _IGNORE(adw_navigation_view_replace)
+
+  /** Replaces the current navigation stack with pages matching @a tags.
+   *
+   * @newin{1,4}
+   *
+   * @param tags Tags of the pages in the new navigation stack.
+   */
+  void replace_with_tags(const std::vector<Glib::ustring>& tags);
+  _IGNORE(adw_navigation_view_replace_with_tags)
+
+  _WRAP_METHOD(NavigationPage* get_visible_page() const, adw_navigation_view_get_visible_page, newin "1.4")
+  _WRAP_METHOD(Glib::ustring get_visible_page_tag() const, adw_navigation_view_get_visible_page_tag, newin "1.7")
+
+  _WRAP_METHOD(NavigationPage* get_previous_page(NavigationPage* page) const, adw_navigation_view_get_previous_page, newin "1.4")
+
+  _WRAP_METHOD(bool get_hhomogeneous() const, adw_navigation_view_get_hhomogeneous, newin "1.7")
+  _WRAP_METHOD(void set_hhomogeneous(bool hhomogeneous), adw_navigation_view_set_hhomogeneous, newin "1.7")
+
+  _WRAP_METHOD(bool get_vhomogeneous() const, adw_navigation_view_get_vhomogeneous, newin "1.7")
+  _WRAP_METHOD(void set_vhomogeneous(bool vhomogeneous), adw_navigation_view_set_vhomogeneous, newin "1.7")
+
+  _WRAP_METHOD(bool get_animate_transitions() const, adw_navigation_view_get_animate_transitions, newin "1.4")
+  _WRAP_METHOD(void set_animate_transitions(bool animate_transitions), adw_navigation_view_set_animate_transitions, newin "1.4")
+
+  _WRAP_METHOD(bool get_pop_on_escape() const, adw_navigation_view_get_pop_on_escape, newin "1.4")
+  _WRAP_METHOD(void set_pop_on_escape(bool pop_on_escape), adw_navigation_view_set_pop_on_escape, newin "1.4")
+
+  _WRAP_METHOD(std::vector<NavigationPage*> get_navigation_stack() const, adw_navigation_view_get_navigation_stack, newin "1.4")
+
+  // Properties
+  _WRAP_PROPERTY("animate-transitions", bool, newin "1.4")
+  _WRAP_PROPERTY("pop-on-escape", bool, newin "1.4")
+  _WRAP_PROPERTY("visible-page", NavigationPage*, newin "1.4")
+  _WRAP_PROPERTY("visible-page-tag", Glib::ustring, newin "1.7")
+  _WRAP_PROPERTY("hhomogeneous", bool, newin "1.7")
+  _WRAP_PROPERTY("vhomogeneous", bool, newin "1.7")
+  _WRAP_PROPERTY("navigation-stack", Glib::RefPtr<Gio::ListModel>, newin "1.4")
+
+  // Signals
+  _WRAP_SIGNAL(void pushed(), "pushed", no_default_handler, newin "1.4")
+  _WRAP_SIGNAL(void popped(NavigationPage* page), "popped", no_default_handler, newin "1.4")
+  _WRAP_SIGNAL(void replaced(), "replaced", no_default_handler, newin "1.4")
+  _WRAP_SIGNAL(NavigationPage* get_next_page(), "get-next-page", no_default_handler, newin "1.4")
+};
+} // namespace Adw

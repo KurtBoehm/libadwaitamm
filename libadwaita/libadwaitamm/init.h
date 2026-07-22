@@ -1,4 +1,5 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -19,9 +20,8 @@
 #ifndef LIBADWAITAMM_INIT_H
 #define LIBADWAITAMM_INIT_H
 
-namespace Adw
-{
-  void init();
+namespace Adw {
+void init();
 }
 
 #endif /* !LIBADWAITAMM_WRAP_INIT_H */

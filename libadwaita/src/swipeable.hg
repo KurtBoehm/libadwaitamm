@@ -1,4 +1,5 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -22,16 +23,10 @@ _PINCLUDE(glibmm/private/object_p.h)
 
 #include <glibmm.h>
 #include <gtkmm.h>
-
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
 #include <libadwaitamm/navigationdirection.h>
 #include <adwaita.h>
 
-namespace Adw
-{
-
+namespace Adw {
 class Swipeable : public Glib::Interface {
 
 _CLASS_INTERFACE(Swipeable, AdwSwipeable, ADW_SWIPEABLE, AdwSwipeableInterface)
@@ -44,18 +39,14 @@ public:
   _IGNORE(adw_swipeable_get_snap_points)
   std::vector<double> get_snap_points() const {
     int snap_points;
-    double *p = adw_swipeable_get_snap_points(
-        const_cast<AdwSwipeable *>(gobj()), &snap_points);
+    double* p = adw_swipeable_get_snap_points(const_cast<AdwSwipeable*>(gobj()), &snap_points);
     if (p)
-      return Glib::ArrayHandler<double>::array_to_vector(p, (size_t)snap_points,
-                                                         Glib::OWNERSHIP_DEEP);
+      return Glib::ArrayHandler<double>::array_to_vector(p, (size_t)snap_points, Glib::OWNERSHIP_DEEP);
     else
       return {};
   }
 
 #m4 _CONVERSION(`GdkRectangle*',`Gdk::Rectangle&',`Glib::wrap($3)')
   _WRAP_METHOD(void get_swipe_area(NavigationDirection navigation_direction, bool is_drag, Gdk::Rectangle& rect) const, adw_swipeable_get_swipe_area)
-
 };
-
 } // namespace Adw

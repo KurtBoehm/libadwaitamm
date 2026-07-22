@@ -1,4 +1,5 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -26,9 +27,7 @@ _PINCLUDE(libadwaitamm/private/animation_p.h)
 #include <libadwaitamm/springparams.h>
 #include <adwaita.h>
 
-namespace Adw
-{
-
+namespace Adw {
 class SpringAnimation : public Animation {
   _CLASS_GOBJECT(SpringAnimation, AdwSpringAnimation, ADW_SPRING_ANIMATION, Animation, AdwAnimation)
   _WRAP_CTOR(SpringAnimation(Gtk::Widget* widget, double value_from, double value_to, const Glib::RefPtr<SpringParams>& spring_params, const Glib::RefPtr<AnimationTarget>& target), adw_spring_animation_new)
@@ -63,5 +62,4 @@ public:
   _WRAP_PROPERTY("value-to", double)
   _WRAP_PROPERTY("velocity", double)
 };
-
 } // namespace Adw

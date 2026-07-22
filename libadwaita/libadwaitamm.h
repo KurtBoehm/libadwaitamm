@@ -1,4 +1,5 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -23,8 +24,8 @@
  *
  * @section description Description
  *
- * The libadwaitamm C++ binding provides a C++ interface on top of the libadwaita
- * C library.
+ * The libadwaitamm C++ binding provides a C++ interface on top of the
+ * libadwaita C library.
  *
  * @section overview Overview
  *
@@ -77,7 +78,12 @@
 #include <libadwaitamm/leaflet.h>
 #include <libadwaitamm/lengthunit.h>
 #include <libadwaitamm/messagedialog.h>
+#include <libadwaitamm/multilayoutview.h>
 #include <libadwaitamm/navigationdirection.h>
+#include <libadwaitamm/navigationpage.h>
+#include <libadwaitamm/navigationsplitview.h>
+#include <libadwaitamm/navigationview.h>
+#include <libadwaitamm/overlaysplitview.h>
 #include <libadwaitamm/passwordentryrow.h>
 #include <libadwaitamm/preferencesgroup.h>
 #include <libadwaitamm/preferencespage.h>

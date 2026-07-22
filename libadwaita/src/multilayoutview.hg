@@ -1,0 +1,55 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(gtkmm/private/widget_p.h)
+
+#include <gtkmm.h>
+#include <libadwaitamm/layout.h>
+#include <adwaita.h>
+
+namespace Adw {
+class MultiLayoutView : public Gtk::Widget {
+  _CLASS_GTKOBJECT(MultiLayoutView, AdwMultiLayoutView, ADW_MULTI_LAYOUT_VIEW, Gtk::Widget, GtkWidget)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+public:
+  // Constructors
+  _CTOR_DEFAULT
+
+  // Methods
+  _WRAP_METHOD(Glib::RefPtr<Layout> get_layout() const, adw_multi_layout_view_get_layout, refreturn, newin "1.6")
+  _WRAP_METHOD(void set_layout(Layout* layout), adw_multi_layout_view_set_layout, newin "1.6")
+
+  _WRAP_METHOD(Glib::ustring get_layout_name() const, adw_multi_layout_view_get_layout_name, newin "1.6")
+  _WRAP_METHOD(void set_layout_name(const Glib::ustring& name), adw_multi_layout_view_set_layout_name, newin "1.6")
+
+  _WRAP_METHOD(void add_layout(Layout* layout), adw_multi_layout_view_add_layout, newin "1.6")
+  _WRAP_METHOD(void remove_layout(Layout* layout), adw_multi_layout_view_remove_layout, newin "1.6")
+  _WRAP_METHOD(Glib::RefPtr<Layout> get_layout_by_name(const Glib::ustring& name) const, adw_multi_layout_view_get_layout_by_name, refreturn, newin "1.6")
+
+  _WRAP_METHOD(Gtk::Widget* get_child(const Glib::ustring& id) const, adw_multi_layout_view_get_child, newin "1.6")
+  _WRAP_METHOD(void set_child(const Glib::ustring& id, Gtk::Widget* child), adw_multi_layout_view_set_child, newin "1.6")
+
+  // Properties
+  _WRAP_PROPERTY("layout", Layout*, newin "1.6")
+  _WRAP_PROPERTY("layout-name", Glib::ustring, newin "1.6")
+};
+} // namespace Adw

@@ -1,0 +1,60 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include <gtkmm.h>
+#include <adwaita.h>
+
+namespace {
+template<typename CppType, typename CType = typename CppType::BaseObjectType>
+std::vector<CppType*> listmodel_to_vector(GListModel* listmodel) {
+  if (!listmodel) {
+    return {};
+  }
+  std::vector<CppType*> result;
+  const guint n_items = g_list_model_get_n_items(listmodel);
+  for (guint pos = 0; pos < n_items; ++pos) {
+    // g_list_model_get_object() gives us a reference.
+    result.push_back(Glib::wrap((CType*)g_list_model_get_object(listmodel, pos)));
+  }
+  // The caller had a reference that's no longer needed.
+  g_object_unref(listmodel);
+  return result;
+}
+} // anonymous namespace
+
+namespace Adw {
+void NavigationView::replace(const std::vector<NavigationPage*>& pages) {
+  std::vector<AdwNavigationPage*> c_pages;
+  c_pages.reserve(pages.size());
+  for (auto* page : pages) {
+    c_pages.push_back(page ? page->gobj() : nullptr);
+  }
+
+  adw_navigation_view_replace(gobj(), c_pages.data(), static_cast<int>(c_pages.size()));
+}
+
+void NavigationView::replace_with_tags(const std::vector<Glib::ustring>& tags) {
+  std::vector<const char*> c_tags;
+  c_tags.reserve(tags.size());
+  for (const auto& tag : tags) {
+    c_tags.push_back(tag.c_str());
+  }
+
+  adw_navigation_view_replace_with_tags(gobj(), c_tags.data(), static_cast<int>(c_tags.size()));
+}
+} // namespace Adw

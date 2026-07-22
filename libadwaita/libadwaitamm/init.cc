@@ -1,4 +1,5 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -16,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <gtkmm/init.h>
 #include <libadwaitamm/init.h>
 #include <libadwaitamm/wrap_init.h>
-#include <gtkmm/init.h>
 
 void Adw::init() {
   Gtk::init_gtkmm_internals();

@@ -63,8 +63,16 @@ _CONVERSION(`Adw::Carousel*', `AdwCarousel*', __FP2P)
 _CONVERSION(`AdwDialog*', `Adw::Dialog*', __RP2P)
 _CONVERSION(`Adw::Dialog*', `AdwDialog*', __FP2P)
 
+_CONVERSION(`AdwLayout*', `Layout*', __RP2P)
+_CONVERSION(`Layout*', `AdwLayout*', __FP2P)
+_CONVERSION(`AdwLayout*', `Glib::RefPtr<Layout>', __RP2P)
+_CONVERSION(`const Glib::RefPtr<Layout>&', `AdwLayout*', __CONVERT_REFPTR_TO_P($3))
+
 _CONVERSION(`AdwLeafletPage*', `Glib::RefPtr<LeafletPage>', __RP2P)
 _CONVERSION(`const Glib::RefPtr<LeafletPage>&', `AdwLeafletPage*', __CONVERT_REFPTR_TO_P($3))
+
+_CONVERSION(`AdwNavigationPage*', `NavigationPage*', __RP2P)
+_CONVERSION(`NavigationPage*', `AdwNavigationPage*', __FP2P)
 
 _CONVERSION(`AdwPreferencesGroup*', `PreferencesGroup*', __RP2P)
 _CONVERSION(`PreferencesGroup*', `AdwPreferencesGroup*', __FP2P)

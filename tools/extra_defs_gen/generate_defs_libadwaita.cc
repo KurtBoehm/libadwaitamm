@@ -1,4 +1,5 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -34,13 +35,12 @@
 // at compile time.
 #undef LIBADWAITA_DISABLE_DEPRECATED
 
-#include <glibmm_generate_extra_defs/generate_extra_defs.h>
 #include <adwaita.h>
+#include <glibmm_generate_extra_defs/generate_extra_defs.h>
 #include <iostream>
 
-int main(int, char**)
-{
-  adw_init ();
+int main(int, char**) {
+  adw_init();
 
   std::cout << get_defs(ADW_TYPE_ABOUT_DIALOG);
   std::cout << get_defs(ADW_TYPE_ABOUT_WINDOW);
@@ -111,6 +111,4 @@ int main(int, char**)
   std::cout << get_defs(ADW_TYPE_VIEW_SWITCHER_TITLE);
   std::cout << get_defs(ADW_TYPE_WINDOW);
   std::cout << get_defs(ADW_TYPE_WINDOW_TITLE);
-
-  return 0;
 }

@@ -1,4 +1,5 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -21,16 +22,10 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
 #include <gtkmm.h>
-
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
 #include <libadwaitamm/tabpage.h>
 #include <adwaita.h>
 
-namespace Adw
-{
-
+namespace Adw {
 class TabView : public Gtk::Widget {
   _CLASS_GTKOBJECT(TabView, AdwTabView, ADW_TAB_VIEW, Gtk::Widget, GtkWidget)
   _STRUCT_NOT_HIDDEN
@@ -101,5 +96,4 @@ public:
   _WRAP_SIGNAL(void page_reordered(const Glib::RefPtr<TabPage>& page, int position), "page-reordered", no_default_handler)
   _WRAP_SIGNAL(void setup_menu(const Glib::RefPtr<TabPage>& page), "setup-menu", no_default_handler)
 };
-
 } // namespace Adw

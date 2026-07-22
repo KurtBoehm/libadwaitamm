@@ -1,4 +1,5 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -22,15 +23,9 @@ _PINCLUDE(glibmm/private/object_p.h)
 
 #include <glibmm.h>
 #include <gtkmm.h>
-
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
 #include <adwaita.h>
 
-namespace Adw
-{
-
+namespace Adw {
 class TabPage : public Glib::Object {
   _CLASS_GOBJECT(TabPage, AdwTabPage, ADW_TAB_PAGE, Glib::Object, GObject)
   _STRUCT_NOT_HIDDEN
@@ -76,5 +71,4 @@ public:
   _WRAP_PROPERTY("title", Glib::ustring)
   _WRAP_PROPERTY("tooltip", Glib::ustring)
 };
-
 } // namespace Adw

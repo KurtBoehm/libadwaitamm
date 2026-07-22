@@ -17,12 +17,12 @@ static void notify_cb() { notified++; }
 
 static void test_adw_flap_flap(void) {
   Adw::Flap flap;
-  Gtk::Widget *widget = nullptr;
+  Gtk::Widget* widget = nullptr;
 
   notified = 0;
   flap.property_flap().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  widget = flap.get_property<Gtk::Widget *>("flap");
+  widget = flap.get_property<Gtk::Widget*>("flap");
   g_assert_null(widget);
 
   flap.set_flap(nullptr);
@@ -33,19 +33,19 @@ static void test_adw_flap_flap(void) {
   g_assert_true(flap.get_flap()->gobj() == widget->gobj());
   g_assert_true(notified == 1);
 
-  flap.set_property<Gtk::Widget *>("flap", nullptr);
+  flap.set_property<Gtk::Widget*>("flap", nullptr);
   g_assert_null(flap.get_flap());
   g_assert_true(notified == 2);
 }
 
 static void test_adw_flap_content(void) {
   Adw::Flap flap;
-  Gtk::Widget *widget = nullptr;
+  Gtk::Widget* widget = nullptr;
 
   notified = 0;
   flap.property_content().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  widget = flap.get_property<Gtk::Widget *>("content");
+  widget = flap.get_property<Gtk::Widget*>("content");
   g_assert_null(widget);
 
   flap.set_content(nullptr);
@@ -56,19 +56,19 @@ static void test_adw_flap_content(void) {
   g_assert_true(flap.get_content()->gobj() == widget->gobj());
   g_assert_true(notified == 1);
 
-  flap.set_property<Gtk::Widget *>("content", nullptr);
+  flap.set_property<Gtk::Widget*>("content", nullptr);
   g_assert_null(flap.get_content());
   g_assert_true(notified == 2);
 }
 
 static void test_adw_flap_separator(void) {
   Adw::Flap flap;
-  Gtk::Widget *widget = nullptr;
+  Gtk::Widget* widget = nullptr;
 
   notified = 0;
   flap.property_separator().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  widget = flap.get_property<Gtk::Widget *>("separator");
+  widget = flap.get_property<Gtk::Widget*>("separator");
   g_assert_null(widget);
 
   flap.set_separator(nullptr);
@@ -79,7 +79,7 @@ static void test_adw_flap_separator(void) {
   g_assert_true(flap.get_separator()->gobj() == widget->gobj());
   g_assert_true(notified == 1);
 
-  flap.set_property<Gtk::Widget *>("separator", nullptr);
+  flap.set_property<Gtk::Widget*>("separator", nullptr);
   g_assert_null(flap.get_separator());
   g_assert_true(notified == 2);
 }
@@ -351,7 +351,7 @@ static void test_adw_flap_fold_threshold_policy(void) {
   g_assert_true(notified == 1);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 

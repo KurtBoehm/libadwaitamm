@@ -1,4 +1,5 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -21,15 +22,9 @@ _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
 #include <gtkmm.h>
-
-// The documentation explicitly advises against this.
-// But G_DECLARE_FINAL_TYPE seems to do struct { ... } Foo; which means we
-// cannot forward-declare a struct type Foo.
 #include <adwaita.h>
 
-namespace Adw
-{
-
+namespace Adw {
 class StatusPage : public Gtk::Widget {
   _CLASS_GTKOBJECT(StatusPage, AdwStatusPage, ADW_STATUS_PAGE, Gtk::Widget, GtkWidget)
   _STRUCT_NOT_HIDDEN
@@ -55,5 +50,4 @@ public:
   _WRAP_PROPERTY("paintable", Glib::RefPtr<Gdk::Paintable>)
   _WRAP_PROPERTY("title", Glib::ustring)
 };
-
 } // namespace Adw

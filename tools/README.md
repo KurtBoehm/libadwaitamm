@@ -25,8 +25,7 @@ Regenerate after upgrading the libadwaita version this project binds against (ne
 tools/generate_defs_and_docs.sh
 ```
 
-This assumes the classic \*mm jhbuild layout: a sibling `glibmm` checkout (for `glibmm/tools/defs_gen/{h2def.py,docextract_to_xml.py}` and
-`glibmm/tools/enum.pl`) and the _system-installed_ libadwaita headers under `/usr/include/libadwaita-1/`.
+This assumes the classic \*mm jhbuild layout: a sibling `glibmm` checkout (for `glibmm/tools/defs_gen/{h2def.py,docextract_to_xml.py}` and `glibmm/tools/enum.pl`) and the _system-installed_ libadwaita headers under `/usr/include/libadwaita-1/`.
 Point `GMMPROC_GEN_SOURCE_DIR`/`GMMPROC_GEN_BUILD_DIR` at your jhbuild `checkoutroot`/`buildroot` if you’re not using the default layout — see the comment block at the top of the script.
 
 ### signals.defs (properties and signals)

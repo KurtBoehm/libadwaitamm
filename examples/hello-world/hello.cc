@@ -1,4 +1,5 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -19,7 +20,7 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h>
 
-static void activate_cb(const Glib::RefPtr<Gtk::Application> &app) {
+static void activate_cb(const Glib::RefPtr<Gtk::Application>& app) {
   auto window = new Gtk::ApplicationWindow(app);
   auto label = new Gtk::Label("Hello World");
 
@@ -29,7 +30,7 @@ static void activate_cb(const Glib::RefPtr<Gtk::Application> &app) {
   window->present();
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   Adw::init();
 
   auto app = Adw::Application::create("org.example.Hello",

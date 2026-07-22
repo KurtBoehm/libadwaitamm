@@ -1,4 +1,5 @@
-/* Copyright (c) 2019  Roger Ferrer <rofirrim@gmail.com>
+/* Copyright (c) 2019 Roger Ferrer <rofirrim@gmail.com>
+ * Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * This file is part of libadwaitamm.
  *
@@ -19,7 +20,30 @@
 #include <adwaita.h>
 #include <gtkmm.h>
 
-namespace Adw
-{
+namespace Adw {
+namespace {
+static void MessageDialog_choose_callback(GObject* source_object, GAsyncResult* res, void* data) {
+  auto slot = static_cast<Gio::SlotAsyncReady*>(data);
+  auto result = Glib::wrap(res, true);
 
+  try {
+    (*slot)(result);
+  } catch (...) {
+    Glib::exception_handlers_invoke();
+  }
+
+  delete slot;
+}
+} // anonymous namespace
+
+void MessageDialog::choose(const Glib::RefPtr<Gio::Cancellable>& cancellable, const Gio::SlotAsyncReady& slot) {
+  auto slot_copy = new Gio::SlotAsyncReady(slot);
+
+  adw_message_dialog_choose(
+    gobj(),
+    Glib::unwrap(cancellable),
+    &MessageDialog_choose_callback,
+    slot_copy
+  );
+}
 } // namespace Adw

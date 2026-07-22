@@ -1,0 +1,67 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(gtkmm/private/widget_p.h)
+
+#include <gtkmm.h>
+#include <adwaita.h>
+
+namespace Adw {
+class NavigationPage : public Gtk::Widget {
+  _CLASS_GTKOBJECT(NavigationPage, AdwNavigationPage, ADW_NAVIGATION_PAGE, Gtk::Widget, GtkWidget)
+  _STRUCT_NOT_HIDDEN
+
+public:
+  // Constructors
+  _WRAP_CTOR(NavigationPage(Gtk::Widget* child, const Glib::ustring& title), adw_navigation_page_new, newin "1.4")
+  _WRAP_CTOR(NavigationPage(Gtk::Widget* child, const Glib::ustring& title, const Glib::ustring& tag), adw_navigation_page_new_with_tag, newin "1.4")
+
+  // Methods
+  _WRAP_METHOD(Gtk::Widget* get_child() const, adw_navigation_page_get_child, newin "1.4")
+  _WRAP_METHOD(void set_child(Gtk::Widget* child), adw_navigation_page_set_child, newin "1.4")
+
+  _WRAP_METHOD(Glib::ustring get_tag() const, adw_navigation_page_get_tag, newin "1.4")
+  _WRAP_METHOD(void set_tag(const Glib::ustring& tag), adw_navigation_page_set_tag, newin "1.4")
+
+  _WRAP_METHOD(Glib::ustring get_title() const, adw_navigation_page_get_title, newin "1.4")
+  _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_navigation_page_set_title, newin "1.4")
+
+  _WRAP_METHOD(bool get_can_pop() const, adw_navigation_page_get_can_pop, newin "1.4")
+  _WRAP_METHOD(void set_can_pop(bool can_pop), adw_navigation_page_set_can_pop, newin "1.4")
+
+  // Properties
+  _WRAP_PROPERTY("child", Gtk::Widget*, newin "1.4")
+  _WRAP_PROPERTY("tag", Glib::ustring, newin "1.4")
+  _WRAP_PROPERTY("title", Glib::ustring, newin "1.4")
+  _WRAP_PROPERTY("can-pop", bool, newin "1.4")
+
+  // Signals
+  _WRAP_SIGNAL(void showing(), "showing", newin "1.4")
+  _WRAP_SIGNAL(void shown(), "shown", newin "1.4")
+  _WRAP_SIGNAL(void hiding(), "hiding", newin "1.4")
+  _WRAP_SIGNAL(void hidden(), "hidden", newin "1.4")
+
+  // Virtual functions
+  _WRAP_VFUNC(void showing(), showing)
+  _WRAP_VFUNC(void shown(), shown)
+  _WRAP_VFUNC(void hiding(), hiding)
+  _WRAP_VFUNC(void hidden(), hidden)
+};
+} // namespace Adw
