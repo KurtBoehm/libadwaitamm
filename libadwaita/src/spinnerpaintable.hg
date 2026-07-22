@@ -1,0 +1,47 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(glibmm/private/object_p.h)
+
+#include <adwaita.h>
+#include <glibmm.h>
+#include <gtkmm.h>
+
+namespace Adw {
+class SpinnerPaintable : public Glib::Object, public Gdk::Paintable, public Gtk::SymbolicPaintable {
+  _CLASS_GOBJECT(SpinnerPaintable, AdwSpinnerPaintable, ADW_SPINNER_PAINTABLE, Glib::Object, GObject)
+  _IMPLEMENTS_INTERFACE(Gdk::Paintable)
+  _IMPLEMENTS_INTERFACE(Gtk::SymbolicPaintable)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+  _WRAP_CTOR(SpinnerPaintable(Gtk::Widget* widget = nullptr), adw_spinner_paintable_new)
+
+protected:
+  _CTOR_DEFAULT
+
+public:
+  _WRAP_CREATE(Gtk::Widget* widget = nullptr)
+
+  _WRAP_METHOD(Gtk::Widget* get_widget() const, adw_spinner_paintable_get_widget)
+  _WRAP_METHOD(void set_widget(Gtk::Widget* widget), adw_spinner_paintable_set_widget)
+
+  _WRAP_PROPERTY("widget", Gtk::Widget*)
+};
+} // namespace Adw

@@ -1,0 +1,67 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(glibmm/private/object_p.h)
+
+#include <adwaita.h>
+#include <glibmm.h>
+#include <gtkmm.h>
+
+namespace Adw {
+class ShortcutsItem : public Glib::Object {
+  _CLASS_GOBJECT(ShortcutsItem, AdwShortcutsItem, ADW_SHORTCUTS_ITEM, Glib::Object, GObject)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+protected:
+  // Constructors
+  _CTOR_DEFAULT
+  _WRAP_CTOR(ShortcutsItem(const Glib::ustring& title, const Glib::ustring& accelerator), adw_shortcuts_item_new)
+
+public:
+  // Construction
+  _WRAP_CREATE(const Glib::ustring& title, const Glib::ustring& accelerator)
+
+  _WRAP_METHOD(static Glib::RefPtr<ShortcutsItem> create_from_action(const Glib::ustring& title, const Glib::ustring& action_name), adw_shortcuts_item_new_from_action, refreturn, newin "1.8")
+
+  // Methods
+  _WRAP_METHOD(Glib::ustring get_title() const, adw_shortcuts_item_get_title, newin "1.8")
+  _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_shortcuts_item_set_title, newin "1.8")
+
+  _WRAP_METHOD(Glib::ustring get_subtitle() const, adw_shortcuts_item_get_subtitle, newin "1.8")
+  _WRAP_METHOD(void set_subtitle(const Glib::ustring& subtitle), adw_shortcuts_item_set_subtitle, newin "1.8")
+
+  _WRAP_METHOD(Glib::ustring get_accelerator() const, adw_shortcuts_item_get_accelerator, newin "1.8")
+  _WRAP_METHOD(void set_accelerator(const Glib::ustring& accelerator), adw_shortcuts_item_set_accelerator, newin "1.8")
+
+  _WRAP_METHOD(Glib::ustring get_action_name() const, adw_shortcuts_item_get_action_name, newin "1.8")
+  _WRAP_METHOD(void set_action_name(const Glib::ustring& action_name), adw_shortcuts_item_set_action_name, newin "1.8")
+
+  _WRAP_METHOD(Gtk::TextDirection get_direction() const, adw_shortcuts_item_get_direction, newin "1.8")
+  _WRAP_METHOD(void set_direction(Gtk::TextDirection direction), adw_shortcuts_item_set_direction, newin "1.8")
+
+  // Properties
+  _WRAP_PROPERTY("title", Glib::ustring, newin "1.8")
+  _WRAP_PROPERTY("subtitle", Glib::ustring, newin "1.8")
+  _WRAP_PROPERTY("accelerator", Glib::ustring, newin "1.8")
+  _WRAP_PROPERTY("action-name", Glib::ustring, newin "1.8")
+  _WRAP_PROPERTY("direction", Gtk::TextDirection, newin "1.8")
+};
+} // namespace Adw

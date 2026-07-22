@@ -13,6 +13,13 @@ _CONVERSION(`gpointer', `Glib::RefPtr<Glib::ObjectBase>', `Glib::make_refptr_for
 
 _CONVERSION(`const Glib::RefPtr<Gtk::Application>&', `GtkApplication*', __CONVERT_REFPTR_TO_P($3))
 
+_CONVERSION(`GdkRGBA*', `Gdk::RGBA', `Gdk::RGBA($3)')
+
+dnl libadwaita's GValue-carrying signals (e.g. Adw::Sidebar::signal_drop())
+dnl declare their "value" parameter as a plain (non-const) GValue*, unlike
+dnl the "const GValue*'/`Glib::ValueBase&'" combinations glibmm registers.
+_CONVERSION(`GValue*', `const Glib::ValueBase&', `*reinterpret_cast<const Glib::ValueBase*>($3)')
+
 
 dnl ============================================================================
 dnl Gtk expression/factory/model/widgets
@@ -23,6 +30,12 @@ _CONVERSION(`GtkExpression*', `Glib::RefPtr<Gtk::Expression<Glib::ustring>>', `G
 
 _CONVERSION(`const Glib::RefPtr<Gtk::ListItemFactory>&', `GtkListItemFactory*', __CONVERT_REFPTR_TO_P)
 _CONVERSION(`GtkListItemFactory*', `Glib::RefPtr<Gtk::ListItemFactory>', `Glib::wrap($3)')
+
+_CONVERSION(`GtkAdjustment*', `Glib::RefPtr<Gtk::Adjustment>', __RP2P)
+_CONVERSION(`const Glib::RefPtr<Gtk::Adjustment>&', `GtkAdjustment*', __CONVERT_REFPTR_TO_P($3))
+
+_CONVERSION(`GtkFilter*', `Glib::RefPtr<Gtk::Filter>', __RP2P)
+_CONVERSION(`const Glib::RefPtr<Gtk::Filter>&', `GtkFilter*', __CONVERT_REFPTR_TO_P($3))
 
 _CONVERSION(`GtkPopover*', `Gtk::Popover*', __RP2P)
 _CONVERSION(`Gtk::Popover*', `GtkPopover*', __FP2P)
@@ -57,6 +70,9 @@ dnl ============================================================================
 dnl Adw widgets and pages
 dnl ============================================================================
 
+_CONVERSION(`AdwBanner*', `Banner*', __RP2P)
+_CONVERSION(`Banner*', `AdwBanner*', __FP2P)
+
 _CONVERSION(`AdwCarousel*', `Adw::Carousel*', __RP2P)
 _CONVERSION(`Adw::Carousel*', `AdwCarousel*', __FP2P)
 
@@ -79,6 +95,21 @@ _CONVERSION(`PreferencesGroup*', `AdwPreferencesGroup*', __FP2P)
 
 _CONVERSION(`AdwPreferencesPage*', `PreferencesPage*', __RP2P)
 _CONVERSION(`PreferencesPage*', `AdwPreferencesPage*', __FP2P)
+
+_CONVERSION(`AdwShortcutsItem*', `Glib::RefPtr<ShortcutsItem>', __RP2P)
+_CONVERSION(`const Glib::RefPtr<ShortcutsItem>&', `AdwShortcutsItem*', __CONVERT_REFPTR_TO_P($3))
+
+_CONVERSION(`AdwShortcutsSection*', `Glib::RefPtr<ShortcutsSection>', __RP2P)
+_CONVERSION(`const Glib::RefPtr<ShortcutsSection>&', `AdwShortcutsSection*', __CONVERT_REFPTR_TO_P($3))
+
+_CONVERSION(`AdwSidebar*', `Sidebar*', __RP2P)
+
+_CONVERSION(`AdwSidebarItem*', `Glib::RefPtr<SidebarItem>', __RP2P)
+_CONVERSION(`AdwSidebarItem*', `const Glib::RefPtr<SidebarItem>&', __RP2P)
+_CONVERSION(`const Glib::RefPtr<SidebarItem>&', `AdwSidebarItem*', __CONVERT_REFPTR_TO_P($3))
+
+_CONVERSION(`AdwSidebarSection*', `Glib::RefPtr<SidebarSection>', __RP2P)
+_CONVERSION(`const Glib::RefPtr<SidebarSection>&', `AdwSidebarSection*', __CONVERT_REFPTR_TO_P($3))
 
 _CONVERSION(`AdwSpringParams*', `Glib::RefPtr<SpringParams>', __RP2P)
 _CONVERSION(`const Glib::RefPtr<SpringParams>&', `AdwSpringParams*', __CONVERT_REFPTR_TO_P($3))
@@ -117,6 +148,7 @@ dnl ============================================================================
 dnl Enum conversions
 dnl ============================================================================
 
+_CONV_ENUM(Adw, AccentColor)
 _CONV_ENUM(Adw, ColorScheme)
 _CONV_ENUM(Adw, CenteringPolicy)
 _CONV_ENUM(Adw, Easing)
@@ -135,6 +167,7 @@ _CONV_INCLASS_ENUM(Adw, Flap, FoldPolicy)
 _CONV_INCLASS_ENUM(Adw, Flap, TransitionType)
 _CONV_INCLASS_ENUM(Adw, InlineViewSwitcher, DisplayMode)
 _CONV_INCLASS_ENUM(Adw, Leaflet, TransitionType)
+_CONV_INCLASS_ENUM(Adw, Sidebar, Mode)
 _CONV_INCLASS_ENUM(Adw, Squeezer, TransitionType)
 _CONV_INCLASS_ENUM(Adw, TabView, Shortcuts)
 _CONV_INCLASS_ENUM(Adw, Toast, Priority)

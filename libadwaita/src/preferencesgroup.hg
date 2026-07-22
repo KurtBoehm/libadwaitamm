@@ -33,16 +33,40 @@ public:
   _CTOR_DEFAULT
 
   _WRAP_METHOD(void add(Gtk::Widget& child), adw_preferences_group_add)
-  _WRAP_METHOD(Glib::ustring get_description() const, adw_preferences_group_get_description)
-  _WRAP_METHOD(Gtk::Widget* get_header_suffix() const, adw_preferences_group_get_header_suffix)
-  _WRAP_METHOD(Glib::ustring get_title() const, adw_preferences_group_get_title)
   _WRAP_METHOD(void remove(Gtk::Widget& child), adw_preferences_group_remove)
-  _WRAP_METHOD(void set_description(const Glib::ustring& description), adw_preferences_group_set_description)
-  _WRAP_METHOD(void set_header_suffix(Gtk::Widget& suffix), adw_preferences_group_set_header_suffix)
+
+  _WRAP_METHOD(Gtk::Widget* get_row(guint index) const, adw_preferences_group_get_row, newin "1.8")
+
+  _WRAP_METHOD(Glib::ustring get_title() const, adw_preferences_group_get_title)
   _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_preferences_group_set_title)
 
+  _WRAP_METHOD(Glib::ustring get_description() const, adw_preferences_group_get_description)
+  _WRAP_METHOD(void set_description(const Glib::ustring& description), adw_preferences_group_set_description)
+
+  _WRAP_METHOD(Gtk::Widget* get_header_suffix() const, adw_preferences_group_get_header_suffix)
+  _WRAP_METHOD(void set_header_suffix(Gtk::Widget& suffix), adw_preferences_group_set_header_suffix)
+
+  _WRAP_METHOD(bool get_separate_rows() const, adw_preferences_group_get_separate_rows, newin "1.6")
+  _WRAP_METHOD(void set_separate_rows(bool separate_rows), adw_preferences_group_set_separate_rows, newin "1.6")
+
+  /** Binds @a model to the group.
+   *
+   * If the group was already bound to a model, that previous binding is
+   * destroyed.
+   *
+   * The contents of the group are cleared and then filled with widgets that
+   * represent items from @a model, created with @a slot_create_widget.
+   *
+   * @newin{1,8}
+   * @param model The list model to bind.
+   * @param slot_create_widget A slot that creates a widget for each item.
+   */
+  _IGNORE(adw_preferences_group_bind_model)
+  void bind_model(const Glib::RefPtr<Gio::ListModel>& model, const sigc::slot<Gtk::Widget*(const Glib::RefPtr<Glib::Object>&)>& slot_create_widget);
+
+  _WRAP_PROPERTY("title", Glib::ustring)
   _WRAP_PROPERTY("description", Glib::ustring)
   _WRAP_PROPERTY("header-suffix", Gtk::Widget*)
-  _WRAP_PROPERTY("title", Glib::ustring)
+  _WRAP_PROPERTY("separate-rows", bool, newin "1.6")
 };
 } // namespace Adw

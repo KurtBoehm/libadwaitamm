@@ -1,0 +1,61 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(libadwaitamm/private/dialog_p.h)
+
+#include <adwaita.h>
+#include <libadwaitamm/dialog.h>
+#include <libadwaitamm/navigationpage.h>
+#include <libadwaitamm/preferencespage.h>
+#include <libadwaitamm/toast.h>
+
+namespace Adw {
+class PreferencesDialog : public Adw::Dialog {
+  _CLASS_GTKOBJECT(PreferencesDialog, AdwPreferencesDialog, ADW_PREFERENCES_DIALOG, Adw::Dialog, AdwDialog)
+  _STRUCT_NOT_HIDDEN
+
+public:
+  // Constructors
+  _CTOR_DEFAULT
+
+  // Methods
+  _WRAP_METHOD(void add(PreferencesPage* page), adw_preferences_dialog_add, newin "1.5")
+  _WRAP_METHOD(void remove(PreferencesPage* page), adw_preferences_dialog_remove, newin "1.5")
+
+  _WRAP_METHOD(PreferencesPage* get_visible_page() const, adw_preferences_dialog_get_visible_page, newin "1.5")
+  _WRAP_METHOD(void set_visible_page(PreferencesPage* page), adw_preferences_dialog_set_visible_page, newin "1.5")
+
+  _WRAP_METHOD(Glib::ustring get_visible_page_name() const, adw_preferences_dialog_get_visible_page_name, newin "1.5")
+  _WRAP_METHOD(void set_visible_page_name(const Glib::ustring& name), adw_preferences_dialog_set_visible_page_name, newin "1.5")
+
+  _WRAP_METHOD(bool get_search_enabled() const, adw_preferences_dialog_get_search_enabled, newin "1.5")
+  _WRAP_METHOD(void set_search_enabled(bool search_enabled), adw_preferences_dialog_set_search_enabled, newin "1.5")
+
+  _WRAP_METHOD(void push_subpage(NavigationPage* page), adw_preferences_dialog_push_subpage, newin "1.5")
+  _WRAP_METHOD(bool pop_subpage(), adw_preferences_dialog_pop_subpage, newin "1.5")
+
+  _WRAP_METHOD(void add_toast(Toast* toast), adw_preferences_dialog_add_toast, newin "1.5")
+
+  // Properties
+  _WRAP_PROPERTY("visible-page", PreferencesPage*, newin "1.5")
+  _WRAP_PROPERTY("visible-page-name", Glib::ustring, newin "1.5")
+  _WRAP_PROPERTY("search-enabled", bool, newin "1.5")
+};
+} // namespace Adw

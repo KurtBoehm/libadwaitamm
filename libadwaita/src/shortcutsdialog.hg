@@ -1,0 +1,40 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(libadwaitamm/private/dialog_p.h)
+
+#include <adwaita.h>
+#include <libadwaitamm/dialog.h>
+#include <libadwaitamm/shortcutssection.h>
+
+namespace Adw {
+class ShortcutsDialog : public Adw::Dialog {
+  _CLASS_GTKOBJECT(ShortcutsDialog, AdwShortcutsDialog, ADW_SHORTCUTS_DIALOG, Adw::Dialog, AdwDialog)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+public:
+  // Constructors
+  _CTOR_DEFAULT
+
+  // Methods
+  _WRAP_METHOD(void add(const Glib::RefPtr<ShortcutsSection>& section), adw_shortcuts_dialog_add, newin "1.8")
+};
+} // namespace Adw

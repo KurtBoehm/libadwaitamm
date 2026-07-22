@@ -99,11 +99,40 @@ int main(int, char**) {
   std::cout << get_defs(ADW_TYPE_OVERLAY_SPLIT_VIEW);
 #endif
   std::cout << get_defs(ADW_TYPE_PASSWORD_ENTRY_ROW);
+#if ADW_CHECK_VERSION(1, 5, 0)
+  std::cout << get_defs(ADW_TYPE_PREFERENCES_DIALOG);
+#endif
   std::cout << get_defs(ADW_TYPE_PREFERENCES_GROUP);
   std::cout << get_defs(ADW_TYPE_PREFERENCES_PAGE);
   std::cout << get_defs(ADW_TYPE_PREFERENCES_ROW);
   std::cout << get_defs(ADW_TYPE_PREFERENCES_WINDOW);
   std::cout << get_defs(ADW_TYPE_PROPERTY_ANIMATION_TARGET);
+#if ADW_CHECK_VERSION(1, 8, 0)
+  std::cout << get_defs(ADW_TYPE_SHORTCUTS_DIALOG);
+#endif
+#if ADW_CHECK_VERSION(1, 8, 0)
+  std::cout << get_defs(ADW_TYPE_SHORTCUTS_ITEM);
+#endif
+#if ADW_CHECK_VERSION(1, 8, 0)
+  std::cout << get_defs(ADW_TYPE_SHORTCUTS_SECTION);
+#endif
+#if ADW_CHECK_VERSION(1, 8, 0)
+  std::cout << get_defs(ADW_TYPE_SHORTCUT_LABEL);
+#endif
+#if ADW_CHECK_VERSION(1, 9, 0)
+  std::cout << get_defs(ADW_TYPE_SIDEBAR);
+#endif
+#if ADW_CHECK_VERSION(1, 9, 0)
+  std::cout << get_defs(ADW_TYPE_SIDEBAR_ITEM);
+#endif
+#if ADW_CHECK_VERSION(1, 9, 0)
+  std::cout << get_defs(ADW_TYPE_SIDEBAR_SECTION);
+#endif
+  std::cout << get_defs(ADW_TYPE_SPINNER);
+  std::cout << get_defs(ADW_TYPE_SPINNER_PAINTABLE);
+#if ADW_CHECK_VERSION(1, 4, 0)
+  std::cout << get_defs(ADW_TYPE_SPIN_ROW);
+#endif
   std::cout << get_defs(ADW_TYPE_SPLIT_BUTTON);
   std::cout << get_defs(ADW_TYPE_SPRING_ANIMATION);
   std::cout << get_defs(ADW_TYPE_SQUEEZER);
@@ -112,6 +141,9 @@ int main(int, char**) {
   std::cout << get_defs(ADW_TYPE_STYLE_MANAGER);
   std::cout << get_defs(ADW_TYPE_SWIPEABLE);
   std::cout << get_defs(ADW_TYPE_SWIPE_TRACKER);
+#if ADW_CHECK_VERSION(1, 4, 0)
+  std::cout << get_defs(ADW_TYPE_SWITCH_ROW);
+#endif
   std::cout << get_defs(ADW_TYPE_TAB_BAR);
   std::cout << get_defs(ADW_TYPE_TAB_PAGE);
   std::cout << get_defs(ADW_TYPE_TAB_VIEW);

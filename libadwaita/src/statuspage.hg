@@ -31,23 +31,30 @@ class StatusPage : public Gtk::Widget {
   _DO_NOT_DERIVE_GTYPE
 
 public:
+  // Construction
   _CTOR_DEFAULT
 
-  _WRAP_METHOD(Gtk::Widget* get_child() const, adw_status_page_get_child)
-  _WRAP_METHOD(Glib::ustring get_description() const, adw_status_page_get_description)
+  // Methods
   _WRAP_METHOD(Glib::ustring get_icon_name() const, adw_status_page_get_icon_name)
+  _WRAP_METHOD(void set_icon_name(const Glib::ustring& icon_name), adw_status_page_set_icon_name)
+
   _WRAP_METHOD(Glib::RefPtr<Gdk::Paintable> get_paintable() const, adw_status_page_get_paintable, refreturn)
-  _WRAP_METHOD(Glib::ustring get_title() const, adw_status_page_get_title)
-  _WRAP_METHOD(void set_child(Gtk::Widget *child), adw_status_page_set_child)
-  _WRAP_METHOD(void set_description(const Glib::ustring& description), adw_status_page_set_description)
-  _WRAP_METHOD(void set_icon_name(const Glib::ustring& description{NULL}), adw_status_page_set_icon_name)
   _WRAP_METHOD(void set_paintable(const Glib::RefPtr<Gdk::Paintable>& paintable), adw_status_page_set_paintable)
+
+  _WRAP_METHOD(Glib::ustring get_title() const, adw_status_page_get_title)
   _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_status_page_set_title)
 
-  _WRAP_PROPERTY("child", Gtk::Widget*)
-  _WRAP_PROPERTY("description", Glib::ustring)
+  _WRAP_METHOD(Glib::ustring get_description() const, adw_status_page_get_description)
+  _WRAP_METHOD(void set_description(const Glib::ustring& description), adw_status_page_set_description)
+
+  _WRAP_METHOD(Gtk::Widget* get_child() const, adw_status_page_get_child)
+  _WRAP_METHOD(void set_child(Gtk::Widget *child), adw_status_page_set_child)
+
+  // Properties
   _WRAP_PROPERTY("icon-name", Glib::ustring)
   _WRAP_PROPERTY("paintable", Glib::RefPtr<Gdk::Paintable>)
   _WRAP_PROPERTY("title", Glib::ustring)
+  _WRAP_PROPERTY("description", Glib::ustring)
+  _WRAP_PROPERTY("child", Gtk::Widget*)
 };
 } // namespace Adw

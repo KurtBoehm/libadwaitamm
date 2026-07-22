@@ -1,0 +1,149 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(gtkmm/private/widget_p.h)
+
+#include <adwaita.h>
+#include <giomm/listmodel.h>
+#include <gtkmm.h>
+#include <libadwaitamm/sidebaritem.h>
+#include <libadwaitamm/sidebarsection.h>
+
+namespace Adw {
+#m4 _CONVERSION(`GListModel*', `std::vector<Glib::RefPtr<SidebarSection>>', `listmodel_to_vector<Adw::SidebarSection>($3)')
+
+class Sidebar : public Gtk::Widget {
+  _CLASS_GTKOBJECT(Sidebar, AdwSidebar, ADW_SIDEBAR, Gtk::Widget, GtkWidget)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+public:
+  // Enumerations
+  _WRAP_ENUM(Mode, AdwSidebarMode, newin "1.9")
+
+  // Constructors
+  _CTOR_DEFAULT
+
+  // Methods
+  _WRAP_METHOD(Sidebar::Mode get_mode() const, adw_sidebar_get_mode, newin "1.9")
+  _WRAP_METHOD(void set_mode(Mode mode), adw_sidebar_set_mode, newin "1.9")
+
+  _WRAP_METHOD(guint get_selected() const, adw_sidebar_get_selected, newin "1.9")
+  _WRAP_METHOD(void set_selected(guint selected), adw_sidebar_set_selected, newin "1.9")
+
+  _WRAP_METHOD(Glib::RefPtr<SidebarItem> get_selected_item() const, adw_sidebar_get_selected_item, refreturn, newin "1.9")
+
+  _WRAP_METHOD(Glib::RefPtr<Gtk::Filter> get_filter() const, adw_sidebar_get_filter, refreturn, newin "1.9")
+  _WRAP_METHOD(void set_filter(const Glib::RefPtr<Gtk::Filter>& filter), adw_sidebar_set_filter, newin "1.9")
+
+  _WRAP_METHOD(Gtk::Widget* get_placeholder() const, adw_sidebar_get_placeholder, newin "1.9")
+  _WRAP_METHOD(void set_placeholder(Gtk::Widget* placeholder), adw_sidebar_set_placeholder, newin "1.9")
+
+  /** Gets a selection model of the items in @a self.
+   *
+   * This can be used to keep an up-to-date view of the selection.
+   *
+   * @newin{1,9}
+   */
+  _IGNORE(adw_sidebar_get_items)
+  Glib::RefPtr<Gtk::SelectionModel> get_items() const;
+
+  _WRAP_METHOD(std::vector<Glib::RefPtr<SidebarSection>> get_sections() const, adw_sidebar_get_sections, newin "1.9")
+
+  _WRAP_METHOD(Glib::RefPtr<SidebarItem> get_item(guint index) const, adw_sidebar_get_item, refreturn, newin "1.9")
+  _WRAP_METHOD(Glib::RefPtr<SidebarSection> get_section(guint index) const, adw_sidebar_get_section, refreturn, newin "1.9")
+
+  /** Appends @a section to @a self.
+   *
+   * @newin{1,9}
+   * @param section A section to append.
+   */
+  _IGNORE(adw_sidebar_append)
+  void append(const Glib::RefPtr<SidebarSection>& section);
+
+  /** Prepends @a section to @a self.
+   *
+   * @newin{1,9}
+   * @param section A section to prepend.
+   */
+  _IGNORE(adw_sidebar_prepend)
+  void prepend(const Glib::RefPtr<SidebarSection>& section);
+
+  /** Inserts @a section at @a position to @a self.
+   *
+   * If @a position is -1, or larger than the total number of sections in
+   * @a self, the section will be appended to the end.
+   *
+   * @newin{1,9}
+   * @param section A section to insert.
+   * @param position The position to insert @a section at.
+   */
+  _IGNORE(adw_sidebar_insert)
+  void insert(const Glib::RefPtr<SidebarSection>& section, int position);
+
+  _WRAP_METHOD(void remove(const Glib::RefPtr<SidebarSection>& section), adw_sidebar_remove, newin "1.9")
+  _WRAP_METHOD(void remove_all(), adw_sidebar_remove_all, newin "1.9")
+
+  /** Sets up drag-and-drop for items in @a self.
+   *
+   * See NavigationPage and the Sidebar::signal_drop(),
+   * Sidebar::signal_drop_enter() and Sidebar::signal_drop_value_loaded()
+   * signals.
+   *
+   * @newin{1,9}
+   * @param actions The actions to accept from the dragged content.
+   * @param types The types to accept from the dragged content.
+   */
+  _IGNORE(adw_sidebar_setup_drop_target)
+  void setup_drop_target(Gdk::DragAction actions, const std::vector<GType>& types);
+
+  _WRAP_METHOD(bool get_drop_preload() const, adw_sidebar_get_drop_preload, newin "1.9")
+  _WRAP_METHOD(void set_drop_preload(bool preload), adw_sidebar_set_drop_preload, newin "1.9")
+
+  _WRAP_METHOD(Glib::RefPtr<Gio::MenuModel> get_menu_model() const, adw_sidebar_get_menu_model, refreturn, newin "1.9")
+  _WRAP_METHOD(void set_menu_model(const Glib::RefPtr<Gio::MenuModel>& menu_model), adw_sidebar_set_menu_model, newin "1.9")
+
+  _WRAP_METHOD(Gtk::Widget* get_prefix() const, adw_sidebar_get_prefix, newin "1.10")
+  _WRAP_METHOD(void set_prefix(Gtk::Widget* prefix), adw_sidebar_set_prefix, newin "1.10")
+
+  _WRAP_METHOD(Gtk::Widget* get_suffix() const, adw_sidebar_get_suffix, newin "1.10")
+  _WRAP_METHOD(void set_suffix(Gtk::Widget* suffix), adw_sidebar_set_suffix, newin "1.10")
+
+  // Properties
+  _WRAP_PROPERTY("mode", Sidebar::Mode, newin "1.9")
+  _WRAP_PROPERTY("selected", guint, newin "1.9")
+  _WRAP_PROPERTY("selected-item", Glib::RefPtr<SidebarItem>, newin "1.9")
+  _WRAP_PROPERTY("items", Glib::RefPtr<Gtk::SelectionModel>, newin "1.9")
+  _WRAP_PROPERTY("sections", Glib::RefPtr<Gio::ListModel>, newin "1.9")
+  _WRAP_PROPERTY("filter", Glib::RefPtr<Gtk::Filter>, newin "1.9")
+  _WRAP_PROPERTY("placeholder", Gtk::Widget*, newin "1.9")
+  _WRAP_PROPERTY("drop-preload", bool, newin "1.9")
+  _WRAP_PROPERTY("menu-model", Glib::RefPtr<Gio::MenuModel>, newin "1.9")
+  _WRAP_PROPERTY("prefix", Gtk::Widget*, newin "1.10")
+  _WRAP_PROPERTY("suffix", Gtk::Widget*, newin "1.10")
+
+  // Signals
+  _WRAP_SIGNAL(void activated(guint index), "activated", no_default_handler, newin "1.9")
+  _WRAP_SIGNAL(bool drop(guint index, const Glib::ValueBase& value, Gdk::DragAction preferred_action), "drop", no_default_handler, newin "1.9")
+  _WRAP_SIGNAL(Gdk::DragAction drop_enter(guint index), "drop-enter", no_default_handler, newin "1.9")
+  _WRAP_SIGNAL(Gdk::DragAction drop_value_loaded(guint index, const Glib::ValueBase& value), "drop-value-loaded", no_default_handler, newin "1.9")
+  _WRAP_SIGNAL(void setup_menu(const Glib::RefPtr<SidebarItem>& item), "setup-menu", no_default_handler, newin "1.9")
+};
+} // namespace Adw

@@ -39,6 +39,18 @@ static void test_adw_preferences_page_icon_name(void) {
   g_assert_true(page.get_icon_name() == "");
 }
 
+static void test_adw_preferences_page_description(void) {
+  Adw::PreferencesPage page;
+
+  g_assert_true(page.get_description() == "");
+
+  page.set_description("Dummy description");
+  g_assert_true(page.get_description() == "Dummy description");
+
+  page.set_description("");
+  g_assert_true(page.get_description() == "");
+}
+
 static void test_adw_preferences_page_use_underline(void) {
   Adw::PreferencesPage page;
 
@@ -51,7 +63,16 @@ static void test_adw_preferences_page_use_underline(void) {
   g_assert_false(page.get_use_underline());
 }
 
-int main(int argc, char *argv[]) {
+static void test_adw_preferences_page_description_center(void) {
+  Adw::PreferencesPage page;
+
+  g_assert_false(page.get_description_centered());
+
+  page.set_description_centered(true);
+  g_assert_true(page.get_description_centered());
+}
+
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
@@ -61,8 +82,12 @@ int main(int argc, char *argv[]) {
                   test_adw_preferences_page_title);
   g_test_add_func("/Adwaita/PreferencesPage/icon_name",
                   test_adw_preferences_page_icon_name);
+  g_test_add_func("/Adwaita/PreferencesPage/description",
+                  test_adw_preferences_page_description);
   g_test_add_func("/Adwaita/PreferencesPage/use_underline",
                   test_adw_preferences_page_use_underline);
+  g_test_add_func("/Adwaita/PreferencesPage/description_center",
+                  test_adw_preferences_page_description_center);
 
   return g_test_run();
 }

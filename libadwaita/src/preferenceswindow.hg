@@ -21,10 +21,11 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(libadwaitamm/private/window_p.h)
 
+#include <adwaita.h>
+#include <libadwaitamm/navigationpage.h>
 #include <libadwaitamm/toast.h>
 #include <libadwaitamm/preferencespage.h>
 #include <libadwaitamm/window.h>
-#include <adwaita.h>
 
 namespace Adw {
 class PreferencesWindow : public Adw::Window {
@@ -33,25 +34,37 @@ class PreferencesWindow : public Adw::Window {
   _STRUCT_NOT_HIDDEN
 
 public:
+  // Constructors
   _CTOR_DEFAULT
 
-  _WRAP_METHOD(void add(PreferencesPage* page), adw_preferences_window_add)
-  _WRAP_METHOD(void add_toast(Toast* toast), adw_preferences_window_add_toast)
-  _WRAP_METHOD(void close_subpage(), adw_preferences_window_close_subpage)
-  _WRAP_METHOD(bool get_can_navigate_back() const, adw_preferences_window_get_can_navigate_back)
-  _WRAP_METHOD(bool get_search_enabled() const, adw_preferences_window_get_search_enabled)
-  _WRAP_METHOD(PreferencesPage* get_visible_page() const, adw_preferences_window_get_visible_page)
-  _WRAP_METHOD(Glib::ustring get_visible_page_name() const, adw_preferences_window_get_visible_page_name)
-  _WRAP_METHOD(void present_subpage(Gtk::Widget* subpage), adw_preferences_window_present_subpage)
-  _WRAP_METHOD(void remove(PreferencesPage* page), adw_preferences_window_remove)
-  _WRAP_METHOD(void set_can_navigate_back(bool can_navigate_back), adw_preferences_window_set_can_navigate_back)
-  _WRAP_METHOD(void set_search_enabled(bool search_enabled), adw_preferences_window_set_search_enabled)
-  _WRAP_METHOD(void set_visible_page(PreferencesPage* page), adw_preferences_window_set_visible_page)
-  _WRAP_METHOD(void set_visible_page_name(const Glib::ustring &name), adw_preferences_window_set_visible_page_name)
+  // Methods
+  _WRAP_METHOD(void add(PreferencesPage* page), adw_preferences_window_add, deprecated "Use Adw::PreferencesDialog instead.")
+  _WRAP_METHOD(void remove(PreferencesPage* page), adw_preferences_window_remove, deprecated "Use Adw::PreferencesDialog instead.")
 
-  _WRAP_PROPERTY("can_navigate_back", bool)
-  _WRAP_PROPERTY("search_enabled", bool)
-  _WRAP_PROPERTY("visible_page", PreferencesPage*)
-  _WRAP_PROPERTY("visible_page_name", Glib::ustring)
+  _WRAP_METHOD(PreferencesPage* get_visible_page() const, adw_preferences_window_get_visible_page, deprecated "Use Adw::PreferencesDialog instead.")
+  _WRAP_METHOD(void set_visible_page(PreferencesPage* page), adw_preferences_window_set_visible_page, deprecated "Use Adw::PreferencesDialog instead.")
+
+  _WRAP_METHOD(Glib::ustring get_visible_page_name() const, adw_preferences_window_get_visible_page_name, deprecated "Use Adw::PreferencesDialog instead.")
+  _WRAP_METHOD(void set_visible_page_name(const Glib::ustring &name), adw_preferences_window_set_visible_page_name, deprecated "Use Adw::PreferencesDialog instead.")
+
+  _WRAP_METHOD(bool get_search_enabled() const, adw_preferences_window_get_search_enabled, deprecated "Use Adw::PreferencesDialog instead.")
+  _WRAP_METHOD(void set_search_enabled(bool search_enabled), adw_preferences_window_set_search_enabled, deprecated "Use Adw::PreferencesDialog instead.")
+
+  _WRAP_METHOD(bool get_can_navigate_back() const, adw_preferences_window_get_can_navigate_back, deprecated "Use Adw::NavigationPage::get_can_pop() instead.")
+  _WRAP_METHOD(void set_can_navigate_back(bool can_navigate_back), adw_preferences_window_set_can_navigate_back, deprecated "Use Adw::NavigationPage::set_can_pop() instead.")
+
+  _WRAP_METHOD(void present_subpage(Gtk::Widget* subpage), adw_preferences_window_present_subpage, deprecated "Use Adw::PreferencesWindow::push_subpage() instead.")
+  _WRAP_METHOD(void close_subpage(), adw_preferences_window_close_subpage, deprecated "Use Adw::PreferencesWindow::pop_subpage() instead.")
+
+  _WRAP_METHOD(void push_subpage(NavigationPage* page), adw_preferences_window_push_subpage, newin "1.4", deprecated "Use Adw::PreferencesDialog instead.")
+  _WRAP_METHOD(bool pop_subpage(), adw_preferences_window_pop_subpage, newin "1.4", deprecated "Use Adw::PreferencesDialog instead.")
+
+  _WRAP_METHOD(void add_toast(Toast* toast), adw_preferences_window_add_toast, deprecated "Use Adw::PreferencesDialog instead.")
+
+  // Properties
+  _WRAP_PROPERTY("visible-page", PreferencesPage*, deprecated "Use Adw::PreferencesDialog instead.")
+  _WRAP_PROPERTY("visible-page-name", Glib::ustring, deprecated "Use Adw::PreferencesDialog instead.")
+  _WRAP_PROPERTY("search-enabled", bool, deprecated "Use Adw::PreferencesDialog instead.")
+  _WRAP_PROPERTY("can-navigate-back", bool, deprecated "Use Adw::NavigationPage instead.")
 };
 } // namespace Adw

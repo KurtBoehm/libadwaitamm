@@ -1,0 +1,47 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(gtkmm/private/widget_p.h)
+
+#include <adwaita.h>
+#include <gtkmm.h>
+
+namespace Adw {
+class ShortcutLabel : public Gtk::Widget {
+  _CLASS_GTKOBJECT(ShortcutLabel, AdwShortcutLabel, ADW_SHORTCUT_LABEL, Gtk::Widget, GtkWidget)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+public:
+  // Constructors
+  _WRAP_CTOR(ShortcutLabel(const Glib::ustring& accelerator), adw_shortcut_label_new)
+
+  // Methods
+  _WRAP_METHOD(Glib::ustring get_accelerator() const, adw_shortcut_label_get_accelerator, newin "1.8")
+  _WRAP_METHOD(void set_accelerator(const Glib::ustring& accelerator), adw_shortcut_label_set_accelerator, newin "1.8")
+
+  _WRAP_METHOD(Glib::ustring get_disabled_text() const, adw_shortcut_label_get_disabled_text, newin "1.8")
+  _WRAP_METHOD(void set_disabled_text(const Glib::ustring& disabled_text), adw_shortcut_label_set_disabled_text, newin "1.8")
+
+  // Properties
+  _WRAP_PROPERTY("accelerator", Glib::ustring, newin "1.8")
+  _WRAP_PROPERTY("disabled-text", Glib::ustring, newin "1.8")
+};
+} // namespace Adw

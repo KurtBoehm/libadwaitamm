@@ -1,0 +1,43 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(libadwaitamm/private/actionrow_p.h)
+
+#include <adwaita.h>
+#include <libadwaitamm/actionrow.h>
+
+namespace Adw {
+class SwitchRow : public Adw::ActionRow {
+  _CLASS_GTKOBJECT(SwitchRow, AdwSwitchRow, ADW_SWITCH_ROW, Adw::ActionRow, AdwActionRow)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+public:
+  // Constructors
+  _CTOR_DEFAULT
+
+  // Methods
+  _WRAP_METHOD(bool get_active() const, adw_switch_row_get_active, newin "1.4")
+  _WRAP_METHOD(void set_active(bool is_active), adw_switch_row_set_active, newin "1.4")
+
+  // Properties
+  _WRAP_PROPERTY("active", bool, newin "1.4")
+};
+} // namespace Adw

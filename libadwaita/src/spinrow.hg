@@ -1,0 +1,95 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm,libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(libadwaitamm/private/actionrow_p.h)
+
+#include <adwaita.h>
+#include <gtkmm/adjustment.h>
+#include <gtkmm/spinbutton.h>
+#include <libadwaitamm/actionrow.h>
+
+namespace Adw {
+class SpinRow : public Adw::ActionRow {
+  _CLASS_GTKOBJECT(SpinRow, AdwSpinRow, ADW_SPIN_ROW, Adw::ActionRow, AdwActionRow)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+public:
+  // Constructors
+  _WRAP_CTOR(SpinRow(const Glib::RefPtr<Gtk::Adjustment>& adjustment, double climb_rate, guint digits), adw_spin_row_new)
+
+  /** Creates a new SpinRow with the given properties.
+   *
+   * This is a convenience constructor that allows creation of a numeric
+   * SpinRow without manually creating an adjustment. The value is
+   * initially set to @a min and a page increment of 10 * @a step is the
+   * default. The precision of the spin row is equivalent to the precision
+   * of @a step.
+   *
+   * @newin{1,4}
+   * @param min The minimum allowable value.
+   * @param max The maximum allowable value.
+   * @param step The step increment.
+   */
+  _IGNORE(adw_spin_row_new_with_range)
+  explicit SpinRow(double min, double max, double step);
+
+  // Methods
+  _WRAP_METHOD(void configure(const Glib::RefPtr<Gtk::Adjustment>& adjustment, double climb_rate, guint digits), adw_spin_row_configure, newin "1.4")
+
+  _WRAP_METHOD(Glib::RefPtr<Gtk::Adjustment> get_adjustment() const, adw_spin_row_get_adjustment, refreturn, newin "1.4")
+  _WRAP_METHOD(void set_adjustment(const Glib::RefPtr<Gtk::Adjustment>& adjustment), adw_spin_row_set_adjustment, newin "1.4")
+
+  _WRAP_METHOD(double get_climb_rate() const, adw_spin_row_get_climb_rate, newin "1.4")
+  _WRAP_METHOD(void set_climb_rate(double climb_rate), adw_spin_row_set_climb_rate, newin "1.4")
+
+  _WRAP_METHOD(guint get_digits() const, adw_spin_row_get_digits, newin "1.4")
+  _WRAP_METHOD(void set_digits(guint digits), adw_spin_row_set_digits, newin "1.4")
+
+  _WRAP_METHOD(bool get_numeric() const, adw_spin_row_get_numeric, newin "1.4")
+  _WRAP_METHOD(void set_numeric(bool numeric), adw_spin_row_set_numeric, newin "1.4")
+
+  _WRAP_METHOD(bool get_snap_to_ticks() const, adw_spin_row_get_snap_to_ticks, newin "1.4")
+  _WRAP_METHOD(void set_snap_to_ticks(bool snap_to_ticks), adw_spin_row_set_snap_to_ticks, newin "1.4")
+
+  _WRAP_METHOD(Gtk::SpinButton::UpdatePolicy get_update_policy() const, adw_spin_row_get_update_policy, newin "1.4")
+  _WRAP_METHOD(void set_update_policy(Gtk::SpinButton::UpdatePolicy policy), adw_spin_row_set_update_policy, newin "1.4")
+
+  _WRAP_METHOD(double get_value() const, adw_spin_row_get_value, newin "1.4")
+  _WRAP_METHOD(void set_value(double value), adw_spin_row_set_value, newin "1.4")
+
+  _WRAP_METHOD(bool get_wrap() const, adw_spin_row_get_wrap, newin "1.4")
+  _WRAP_METHOD(void set_wrap(bool wrap), adw_spin_row_set_wrap, newin "1.4")
+
+  _WRAP_METHOD(void update(), adw_spin_row_update, newin "1.4")
+
+  _WRAP_METHOD(void set_range(double min, double max), adw_spin_row_set_range, newin "1.4")
+
+  // Properties
+  _WRAP_PROPERTY("adjustment", Glib::RefPtr<Gtk::Adjustment>, newin "1.4")
+  _WRAP_PROPERTY("climb-rate", double, newin "1.4")
+  _WRAP_PROPERTY("digits", guint, newin "1.4")
+  _WRAP_PROPERTY("numeric", bool, newin "1.4")
+  _WRAP_PROPERTY("snap-to-ticks", bool, newin "1.4")
+  _WRAP_PROPERTY("update-policy", Gtk::SpinButton::UpdatePolicy, newin "1.4")
+  _WRAP_PROPERTY("value", double, newin "1.4")
+  _WRAP_PROPERTY("wrap", bool, newin "1.4")
+};
+} // namespace Adw

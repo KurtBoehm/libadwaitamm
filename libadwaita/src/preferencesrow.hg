@@ -32,18 +32,20 @@ public:
   _CTOR_DEFAULT
 
   _WRAP_METHOD(Glib::ustring get_title() const, adw_preferences_row_get_title)
-  _WRAP_METHOD(bool get_title_selectable() const, adw_preferences_row_get_title_selectable)
-  _WRAP_METHOD(bool get_use_markup() const, adw_preferences_row_get_use_markup)
-  _WRAP_METHOD(bool get_use_underline() const, adw_preferences_row_get_use_underline)
-
   _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_preferences_row_set_title)
-  _WRAP_METHOD(void set_title_selectable(bool title_selectable), adw_preferences_row_set_title_selectable)
-  _WRAP_METHOD(void set_use_markup(bool use_markup), adw_preferences_row_set_use_markup)
+
+  _WRAP_METHOD(bool get_use_underline() const, adw_preferences_row_get_use_underline)
   _WRAP_METHOD(void set_use_underline(bool use_underline), adw_preferences_row_set_use_underline)
 
+  _WRAP_METHOD(bool get_title_selectable() const, adw_preferences_row_get_title_selectable, newin "1.1")
+  _WRAP_METHOD(void set_title_selectable(bool title_selectable), adw_preferences_row_set_title_selectable, newin "1.1")
+
+  _WRAP_METHOD(bool get_use_markup() const, adw_preferences_row_get_use_markup, newin "1.2")
+  _WRAP_METHOD(void set_use_markup(bool use_markup), adw_preferences_row_set_use_markup, newin "1.2")
+
   _WRAP_PROPERTY("title", Glib::ustring)
-  _WRAP_PROPERTY("title-selectable", bool)
-  _WRAP_PROPERTY("use-markup", bool)
   _WRAP_PROPERTY("use-underline", bool)
+  _WRAP_PROPERTY("title-selectable", bool, newin "1.1")
+  _WRAP_PROPERTY("use-markup", bool, newin "1.2")
 };
 } // namespace Adw

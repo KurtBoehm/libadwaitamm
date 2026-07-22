@@ -2710,6 +2710,37 @@
 
 ;; From AdwPasswordEntryRow
 
+;; From AdwPreferencesDialog
+
+(define-property visible-page
+  (of-object "AdwPreferencesDialog")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property visible-page-name
+  (of-object "AdwPreferencesDialog")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property search-enabled
+  (of-object "AdwPreferencesDialog")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
 ;; From AdwPreferencesGroup
 
 (define-property title
@@ -2924,6 +2955,510 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+)
+
+;; From AdwShortcutsDialog
+
+;; From AdwShortcutsItem
+
+(define-property title
+  (of-object "AdwShortcutsItem")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property subtitle
+  (of-object "AdwShortcutsItem")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property accelerator
+  (of-object "AdwShortcutsItem")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property action-name
+  (of-object "AdwShortcutsItem")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property direction
+  (of-object "AdwShortcutsItem")
+  (prop-type "GParamEnum")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "GTK_TEXT_DIR_NONE")
+)
+
+;; From AdwShortcutsSection
+
+(define-property title
+  (of-object "AdwShortcutsSection")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property item-type
+  (of-object "AdwShortcutsSection")
+  (prop-type "GParamGType")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property n-items
+  (of-object "AdwShortcutsSection")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+  (default-value "0")
+)
+
+;; From AdwShortcutLabel
+
+(define-property accelerator
+  (of-object "AdwShortcutLabel")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property disabled-text
+  (of-object "AdwShortcutLabel")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+;; From AdwSidebar
+
+(define-signal activated
+  (of-object "AdwSidebar")
+  (return-type "void")
+  (flags "Run Last")
+  (parameters
+    '("guint" "p0")
+  )
+)
+
+(define-signal drop
+  (of-object "AdwSidebar")
+  (return-type "gboolean")
+  (flags "Run Last")
+  (parameters
+    '("guint" "p0")
+    '("GValue*" "p1")
+    '("GdkDragAction" "p2")
+  )
+)
+
+(define-signal drop-enter
+  (of-object "AdwSidebar")
+  (return-type "GdkDragAction")
+  (flags "Run Last")
+  (parameters
+    '("guint" "p0")
+  )
+)
+
+(define-signal drop-value-loaded
+  (of-object "AdwSidebar")
+  (return-type "GdkDragAction")
+  (flags "Run Last")
+  (parameters
+    '("guint" "p0")
+    '("GValue*" "p1")
+  )
+)
+
+(define-signal setup-menu
+  (of-object "AdwSidebar")
+  (return-type "void")
+  (flags "Run Last")
+  (parameters
+    '("AdwSidebarItem*" "p0")
+  )
+)
+
+(define-property mode
+  (of-object "AdwSidebar")
+  (prop-type "GParamEnum")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "ADW_SIDEBAR_MODE_SIDEBAR")
+)
+
+(define-property selected
+  (of-object "AdwSidebar")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "4294967295")
+)
+
+(define-property selected-item
+  (of-object "AdwSidebar")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property items
+  (of-object "AdwSidebar")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property sections
+  (of-object "AdwSidebar")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property filter
+  (of-object "AdwSidebar")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property placeholder
+  (of-object "AdwSidebar")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property drop-preload
+  (of-object "AdwSidebar")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property menu-model
+  (of-object "AdwSidebar")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From AdwSidebarItem
+
+(define-property title
+  (of-object "AdwSidebarItem")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property subtitle
+  (of-object "AdwSidebarItem")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property use-underline
+  (of-object "AdwSidebarItem")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property icon-name
+  (of-object "AdwSidebarItem")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property icon-paintable
+  (of-object "AdwSidebarItem")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property tooltip
+  (of-object "AdwSidebarItem")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property suffix
+  (of-object "AdwSidebarItem")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property visible
+  (of-object "AdwSidebarItem")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property enabled
+  (of-object "AdwSidebarItem")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property drag-motion-activate
+  (of-object "AdwSidebarItem")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property section
+  (of-object "AdwSidebarItem")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+;; From AdwSidebarSection
+
+(define-property title
+  (of-object "AdwSidebarSection")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property menu-model
+  (of-object "AdwSidebarSection")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property items
+  (of-object "AdwSidebarSection")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property sidebar
+  (of-object "AdwSidebarSection")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+;; From AdwSpinner
+
+;; From AdwSpinnerPaintable
+
+(define-property widget
+  (of-object "AdwSpinnerPaintable")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From AdwSpinRow
+
+(define-signal input
+  (of-object "AdwSpinRow")
+  (return-type "gint")
+  (flags "Run Last")
+  (parameters
+    '("gpointer" "p0")
+  )
+)
+
+(define-signal output
+  (of-object "AdwSpinRow")
+  (return-type "gboolean")
+  (flags "Run Last")
+)
+
+(define-signal wrapped
+  (of-object "AdwSpinRow")
+  (return-type "void")
+  (flags "Run Last")
+)
+
+(define-property adjustment
+  (of-object "AdwSpinRow")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property climb-rate
+  (of-object "AdwSpinRow")
+  (prop-type "GParamDouble")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "0")
+)
+
+(define-property digits
+  (of-object "AdwSpinRow")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "0")
+)
+
+(define-property numeric
+  (of-object "AdwSpinRow")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property snap-to-ticks
+  (of-object "AdwSpinRow")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property update-policy
+  (of-object "AdwSpinRow")
+  (prop-type "GParamEnum")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "GTK_UPDATE_ALWAYS")
+)
+
+(define-property value
+  (of-object "AdwSpinRow")
+  (prop-type "GParamDouble")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "0")
+)
+
+(define-property wrap
+  (of-object "AdwSpinRow")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
 )
 
 ;; From AdwSplitButton
@@ -3519,6 +4054,18 @@
   (default-value "FALSE")
 )
 
+;; From AdwSwitchRow
+
+(define-property active
+  (of-object "AdwSwitchRow")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
 ;; From AdwTabBar
 
 (define-signal extra-drag-drop
@@ -3798,6 +4345,15 @@
 
 ;; From AdwTabView
 
+(define-signal setup-menu
+  (of-object "AdwTabView")
+  (return-type "void")
+  (flags "Run Last")
+  (parameters
+    '("AdwTabPage*" "p0")
+  )
+)
+
 (define-signal page-attached
   (of-object "AdwTabView")
   (return-type "void")
@@ -3831,15 +4387,6 @@
 (define-signal close-page
   (of-object "AdwTabView")
   (return-type "gboolean")
-  (flags "Run Last")
-  (parameters
-    '("AdwTabPage*" "p0")
-  )
-)
-
-(define-signal setup-menu
-  (of-object "AdwTabView")
-  (return-type "void")
   (flags "Run Last")
   (parameters
     '("AdwTabPage*" "p0")

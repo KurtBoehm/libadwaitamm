@@ -32,37 +32,53 @@ class SplitButton : public Gtk::Widget, public Gtk::Actionable {
   _DO_NOT_DERIVE_GTYPE
 
 public:
+  // Constructors
   _CTOR_DEFAULT
 
-  _WRAP_METHOD(Gtk::Widget* get_child() const, adw_split_button_get_child)
-  _WRAP_METHOD(Gtk::ArrowType get_direction() const, adw_split_button_get_direction)
-  _WRAP_METHOD(Glib::ustring get_dropdown_tooltip() const, adw_split_button_get_dropdown_tooltip)
-  _WRAP_METHOD(Glib::ustring get_icon_name() const, adw_split_button_get_icon_name)
+  // Methods
   _WRAP_METHOD(Glib::ustring get_label() const, adw_split_button_get_label)
-  _WRAP_METHOD(Glib::RefPtr<Gio::MenuModel> get_menu_model() const, adw_split_button_get_menu_model, refreturn)
-  _WRAP_METHOD(Gtk::Popover* get_popover() const, adw_split_button_get_popover)
-  _WRAP_METHOD(bool get_use_underline() const, adw_split_button_get_use_underline)
-  _WRAP_METHOD(void popdown(), adw_split_button_popdown)
-  _WRAP_METHOD(void popup(), adw_split_button_popup)
-  _WRAP_METHOD(void set_child(Gtk::Widget* child), adw_split_button_set_child)
-  _WRAP_METHOD(void set_direction(Gtk::ArrowType direction), adw_split_button_set_direction)
-  _WRAP_METHOD(void set_dropdown_tooltip(const Glib::ustring& dropdown_tooltip), adw_split_button_set_dropdown_tooltip)
-  _WRAP_METHOD(void set_icon_name(const Glib::ustring& icon_name), adw_split_button_set_icon_name)
   _WRAP_METHOD(void set_label(const Glib::ustring& label), adw_split_button_set_label)
-  _WRAP_METHOD(void set_menu_model(const Glib::RefPtr<Gio::MenuModel>& menu_model), adw_split_button_set_menu_model)
-  _WRAP_METHOD(void set_popover(Gtk::Popover* popover), adw_split_button_set_popover)
+
+  _WRAP_METHOD(bool get_use_underline() const, adw_split_button_get_use_underline)
   _WRAP_METHOD(void set_use_underline(bool use_underline), adw_split_button_set_use_underline)
 
-  _WRAP_PROPERTY("child", Gtk::Widget*)
-  _WRAP_PROPERTY("direction", Gtk::ArrowType)
-  _WRAP_PROPERTY("dropdown-tooltip", Glib::ustring)
-  _WRAP_PROPERTY("icon-name", Glib::ustring)
+  _WRAP_METHOD(Glib::ustring get_icon_name() const, adw_split_button_get_icon_name)
+  _WRAP_METHOD(void set_icon_name(const Glib::ustring& icon_name), adw_split_button_set_icon_name)
+
+  _WRAP_METHOD(Gtk::Widget* get_child() const, adw_split_button_get_child)
+  _WRAP_METHOD(void set_child(Gtk::Widget* child), adw_split_button_set_child)
+
+  _WRAP_METHOD(bool get_can_shrink() const, adw_split_button_get_can_shrink, newin "1.4")
+  _WRAP_METHOD(void set_can_shrink(bool can_shrink), adw_split_button_set_can_shrink, newin "1.4")
+
+  _WRAP_METHOD(Glib::RefPtr<Gio::MenuModel> get_menu_model() const, adw_split_button_get_menu_model, refreturn)
+  _WRAP_METHOD(void set_menu_model(const Glib::RefPtr<Gio::MenuModel>& menu_model), adw_split_button_set_menu_model)
+
+  _WRAP_METHOD(Gtk::Popover* get_popover() const, adw_split_button_get_popover)
+  _WRAP_METHOD(void set_popover(Gtk::Popover* popover), adw_split_button_set_popover)
+
+  _WRAP_METHOD(Gtk::ArrowType get_direction() const, adw_split_button_get_direction)
+  _WRAP_METHOD(void set_direction(Gtk::ArrowType direction), adw_split_button_set_direction)
+
+  _WRAP_METHOD(Glib::ustring get_dropdown_tooltip() const, adw_split_button_get_dropdown_tooltip, newin "1.2")
+  _WRAP_METHOD(void set_dropdown_tooltip(const Glib::ustring& dropdown_tooltip), adw_split_button_set_dropdown_tooltip, newin "1.2")
+
+  _WRAP_METHOD(void popup(), adw_split_button_popup)
+  _WRAP_METHOD(void popdown(), adw_split_button_popdown)
+
+  // Properties
   _WRAP_PROPERTY("label", Glib::ustring)
+  _WRAP_PROPERTY("use-underline", bool)
+  _WRAP_PROPERTY("icon-name", Glib::ustring)
+  _WRAP_PROPERTY("child", Gtk::Widget*)
+  _WRAP_PROPERTY("can-shrink", bool, newin "1.4")
   _WRAP_PROPERTY("menu-model", Glib::RefPtr<Gio::MenuModel>)
   _WRAP_PROPERTY("popover", Gtk::Popover*)
-  _WRAP_PROPERTY("use-underline", bool)
+  _WRAP_PROPERTY("direction", Gtk::ArrowType)
+  _WRAP_PROPERTY("dropdown-tooltip", Glib::ustring, newin "1.2")
 
-  _WRAP_SIGNAL(void activate(), "activate", no_default_handler)
+  // Signals
   _WRAP_SIGNAL(void clicked(), "clicked", no_default_handler)
+  _WRAP_SIGNAL(void activate(), "activate", no_default_handler)
 };
 } // namespace Adw

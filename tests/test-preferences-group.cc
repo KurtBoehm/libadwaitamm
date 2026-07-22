@@ -10,10 +10,10 @@
 static void test_adw_preferences_group_add_remove(void) {
   Adw::PreferencesGroup group;
 
-  Adw::PreferencesRow *row = Gtk::make_managed<Adw::PreferencesRow>();
+  Adw::PreferencesRow* row = Gtk::make_managed<Adw::PreferencesRow>();
   group.add(*row);
 
-  Gtk::Switch *widget = Gtk::make_managed<Gtk::Switch>();
+  Gtk::Switch* widget = Gtk::make_managed<Gtk::Switch>();
   group.add(*widget);
 
   g_assert_true(G_TYPE_CHECK_INSTANCE_TYPE(
@@ -49,7 +49,16 @@ static void test_adw_preferences_group_description(void) {
   g_assert_true(group.get_description() == "");
 }
 
-int main(int argc, char *argv[]) {
+static void test_adw_preferences_group_separate_rows(void) {
+  Adw::PreferencesGroup group;
+
+  g_assert_false(group.get_separate_rows());
+
+  group.set_separate_rows(true);
+  g_assert_true(group.get_separate_rows());
+}
+
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
@@ -59,6 +68,8 @@ int main(int argc, char *argv[]) {
                   test_adw_preferences_group_title);
   g_test_add_func("/Adwaita/PreferencesGroup/description",
                   test_adw_preferences_group_description);
+  g_test_add_func("/Adwaita/PreferencesGroup/separate_rows",
+                  test_adw_preferences_group_separate_rows);
 
   return g_test_run();
 }

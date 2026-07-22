@@ -23,15 +23,18 @@ static void test_adw_status_page_icon_name(void) {
   g_assert_true(icon_name == "");
 
   status_page.set_icon_name("");
-  g_assert_true(notified == 0);
+  g_assert_cmpint(notified, ==, 1);
 
   status_page.set_icon_name("some-icon-symbolic");
   g_assert_true(status_page.get_icon_name() == "some-icon-symbolic");
-  g_assert_true(notified == 1);
+  g_assert_cmpint(notified, ==, 2);
+
+  status_page.set_icon_name("some-icon-symbolic");
+  g_assert_cmpint(notified, ==, 2);
 
   status_page.set_property<Glib::ustring>("icon-name", "other-icon-symbolic");
   g_assert_true(status_page.get_icon_name() == "other-icon-symbolic");
-  g_assert_true(notified == 2);
+  g_assert_cmpint(notified, ==, 3);
 }
 
 static void test_adw_status_page_title(void) {
@@ -79,7 +82,7 @@ static void test_adw_status_page_description(void) {
   g_assert_true(notified == 2);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 

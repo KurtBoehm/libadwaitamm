@@ -17,4 +17,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Adw {}
+#include <gtkmm.h>
+
+namespace {
+using SlotCreateRowWidget = sigc::slot<Gtk::Widget*(const Glib::RefPtr<Glib::Object>&)>;
+
+GtkWidget* preferences_group_create_row_callback(gpointer item, gpointer user_data) {
+  auto slot = static_cast<SlotCreateRowWidget*>(user_data);
+
+  try {
+    Gtk::Widget* widget = (*slot)(Glib::wrap(static_cast<GObject*>(item), true));
+    return widget ? widget->gobj() : nullptr;
+  } catch (...) {
+    Glib::exception_handlers_invoke();
+  }
+  return nullptr;
+}
+
+void preferences_group_create_row_callback_destroy(gpointer data) {
+  delete static_cast<SlotCreateRowWidget*>(data);
+}
+} // anonymous namespace
+
+namespace Adw {
+void PreferencesGroup::bind_model(const Glib::RefPtr<Gio::ListModel>& model, const SlotCreateRowWidget& slot_create_widget) {
+  auto slot_copy = new SlotCreateRowWidget(slot_create_widget);
+  adw_preferences_group_bind_model(
+    gobj(),
+    Glib::unwrap(model),
+    &preferences_group_create_row_callback, slot_copy,
+    &preferences_group_create_row_callback_destroy
+  );
+}
+} // namespace Adw
