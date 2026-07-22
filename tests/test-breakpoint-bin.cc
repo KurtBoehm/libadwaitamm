@@ -8,15 +8,17 @@
 #include <libadwaitamm/init.h> // Adw::init
 
 int notified;
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_breakpoint_bin_child(void) {
+static void test_adw_breakpoint_bin_child() {
   Adw::BreakpointBin bin;
 
   notified = 0;
   bin.property_child().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  Gtk::Widget *widget = bin.get_property<Gtk::Widget *>("child");
+  Gtk::Widget* widget = bin.get_property<Gtk::Widget*>("child");
   g_assert_null(widget);
 
   bin.set_child(nullptr);
@@ -27,11 +29,11 @@ static void test_adw_breakpoint_bin_child(void) {
   g_assert_true(bin.get_child() == widget);
   g_assert_true(notified == 1);
 
-  bin.set_property<Gtk::Widget *>("child", nullptr);
+  bin.set_property<Gtk::Widget*>("child", nullptr);
   g_assert_true(notified == 2);
 }
 
-static void test_adw_breakpoint_bin_add_remove_breakpoint(void) {
+static void test_adw_breakpoint_bin_add_remove_breakpoint() {
   Adw::BreakpointBin bin;
 
   g_assert_true(bin.get_current_breakpoint() == nullptr);
@@ -49,12 +51,11 @@ static void test_adw_breakpoint_bin_add_remove_breakpoint(void) {
   g_assert_true(bin.get_current_breakpoint() == nullptr);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/BreakpointBin/child",
-                  test_adw_breakpoint_bin_child);
+  g_test_add_func("/Adwaita/BreakpointBin/child", test_adw_breakpoint_bin_child);
   g_test_add_func("/Adwaita/BreakpointBin/add_remove_breakpoint",
                   test_adw_breakpoint_bin_add_remove_breakpoint);
 

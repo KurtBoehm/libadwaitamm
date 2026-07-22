@@ -9,9 +9,11 @@
 #include <libadwaitamm/init.h> // Adw::init
 
 int notified;
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_carousel_indicator_lines_carousel(void) {
+static void test_adw_carousel_indicator_lines_carousel() {
   Adw::CarouselIndicatorLines lines;
   Adw::Carousel carousel;
 
@@ -34,12 +36,11 @@ static void test_adw_carousel_indicator_lines_carousel(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_carousel_indicator_lines_orientation(void) {
+static void test_adw_carousel_indicator_lines_orientation() {
   Adw::CarouselIndicatorLines dots;
 
   notified = 0;
-  dots.property_orientation().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  dots.property_orientation().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(dots.get_orientation() == Gtk::Orientation::HORIZONTAL);
   dots.set_orientation(Gtk::Orientation::VERTICAL);
@@ -47,7 +48,7 @@ static void test_adw_carousel_indicator_lines_orientation(void) {
   g_assert_true(notified == 1);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 

@@ -19,7 +19,6 @@
 #include "pages/welcome/adw-demo-page-welcome.h"
 
 namespace Adw {
-
 const char DemoWindow::class_name[] = "AdwDemoWindow";
 
 void DemoWindow::setup_template(Gtk::TemplateWidgetSetup& s) {
@@ -30,35 +29,28 @@ void DemoWindow::setup_template(Gtk::TemplateWidgetSetup& s) {
   s.bind_widget("subpage_leaflet");
   s.bind_widget("toasts_page");
 
-  s.bind_callback(
-      "get_color_scheme_icon_name",
-      Gtk::ptr_fun_to_mem_fun<&DemoWindow::get_color_scheme_icon_name>());
-  s.bind_callback(
-      "color_scheme_button_clicked_cb",
-      Gtk::ptr_fun_to_mem_fun<&DemoWindow::color_scheme_button_clicked_cb>());
-  s.bind_callback(
-      "notify_visible_child_cb",
-      Gtk::ptr_fun_to_mem_fun<&DemoWindow::notify_visible_child_cb>());
-  s.bind_callback("back_clicked_cb",
-                  Gtk::ptr_fun_to_mem_fun<&DemoWindow::back_clicked_cb>());
-  s.bind_callback(
-      "leaflet_back_clicked_cb",
-      Gtk::ptr_fun_to_mem_fun<&DemoWindow::leaflet_back_clicked_cb>());
+  s.bind_callback("get_color_scheme_icon_name",
+                  Gtk::ptr_fun_to_mem_fun<&DemoWindow::get_color_scheme_icon_name>());
+  s.bind_callback("color_scheme_button_clicked_cb",
+                  Gtk::ptr_fun_to_mem_fun<&DemoWindow::color_scheme_button_clicked_cb>());
+  s.bind_callback("notify_visible_child_cb",
+                  Gtk::ptr_fun_to_mem_fun<&DemoWindow::notify_visible_child_cb>());
+  s.bind_callback("back_clicked_cb", Gtk::ptr_fun_to_mem_fun<&DemoWindow::back_clicked_cb>());
+  s.bind_callback("leaflet_back_clicked_cb",
+                  Gtk::ptr_fun_to_mem_fun<&DemoWindow::leaflet_back_clicked_cb>());
   s.bind_callback("leaflet_next_page_cb",
                   Gtk::ptr_fun_to_mem_fun<&DemoWindow::leaflet_next_page_cb>());
 }
 
-DemoWindow *
-DemoWindow::create(const Glib::RefPtr<Gtk::Application> &application) {
-  Glib::ConstructParams params(type_class_.init(), "application",
-                               Glib::unwrap(application), nullptr);
-  GObject *obj = g_object_new_with_properties(
-      DemoWindow::get_type(), params.n_parameters, params.parameter_names,
-      params.parameter_values);
+DemoWindow* DemoWindow::create(const Glib::RefPtr<Gtk::Application>& application) {
+  Glib::ConstructParams params(type_class_.init(), "application", Glib::unwrap(application),
+                               nullptr);
+  GObject* obj = g_object_new_with_properties(DemoWindow::get_type(), params.n_parameters,
+                                              params.parameter_names, params.parameter_values);
   return DemoWindow::wrap(obj);
 }
 
-void DemoWindow::init_widget(Gtk::TemplateWidgetInit &i) {
+void DemoWindow::init_widget(Gtk::TemplateWidgetInit& i) {
   g_type_ensure(Adw::DemoPageAbout::get_type());
   g_type_ensure(Adw::DemoPageAnimations::get_type());
   g_type_ensure(Adw::DemoPageAvatar::get_type());
@@ -83,14 +75,12 @@ void DemoWindow::init_widget(Gtk::TemplateWidgetInit &i) {
   i.bind_widget(toasts_page, "toasts_page");
 
   auto simple_action_group = Gio::SimpleActionGroup::create();
-  simple_action_group->add_action(
-      "undo", sigc::mem_fun(*this, &DemoWindow::toast_undo_cb));
+  simple_action_group->add_action("undo", sigc::mem_fun(*this, &DemoWindow::toast_undo_cb));
   insert_action_group("toast", simple_action_group);
 
   auto manager = StyleManager::get_default();
   manager->property_system_supports_color_schemes().signal_changed().connect(
-      sigc::mem_fun(*this,
-                    &DemoWindow::notify_system_supports_color_schemes_cb));
+    sigc::mem_fun(*this, &DemoWindow::notify_system_supports_color_schemes_cb));
 
   main_leaflet->navigate(NavigationDirection::FORWARD);
 }
@@ -121,7 +111,9 @@ void DemoWindow::leaflet_next_page_cb() {
   subpage_leaflet->navigate(NavigationDirection::FORWARD);
 }
 
-void DemoWindow::toast_undo_cb() { toasts_page->undo(); }
+void DemoWindow::toast_undo_cb() {
+  toasts_page->undo();
+}
 
 void DemoWindow::notify_system_supports_color_schemes_cb() {
   auto manager = StyleManager::get_default();
@@ -129,12 +121,12 @@ void DemoWindow::notify_system_supports_color_schemes_cb() {
 
   color_scheme_button->set_visible(!supports);
 
-  if (supports)
+  if (supports) {
     manager->set_color_scheme(ColorScheme::DEFAULT);
+  }
 }
 
-char *DemoWindow::get_color_scheme_icon_name(gboolean dark) {
+char* DemoWindow::get_color_scheme_icon_name(gboolean dark) {
   return g_strdup(dark ? "light-mode-symbolic" : "dark-mode-symbolic");
 }
-
 } // namespace Adw

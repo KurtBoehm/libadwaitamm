@@ -11,7 +11,9 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
 static void check_items(const Glib::RefPtr<Adw::SidebarSection>& section,
                         std::initializer_list<Glib::ustring> titles) {
@@ -22,7 +24,7 @@ static void check_items(const Glib::RefPtr<Adw::SidebarSection>& section,
   guint i = 0;
   for (const Glib::ustring& title : titles) {
     Glib::RefPtr<Adw::SidebarItem> item =
-        std::dynamic_pointer_cast<Adw::SidebarItem>(items->get_object(i));
+      std::dynamic_pointer_cast<Adw::SidebarItem>(items->get_object(i));
 
     g_assert_true(item == section->get_item(i));
 
@@ -34,7 +36,7 @@ static void check_items(const Glib::RefPtr<Adw::SidebarSection>& section,
   }
 }
 
-static void test_adw_sidebar_section_title(void) {
+static void test_adw_sidebar_section_title() {
   Glib::RefPtr<Adw::SidebarSection> section = Adw::SidebarSection::create();
 
   notified = 0;
@@ -54,7 +56,7 @@ static void test_adw_sidebar_section_title(void) {
 }
 
 #if ADW_CHECK_VERSION(1, 10, 0)
-static void test_adw_sidebar_section_suffix(void) {
+static void test_adw_sidebar_section_suffix() {
   Glib::RefPtr<Adw::SidebarSection> section = Adw::SidebarSection::create();
 
   notified = 0;
@@ -75,18 +77,17 @@ static void test_adw_sidebar_section_suffix(void) {
 }
 #endif
 
-static void test_adw_sidebar_section_menu_model(void) {
+static void test_adw_sidebar_section_menu_model() {
   Glib::RefPtr<Adw::SidebarSection> section = Adw::SidebarSection::create();
 
   Glib::RefPtr<Gio::MenuModel> model1 = Gio::Menu::create();
   Glib::RefPtr<Gio::MenuModel> model2 = Gio::Menu::create();
 
   notified = 0;
-  section->property_menu_model().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  section->property_menu_model().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::RefPtr<Gio::MenuModel> model =
-      section->get_property<Glib::RefPtr<Gio::MenuModel>>("menu-model");
+    section->get_property<Glib::RefPtr<Gio::MenuModel>>("menu-model");
   g_assert_true(model == nullptr);
   g_assert_true(notified == 0);
 
@@ -99,7 +100,7 @@ static void test_adw_sidebar_section_menu_model(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_sidebar_section_add_remove(void) {
+static void test_adw_sidebar_section_add_remove() {
   Adw::Sidebar sidebar;
   Glib::RefPtr<Adw::SidebarSection> section = Adw::SidebarSection::create();
   Glib::RefPtr<Adw::SidebarItem> item1 = Adw::SidebarItem::create("Item 1");
@@ -151,7 +152,7 @@ static void test_adw_sidebar_section_add_remove(void) {
   check_items(section, {"Item 1", "Item 2", "Item 3"});
 }
 
-static void test_adw_sidebar_section_bind_model(void) {
+static void test_adw_sidebar_section_bind_model() {
   Adw::Sidebar sidebar;
   Glib::RefPtr<Adw::SidebarSection> section = Adw::SidebarSection::create();
   Glib::RefPtr<Gtk::StringList> list = Gtk::StringList::create();
@@ -166,12 +167,10 @@ static void test_adw_sidebar_section_bind_model(void) {
   check_items(section, {"Item"});
 
   section->bind_model(list,
-                      [](const Glib::RefPtr<Glib::Object>& item)
-                          -> Glib::RefPtr<Adw::SidebarItem> {
+                      [](const Glib::RefPtr<Glib::Object>& item) -> Glib::RefPtr<Adw::SidebarItem> {
                         Glib::RefPtr<Gtk::StringObject> string_object =
-                            std::dynamic_pointer_cast<Gtk::StringObject>(item);
-                        return Adw::SidebarItem::create(
-                            string_object->get_string());
+                          std::dynamic_pointer_cast<Gtk::StringObject>(item);
+                        return Adw::SidebarItem::create(string_object->get_string());
                       });
   check_items(section, {"Item 1", "Item 2", "Item 3"});
 
@@ -184,22 +183,21 @@ static void test_adw_sidebar_section_bind_model(void) {
   list->splice(1, 2, {});
   check_items(section, {"Item 1"});
 
-  section->bind_model(Glib::RefPtr<Gio::ListModel>(),
-                      sigc::slot<Glib::RefPtr<Adw::SidebarItem>(
-                          const Glib::RefPtr<Glib::Object>&)>());
+  section->bind_model(
+    Glib::RefPtr<Gio::ListModel>(),
+    sigc::slot<Glib::RefPtr<Adw::SidebarItem>(const Glib::RefPtr<Glib::Object>&)>());
   check_items(section, {});
 
   section->append(Adw::SidebarItem::create("Item"));
   check_items(section, {"Item"});
 }
 
-static void test_adw_sidebar_section_get_sidebar(void) {
+static void test_adw_sidebar_section_get_sidebar() {
   Glib::RefPtr<Adw::SidebarSection> section = Adw::SidebarSection::create();
   Adw::Sidebar sidebar;
 
   notified = 0;
-  section->property_sidebar().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  section->property_sidebar().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(section->get_sidebar() == nullptr);
   g_assert_true(notified == 0);
@@ -225,20 +223,14 @@ int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/SidebarSection/title",
-                  test_adw_sidebar_section_title);
+  g_test_add_func("/Adwaita/SidebarSection/title", test_adw_sidebar_section_title);
 #if ADW_CHECK_VERSION(1, 10, 0)
-  g_test_add_func("/Adwaita/SidebarSection/suffix",
-                  test_adw_sidebar_section_suffix);
+  g_test_add_func("/Adwaita/SidebarSection/suffix", test_adw_sidebar_section_suffix);
 #endif
-  g_test_add_func("/Adwaita/SidebarSection/menu_model",
-                  test_adw_sidebar_section_menu_model);
-  g_test_add_func("/Adwaita/SidebarSection/add_remove",
-                  test_adw_sidebar_section_add_remove);
-  g_test_add_func("/Adwaita/SidebarSection/bind_model",
-                  test_adw_sidebar_section_bind_model);
-  g_test_add_func("/Adwaita/SidebarSection/get_sidebar",
-                  test_adw_sidebar_section_get_sidebar);
+  g_test_add_func("/Adwaita/SidebarSection/menu_model", test_adw_sidebar_section_menu_model);
+  g_test_add_func("/Adwaita/SidebarSection/add_remove", test_adw_sidebar_section_add_remove);
+  g_test_add_func("/Adwaita/SidebarSection/bind_model", test_adw_sidebar_section_bind_model);
+  g_test_add_func("/Adwaita/SidebarSection/get_sidebar", test_adw_sidebar_section_get_sidebar);
 
   return g_test_run();
 }

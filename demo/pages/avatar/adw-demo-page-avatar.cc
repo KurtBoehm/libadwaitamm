@@ -5,27 +5,22 @@
 #include <array>
 
 namespace Adw {
-
 const char DemoPageAvatar::class_name[] = "AdwDemoPageAvatar";
 
-void DemoPageAvatar::setup_template(Gtk::TemplateWidgetSetup &s) {
-  s.set_resource(
-      "/org/gnome/Adwaitamm1/Demo/ui/pages/avatar/adw-demo-page-avatar.ui");
+void DemoPageAvatar::setup_template(Gtk::TemplateWidgetSetup& s) {
+  s.set_resource("/org/gnome/Adwaitamm1/Demo/ui/pages/avatar/adw-demo-page-avatar.ui");
 
   s.bind_widget("avatar");
   s.bind_widget("text");
   s.bind_widget("file_chooser_label");
   s.bind_widget("contacts");
 
-  s.install_action("avatar.open",
-                   Gtk::ptr_fun_to_mem_fun<&DemoPageAvatar::avatar_open>());
-  s.install_action("avatar.remove",
-                   Gtk::ptr_fun_to_mem_fun<&DemoPageAvatar::avatar_remove>());
-  s.install_action("avatar.save",
-                   Gtk::ptr_fun_to_mem_fun<&DemoPageAvatar::avatar_save>());
+  s.install_action("avatar.open", Gtk::ptr_fun_to_mem_fun<&DemoPageAvatar::avatar_open>());
+  s.install_action("avatar.remove", Gtk::ptr_fun_to_mem_fun<&DemoPageAvatar::avatar_remove>());
+  s.install_action("avatar.save", Gtk::ptr_fun_to_mem_fun<&DemoPageAvatar::avatar_save>());
 }
 
-void DemoPageAvatar::init_widget(Gtk::TemplateWidgetInit &i) {
+void DemoPageAvatar::init_widget(Gtk::TemplateWidgetInit& i) {
   i.init_template();
 
   i.bind_widget(avatar, "avatar");
@@ -45,7 +40,7 @@ void DemoPageAvatar::populate_contacts() {
   for (int i = 0; i < 30; i++) {
     Glib::ustring name = create_random_name();
     Adw::ActionRow* contact = Gtk::make_managed<Adw::ActionRow>();
-    Gtk::Widget *new_avatar = Gtk::make_managed<Adw::Avatar>(40, name, true);
+    Gtk::Widget* new_avatar = Gtk::make_managed<Adw::Avatar>(40, name, true);
 
     avatar->set_margin_top(12);
     avatar->set_margin_bottom(12);
@@ -58,10 +53,10 @@ void DemoPageAvatar::populate_contacts() {
 }
 
 void DemoPageAvatar::avatar_open() {
-  Gtk::Root *root = get_root();
-  auto chooser = Gtk::FileChooserNative::create(
-      _("Select an Avatar"), dynamic_cast<Gtk::Window &>(*root),
-      Gtk::FileChooser::Action::OPEN, _("_Select"), _("_Cancel"));
+  Gtk::Root* root = get_root();
+  auto chooser =
+    Gtk::FileChooserNative::create(_("Select an Avatar"), dynamic_cast<Gtk::Window&>(*root),
+                                   Gtk::FileChooser::Action::OPEN, _("_Select"), _("_Cancel"));
 
   chooser->set_modal(true);
 
@@ -69,10 +64,11 @@ void DemoPageAvatar::avatar_open() {
     switch (response_id) {
     case Gtk::ResponseType::ACCEPT: {
       auto file = chooser->get_file();
-      auto info = file->query_info(G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
-                                   Gio::FileQueryInfoFlags::NONE);
-      if (info)
+      auto info =
+        file->query_info(G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME, Gio::FileQueryInfoFlags::NONE);
+      if (info) {
         file_chooser_label->set_label(info->get_display_name());
+      }
 
       action_set_enabled("avatar.remove", true);
 
@@ -80,8 +76,7 @@ void DemoPageAvatar::avatar_open() {
       try {
         texture = Gdk::Texture::create_from_file(file);
       } catch (...) {
-        g_critical("Failed to create texture from file: %s",
-                   info->get_display_name().c_str());
+        g_critical("Failed to create texture from file: %s", info->get_display_name().c_str());
       }
 
       avatar->set_custom_image(texture);
@@ -104,10 +99,10 @@ void DemoPageAvatar::avatar_remove() {
 }
 
 void DemoPageAvatar::avatar_save() {
-  Gtk::Root *root = get_root();
-  auto chooser = Gtk::FileChooserNative::create(
-      _("Save Avatar"), dynamic_cast<Gtk::Window &>(*root),
-      Gtk::FileChooser::Action::SAVE, _("_Save"), _("_Cancel"));
+  Gtk::Root* root = get_root();
+  auto chooser =
+    Gtk::FileChooserNative::create(_("Save Avatar"), dynamic_cast<Gtk::Window&>(*root),
+                                   Gtk::FileChooser::Action::SAVE, _("_Save"), _("_Cancel"));
 
   chooser->set_modal(true);
 
@@ -127,17 +122,15 @@ void DemoPageAvatar::avatar_save() {
   chooser->show();
 }
 
-Glib::ustring DemoPageAvatar::create_random_name(void) {
+Glib::ustring DemoPageAvatar::create_random_name() {
   static std::array first_names = {
-      "Adam",    "Adrian",    "Anna",     "Charlotte", "Frédérique", "Ilaria",
-      "Jakub",   "Jennyfer",  "Julia",    "Justin",    "Mario",      "Miriam",
-      "Mohamed", "Nourimane", "Owen",     "Peter",     "Petra",      "Rachid",
-      "Rebecca", "Sarah",     "Thibault", "Wolfgang",
+    "Adam",  "Adrian", "Anna",    "Charlotte", "Frédérique", "Ilaria",    "Jakub", "Jennyfer",
+    "Julia", "Justin", "Mario",   "Miriam",    "Mohamed",    "Nourimane", "Owen",  "Peter",
+    "Petra", "Rachid", "Rebecca", "Sarah",     "Thibault",   "Wolfgang",
   };
   static std::array last_names = {
-      "Bailey", "Berat",    "Chen",  "Farquharson", "Ferber",
-      "Franco", "Galinier", "Han",   "Lawrence",    "Lepied",
-      "Lopez",  "Mariotti", "Rossi", "Urasawa",     "Zwickelman",
+    "Bailey",   "Berat",  "Chen",  "Farquharson", "Ferber", "Franco",  "Galinier",   "Han",
+    "Lawrence", "Lepied", "Lopez", "Mariotti",    "Rossi",  "Urasawa", "Zwickelman",
   };
 
   Glib::ustring result = first_names[g_random_int_range(0, first_names.size())];

@@ -9,14 +9,15 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
-static void test_adw_password_entry_row_new(void) { Adw::PasswordEntryRow row; }
+static void test_adw_password_entry_row_new() {
+  Adw::PasswordEntryRow row;
+}
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/PasswordEntryRow/new",
-                  test_adw_password_entry_row_new);
+  g_test_add_func("/Adwaita/PasswordEntryRow/new", test_adw_password_entry_row_new);
 
   return g_test_run();
 }

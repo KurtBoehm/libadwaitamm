@@ -8,9 +8,11 @@
 #include <libadwaitamm/init.h> // Adw::init
 
 int notified;
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_bottom_sheet_content(void) {
+static void test_adw_bottom_sheet_content() {
   Adw::BottomSheet sheet;
 
   notified = 0;
@@ -27,7 +29,7 @@ static void test_adw_bottom_sheet_content(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_bottom_sheet_sheet(void) {
+static void test_adw_bottom_sheet_sheet() {
   Adw::BottomSheet sheet;
 
   notified = 0;
@@ -41,12 +43,11 @@ static void test_adw_bottom_sheet_sheet(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_bottom_sheet_bottom_bar(void) {
+static void test_adw_bottom_sheet_bottom_bar() {
   Adw::BottomSheet sheet;
 
   notified = 0;
-  sheet.property_bottom_bar().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  sheet.property_bottom_bar().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_null(sheet.get_bottom_bar());
 
@@ -56,7 +57,7 @@ static void test_adw_bottom_sheet_bottom_bar(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_bottom_sheet_open(void) {
+static void test_adw_bottom_sheet_open() {
   Adw::BottomSheet sheet;
 
   notified = 0;
@@ -71,7 +72,7 @@ static void test_adw_bottom_sheet_open(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_bottom_sheet_align(void) {
+static void test_adw_bottom_sheet_align() {
   Adw::BottomSheet sheet;
 
   notified = 0;
@@ -88,12 +89,11 @@ static void test_adw_bottom_sheet_align(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_bottom_sheet_full_width(void) {
+static void test_adw_bottom_sheet_full_width() {
   Adw::BottomSheet sheet;
 
   notified = 0;
-  sheet.property_full_width().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  sheet.property_full_width().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   bool orig = sheet.get_full_width();
   sheet.set_full_width(!orig);
@@ -101,12 +101,11 @@ static void test_adw_bottom_sheet_full_width(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_bottom_sheet_show_drag_handle(void) {
+static void test_adw_bottom_sheet_show_drag_handle() {
   Adw::BottomSheet sheet;
 
   notified = 0;
-  sheet.property_show_drag_handle().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  sheet.property_show_drag_handle().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   // There is an overlaid drag handle by default.
   g_assert_true(sheet.get_show_drag_handle());
@@ -119,7 +118,7 @@ static void test_adw_bottom_sheet_show_drag_handle(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_bottom_sheet_modal(void) {
+static void test_adw_bottom_sheet_modal() {
   Adw::BottomSheet sheet;
 
   notified = 0;
@@ -131,7 +130,7 @@ static void test_adw_bottom_sheet_modal(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_bottom_sheet_can_open(void) {
+static void test_adw_bottom_sheet_can_open() {
   Adw::BottomSheet sheet;
 
   notified = 0;
@@ -143,7 +142,7 @@ static void test_adw_bottom_sheet_can_open(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_bottom_sheet_can_close(void) {
+static void test_adw_bottom_sheet_can_close() {
   Adw::BottomSheet sheet;
 
   notified = 0;
@@ -155,12 +154,11 @@ static void test_adw_bottom_sheet_can_close(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_bottom_sheet_reveal_bottom_bar(void) {
+static void test_adw_bottom_sheet_reveal_bottom_bar() {
   Adw::BottomSheet sheet;
 
   notified = 0;
-  sheet.property_reveal_bottom_bar().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  sheet.property_reveal_bottom_bar().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   bool orig = sheet.get_reveal_bottom_bar();
   sheet.set_reveal_bottom_bar(!orig);
@@ -168,18 +166,17 @@ static void test_adw_bottom_sheet_reveal_bottom_bar(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_bottom_sheet_close_attempt(void) {
+static void test_adw_bottom_sheet_close_attempt() {
   Adw::BottomSheet sheet;
 
   int close_attempt_count = 0;
-  sheet.signal_close_attempt().connect(
-      [&close_attempt_count]() { close_attempt_count++; });
+  sheet.signal_close_attempt().connect([&close_attempt_count]() { close_attempt_count++; });
 
   g_signal_emit_by_name(sheet.gobj(), "close-attempt");
   g_assert_true(close_attempt_count == 1);
 }
 
-static void test_adw_bottom_sheet_heights(void) {
+static void test_adw_bottom_sheet_heights() {
   Adw::BottomSheet sheet;
 
   // Read-only, but should be well-defined even with no sheet/bottom bar set.
@@ -187,32 +184,24 @@ static void test_adw_bottom_sheet_heights(void) {
   g_assert_true(sheet.get_bottom_bar_height() >= 0);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/BottomSheet/content",
-                  test_adw_bottom_sheet_content);
+  g_test_add_func("/Adwaita/BottomSheet/content", test_adw_bottom_sheet_content);
   g_test_add_func("/Adwaita/BottomSheet/sheet", test_adw_bottom_sheet_sheet);
-  g_test_add_func("/Adwaita/BottomSheet/bottom_bar",
-                  test_adw_bottom_sheet_bottom_bar);
+  g_test_add_func("/Adwaita/BottomSheet/bottom_bar", test_adw_bottom_sheet_bottom_bar);
   g_test_add_func("/Adwaita/BottomSheet/open", test_adw_bottom_sheet_open);
   g_test_add_func("/Adwaita/BottomSheet/align", test_adw_bottom_sheet_align);
-  g_test_add_func("/Adwaita/BottomSheet/full_width",
-                  test_adw_bottom_sheet_full_width);
-  g_test_add_func("/Adwaita/BottomSheet/show_drag_handle",
-                  test_adw_bottom_sheet_show_drag_handle);
+  g_test_add_func("/Adwaita/BottomSheet/full_width", test_adw_bottom_sheet_full_width);
+  g_test_add_func("/Adwaita/BottomSheet/show_drag_handle", test_adw_bottom_sheet_show_drag_handle);
   g_test_add_func("/Adwaita/BottomSheet/modal", test_adw_bottom_sheet_modal);
-  g_test_add_func("/Adwaita/BottomSheet/can_open",
-                  test_adw_bottom_sheet_can_open);
-  g_test_add_func("/Adwaita/BottomSheet/can_close",
-                  test_adw_bottom_sheet_can_close);
+  g_test_add_func("/Adwaita/BottomSheet/can_open", test_adw_bottom_sheet_can_open);
+  g_test_add_func("/Adwaita/BottomSheet/can_close", test_adw_bottom_sheet_can_close);
   g_test_add_func("/Adwaita/BottomSheet/reveal_bottom_bar",
                   test_adw_bottom_sheet_reveal_bottom_bar);
-  g_test_add_func("/Adwaita/BottomSheet/close_attempt",
-                  test_adw_bottom_sheet_close_attempt);
-  g_test_add_func("/Adwaita/BottomSheet/heights",
-                  test_adw_bottom_sheet_heights);
+  g_test_add_func("/Adwaita/BottomSheet/close_attempt", test_adw_bottom_sheet_close_attempt);
+  g_test_add_func("/Adwaita/BottomSheet/heights", test_adw_bottom_sheet_heights);
 
   return g_test_run();
 }

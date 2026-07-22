@@ -23,13 +23,11 @@ namespace Adw {
 SelectionListModelImpl::SelectionListModelImpl(GObject* castitem)
     : Glib::ObjectBase(nullptr), Glib::Object(castitem) {}
 
-SelectionListModelImpl::SelectionListModelImpl(
-    SelectionListModelImpl&& src) noexcept
+SelectionListModelImpl::SelectionListModelImpl(SelectionListModelImpl&& src) noexcept
     : Gio::ListModel(std::move(src)), Gtk::SelectionModel(std::move(src)),
       Gtk::SectionModel(std::move(src)), Glib::Object(std::move(src)) {}
 
-SelectionListModelImpl&
-SelectionListModelImpl::operator=(SelectionListModelImpl&& src) noexcept {
+SelectionListModelImpl& SelectionListModelImpl::operator=(SelectionListModelImpl&& src) noexcept {
   Gio::ListModel::operator=(std::move(src));
   Gtk::SelectionModel::operator=(std::move(src));
   Gtk::SectionModel::operator=(std::move(src));

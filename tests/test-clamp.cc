@@ -8,27 +8,28 @@
 #include <libadwaitamm/init.h> // Adw::init
 
 int notified;
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_clamp_child(void) {
+static void test_adw_clamp_child() {
   Adw::Clamp clamp;
   Gtk::Label child;
 
   g_assert_true(clamp.get_child() == nullptr);
 
   clamp.set_child(&child);
-  g_assert_true(clamp.get_child()->gobj() == (GtkWidget *)child.gobj());
+  g_assert_true(clamp.get_child()->gobj() == (GtkWidget*)child.gobj());
 
   clamp.set_child(nullptr);
   g_assert_true(clamp.get_child() == nullptr);
 }
 
-static void test_adw_clamp_maximum_size(void) {
+static void test_adw_clamp_maximum_size() {
   Adw::Clamp clamp;
 
   notified = 0;
-  clamp.property_maximum_size().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  clamp.property_maximum_size().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   clamp.set_maximum_size(100);
   g_assert_true(clamp.get_maximum_size() == 100);
@@ -42,12 +43,11 @@ static void test_adw_clamp_maximum_size(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_clamp_tightening_threshold(void) {
+static void test_adw_clamp_tightening_threshold() {
   Adw::Clamp clamp;
 
   notified = 0;
-  clamp.property_tightening_threshold().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  clamp.property_tightening_threshold().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   clamp.set_tightening_threshold(50);
   g_assert_true(clamp.get_tightening_threshold() == 50);
@@ -61,7 +61,7 @@ static void test_adw_clamp_tightening_threshold(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_clamp_unit(void) {
+static void test_adw_clamp_unit() {
   Adw::Clamp clamp;
 
   notified = 0;
@@ -77,14 +77,13 @@ static void test_adw_clamp_unit(void) {
   g_assert_true(notified == 1);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
   g_test_add_func("/Adwaita/Clamp/child", test_adw_clamp_child);
   g_test_add_func("/Adwaita/Clamp/maximum_size", test_adw_clamp_maximum_size);
-  g_test_add_func("/Adwaita/Clamp/tightening_threshold",
-                  test_adw_clamp_tightening_threshold);
+  g_test_add_func("/Adwaita/Clamp/tightening_threshold", test_adw_clamp_tightening_threshold);
   g_test_add_func("/Adwaita/Clamp/unit", test_adw_clamp_unit);
   return g_test_run();
 }

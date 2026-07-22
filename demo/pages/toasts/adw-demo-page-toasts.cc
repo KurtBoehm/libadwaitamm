@@ -3,33 +3,25 @@
 #include <glib/gi18n.h>
 
 namespace Adw {
-
 const char DemoPageToasts::class_name[] = "AdwDemoPageToasts";
 unsigned int DemoPageToasts::signal_add_toast;
 
-void DemoPageToasts::setup_template(Gtk::TemplateWidgetSetup &s) {
+void DemoPageToasts::setup_template(Gtk::TemplateWidgetSetup& s) {
 
-  signal_add_toast =
-      g_signal_new("add-toast", s.get_class_type(), G_SIGNAL_RUN_FIRST, 0, NULL,
-                   NULL, NULL, G_TYPE_NONE, 1, ADW_TYPE_TOAST);
+  signal_add_toast = g_signal_new("add-toast", s.get_class_type(), G_SIGNAL_RUN_FIRST, 0, NULL,
+                                  NULL, NULL, G_TYPE_NONE, 1, ADW_TYPE_TOAST);
 
-  s.set_resource(
-      "/org/gnome/Adwaitamm1/Demo/ui/pages/toasts/adw-demo-page-toasts.ui");
+  s.set_resource("/org/gnome/Adwaitamm1/Demo/ui/pages/toasts/adw-demo-page-toasts.ui");
 
-  s.install_action("toast.add",
-                   Gtk::ptr_fun_to_mem_fun<&DemoPageToasts::toast_add_cb>());
-  s.install_action(
-      "toast.add-with-button",
-      Gtk::ptr_fun_to_mem_fun<&DemoPageToasts::toast_add_with_button_cb>());
-  s.install_action(
-      "toast.add-with-long-title",
-      Gtk::ptr_fun_to_mem_fun<&DemoPageToasts::toast_add_with_long_title_cb>());
-  s.install_action(
-      "toast.dismiss",
-      Gtk::ptr_fun_to_mem_fun<&DemoPageToasts::toast_dismiss_cb>());
+  s.install_action("toast.add", Gtk::ptr_fun_to_mem_fun<&DemoPageToasts::toast_add_cb>());
+  s.install_action("toast.add-with-button",
+                   Gtk::ptr_fun_to_mem_fun<&DemoPageToasts::toast_add_with_button_cb>());
+  s.install_action("toast.add-with-long-title",
+                   Gtk::ptr_fun_to_mem_fun<&DemoPageToasts::toast_add_with_long_title_cb>());
+  s.install_action("toast.dismiss", Gtk::ptr_fun_to_mem_fun<&DemoPageToasts::toast_dismiss_cb>());
 }
 
-void DemoPageToasts::init_widget(Gtk::TemplateWidgetInit &i) {
+void DemoPageToasts::init_widget(Gtk::TemplateWidgetInit& i) {
   i.init_template();
   action_set_enabled("toast.dismiss", false);
 }
@@ -44,18 +36,16 @@ void DemoPageToasts::toast_add_with_button_cb() {
 
   if (undo_toast) {
     Glib::ustring title = Glib::ustring::sprintf(
-        ngettext("<span font_features='tnum=1'>%d</span> item deleted",
-                 "<span font_features='tnum=1'>%d</span> items deleted",
-                 toast_undo_items),
-        toast_undo_items);
+      ngettext("<span font_features='tnum=1'>%d</span> item deleted",
+               "<span font_features='tnum=1'>%d</span> items deleted", toast_undo_items),
+      toast_undo_items);
 
     undo_toast->set_title(title);
 
     /* Bump the toast timeout */
     add_toast(undo_toast);
   } else {
-    undo_toast = new Adw::Toast(
-        Glib::ustring::sprintf(_("‘%s’ deleted"), "Lorem Ipsum"));
+    undo_toast = new Adw::Toast(Glib::ustring::sprintf(_("‘%s’ deleted"), "Lorem Ipsum"));
 
     undo_toast->set_priority(Adw::Toast::Priority::HIGH);
     undo_toast->set_button_label(_("_Undo"));
@@ -74,12 +64,11 @@ void DemoPageToasts::toast_add_with_button_cb() {
 }
 
 void DemoPageToasts::toast_add_with_long_title_cb() {
-  Toast* toast =
-      new Adw::Toast(_("Lorem ipsum dolor sit amet, "
-                           "consectetur adipiscing elit, "
-                           "sed do eiusmod tempor incididunt "
-                           "ut labore et dolore magnam aliquam "
-                           "quaerat voluptatem."));
+  Toast* toast = new Adw::Toast(_("Lorem ipsum dolor sit amet, "
+                                  "consectetur adipiscing elit, "
+                                  "sed do eiusmod tempor incididunt "
+                                  "ut labore et dolore magnam aliquam "
+                                  "quaerat voluptatem."));
   add_toast(toast);
 }
 
@@ -88,16 +77,16 @@ void DemoPageToasts::add_toast(const Toast* toast) {
 }
 
 void DemoPageToasts::toast_dismiss_cb() {
-  if (undo_toast)
+  if (undo_toast) {
     undo_toast->dismiss();
+  }
 }
 
 void DemoPageToasts::undo() {
   Glib::ustring title = Glib::ustring::sprintf(
-      ngettext("Undoing deleting <span font_features='tnum=1'>%d</span> item…",
-               "Undoing deleting <span font_features='tnum=1'>%d</span> items…",
-               toast_undo_items),
-      toast_undo_items);
+    ngettext("Undoing deleting <span font_features='tnum=1'>%d</span> item…",
+             "Undoing deleting <span font_features='tnum=1'>%d</span> items…", toast_undo_items),
+    toast_undo_items);
 
   Toast* toast = new Adw::Toast(title);
 
@@ -105,5 +94,4 @@ void DemoPageToasts::undo() {
 
   add_toast(toast);
 }
-
 } // namespace Adw

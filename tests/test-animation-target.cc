@@ -8,18 +8,17 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
-static void test_adw_property_animation_target_construct(void) {
+static void test_adw_property_animation_target_construct() {
   auto widget = Glib::RefPtr<Gtk::Button>(new Gtk::Button());
 
   auto named_target = Adw::PropertyAnimationTarget::create(widget, "opacity");
 
-  GParamSpec *target_pspec = named_target->get_pspec();
+  GParamSpec* target_pspec = named_target->get_pspec();
   g_assert_true(target_pspec);
   g_assert_true(Glib::ustring(target_pspec->name) == "opacity");
   g_assert_true(named_target->get_object() == widget);
 
-  auto pspec_target =
-      Adw::PropertyAnimationTarget::create(widget, target_pspec);
+  auto pspec_target = Adw::PropertyAnimationTarget::create(widget, target_pspec);
   g_assert_true(pspec_target->get_pspec() == target_pspec);
   g_assert_true(pspec_target->get_object() == widget);
 
@@ -28,7 +27,7 @@ static void test_adw_property_animation_target_construct(void) {
   g_assert_true(Glib::ustring(target_pspec->name) == "opacity");
 }
 
-static void test_adw_property_animation_target_basic(void) {
+static void test_adw_property_animation_target_basic() {
   auto widget = Glib::RefPtr<Gtk::Button>(new Gtk::Button());
 
   auto target = Adw::PropertyAnimationTarget::create(widget, "opacity");
@@ -40,7 +39,7 @@ static void test_adw_property_animation_target_basic(void) {
   g_assert_true(widget->get_opacity() == 0);
 }
 
-static void test_adw_none_animation_target_basic(void) {
+static void test_adw_none_animation_target_basic() {
   auto widget = Glib::RefPtr<Gtk::Button>(new Gtk::Button());
 
   auto target = Adw::NoneAnimationTarget::create();
@@ -56,17 +55,16 @@ static void test_adw_none_animation_target_basic(void) {
   g_assert_true(widget->get_opacity() == 1);
 }
 
-static void test_adw_callback_animation_target_basic(void) {
+static void test_adw_callback_animation_target_basic() {
   auto widget = Glib::RefPtr<Gtk::Button>(new Gtk::Button());
 
   double received_value = -1;
   int call_count = 0;
 
-  auto target = Adw::CallbackAnimationTarget::create(
-      [&received_value, &call_count](double value) {
-        received_value = value;
-        ++call_count;
-      });
+  auto target = Adw::CallbackAnimationTarget::create([&received_value, &call_count](double value) {
+    received_value = value;
+    ++call_count;
+  });
   g_assert_true(target);
 
   auto animation = Adw::TimedAnimation::create(widget.get(), 1, 0, 0, target);
@@ -77,7 +75,7 @@ static void test_adw_callback_animation_target_basic(void) {
   g_assert_true(received_value == 0);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
@@ -85,8 +83,7 @@ int main(int argc, char *argv[]) {
                   test_adw_property_animation_target_construct);
   g_test_add_func("/Adwaita/PropertyAnimationTarget/basic",
                   test_adw_property_animation_target_basic);
-  g_test_add_func("/Adwaita/NoneAnimationTarget/basic",
-                  test_adw_none_animation_target_basic);
+  g_test_add_func("/Adwaita/NoneAnimationTarget/basic", test_adw_none_animation_target_basic);
   g_test_add_func("/Adwaita/CallbackAnimationTarget/basic",
                   test_adw_callback_animation_target_basic);
 

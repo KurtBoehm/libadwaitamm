@@ -7,7 +7,7 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
-static void test_adw_preferences_page_add_remove(void) {
+static void test_adw_preferences_page_add_remove() {
   Adw::PreferencesPage page;
   Adw::PreferencesGroup group;
 
@@ -15,7 +15,7 @@ static void test_adw_preferences_page_add_remove(void) {
   page.remove(&group);
 }
 
-static void test_adw_preferences_page_title(void) {
+static void test_adw_preferences_page_title() {
   Adw::PreferencesPage page;
 
   g_assert_true(page.get_title() == "");
@@ -27,7 +27,7 @@ static void test_adw_preferences_page_title(void) {
   g_assert_true(page.get_title() == "");
 }
 
-static void test_adw_preferences_page_icon_name(void) {
+static void test_adw_preferences_page_icon_name() {
   Adw::PreferencesPage page;
 
   g_assert_true(page.get_icon_name() == "");
@@ -39,7 +39,7 @@ static void test_adw_preferences_page_icon_name(void) {
   g_assert_true(page.get_icon_name() == "");
 }
 
-static void test_adw_preferences_page_description(void) {
+static void test_adw_preferences_page_description() {
   Adw::PreferencesPage page;
 
   g_assert_true(page.get_description() == "");
@@ -51,7 +51,7 @@ static void test_adw_preferences_page_description(void) {
   g_assert_true(page.get_description() == "");
 }
 
-static void test_adw_preferences_page_use_underline(void) {
+static void test_adw_preferences_page_use_underline() {
   Adw::PreferencesPage page;
 
   g_assert_false(page.get_use_underline());
@@ -63,7 +63,7 @@ static void test_adw_preferences_page_use_underline(void) {
   g_assert_false(page.get_use_underline());
 }
 
-static void test_adw_preferences_page_description_center(void) {
+static void test_adw_preferences_page_description_center() {
   Adw::PreferencesPage page;
 
   g_assert_false(page.get_description_centered());
@@ -76,14 +76,10 @@ int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/PreferencesPage/add_remove",
-                  test_adw_preferences_page_add_remove);
-  g_test_add_func("/Adwaita/PreferencesPage/title",
-                  test_adw_preferences_page_title);
-  g_test_add_func("/Adwaita/PreferencesPage/icon_name",
-                  test_adw_preferences_page_icon_name);
-  g_test_add_func("/Adwaita/PreferencesPage/description",
-                  test_adw_preferences_page_description);
+  g_test_add_func("/Adwaita/PreferencesPage/add_remove", test_adw_preferences_page_add_remove);
+  g_test_add_func("/Adwaita/PreferencesPage/title", test_adw_preferences_page_title);
+  g_test_add_func("/Adwaita/PreferencesPage/icon_name", test_adw_preferences_page_icon_name);
+  g_test_add_func("/Adwaita/PreferencesPage/description", test_adw_preferences_page_description);
   g_test_add_func("/Adwaita/PreferencesPage/use_underline",
                   test_adw_preferences_page_use_underline);
   g_test_add_func("/Adwaita/PreferencesPage/description_center",

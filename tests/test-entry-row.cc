@@ -13,9 +13,11 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_entry_row_add_remove(void) {
+static void test_adw_entry_row_add_remove() {
   Adw::EntryRow row;
 
   Gtk::Button prefix, suffix;
@@ -27,12 +29,11 @@ static void test_adw_entry_row_add_remove(void) {
   row.remove(suffix);
 }
 
-static void test_adw_entry_row_show_apply_button(void) {
+static void test_adw_entry_row_show_apply_button() {
   Adw::EntryRow row;
 
   notified = 0;
-  row.property_show_apply_button().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  row.property_show_apply_button().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   bool show_apply_button = row.get_property<bool>("show-apply-button");
   g_assert_false(show_apply_button);
@@ -49,12 +50,11 @@ static void test_adw_entry_row_show_apply_button(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_entry_row_activates_default(void) {
+static void test_adw_entry_row_activates_default() {
   Adw::EntryRow row;
 
   notified = 0;
-  row.property_activates_default().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  row.property_activates_default().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_false(row.get_activates_default());
 
@@ -70,12 +70,11 @@ static void test_adw_entry_row_activates_default(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_entry_row_input_purpose(void) {
+static void test_adw_entry_row_input_purpose() {
   Adw::EntryRow row;
 
   notified = 0;
-  row.property_input_purpose().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  row.property_input_purpose().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(row.get_input_purpose() == Gtk::InputPurpose::FREE_FORM);
 
@@ -87,7 +86,7 @@ static void test_adw_entry_row_input_purpose(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_entry_row_input_hints(void) {
+static void test_adw_entry_row_input_hints() {
   Adw::EntryRow row;
 
   notified = 0;
@@ -103,12 +102,11 @@ static void test_adw_entry_row_input_hints(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_entry_row_enable_emoji_completion(void) {
+static void test_adw_entry_row_enable_emoji_completion() {
   Adw::EntryRow row;
 
   notified = 0;
-  row.property_enable_emoji_completion().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  row.property_enable_emoji_completion().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_false(row.get_enable_emoji_completion());
 
@@ -120,7 +118,7 @@ static void test_adw_entry_row_enable_emoji_completion(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_entry_row_attributes(void) {
+static void test_adw_entry_row_attributes() {
   Adw::EntryRow row;
 
   notified = 0;
@@ -133,10 +131,10 @@ static void test_adw_entry_row_attributes(void) {
   // Content equality on Pango::AttrList isn't cheap to assert generically;
   // just confirm the getter round-trips without crashing.
   Pango::AttrList roundtrip = row.get_attributes();
-  (void)roundtrip;
+  () roundtrip;
 }
 
-static void test_adw_entry_row_max_length(void) {
+static void test_adw_entry_row_max_length() {
   Adw::EntryRow row;
 
   notified = 0;
@@ -159,7 +157,7 @@ static void test_adw_entry_row_max_length(void) {
   // g_assert_true(notified == 1);
 }
 
-static void test_adw_entry_row_text_length(void) {
+static void test_adw_entry_row_text_length() {
   Adw::EntryRow row;
 
   notified = 0;
@@ -172,7 +170,7 @@ static void test_adw_entry_row_text_length(void) {
   g_assert_true(notified >= 1);
 }
 
-static void test_adw_entry_row_grab_focus_without_selecting(void) {
+static void test_adw_entry_row_grab_focus_without_selecting() {
   Gtk::Window window;
   Adw::EntryRow row;
 
@@ -181,14 +179,13 @@ static void test_adw_entry_row_grab_focus_without_selecting(void) {
   row.grab_focus_without_selecting();
 }
 
-static void test_adw_entry_row_signals(void) {
+static void test_adw_entry_row_signals() {
   Adw::EntryRow row;
 
   int apply_count = 0;
   int activated_count = 0;
   row.signal_apply().connect([&apply_count]() { ++apply_count; });
-  row.signal_entry_activated().connect(
-      [&activated_count]() { ++activated_count; });
+  row.signal_entry_activated().connect([&activated_count]() { ++activated_count; });
 
   g_signal_emit_by_name(row.gobj(), "apply");
   g_assert_true(apply_count == 1);
@@ -197,28 +194,20 @@ static void test_adw_entry_row_signals(void) {
   g_assert_true(activated_count == 1);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/EntryRow/add_remove",
-                  test_adw_entry_row_add_remove);
-  g_test_add_func("/Adwaita/EntryRow/show_apply_button",
-                  test_adw_entry_row_show_apply_button);
-  g_test_add_func("/Adwaita/EntryRow/activates_default",
-                  test_adw_entry_row_activates_default);
-  g_test_add_func("/Adwaita/EntryRow/input_purpose",
-                  test_adw_entry_row_input_purpose);
-  g_test_add_func("/Adwaita/EntryRow/input_hints",
-                  test_adw_entry_row_input_hints);
+  g_test_add_func("/Adwaita/EntryRow/add_remove", test_adw_entry_row_add_remove);
+  g_test_add_func("/Adwaita/EntryRow/show_apply_button", test_adw_entry_row_show_apply_button);
+  g_test_add_func("/Adwaita/EntryRow/activates_default", test_adw_entry_row_activates_default);
+  g_test_add_func("/Adwaita/EntryRow/input_purpose", test_adw_entry_row_input_purpose);
+  g_test_add_func("/Adwaita/EntryRow/input_hints", test_adw_entry_row_input_hints);
   g_test_add_func("/Adwaita/EntryRow/enable_emoji_completion",
                   test_adw_entry_row_enable_emoji_completion);
-  g_test_add_func("/Adwaita/EntryRow/attributes",
-                  test_adw_entry_row_attributes);
-  g_test_add_func("/Adwaita/EntryRow/max_length",
-                  test_adw_entry_row_max_length);
-  g_test_add_func("/Adwaita/EntryRow/text_length",
-                  test_adw_entry_row_text_length);
+  g_test_add_func("/Adwaita/EntryRow/attributes", test_adw_entry_row_attributes);
+  g_test_add_func("/Adwaita/EntryRow/max_length", test_adw_entry_row_max_length);
+  g_test_add_func("/Adwaita/EntryRow/text_length", test_adw_entry_row_text_length);
   g_test_add_func("/Adwaita/EntryRow/grab_focus_without_selecting",
                   test_adw_entry_row_grab_focus_without_selecting);
   g_test_add_func("/Adwaita/EntryRow/signals", test_adw_entry_row_signals);

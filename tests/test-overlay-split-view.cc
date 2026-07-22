@@ -9,17 +9,18 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_overlay_split_view_sidebar(void) {
+static void test_adw_overlay_split_view_sidebar() {
   Adw::OverlaySplitView split_view;
-  Gtk::Widget *widget = nullptr;
+  Gtk::Widget* widget = nullptr;
 
   notified = 0;
-  split_view.property_sidebar().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  split_view.property_sidebar().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  widget = split_view.get_property<Gtk::Widget *>("sidebar");
+  widget = split_view.get_property<Gtk::Widget*>("sidebar");
   g_assert_null(widget);
 
   split_view.set_sidebar(nullptr);
@@ -30,20 +31,19 @@ static void test_adw_overlay_split_view_sidebar(void) {
   g_assert_true(split_view.get_sidebar()->gobj() == widget->gobj());
   g_assert_true(notified == 1);
 
-  split_view.set_property<Gtk::Widget *>("sidebar", nullptr);
+  split_view.set_property<Gtk::Widget*>("sidebar", nullptr);
   g_assert_null(split_view.get_sidebar());
   g_assert_true(notified == 2);
 }
 
-static void test_adw_overlay_split_view_content(void) {
+static void test_adw_overlay_split_view_content() {
   Adw::OverlaySplitView split_view;
-  Gtk::Widget *widget = nullptr;
+  Gtk::Widget* widget = nullptr;
 
   notified = 0;
-  split_view.property_content().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  split_view.property_content().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  widget = split_view.get_property<Gtk::Widget *>("content");
+  widget = split_view.get_property<Gtk::Widget*>("content");
   g_assert_null(widget);
 
   split_view.set_content(nullptr);
@@ -54,17 +54,16 @@ static void test_adw_overlay_split_view_content(void) {
   g_assert_true(split_view.get_content()->gobj() == widget->gobj());
   g_assert_true(notified == 1);
 
-  split_view.set_property<Gtk::Widget *>("content", nullptr);
+  split_view.set_property<Gtk::Widget*>("content", nullptr);
   g_assert_null(split_view.get_content());
   g_assert_true(notified == 2);
 }
 
-static void test_adw_overlay_split_view_collapsed(void) {
+static void test_adw_overlay_split_view_collapsed() {
   Adw::OverlaySplitView split_view;
 
   notified = 0;
-  split_view.property_collapsed().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  split_view.property_collapsed().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_false(split_view.get_collapsed());
 
@@ -80,12 +79,11 @@ static void test_adw_overlay_split_view_collapsed(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_overlay_split_view_sidebar_position(void) {
+static void test_adw_overlay_split_view_sidebar_position() {
   Adw::OverlaySplitView split_view;
 
   notified = 0;
-  split_view.property_sidebar_position().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  split_view.property_sidebar_position().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(split_view.get_sidebar_position() == Gtk::PackType::START);
 
@@ -96,18 +94,16 @@ static void test_adw_overlay_split_view_sidebar_position(void) {
   g_assert_true(split_view.get_sidebar_position() == Gtk::PackType::END);
   g_assert_true(notified == 1);
 
-  split_view.set_property<Gtk::PackType>("sidebar-position",
-                                         Gtk::PackType::START);
+  split_view.set_property<Gtk::PackType>("sidebar-position", Gtk::PackType::START);
   g_assert_true(split_view.get_sidebar_position() == Gtk::PackType::START);
   g_assert_true(notified == 2);
 }
 
-static void test_adw_overlay_split_view_show_sidebar(void) {
+static void test_adw_overlay_split_view_show_sidebar() {
   Adw::OverlaySplitView split_view;
 
   notified = 0;
-  split_view.property_show_sidebar().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  split_view.property_show_sidebar().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(split_view.get_show_sidebar());
 
@@ -123,12 +119,11 @@ static void test_adw_overlay_split_view_show_sidebar(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_overlay_split_view_pin_sidebar(void) {
+static void test_adw_overlay_split_view_pin_sidebar() {
   Adw::OverlaySplitView split_view;
 
   notified = 0;
-  split_view.property_pin_sidebar().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  split_view.property_pin_sidebar().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_false(split_view.get_pin_sidebar());
 
@@ -144,12 +139,11 @@ static void test_adw_overlay_split_view_pin_sidebar(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_overlay_split_view_enable_show_gesture(void) {
+static void test_adw_overlay_split_view_enable_show_gesture() {
   Adw::OverlaySplitView split_view;
 
   notified = 0;
-  split_view.property_enable_show_gesture().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  split_view.property_enable_show_gesture().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(split_view.get_enable_show_gesture());
 
@@ -165,12 +159,11 @@ static void test_adw_overlay_split_view_enable_show_gesture(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_overlay_split_view_enable_hide_gesture(void) {
+static void test_adw_overlay_split_view_enable_hide_gesture() {
   Adw::OverlaySplitView split_view;
 
   notified = 0;
-  split_view.property_enable_hide_gesture().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  split_view.property_enable_hide_gesture().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(split_view.get_enable_hide_gesture());
 
@@ -186,12 +179,11 @@ static void test_adw_overlay_split_view_enable_hide_gesture(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_overlay_split_view_min_sidebar_width(void) {
+static void test_adw_overlay_split_view_min_sidebar_width() {
   Adw::OverlaySplitView split_view;
 
   notified = 0;
-  split_view.property_min_sidebar_width().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  split_view.property_min_sidebar_width().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_cmpfloat_with_epsilon(split_view.get_min_sidebar_width(), 180, 1e-9);
 
@@ -207,12 +199,11 @@ static void test_adw_overlay_split_view_min_sidebar_width(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_overlay_split_view_max_sidebar_width(void) {
+static void test_adw_overlay_split_view_max_sidebar_width() {
   Adw::OverlaySplitView split_view;
 
   notified = 0;
-  split_view.property_max_sidebar_width().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  split_view.property_max_sidebar_width().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_cmpfloat_with_epsilon(split_view.get_max_sidebar_width(), 280, 1e-9);
 
@@ -228,36 +219,31 @@ static void test_adw_overlay_split_view_max_sidebar_width(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_overlay_split_view_sidebar_width_fraction(void) {
+static void test_adw_overlay_split_view_sidebar_width_fraction() {
   Adw::OverlaySplitView split_view;
 
   notified = 0;
-  split_view.property_sidebar_width_fraction().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  split_view.property_sidebar_width_fraction().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  g_assert_cmpfloat_with_epsilon(split_view.get_sidebar_width_fraction(), 0.25,
-                                 1e-9);
+  g_assert_cmpfloat_with_epsilon(split_view.get_sidebar_width_fraction(), 0.25, 1e-9);
 
   split_view.set_sidebar_width_fraction(0.25);
   g_assert_true(notified == 0);
 
   split_view.set_sidebar_width_fraction(0.2);
-  g_assert_cmpfloat_with_epsilon(split_view.get_sidebar_width_fraction(), 0.2,
-                                 1e-9);
+  g_assert_cmpfloat_with_epsilon(split_view.get_sidebar_width_fraction(), 0.2, 1e-9);
   g_assert_true(notified == 1);
 
   split_view.set_property<double>("sidebar-width-fraction", 0.25);
-  g_assert_cmpfloat_with_epsilon(split_view.get_sidebar_width_fraction(), 0.25,
-                                 1e-9);
+  g_assert_cmpfloat_with_epsilon(split_view.get_sidebar_width_fraction(), 0.25, 1e-9);
   g_assert_true(notified == 2);
 }
 
-static void test_adw_overlay_split_view_sidebar_width_unit(void) {
+static void test_adw_overlay_split_view_sidebar_width_unit() {
   Adw::OverlaySplitView split_view;
 
   notified = 0;
-  split_view.property_sidebar_width_unit().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  split_view.property_sidebar_width_unit().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(split_view.get_sidebar_width_unit() == Adw::LengthUnit::SP);
 
@@ -268,28 +254,23 @@ static void test_adw_overlay_split_view_sidebar_width_unit(void) {
   g_assert_true(split_view.get_sidebar_width_unit() == Adw::LengthUnit::PX);
   g_assert_true(notified == 1);
 
-  split_view.set_property<Adw::LengthUnit>("sidebar-width-unit",
-                                           Adw::LengthUnit::SP);
+  split_view.set_property<Adw::LengthUnit>("sidebar-width-unit", Adw::LengthUnit::SP);
   g_assert_true(split_view.get_sidebar_width_unit() == Adw::LengthUnit::SP);
   g_assert_true(notified == 2);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/OverlaySplitView/sidebar",
-                  test_adw_overlay_split_view_sidebar);
-  g_test_add_func("/Adwaita/OverlaySplitView/content",
-                  test_adw_overlay_split_view_content);
-  g_test_add_func("/Adwaita/OverlaySplitView/collapsed",
-                  test_adw_overlay_split_view_collapsed);
+  g_test_add_func("/Adwaita/OverlaySplitView/sidebar", test_adw_overlay_split_view_sidebar);
+  g_test_add_func("/Adwaita/OverlaySplitView/content", test_adw_overlay_split_view_content);
+  g_test_add_func("/Adwaita/OverlaySplitView/collapsed", test_adw_overlay_split_view_collapsed);
   g_test_add_func("/Adwaita/OverlaySplitView/sidebar_position",
                   test_adw_overlay_split_view_sidebar_position);
   g_test_add_func("/Adwaita/OverlaySplitView/show_sidebar",
                   test_adw_overlay_split_view_show_sidebar);
-  g_test_add_func("/Adwaita/OverlaySplitView/pin_sidebar",
-                  test_adw_overlay_split_view_pin_sidebar);
+  g_test_add_func("/Adwaita/OverlaySplitView/pin_sidebar", test_adw_overlay_split_view_pin_sidebar);
   g_test_add_func("/Adwaita/OverlaySplitView/enable_show_gesture",
                   test_adw_overlay_split_view_enable_show_gesture);
   g_test_add_func("/Adwaita/OverlaySplitView/enable_hide_gesture",

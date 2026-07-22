@@ -8,29 +8,31 @@ static void get_gtk_info(const char** backend, const char** renderer) {
   GdkSurface* surface;
   GskRenderer* gsk_renderer;
 
-  if (!g_strcmp0(G_OBJECT_TYPE_NAME(display), "GdkX11Display"))
+  if (!g_strcmp0(G_OBJECT_TYPE_NAME(display), "GdkX11Display")) {
     *backend = "X11";
-  else if (!g_strcmp0(G_OBJECT_TYPE_NAME(display), "GdkWaylandDisplay"))
+  } else if (!g_strcmp0(G_OBJECT_TYPE_NAME(display), "GdkWaylandDisplay")) {
     *backend = "Wayland";
-  else if (!g_strcmp0(G_OBJECT_TYPE_NAME(display), "GdkBroadwayDisplay"))
+  } else if (!g_strcmp0(G_OBJECT_TYPE_NAME(display), "GdkBroadwayDisplay")) {
     *backend = "Broadway";
-  else if (!g_strcmp0(G_OBJECT_TYPE_NAME(display), "GdkWin32Display"))
+  } else if (!g_strcmp0(G_OBJECT_TYPE_NAME(display), "GdkWin32Display")) {
     *backend = "Windows";
-  else if (!g_strcmp0(G_OBJECT_TYPE_NAME(display), "GdkMacosDisplay"))
+  } else if (!g_strcmp0(G_OBJECT_TYPE_NAME(display), "GdkMacosDisplay")) {
     *backend = "macOS";
-  else
+  } else {
     *backend = G_OBJECT_TYPE_NAME(display);
+  }
 
   surface = gdk_surface_new_toplevel(display);
   gsk_renderer = gsk_renderer_new_for_surface(surface);
-  if (!g_strcmp0(G_OBJECT_TYPE_NAME(gsk_renderer), "GskVulkanRenderer"))
+  if (!g_strcmp0(G_OBJECT_TYPE_NAME(gsk_renderer), "GskVulkanRenderer")) {
     *renderer = "Vulkan";
-  else if (!g_strcmp0(G_OBJECT_TYPE_NAME(gsk_renderer), "GskGLRenderer"))
+  } else if (!g_strcmp0(G_OBJECT_TYPE_NAME(gsk_renderer), "GskGLRenderer")) {
     *renderer = "GL";
-  else if (!g_strcmp0(G_OBJECT_TYPE_NAME(gsk_renderer), "GskCairoRenderer"))
+  } else if (!g_strcmp0(G_OBJECT_TYPE_NAME(gsk_renderer), "GskCairoRenderer")) {
     *renderer = "Cairo";
-  else
+  } else {
     *renderer = G_OBJECT_TYPE_NAME(gsk_renderer);
+  }
 
   gsk_renderer_unrealize(gsk_renderer);
   g_object_unref(gsk_renderer);
@@ -42,9 +44,9 @@ static char* get_flatpak_info(const char* group, const char* key) {
   GKeyFile* keyfile = g_key_file_new();
   char* ret = NULL;
 
-  if (g_key_file_load_from_file(keyfile, "/.flatpak-info",
-                                static_cast<GKeyFileFlags>(0), NULL))
+  if (g_key_file_load_from_file(keyfile, "/.flatpak-info", static_cast<GKeyFileFlags>(0), NULL)) {
     ret = g_key_file_get_string(keyfile, group, key, NULL);
+  }
 
   g_key_file_unref(keyfile);
 
@@ -52,26 +54,25 @@ static char* get_flatpak_info(const char* group, const char* key) {
 }
 #endif
 
-char* adw_demo_generate_debug_info(void) {
+char* adw_demo_generate_debug_info() {
   GString* string = g_string_new(NULL);
 #ifndef G_OS_WIN32
   gboolean flatpak = g_file_test("/.flatpak-info", G_FILE_TEST_EXISTS);
 #endif
 
-  g_string_append_printf(string, "Libadwaita demo: %s (%s)\n", ADW_VERSION_S,
-                         ADW_DEMO_VCS_TAG);
+  g_string_append_printf(string, "Libadwaita demo: %s (%s)\n", ADW_VERSION_S, ADW_DEMO_VCS_TAG);
   g_string_append(string, "\n");
 
   g_string_append(string, "Compiled against:\n");
-  g_string_append_printf(string, "- GLib: %d.%d.%d\n", GLIB_MAJOR_VERSION,
-                         GLIB_MINOR_VERSION, GLIB_MICRO_VERSION);
-  g_string_append_printf(string, "- GTK: %d.%d.%d\n", GTK_MAJOR_VERSION,
-                         GTK_MINOR_VERSION, GTK_MICRO_VERSION);
+  g_string_append_printf(string, "- GLib: %d.%d.%d\n", GLIB_MAJOR_VERSION, GLIB_MINOR_VERSION,
+                         GLIB_MICRO_VERSION);
+  g_string_append_printf(string, "- GTK: %d.%d.%d\n", GTK_MAJOR_VERSION, GTK_MINOR_VERSION,
+                         GTK_MICRO_VERSION);
   g_string_append(string, "\n");
 
   g_string_append(string, "Running against:\n");
-  g_string_append_printf(string, "- GLib: %d.%d.%d\n", glib_major_version,
-                         glib_minor_version, glib_micro_version);
+  g_string_append_printf(string, "- GLib: %d.%d.%d\n", glib_major_version, glib_minor_version,
+                         glib_micro_version);
   g_string_append_printf(string, "- GTK: %d.%d.%d\n", gtk_get_major_version(),
                          gtk_get_minor_version(), gtk_get_micro_version());
   g_string_append(string, "\n");
@@ -138,25 +139,25 @@ char* adw_demo_generate_debug_info(void) {
 
     g_string_append(string, "Environment:\n");
     g_string_append_printf(string, "- Desktop: %s\n", desktop);
-    g_string_append_printf(string, "- Session: %s (%s)\n", session_desktop,
-                           session_type);
+    g_string_append_printf(string, "- Session: %s (%s)\n", session_desktop, session_type);
     g_string_append_printf(string, "- Language: %s\n", lang);
-    g_string_append_printf(string, "- Running inside Builder: %s\n",
-                           builder ? "yes" : "no");
+    g_string_append_printf(string, "- Running inside Builder: %s\n", builder ? "yes" : "no");
 
-    if (gtk_debug)
+    if (gtk_debug) {
       g_string_append_printf(string, "- GTK_DEBUG: %s\n", gtk_debug);
-    if (gtk_theme)
+    }
+    if (gtk_theme) {
       g_string_append_printf(string, "- GTK_THEME: %s\n", gtk_theme);
-    if (adw_debug_color_scheme)
-      g_string_append_printf(string, "- ADW_DEBUG_COLOR_SCHEME: %s\n",
-                             adw_debug_color_scheme);
-    if (adw_debug_high_contrast)
-      g_string_append_printf(string, "- ADW_DEBUG_HIGH_CONTRAST: %s\n",
-                             adw_debug_high_contrast);
-    if (adw_disable_portal)
-      g_string_append_printf(string, "- ADW_DISABLE_PORTAL: %s\n",
-                             adw_disable_portal);
+    }
+    if (adw_debug_color_scheme) {
+      g_string_append_printf(string, "- ADW_DEBUG_COLOR_SCHEME: %s\n", adw_debug_color_scheme);
+    }
+    if (adw_debug_high_contrast) {
+      g_string_append_printf(string, "- ADW_DEBUG_HIGH_CONTRAST: %s\n", adw_debug_high_contrast);
+    }
+    if (adw_disable_portal) {
+      g_string_append_printf(string, "- ADW_DISABLE_PORTAL: %s\n", adw_disable_portal);
+    }
   }
 
   return g_string_free(string, FALSE);

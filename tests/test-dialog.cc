@@ -9,16 +9,18 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_dialog_child(void) {
+static void test_adw_dialog_child() {
   Adw::Dialog dialog;
-  Gtk::Widget *widget = nullptr;
+  Gtk::Widget* widget = nullptr;
 
   notified = 0;
   dialog.property_child().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  widget = dialog.get_property<Gtk::Widget *>("child");
+  widget = dialog.get_property<Gtk::Widget*>("child");
   g_assert_null(widget);
 
   widget = Gtk::make_managed<Gtk::Button>();
@@ -31,7 +33,7 @@ static void test_adw_dialog_child(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_dialog_title(void) {
+static void test_adw_dialog_title() {
   Adw::Dialog dialog;
 
   notified = 0;
@@ -51,12 +53,11 @@ static void test_adw_dialog_title(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_dialog_can_close(void) {
+static void test_adw_dialog_can_close() {
   Adw::Dialog dialog;
 
   notified = 0;
-  dialog.property_can_close().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  dialog.property_can_close().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(dialog.get_can_close());
 
@@ -72,14 +73,14 @@ static void test_adw_dialog_can_close(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_dialog_content_size(void) {
+static void test_adw_dialog_content_size() {
   Adw::Dialog dialog;
 
   int width_notified = 0, height_notified = 0;
   dialog.property_content_width().signal_changed().connect(
-      [&width_notified]() { width_notified++; });
+    [&width_notified]() { width_notified++; });
   dialog.property_content_height().signal_changed().connect(
-      [&height_notified]() { height_notified++; });
+    [&height_notified]() { height_notified++; });
 
   g_assert_cmpint(dialog.get_content_width(), ==, -1);
   g_assert_cmpint(dialog.get_content_height(), ==, -1);
@@ -99,12 +100,11 @@ static void test_adw_dialog_content_size(void) {
   // g_assert_true(height_notified == 1);
 }
 
-static void test_adw_dialog_follows_content_size(void) {
+static void test_adw_dialog_follows_content_size() {
   Adw::Dialog dialog;
 
   notified = 0;
-  dialog.property_follows_content_size().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  dialog.property_follows_content_size().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_false(dialog.get_follows_content_size());
 
@@ -120,40 +120,34 @@ static void test_adw_dialog_follows_content_size(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_dialog_presentation_mode(void) {
+static void test_adw_dialog_presentation_mode() {
   Adw::Dialog dialog;
 
   notified = 0;
-  dialog.property_presentation_mode().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  dialog.property_presentation_mode().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  g_assert_true(dialog.get_presentation_mode() ==
-                Adw::Dialog::PresentationMode::AUTO);
+  g_assert_true(dialog.get_presentation_mode() == Adw::Dialog::PresentationMode::AUTO);
 
   dialog.set_presentation_mode(Adw::Dialog::PresentationMode::AUTO);
   g_assert_true(notified == 0);
 
   dialog.set_presentation_mode(Adw::Dialog::PresentationMode::FLOATING);
-  g_assert_true(dialog.get_presentation_mode() ==
-                Adw::Dialog::PresentationMode::FLOATING);
+  g_assert_true(dialog.get_presentation_mode() == Adw::Dialog::PresentationMode::FLOATING);
   g_assert_true(notified == 1);
 
-  dialog.property_presentation_mode() =
-      Adw::Dialog::PresentationMode::BOTTOM_SHEET;
-  g_assert_true(dialog.get_presentation_mode() ==
-                Adw::Dialog::PresentationMode::BOTTOM_SHEET);
+  dialog.property_presentation_mode() = Adw::Dialog::PresentationMode::BOTTOM_SHEET;
+  g_assert_true(dialog.get_presentation_mode() == Adw::Dialog::PresentationMode::BOTTOM_SHEET);
   g_assert_true(notified == 2);
 }
 
-static void test_adw_dialog_default_widget(void) {
+static void test_adw_dialog_default_widget() {
   Adw::Dialog dialog;
-  Gtk::Widget *widget = nullptr;
+  Gtk::Widget* widget = nullptr;
 
   notified = 0;
-  dialog.property_default_widget().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  dialog.property_default_widget().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  widget = dialog.get_property<Gtk::Widget *>("default-widget");
+  widget = dialog.get_property<Gtk::Widget*>("default-widget");
   g_assert_null(widget);
 
   widget = Gtk::make_managed<Gtk::Button>();
@@ -163,23 +157,22 @@ static void test_adw_dialog_default_widget(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_dialog_focus_widget(void) {
+static void test_adw_dialog_focus_widget() {
   Adw::Dialog dialog;
-  Gtk::Widget *widget = Gtk::make_managed<Gtk::Button>();
+  Gtk::Widget* widget = Gtk::make_managed<Gtk::Button>();
 
   dialog.set_child(widget);
 
   notified = 0;
-  dialog.property_focus_widget().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  dialog.property_focus_widget().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   dialog.set_focus(widget);
   // Not asserting notified count strictly since focus assignment can be a
   // no-op without a realized/mapped surface.
-  (void)notified;
+  () notified;
 }
 
-static void test_adw_dialog_close_force_close(void) {
+static void test_adw_dialog_close_force_close() {
   Adw::Window window;
   Adw::Dialog dialog;
 
@@ -188,8 +181,7 @@ static void test_adw_dialog_close_force_close(void) {
 
   int close_attempt_count = 0;
   int closed_count = 0;
-  dialog.signal_close_attempt().connect(
-      [&close_attempt_count]() { close_attempt_count++; });
+  dialog.signal_close_attempt().connect([&close_attempt_count]() { close_attempt_count++; });
   dialog.signal_closed().connect([&closed_count]() { closed_count++; });
 
   dialog.set_can_close(false);
@@ -201,7 +193,7 @@ static void test_adw_dialog_close_force_close(void) {
   g_assert_true(closed_count == 1);
 }
 
-static void test_adw_dialog_add_breakpoint(void) {
+static void test_adw_dialog_add_breakpoint() {
   Adw::Window window;
   Adw::Dialog dialog;
 
@@ -209,8 +201,7 @@ static void test_adw_dialog_add_breakpoint(void) {
   dialog.present(&window);
 
   Adw::BreakpointCondition condition = Adw::BreakpointCondition::create_length(
-      Adw::BreakpointCondition::LengthType::MAX_WIDTH, 400,
-      Adw::LengthUnit::PX);
+    Adw::BreakpointCondition::LengthType::MAX_WIDTH, 400, Adw::LengthUnit::PX);
 
   Glib::RefPtr<Adw::Breakpoint> breakpoint = Adw::Breakpoint::create(condition);
 
@@ -232,7 +223,7 @@ static void test_adw_dialog_add_breakpoint(void) {
 // TODO: adw_dialog_present() needs a live AdwWindow/AdwApplicationWindow
 // parent to be meaningful; consider adding once window.hg is confirmed.
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
@@ -240,17 +231,12 @@ int main(int argc, char *argv[]) {
   g_test_add_func("/Adwaita/Dialog/title", test_adw_dialog_title);
   g_test_add_func("/Adwaita/Dialog/can_close", test_adw_dialog_can_close);
   g_test_add_func("/Adwaita/Dialog/content_size", test_adw_dialog_content_size);
-  g_test_add_func("/Adwaita/Dialog/follows_content_size",
-                  test_adw_dialog_follows_content_size);
-  g_test_add_func("/Adwaita/Dialog/presentation_mode",
-                  test_adw_dialog_presentation_mode);
-  g_test_add_func("/Adwaita/Dialog/default_widget",
-                  test_adw_dialog_default_widget);
+  g_test_add_func("/Adwaita/Dialog/follows_content_size", test_adw_dialog_follows_content_size);
+  g_test_add_func("/Adwaita/Dialog/presentation_mode", test_adw_dialog_presentation_mode);
+  g_test_add_func("/Adwaita/Dialog/default_widget", test_adw_dialog_default_widget);
   g_test_add_func("/Adwaita/Dialog/focus_widget", test_adw_dialog_focus_widget);
-  g_test_add_func("/Adwaita/Dialog/close_force_close",
-                  test_adw_dialog_close_force_close);
-  g_test_add_func("/Adwaita/Dialog/add_breakpoint",
-                  test_adw_dialog_add_breakpoint);
+  g_test_add_func("/Adwaita/Dialog/close_force_close", test_adw_dialog_close_force_close);
+  g_test_add_func("/Adwaita/Dialog/add_breakpoint", test_adw_dialog_add_breakpoint);
 
   return g_test_run();
 }

@@ -9,9 +9,11 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_switch_row_active(void) {
+static void test_adw_switch_row_active() {
   Adw::SwitchRow row;
 
   notified = 0;

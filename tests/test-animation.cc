@@ -14,11 +14,15 @@
 static double last_value;
 static int done_count;
 
-static void value_cb(double value) { last_value = value; }
+static void value_cb(double value) {
+  last_value = value;
+}
 
-static void done_cb(void) { done_count++; }
+static void done_cb() {
+  done_count++;
+}
 
-static void test_adw_animation_general(void) {
+static void test_adw_animation_general() {
   Gtk::Button widget;
   auto target = Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
   auto target2 = Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
@@ -31,8 +35,7 @@ static void test_adw_animation_general(void) {
   animation->signal_done().connect(sigc::ptr_fun(done_cb));
 
   g_assert_true(animation->get_widget() == &widget);
-  g_assert_true(animation->get_target()->gobj() ==
-                (AdwAnimationTarget *)target->gobj());
+  g_assert_true(animation->get_target()->gobj() == (AdwAnimationTarget*)target->gobj());
 
   g_assert_true(animation->get_state() == Adw::Animation::State::IDLE);
   g_assert_true(animation->get_value() == 10);
@@ -61,14 +64,13 @@ static void test_adw_animation_general(void) {
   g_assert_true(done_count == 2);
 
   animation->set_target(target2);
-  g_assert_true(animation->get_target()->gobj() ==
-                (AdwAnimationTarget *)target2->gobj());
+  g_assert_true(animation->get_target()->gobj() == (AdwAnimationTarget*)target2->gobj());
 
   g_assert_true(last_value == 20);
   g_assert_true(done_count == 2);
 }
 
-static void test_adw_animation_play_pause(void) {
+static void test_adw_animation_play_pause() {
   /* A mapped widget is required so the animation actually advances across
    * frames instead of finishing synchronously on play(), which is what lets
    * us observe PLAYING/PAUSED states in between. */
@@ -102,7 +104,7 @@ static void test_adw_animation_play_pause(void) {
   g_assert_true(done_count == 1);
 }
 
-static void test_adw_animation_follow_enable_animations_setting(void) {
+static void test_adw_animation_follow_enable_animations_setting() {
   Gtk::Button widget;
   auto target = Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
   auto animation = Adw::TimedAnimation::create(&widget, 0, 1, 100, target);
@@ -117,13 +119,12 @@ static void test_adw_animation_follow_enable_animations_setting(void) {
   g_assert_true(animation->get_follow_enable_animations_setting());
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
   g_test_add_func("/Adwaita/Animation/general", test_adw_animation_general);
-  g_test_add_func("/Adwaita/Animation/play_pause",
-                  test_adw_animation_play_pause);
+  g_test_add_func("/Adwaita/Animation/play_pause", test_adw_animation_play_pause);
   g_test_add_func("/Adwaita/Animation/follow_enable_animations_setting",
                   test_adw_animation_follow_enable_animations_setting);
 

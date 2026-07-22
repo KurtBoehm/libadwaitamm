@@ -13,9 +13,11 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_flap_flap(void) {
+static void test_adw_flap_flap() {
   Adw::Flap flap;
   Gtk::Widget* widget = nullptr;
 
@@ -38,7 +40,7 @@ static void test_adw_flap_flap(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_flap_content(void) {
+static void test_adw_flap_content() {
   Adw::Flap flap;
   Gtk::Widget* widget = nullptr;
 
@@ -61,7 +63,7 @@ static void test_adw_flap_content(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_flap_separator(void) {
+static void test_adw_flap_separator() {
   Adw::Flap flap;
   Gtk::Widget* widget = nullptr;
 
@@ -84,12 +86,11 @@ static void test_adw_flap_separator(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_flap_flap_position(void) {
+static void test_adw_flap_flap_position() {
   Adw::Flap flap;
 
   notified = 0;
-  flap.property_flap_position().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  flap.property_flap_position().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Gtk::PackType position = flap.get_property<Gtk::PackType>("flap-position");
   g_assert_true(position == Gtk::PackType::START);
@@ -106,14 +107,13 @@ static void test_adw_flap_flap_position(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_flap_reveal_flap(void) {
+static void test_adw_flap_reveal_flap() {
   Adw::Flap flap;
 
   flap.set_flap(Gtk::make_managed<Gtk::Button>());
 
   notified = 0;
-  flap.property_reveal_flap().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  flap.property_reveal_flap().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   bool reveal = flap.get_property<bool>("reveal-flap");
   g_assert_true(reveal);
@@ -130,12 +130,11 @@ static void test_adw_flap_reveal_flap(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_flap_reveal_progress(void) {
+static void test_adw_flap_reveal_progress() {
   Adw::Flap flap;
 
   notified = 0;
-  flap.property_reveal_progress().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  flap.property_reveal_progress().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   double progress = flap.get_property<double>("reveal-progress");
   g_assert_true(progress == 1.0);
@@ -149,15 +148,13 @@ static void test_adw_flap_reveal_progress(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_flap_fold_policy(void) {
+static void test_adw_flap_fold_policy() {
   Adw::Flap flap;
 
   notified = 0;
-  flap.property_fold_policy().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  flap.property_fold_policy().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  Adw::Flap::FoldPolicy policy =
-      flap.get_property<Adw::Flap::FoldPolicy>("fold-policy");
+  Adw::Flap::FoldPolicy policy = flap.get_property<Adw::Flap::FoldPolicy>("fold-policy");
   g_assert_true(policy == Adw::Flap::FoldPolicy::AUTO);
 
   flap.set_fold_policy(Adw::Flap::FoldPolicy::AUTO);
@@ -167,18 +164,16 @@ static void test_adw_flap_fold_policy(void) {
   g_assert_true(flap.get_fold_policy() == Adw::Flap::FoldPolicy::NEVER);
   g_assert_true(notified == 1);
 
-  flap.set_property<Adw::Flap::FoldPolicy>("fold-policy",
-                                           Adw::Flap::FoldPolicy::ALWAYS);
+  flap.set_property<Adw::Flap::FoldPolicy>("fold-policy", Adw::Flap::FoldPolicy::ALWAYS);
   g_assert_true(flap.get_fold_policy() == Adw::Flap::FoldPolicy::ALWAYS);
   g_assert_true(notified == 2);
 }
 
-static void test_adw_flap_fold_duration(void) {
+static void test_adw_flap_fold_duration() {
   Adw::Flap flap;
 
   notified = 0;
-  flap.property_fold_duration().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  flap.property_fold_duration().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   guint duration = flap.get_property<guint>("fold-duration");
   g_assert_true(duration == 250);
@@ -195,7 +190,7 @@ static void test_adw_flap_fold_duration(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_flap_folded(void) {
+static void test_adw_flap_folded() {
   Adw::Flap flap;
 
   flap.set_flap(Gtk::make_managed<Gtk::Button>());
@@ -212,7 +207,7 @@ static void test_adw_flap_folded(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_flap_locked(void) {
+static void test_adw_flap_locked() {
   Adw::Flap flap;
 
   flap.set_flap(Gtk::make_managed<Gtk::Button>());
@@ -235,15 +230,14 @@ static void test_adw_flap_locked(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_flap_transition_type(void) {
+static void test_adw_flap_transition_type() {
   Adw::Flap flap;
 
   notified = 0;
-  flap.property_transition_type().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  flap.property_transition_type().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Adw::Flap::TransitionType policy =
-      flap.get_property<Adw::Flap::TransitionType>("transition-type");
+    flap.get_property<Adw::Flap::TransitionType>("transition-type");
   g_assert_true(policy == Adw::Flap::TransitionType::OVER);
 
   flap.set_transition_type(Adw::Flap::TransitionType::OVER);
@@ -253,13 +247,12 @@ static void test_adw_flap_transition_type(void) {
   g_assert_true(flap.get_transition_type() == Adw::Flap::TransitionType::SLIDE);
   g_assert_true(notified == 1);
 
-  flap.set_property<Adw::Flap::TransitionType>(
-      "transition-type", Adw::Flap::TransitionType::UNDER);
+  flap.set_property<Adw::Flap::TransitionType>("transition-type", Adw::Flap::TransitionType::UNDER);
   g_assert_true(flap.get_transition_type() == Adw::Flap::TransitionType::UNDER);
   g_assert_true(notified == 2);
 }
 
-static void test_adw_flap_modal(void) {
+static void test_adw_flap_modal() {
   Adw::Flap flap;
 
   flap.set_flap(Gtk::make_managed<Gtk::Button>());
@@ -282,14 +275,13 @@ static void test_adw_flap_modal(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_flap_swipe_to_open(void) {
+static void test_adw_flap_swipe_to_open() {
   Adw::Flap flap;
 
   flap.set_flap(Gtk::make_managed<Gtk::Button>());
 
   notified = 0;
-  flap.property_swipe_to_open().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  flap.property_swipe_to_open().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   bool swipe_to_open = flap.get_property<bool>("swipe-to-open");
   g_assert_true(swipe_to_open);
@@ -306,14 +298,13 @@ static void test_adw_flap_swipe_to_open(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_flap_swipe_to_close(void) {
+static void test_adw_flap_swipe_to_close() {
   Adw::Flap flap;
 
   flap.set_flap(Gtk::make_managed<Gtk::Button>());
 
   notified = 0;
-  flap.property_swipe_to_close().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  flap.property_swipe_to_close().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   bool swipe_to_close = flap.get_property<bool>("swipe-to-close");
   g_assert_true(swipe_to_close);
@@ -330,18 +321,16 @@ static void test_adw_flap_swipe_to_close(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_flap_fold_threshold_policy(void) {
+static void test_adw_flap_fold_threshold_policy() {
   Adw::Flap flap;
 
   notified = 0;
-  flap.property_fold_threshold_policy().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  flap.property_fold_threshold_policy().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Adw::FoldThresholdPolicy initial = flap.get_fold_threshold_policy();
-  Adw::FoldThresholdPolicy other =
-      (initial == Adw::FoldThresholdPolicy::MINIMUM)
-          ? Adw::FoldThresholdPolicy::NATURAL
-          : Adw::FoldThresholdPolicy::MINIMUM;
+  Adw::FoldThresholdPolicy other = (initial == Adw::FoldThresholdPolicy::MINIMUM)
+                                     ? Adw::FoldThresholdPolicy::NATURAL
+                                     : Adw::FoldThresholdPolicy::MINIMUM;
 
   flap.set_fold_threshold_policy(initial);
   g_assert_true(notified == 0);
@@ -360,19 +349,16 @@ int main(int argc, char* argv[]) {
   g_test_add_func("/Adwaita/Flap/separator", test_adw_flap_separator);
   g_test_add_func("/Adwaita/Flap/flap_position", test_adw_flap_flap_position);
   g_test_add_func("/Adwaita/Flap/reveal_flap", test_adw_flap_reveal_flap);
-  g_test_add_func("/Adwaita/Flap/reveal_progress",
-                  test_adw_flap_reveal_progress);
+  g_test_add_func("/Adwaita/Flap/reveal_progress", test_adw_flap_reveal_progress);
   g_test_add_func("/Adwaita/Flap/fold_policy", test_adw_flap_fold_policy);
   g_test_add_func("/Adwaita/Flap/fold_duration", test_adw_flap_fold_duration);
   g_test_add_func("/Adwaita/Flap/folded", test_adw_flap_folded);
   g_test_add_func("/Adwaita/Flap/locked", test_adw_flap_locked);
-  g_test_add_func("/Adwaita/Flap/transition_type",
-                  test_adw_flap_transition_type);
+  g_test_add_func("/Adwaita/Flap/transition_type", test_adw_flap_transition_type);
   g_test_add_func("/Adwaita/Flap/modal", test_adw_flap_modal);
   g_test_add_func("/Adwaita/Flap/swipe_to_open", test_adw_flap_swipe_to_open);
   g_test_add_func("/Adwaita/Flap/swipe_to_close", test_adw_flap_swipe_to_close);
-  g_test_add_func("/Adwaita/Flap/fold_threshold_policy",
-                  test_adw_flap_fold_threshold_policy);
+  g_test_add_func("/Adwaita/Flap/fold_threshold_policy", test_adw_flap_fold_threshold_policy);
 
   return g_test_run();
 }

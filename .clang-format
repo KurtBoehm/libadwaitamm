@@ -1,0 +1,10 @@
+Language: Cpp
+
+AllowShortFunctionsOnASingleLine: Empty
+AlwaysBreakTemplateDeclarations: Yes
+ColumnLimit: 100
+ContinuationIndentWidth: 2
+InsertBraces: true
+PointerAlignment: Left
+SpaceAfterTemplateKeyword: false
+UseTab: Never

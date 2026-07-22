@@ -8,7 +8,7 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
-static inline int rgba_to_hex(const Gdk::RGBA &rgba) {
+static inline int rgba_to_hex(const Gdk::RGBA& rgba) {
   return (int)(std::round(rgba.get_red() * 0xff)) << 16 |
          (int)(std::round(rgba.get_green() * 0xff)) << 8 |
          (int)(std::round(rgba.get_blue() * 0xff));
@@ -23,7 +23,7 @@ static inline Gdk::RGBA hex_to_rgba(int hex) {
   return rgba;
 }
 
-static void test_adw_accent_color_to_rgba(void) {
+static void test_adw_accent_color_to_rgba() {
   Gdk::RGBA rgba;
 
   Adw::accent_color_to_rgba(Adw::AccentColor::BLUE, rgba);
@@ -54,7 +54,7 @@ static void test_adw_accent_color_to_rgba(void) {
   g_assert_cmphex(rgba_to_hex(rgba), ==, 0x6f8396);
 }
 
-static void test_adw_accent_color_to_standalone_rgba(void) {
+static void test_adw_accent_color_to_standalone_rgba() {
   Gdk::RGBA rgba;
 
   Adw::accent_color_to_standalone_rgba(Adw::AccentColor::BLUE, false, rgba);
@@ -112,7 +112,7 @@ static void test_adw_accent_color_to_standalone_rgba(void) {
   g_assert_cmphex(rgba_to_hex(rgba), ==, 0xbbd1e5);
 }
 
-static void test_adw_accent_color_rgba_to_standalone(void) {
+static void test_adw_accent_color_rgba_to_standalone() {
   Gdk::RGBA rgba = hex_to_rgba(0x3584e4);
   Gdk::RGBA standalone;
 
@@ -141,12 +141,11 @@ static void test_adw_accent_color_rgba_to_standalone(void) {
   g_assert_cmphex(rgba_to_hex(standalone), ==, 0xcecece);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/AccentColor/to_rgba",
-                  test_adw_accent_color_to_rgba);
+  g_test_add_func("/Adwaita/AccentColor/to_rgba", test_adw_accent_color_to_rgba);
   g_test_add_func("/Adwaita/AccentColor/to_standalone_rgba",
                   test_adw_accent_color_to_standalone_rgba);
   g_test_add_func("/Adwaita/AccentColor/rgba_to_standalone",

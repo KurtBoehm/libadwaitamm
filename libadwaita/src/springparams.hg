@@ -50,7 +50,6 @@ public:
 
  _IGNORE(adw_spring_params_ref)
  _IGNORE(adw_spring_params_unref)
-
 };
 } // namespace Adw
 
@@ -67,4 +66,4 @@ public:
   void set(const CppType& data);
   CppType get() const;
 };
-}
+} // namespace Glib

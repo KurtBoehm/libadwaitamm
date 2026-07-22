@@ -7,7 +7,7 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
-static void test_adw_header_bar_pack(void) {
+static void test_adw_header_bar_pack() {
   Adw::HeaderBar bar;
   Gtk::Switch widget1;
 
@@ -18,20 +18,20 @@ static void test_adw_header_bar_pack(void) {
   bar.pack_end(widget2);
 }
 
-static void test_adw_header_bar_title_widget(void) {
+static void test_adw_header_bar_title_widget() {
   Adw::HeaderBar bar;
   g_assert_null(bar.get_title_widget());
 
   Gtk::Switch widget;
   bar.set_title_widget(&widget);
 
-  g_assert_true(bar.get_title_widget()->gobj() == (GtkWidget *)widget.gobj());
+  g_assert_true(bar.get_title_widget()->gobj() == (GtkWidget*)widget.gobj());
 
   bar.set_title_widget(nullptr);
   g_assert_null(bar.get_title_widget());
 }
 
-static void test_adw_header_bar_show_start_title_buttons(void) {
+static void test_adw_header_bar_show_start_title_buttons() {
   Adw::HeaderBar bar;
 
   g_assert_true(bar.get_show_start_title_buttons());
@@ -43,7 +43,7 @@ static void test_adw_header_bar_show_start_title_buttons(void) {
   g_assert_true(bar.get_show_start_title_buttons());
 }
 
-static void test_adw_header_bar_show_end_title_buttons(void) {
+static void test_adw_header_bar_show_end_title_buttons() {
   Adw::HeaderBar bar;
 
   g_assert_true(bar.get_show_end_title_buttons());
@@ -55,7 +55,7 @@ static void test_adw_header_bar_show_end_title_buttons(void) {
   g_assert_true(bar.get_show_end_title_buttons());
 }
 
-static void test_adw_header_bar_decoration_layout(void) {
+static void test_adw_header_bar_decoration_layout() {
   Adw::HeaderBar bar;
 
   g_assert_true(bar.get_decoration_layout() == "");
@@ -68,7 +68,7 @@ static void test_adw_header_bar_decoration_layout(void) {
   g_assert_true(bar.get_decoration_layout() == "");
 }
 
-static void test_adw_header_bar_centering_policy(void) {
+static void test_adw_header_bar_centering_policy() {
   Adw::HeaderBar bar;
 
   g_assert_true(bar.get_centering_policy() == Adw::CenteringPolicy::LOOSE);
@@ -80,21 +80,18 @@ static void test_adw_header_bar_centering_policy(void) {
   g_assert_true(bar.get_centering_policy() == Adw::CenteringPolicy::LOOSE);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
   g_test_add_func("/Adwaita/HeaderBar/pack", test_adw_header_bar_pack);
-  g_test_add_func("/Adwaita/HeaderBar/title_widget",
-                  test_adw_header_bar_title_widget);
+  g_test_add_func("/Adwaita/HeaderBar/title_widget", test_adw_header_bar_title_widget);
   g_test_add_func("/Adwaita/HeaderBar/show_start_title_buttons",
                   test_adw_header_bar_show_start_title_buttons);
   g_test_add_func("/Adwaita/HeaderBar/show_end_title_buttons",
                   test_adw_header_bar_show_end_title_buttons);
-  g_test_add_func("/Adwaita/HeaderBar/decoration_layout",
-                  test_adw_header_bar_decoration_layout);
-  g_test_add_func("/Adwaita/HeaderBar/centering_policy",
-                  test_adw_header_bar_centering_policy);
+  g_test_add_func("/Adwaita/HeaderBar/decoration_layout", test_adw_header_bar_decoration_layout);
+  g_test_add_func("/Adwaita/HeaderBar/centering_policy", test_adw_header_bar_centering_policy);
 
   return g_test_run();
 }

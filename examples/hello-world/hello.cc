@@ -33,8 +33,7 @@ static void activate_cb(const Glib::RefPtr<Gtk::Application>& app) {
 int main(int argc, char** argv) {
   Adw::init();
 
-  auto app = Adw::Application::create("org.example.Hello",
-                                      Gio::Application::Flags::NONE);
+  auto app = Adw::Application::create("org.example.Hello", Gio::Application::Flags::NONE);
 
   app->signal_activate().connect(sigc::bind(sigc::ptr_fun(&activate_cb), app));
 

@@ -7,7 +7,9 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
-static void test_adw_spinner_new(void) { Adw::Spinner spinner; }
+static void test_adw_spinner_new() {
+  Adw::Spinner spinner;
+}
 
 int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);

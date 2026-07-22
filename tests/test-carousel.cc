@@ -10,23 +10,25 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void allocate_carousel(Adw::Carousel &carousel) {
+static void allocate_carousel(Adw::Carousel& carousel) {
   int width, height;
 
   int _minimum, _minimum_baseline, _natural_baseline;
-  carousel.measure(Gtk::Orientation::HORIZONTAL, -1, _minimum, width,
-                   _minimum_baseline, _natural_baseline);
+  carousel.measure(Gtk::Orientation::HORIZONTAL, -1, _minimum, width, _minimum_baseline,
+                   _natural_baseline);
 
-  carousel.measure(Gtk::Orientation::VERTICAL, -1, _minimum, height,
-                   _minimum_baseline, _natural_baseline);
+  carousel.measure(Gtk::Orientation::VERTICAL, -1, _minimum, height, _minimum_baseline,
+                   _natural_baseline);
 
   // FIXME: This is not wrapped?
   gtk_widget_allocate(GTK_WIDGET(carousel.gobj()), width, height, 0, NULL);
 }
 
-static void test_adw_carousel_add_remove(void) {
+static void test_adw_carousel_add_remove() {
   Adw::Carousel carousel;
 
   Gtk::Label child1;
@@ -34,8 +36,7 @@ static void test_adw_carousel_add_remove(void) {
   Gtk::Label child3;
 
   notified = 0;
-  carousel.property_n_pages().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  carousel.property_n_pages().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(carousel.get_n_pages() == 0);
 
@@ -47,17 +48,17 @@ static void test_adw_carousel_add_remove(void) {
   allocate_carousel(carousel);
 
   g_assert_true(carousel.get_n_pages() == 2);
-  g_assert_true(carousel.get_nth_page(0)->gobj() == (GtkWidget *)child2.gobj());
-  g_assert_true(carousel.get_nth_page(1)->gobj() == (GtkWidget *)child1.gobj());
+  g_assert_true(carousel.get_nth_page(0)->gobj() == (GtkWidget*)child2.gobj());
+  g_assert_true(carousel.get_nth_page(1)->gobj() == (GtkWidget*)child1.gobj());
   g_assert_true(carousel.get_position() == 1);
   g_assert_true(notified == 2);
 
   carousel.insert(child3, 1);
   allocate_carousel(carousel);
   g_assert_true(carousel.get_n_pages() == 3);
-  g_assert_true(carousel.get_nth_page(0)->gobj() == (GtkWidget *)child2.gobj());
-  g_assert_true(carousel.get_nth_page(1)->gobj() == (GtkWidget *)child3.gobj());
-  g_assert_true(carousel.get_nth_page(2)->gobj() == (GtkWidget *)child1.gobj());
+  g_assert_true(carousel.get_nth_page(0)->gobj() == (GtkWidget*)child2.gobj());
+  g_assert_true(carousel.get_nth_page(1)->gobj() == (GtkWidget*)child3.gobj());
+  g_assert_true(carousel.get_nth_page(2)->gobj() == (GtkWidget*)child1.gobj());
   g_assert_true(carousel.get_position() == 2);
   g_assert_true(notified == 3);
 
@@ -73,9 +74,8 @@ static void test_adw_carousel_add_remove(void) {
   g_assert_true(notified == 5);
 }
 
-static void assert_carousel_positions(Adw::Carousel &carousel,
-                                      Gtk::Widget &child1, Gtk::Widget &child2,
-                                      Gtk::Widget &child3, Gtk::Widget &child4,
+static void assert_carousel_positions(Adw::Carousel& carousel, Gtk::Widget& child1,
+                                      Gtk::Widget& child2, Gtk::Widget& child3, Gtk::Widget& child4,
                                       double position) {
   allocate_carousel(carousel);
   g_assert_true(carousel.get_nth_page(0)->gobj() == child1.gobj());
@@ -85,7 +85,7 @@ static void assert_carousel_positions(Adw::Carousel &carousel,
   g_assert_true(carousel.get_position() == position);
 }
 
-static void test_adw_carousel_reorder(void) {
+static void test_adw_carousel_reorder() {
   Adw::Carousel carousel;
   Gtk::Label child1;
   Gtk::Label child2;
@@ -145,12 +145,11 @@ static void test_adw_carousel_reorder(void) {
   assert_carousel_positions(carousel, child1, child2, child3, child4, 3);
 }
 
-static void test_adw_carousel_interactive(void) {
+static void test_adw_carousel_interactive() {
   Adw::Carousel carousel;
 
   notified = 0;
-  carousel.property_interactive().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  carousel.property_interactive().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   /* Accessors */
   g_assert_true(carousel.get_interactive());
@@ -169,12 +168,11 @@ static void test_adw_carousel_interactive(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_carousel_spacing(void) {
+static void test_adw_carousel_spacing() {
   Adw::Carousel carousel;
 
   notified = 0;
-  carousel.property_spacing().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  carousel.property_spacing().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   /* Accessors */
   g_assert_true(carousel.get_spacing() == 0);
@@ -193,18 +191,17 @@ static void test_adw_carousel_spacing(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_carousel_scroll_params(void) {
+static void test_adw_carousel_scroll_params() {
   Adw::Carousel carousel;
 
   notified = 0;
-  carousel.property_scroll_params().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  carousel.property_scroll_params().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::RefPtr<Adw::SpringParams> default_params = carousel.get_scroll_params();
   g_assert_true(default_params != nullptr);
 
   Glib::RefPtr<Adw::SpringParams> params =
-      Adw::SpringParams::create(Adw::DampingRatio{1.0}, 1.0, 100.0);
+    Adw::SpringParams::create(Adw::DampingRatio{1.0}, 1.0, 100.0);
   carousel.set_scroll_params(params);
   g_assert_true(carousel.get_scroll_params()->gobj() == params->gobj());
   g_assert_true(notified == 1);
@@ -214,12 +211,11 @@ static void test_adw_carousel_scroll_params(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_carousel_allow_mouse_drag(void) {
+static void test_adw_carousel_allow_mouse_drag() {
   Adw::Carousel carousel;
 
   notified = 0;
-  carousel.property_allow_mouse_drag().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  carousel.property_allow_mouse_drag().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   /* Accessors */
   g_assert_true(carousel.get_allow_mouse_drag());
@@ -238,12 +234,11 @@ static void test_adw_carousel_allow_mouse_drag(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_carousel_allow_scroll_wheel(void) {
+static void test_adw_carousel_allow_scroll_wheel() {
   Adw::Carousel carousel;
 
   notified = 0;
-  carousel.property_allow_scroll_wheel().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  carousel.property_allow_scroll_wheel().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   /* Accessors */
   g_assert_true(carousel.get_allow_scroll_wheel());
@@ -262,12 +257,11 @@ static void test_adw_carousel_allow_scroll_wheel(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_carousel_allow_long_swipes(void) {
+static void test_adw_carousel_allow_long_swipes() {
   Adw::Carousel carousel;
 
   notified = 0;
-  carousel.property_allow_long_swipes().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  carousel.property_allow_long_swipes().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   /* Accessors */
   g_assert_false(carousel.get_allow_long_swipes());
@@ -286,12 +280,11 @@ static void test_adw_carousel_allow_long_swipes(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_carousel_reveal_duration(void) {
+static void test_adw_carousel_reveal_duration() {
   Adw::Carousel carousel;
 
   notified = 0;
-  carousel.property_reveal_duration().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  carousel.property_reveal_duration().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   /* Accessors */
   g_assert_true(carousel.get_reveal_duration() == 0);
@@ -310,7 +303,7 @@ static void test_adw_carousel_reveal_duration(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_carousel_page_changed(void) {
+static void test_adw_carousel_page_changed() {
   Adw::Carousel carousel;
   Gtk::Label child1;
   Gtk::Label child2;
@@ -344,12 +337,11 @@ static void test_adw_carousel_page_changed(void) {
   g_assert_true(page_changed_count == 3);
 }
 
-static void test_adw_carousel_orientation(void) {
+static void test_adw_carousel_orientation() {
   Adw::Carousel carousel;
 
   notified = 0;
-  carousel.property_orientation().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  carousel.property_orientation().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   /* AdwCarousel defaults to horizontal */
   g_assert_true(carousel.get_orientation() == Gtk::Orientation::HORIZONTAL);
@@ -358,8 +350,7 @@ static void test_adw_carousel_orientation(void) {
   g_assert_true(carousel.get_orientation() == Gtk::Orientation::VERTICAL);
   g_assert_true(notified == 1);
 
-  carousel.set_property<Gtk::Orientation>("orientation",
-                                          Gtk::Orientation::HORIZONTAL);
+  carousel.set_property<Gtk::Orientation>("orientation", Gtk::Orientation::HORIZONTAL);
   g_assert_true(carousel.get_orientation() == Gtk::Orientation::HORIZONTAL);
   g_assert_true(notified == 2);
 
@@ -368,7 +359,7 @@ static void test_adw_carousel_orientation(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_carousel_swipeable(void) {
+static void test_adw_carousel_swipeable() {
   Adw::Carousel carousel;
   Gtk::Label child1;
   Gtk::Label child2;
@@ -393,29 +384,21 @@ static void test_adw_carousel_swipeable(void) {
   g_assert_true(carousel.get_cancel_progress() == 1);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
   g_test_add_func("/Adwaita/Carousel/add_remove", test_adw_carousel_add_remove);
   g_test_add_func("/Adwaita/Carousel/reorder", test_adw_carousel_reorder);
-  g_test_add_func("/Adwaita/Carousel/interactive",
-                  test_adw_carousel_interactive);
+  g_test_add_func("/Adwaita/Carousel/interactive", test_adw_carousel_interactive);
   g_test_add_func("/Adwaita/Carousel/spacing", test_adw_carousel_spacing);
-  g_test_add_func("/Adwaita/Carousel/scroll_params",
-                  test_adw_carousel_scroll_params);
-  g_test_add_func("/Adwaita/Carousel/allow_mouse_drag",
-                  test_adw_carousel_allow_mouse_drag);
-  g_test_add_func("/Adwaita/Carousel/allow_scroll_wheel",
-                  test_adw_carousel_allow_scroll_wheel);
-  g_test_add_func("/Adwaita/Carousel/allow_long_swipes",
-                  test_adw_carousel_allow_long_swipes);
-  g_test_add_func("/Adwaita/Carousel/reveal_duration",
-                  test_adw_carousel_reveal_duration);
-  g_test_add_func("/Adwaita/Carousel/page_changed",
-                  test_adw_carousel_page_changed);
-  g_test_add_func("/Adwaita/Carousel/orientation",
-                  test_adw_carousel_orientation);
+  g_test_add_func("/Adwaita/Carousel/scroll_params", test_adw_carousel_scroll_params);
+  g_test_add_func("/Adwaita/Carousel/allow_mouse_drag", test_adw_carousel_allow_mouse_drag);
+  g_test_add_func("/Adwaita/Carousel/allow_scroll_wheel", test_adw_carousel_allow_scroll_wheel);
+  g_test_add_func("/Adwaita/Carousel/allow_long_swipes", test_adw_carousel_allow_long_swipes);
+  g_test_add_func("/Adwaita/Carousel/reveal_duration", test_adw_carousel_reveal_duration);
+  g_test_add_func("/Adwaita/Carousel/page_changed", test_adw_carousel_page_changed);
+  g_test_add_func("/Adwaita/Carousel/orientation", test_adw_carousel_orientation);
   g_test_add_func("/Adwaita/Carousel/swipeable", test_adw_carousel_swipeable);
   return g_test_run();
 }

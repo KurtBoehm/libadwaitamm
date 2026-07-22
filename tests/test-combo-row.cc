@@ -10,9 +10,11 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_combo_row_set_for_enum(void) {
+static void test_adw_combo_row_set_for_enum() {
   Adw::ComboRow row;
   Glib::RefPtr<Gtk::Expression<Glib::ustring>> expr;
   Glib::RefPtr<Gio::ListModel> model;
@@ -20,8 +22,7 @@ static void test_adw_combo_row_set_for_enum(void) {
 
   g_assert_true(row.get_model() == nullptr);
 
-  expr = Gtk::PropertyExpression<Glib::ustring>::create(
-      Adw::EnumListItem::get_type(), "nick");
+  expr = Gtk::PropertyExpression<Glib::ustring>::create(Adw::EnumListItem::get_type(), "nick");
   row.set_expression(expr);
 
   // Enums don't have a way to retrieve its GType in gtkmm.
@@ -42,7 +43,7 @@ static void test_adw_combo_row_set_for_enum(void) {
   g_assert_true(item->get_nick() == "vertical");
 }
 
-static void test_adw_combo_row_model(void) {
+static void test_adw_combo_row_model() {
   Adw::ComboRow row;
   Glib::RefPtr<Gio::ListModel> model;
 
@@ -61,7 +62,7 @@ static void test_adw_combo_row_model(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_combo_row_selected(void) {
+static void test_adw_combo_row_selected() {
   Adw::ComboRow row;
   Glib::RefPtr<Gio::ListModel> model;
   int selected = 0;
@@ -91,7 +92,7 @@ static void test_adw_combo_row_selected(void) {
   g_assert_true(notified == 3);
 }
 
-static void test_adw_combo_row_selected_item(void) {
+static void test_adw_combo_row_selected_item() {
   Adw::ComboRow row;
   Glib::RefPtr<Gio::ListModel> model;
 
@@ -108,7 +109,7 @@ static void test_adw_combo_row_selected_item(void) {
   g_assert_true(item->gobj() != item2->gobj());
 }
 
-static void test_adw_combo_row_factory(void) {
+static void test_adw_combo_row_factory() {
   Adw::ComboRow row;
   Glib::RefPtr<Gtk::ListItemFactory> initial = row.get_factory();
 
@@ -117,8 +118,7 @@ static void test_adw_combo_row_factory(void) {
 
   auto factory = Gtk::SignalListItemFactory::create();
   row.set_factory(factory);
-  g_assert_true(row.get_factory()->gobj() ==
-                (GtkListItemFactory *)factory->gobj());
+  g_assert_true(row.get_factory()->gobj() == (GtkListItemFactory*)factory->gobj());
   g_assert_true(notified == 1);
 
   row.set_factory(nullptr);
@@ -126,44 +126,39 @@ static void test_adw_combo_row_factory(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_combo_row_header_factory(void) {
+static void test_adw_combo_row_header_factory() {
   Adw::ComboRow row;
 
   notified = 0;
-  row.property_header_factory().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  row.property_header_factory().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(row.get_header_factory() == nullptr);
 
   auto factory = Gtk::SignalListItemFactory::create();
   row.set_header_factory(factory);
-  g_assert_true(row.get_header_factory()->gobj() ==
-                (GtkListItemFactory *)factory->gobj());
+  g_assert_true(row.get_header_factory()->gobj() == (GtkListItemFactory*)factory->gobj());
   g_assert_true(notified == 1);
 }
 
-static void test_adw_combo_row_list_factory(void) {
+static void test_adw_combo_row_list_factory() {
   Adw::ComboRow row;
 
   notified = 0;
-  row.property_list_factory().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  row.property_list_factory().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(row.get_list_factory() == nullptr);
 
   auto factory = Gtk::SignalListItemFactory::create();
   row.set_list_factory(factory);
-  g_assert_true(row.get_list_factory()->gobj() ==
-                (GtkListItemFactory *)factory->gobj());
+  g_assert_true(row.get_list_factory()->gobj() == (GtkListItemFactory*)factory->gobj());
   g_assert_true(notified == 1);
 }
 
-static void test_adw_combo_row_use_subtitle(void) {
+static void test_adw_combo_row_use_subtitle() {
   Adw::ComboRow row;
 
   notified = 0;
-  row.property_use_subtitle().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  row.property_use_subtitle().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_false(row.get_use_subtitle());
 
@@ -180,12 +175,11 @@ static void test_adw_combo_row_use_subtitle(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_combo_row_enable_search(void) {
+static void test_adw_combo_row_enable_search() {
   Adw::ComboRow row;
 
   notified = 0;
-  row.property_enable_search().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  row.property_enable_search().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_false(row.get_enable_search());
   row.set_enable_search(true);
@@ -200,45 +194,35 @@ static void test_adw_combo_row_enable_search(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_combo_row_search_match_mode(void) {
+static void test_adw_combo_row_search_match_mode() {
   Adw::ComboRow row;
 
   notified = 0;
-  row.property_search_match_mode().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  row.property_search_match_mode().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  g_assert_true(row.get_search_match_mode() ==
-                Gtk::StringFilter::MatchMode::PREFIX);
+  g_assert_true(row.get_search_match_mode() == Gtk::StringFilter::MatchMode::PREFIX);
   row.set_search_match_mode(Gtk::StringFilter::MatchMode::SUBSTRING);
-  g_assert_true(row.get_search_match_mode() ==
-                Gtk::StringFilter::MatchMode::SUBSTRING);
+  g_assert_true(row.get_search_match_mode() == Gtk::StringFilter::MatchMode::SUBSTRING);
   g_assert_true(notified == 1);
 
   row.set_search_match_mode(Gtk::StringFilter::MatchMode::SUBSTRING);
   g_assert_true(notified == 1);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/ComboRow/set_for_enum",
-                  test_adw_combo_row_set_for_enum);
+  g_test_add_func("/Adwaita/ComboRow/set_for_enum", test_adw_combo_row_set_for_enum);
   g_test_add_func("/Adwaita/ComboRow/model", test_adw_combo_row_model);
   g_test_add_func("/Adwaita/ComboRow/selected", test_adw_combo_row_selected);
-  g_test_add_func("/Adwaita/ComboRow/selected_item",
-                  test_adw_combo_row_selected_item);
+  g_test_add_func("/Adwaita/ComboRow/selected_item", test_adw_combo_row_selected_item);
   g_test_add_func("/Adwaita/ComboRow/factory", test_adw_combo_row_factory);
-  g_test_add_func("/Adwaita/ComboRow/header_factory",
-                  test_adw_combo_row_header_factory);
-  g_test_add_func("/Adwaita/ComboRow/list_factory",
-                  test_adw_combo_row_list_factory);
-  g_test_add_func("/Adwaita/ComboRow/use_subtitle",
-                  test_adw_combo_row_use_subtitle);
-  g_test_add_func("/Adwaita/ComboRow/enable_search",
-                  test_adw_combo_row_enable_search);
-  g_test_add_func("/Adwaita/ComboRow/search_match_mode",
-                  test_adw_combo_row_search_match_mode);
+  g_test_add_func("/Adwaita/ComboRow/header_factory", test_adw_combo_row_header_factory);
+  g_test_add_func("/Adwaita/ComboRow/list_factory", test_adw_combo_row_list_factory);
+  g_test_add_func("/Adwaita/ComboRow/use_subtitle", test_adw_combo_row_use_subtitle);
+  g_test_add_func("/Adwaita/ComboRow/enable_search", test_adw_combo_row_enable_search);
+  g_test_add_func("/Adwaita/ComboRow/search_match_mode", test_adw_combo_row_search_match_mode);
 
   return g_test_run();
 }

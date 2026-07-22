@@ -13,18 +13,19 @@ int notified;
 
 static void value_cb(double) {}
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_animation_value_from(void) {
+static void test_adw_animation_value_from() {
   Gtk::Button widget;
   Glib::RefPtr<Adw::AnimationTarget> target =
-      Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
+    Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
   Glib::RefPtr<Adw::TimedAnimation> animation =
-      Adw::TimedAnimation::create(&widget, 10, 20, 100, target);
+    Adw::TimedAnimation::create(&widget, 10, 20, 100, target);
 
   notified = 0;
-  animation->property_value_from().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  animation->property_value_from().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   double value = animation->get_property<double>("value-from");
   g_assert_true(value == 10);
@@ -40,18 +41,17 @@ static void test_adw_animation_value_from(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_animation_value_to(void) {
+static void test_adw_animation_value_to() {
   Gtk::Button widget;
   Glib::RefPtr<Adw::AnimationTarget> target =
-      Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
+    Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
   Glib::RefPtr<Adw::TimedAnimation> animation =
-      Adw::TimedAnimation::create(&widget, 10, 20, 100, target);
+    Adw::TimedAnimation::create(&widget, 10, 20, 100, target);
 
   animation->skip();
 
   notified = 0;
-  animation->property_value_to().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  animation->property_value_to().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   double value = animation->get_property<double>("value-to");
   g_assert_true(value == 20);
@@ -67,16 +67,15 @@ static void test_adw_animation_value_to(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_animation_duration(void) {
+static void test_adw_animation_duration() {
   Gtk::Button widget;
   Glib::RefPtr<Adw::AnimationTarget> target =
-      Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
+    Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
   Glib::RefPtr<Adw::TimedAnimation> animation =
-      Adw::TimedAnimation::create(&widget, 10, 20, 100, target);
+    Adw::TimedAnimation::create(&widget, 10, 20, 100, target);
 
   notified = 0;
-  animation->property_duration().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  animation->property_duration().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   guint duration = animation->get_property<guint>("duration");
   g_assert_true(duration == 100);
@@ -92,16 +91,15 @@ static void test_adw_animation_duration(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_animation_easing(void) {
+static void test_adw_animation_easing() {
   Gtk::Button widget;
   Glib::RefPtr<Adw::AnimationTarget> target =
-      Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
+    Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
   Glib::RefPtr<Adw::TimedAnimation> animation =
-      Adw::TimedAnimation::create(&widget, 10, 20, 100, target);
+    Adw::TimedAnimation::create(&widget, 10, 20, 100, target);
 
   notified = 0;
-  animation->property_easing().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  animation->property_easing().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Adw::Easing easing = animation->get_property<Adw::Easing>("easing");
   g_assert_true(easing == Adw::Easing::EASE_OUT_CUBIC);
@@ -112,25 +110,22 @@ static void test_adw_animation_easing(void) {
   g_assert_true(easing == Adw::Easing::EASE_IN_CUBIC);
   g_assert_true(notified == 1);
 
-  animation->set_property<Adw::Easing>("easing",
-                                       Adw::Easing::EASE_IN_OUT_CUBIC);
+  animation->set_property<Adw::Easing>("easing", Adw::Easing::EASE_IN_OUT_CUBIC);
   g_assert_true(animation->get_easing() == Adw::Easing::EASE_IN_OUT_CUBIC);
   g_assert_true(notified == 2);
 }
 
-static void test_adw_animation_repeat_count(void) {
+static void test_adw_animation_repeat_count() {
   Gtk::Button widget;
   Glib::RefPtr<Adw::AnimationTarget> target =
-      Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
+    Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
   Glib::RefPtr<Adw::TimedAnimation> animation =
-      Adw::TimedAnimation::create(&widget, 10, 20, 100, target);
+    Adw::TimedAnimation::create(&widget, 10, 20, 100, target);
 
   notified = 0;
-  animation->property_repeat_count().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  animation->property_repeat_count().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  guint repeat_count =
-      animation->get_property<guint>("repeat-count");
+  guint repeat_count = animation->get_property<guint>("repeat-count");
   g_assert_true(repeat_count == 1);
   g_assert_true(notified == 0);
 
@@ -144,16 +139,15 @@ static void test_adw_animation_repeat_count(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_animation_reverse(void) {
+static void test_adw_animation_reverse() {
   Gtk::Button widget;
   Glib::RefPtr<Adw::AnimationTarget> target =
-      Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
+    Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
   Glib::RefPtr<Adw::TimedAnimation> animation =
-      Adw::TimedAnimation::create(&widget, 10, 20, 100, target);
+    Adw::TimedAnimation::create(&widget, 10, 20, 100, target);
 
   notified = 0;
-  animation->property_reverse().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  animation->property_reverse().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   bool reverse = animation->get_property<bool>("reverse");
   g_assert_false(reverse);
@@ -169,16 +163,15 @@ static void test_adw_animation_reverse(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_animation_alternate(void) {
+static void test_adw_animation_alternate() {
   Gtk::Button widget;
   Glib::RefPtr<Adw::AnimationTarget> target =
-      Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
+    Adw::CallbackAnimationTarget::create(sigc::ptr_fun(value_cb));
   Glib::RefPtr<Adw::TimedAnimation> animation =
-      Adw::TimedAnimation::create(&widget, 10, 20, 100, target);
+    Adw::TimedAnimation::create(&widget, 10, 20, 100, target);
 
   notified = 0;
-  animation->property_alternate().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  animation->property_alternate().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   bool alternate = animation->get_property<bool>("alternate");
   g_assert_false(alternate);
@@ -194,23 +187,17 @@ static void test_adw_animation_alternate(void) {
   g_assert_true(notified == 2);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/TimedAnimation/value_from",
-                  test_adw_animation_value_from);
-  g_test_add_func("/Adwaita/TimedAnimation/value_to",
-                  test_adw_animation_value_to);
-  g_test_add_func("/Adwaita/TimedAnimation/duration",
-                  test_adw_animation_duration);
+  g_test_add_func("/Adwaita/TimedAnimation/value_from", test_adw_animation_value_from);
+  g_test_add_func("/Adwaita/TimedAnimation/value_to", test_adw_animation_value_to);
+  g_test_add_func("/Adwaita/TimedAnimation/duration", test_adw_animation_duration);
   g_test_add_func("/Adwaita/TimedAnimation/easing", test_adw_animation_easing);
-  g_test_add_func("/Adwaita/TimedAnimation/repeat_count",
-                  test_adw_animation_repeat_count);
-  g_test_add_func("/Adwaita/TimedAnimation/reverse",
-                  test_adw_animation_reverse);
-  g_test_add_func("/Adwaita/TimedAnimation/alternate",
-                  test_adw_animation_alternate);
+  g_test_add_func("/Adwaita/TimedAnimation/repeat_count", test_adw_animation_repeat_count);
+  g_test_add_func("/Adwaita/TimedAnimation/reverse", test_adw_animation_reverse);
+  g_test_add_func("/Adwaita/TimedAnimation/alternate", test_adw_animation_alternate);
 
   return g_test_run();
 }

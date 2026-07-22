@@ -11,14 +11,15 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_window_title_title(void) {
+static void test_adw_window_title_title() {
   Adw::WindowTitle window_title("Some title", "");
 
   notified = 0;
-  window_title.property_title().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  window_title.property_title().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::ustring title = window_title.get_property<Glib::ustring>("title");
   g_assert_true(title == "Some title");
@@ -35,12 +36,11 @@ static void test_adw_window_title_title(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_window_title_subtitle(void) {
+static void test_adw_window_title_subtitle() {
   Adw::WindowTitle window_title("", "Some subtitle");
 
   notified = 0;
-  window_title.property_subtitle().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  window_title.property_subtitle().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::ustring subtitle = window_title.get_property<Glib::ustring>("subtitle");
   g_assert_true(subtitle == "Some subtitle");
@@ -57,13 +57,12 @@ static void test_adw_window_title_subtitle(void) {
   g_assert_true(notified == 2);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
   g_test_add_func("/Adwaita/WindowTitle/title", test_adw_window_title_title);
-  g_test_add_func("/Adwaita/WindowTitle/subtitle",
-                  test_adw_window_title_subtitle);
+  g_test_add_func("/Adwaita/WindowTitle/subtitle", test_adw_window_title_subtitle);
 
   return g_test_run();
 }

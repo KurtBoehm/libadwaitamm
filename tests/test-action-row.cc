@@ -8,11 +8,11 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
-static void test_adw_action_row_add_remove(void) {
+static void test_adw_action_row_add_remove() {
   Adw::ActionRow row;
 
-  auto *prefix = Gtk::make_managed<Gtk::CheckButton>();
-  auto *suffix = Gtk::make_managed<Gtk::CheckButton>();
+  auto* prefix = Gtk::make_managed<Gtk::CheckButton>();
+  auto* suffix = Gtk::make_managed<Gtk::CheckButton>();
 
   row.add_prefix(*prefix);
   row.add_suffix(*suffix);
@@ -21,12 +21,11 @@ static void test_adw_action_row_add_remove(void) {
   row.remove(*suffix);
 }
 
-static void test_adw_action_row_subtitle(void) {
+static void test_adw_action_row_subtitle() {
   Adw::ActionRow row;
 
   int notified = 0;
-  row.property_subtitle().signal_changed().connect(
-      [&notified]() { notified++; });
+  row.property_subtitle().signal_changed().connect([&notified]() { notified++; });
 
   g_assert_true(row.get_subtitle() == "");
   g_assert_cmpint(notified, ==, 0);
@@ -45,7 +44,7 @@ static void test_adw_action_row_subtitle(void) {
   g_assert_cmpint(notified, ==, 3);
 }
 
-static void test_adw_action_row_icon_name(void) {
+static void test_adw_action_row_icon_name() {
   Adw::ActionRow row;
 
   g_assert_true(row.get_icon_name() == "");
@@ -54,12 +53,12 @@ static void test_adw_action_row_icon_name(void) {
   g_assert_true(row.get_icon_name() == "dummy-icon-name");
 }
 
-static void test_adw_action_row_activatable_widget(void) {
+static void test_adw_action_row_activatable_widget() {
   Adw::ActionRow row;
 
   g_assert_null(row.get_activatable_widget());
 
-  auto *widget = Gtk::make_managed<Gtk::CheckButton>();
+  auto* widget = Gtk::make_managed<Gtk::CheckButton>();
   row.add_prefix(*widget);
   row.set_activatable_widget(widget);
   g_assert_true(row.get_activatable_widget() == widget);
@@ -68,13 +67,12 @@ static void test_adw_action_row_activatable_widget(void) {
   g_assert_true(row.get_activatable_widget() == &row);
 }
 
-static void test_adw_action_row_title_lines(void) {
+static void test_adw_action_row_title_lines() {
   Adw::ActionRow row;
   g_assert_true(row.get_title_lines() == 0);
 
-  g_test_expect_message(
-      ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
-      "adw_action_row_set_title_lines: assertion 'title_lines >= 0' failed");
+  g_test_expect_message(ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                        "adw_action_row_set_title_lines: assertion 'title_lines >= 0' failed");
   row.set_title_lines(-1);
   g_test_assert_expected_messages();
 
@@ -84,7 +82,7 @@ static void test_adw_action_row_title_lines(void) {
   g_assert_true(row.get_title_lines() == 1);
 }
 
-static void test_adw_action_row_subtitle_lines(void) {
+static void test_adw_action_row_subtitle_lines() {
   Adw::ActionRow row;
 
   g_assert_true(row.get_subtitle_lines() == 0);
@@ -101,7 +99,7 @@ static void test_adw_action_row_subtitle_lines(void) {
   g_assert_true(row.get_subtitle_lines() == 1);
 }
 
-static void test_adw_action_row_subtitle_selectable(void) {
+static void test_adw_action_row_subtitle_selectable() {
   Adw::ActionRow row;
 
   g_assert_false(row.get_subtitle_selectable());
@@ -113,7 +111,7 @@ static void test_adw_action_row_subtitle_selectable(void) {
   g_assert_false(row.get_subtitle_selectable());
 }
 
-static void test_adw_action_row_activate(void) {
+static void test_adw_action_row_activate() {
   Adw::ActionRow row;
 
   int activated = 0;
@@ -123,21 +121,16 @@ static void test_adw_action_row_activate(void) {
   g_assert_cmpint(activated, ==, 1);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/ActionRow/add_remove",
-                  test_adw_action_row_add_remove);
+  g_test_add_func("/Adwaita/ActionRow/add_remove", test_adw_action_row_add_remove);
   g_test_add_func("/Adwaita/ActionRow/subtitle", test_adw_action_row_subtitle);
-  g_test_add_func("/Adwaita/ActionRow/icon_name",
-                  test_adw_action_row_icon_name);
-  g_test_add_func("/Adwaita/ActionRow/activatable_widget",
-                  test_adw_action_row_activatable_widget);
-  g_test_add_func("/Adwaita/ActionRow/title_lines",
-                  test_adw_action_row_title_lines);
-  g_test_add_func("/Adwaita/ActionRow/subtitle_lines",
-                  test_adw_action_row_subtitle_lines);
+  g_test_add_func("/Adwaita/ActionRow/icon_name", test_adw_action_row_icon_name);
+  g_test_add_func("/Adwaita/ActionRow/activatable_widget", test_adw_action_row_activatable_widget);
+  g_test_add_func("/Adwaita/ActionRow/title_lines", test_adw_action_row_title_lines);
+  g_test_add_func("/Adwaita/ActionRow/subtitle_lines", test_adw_action_row_subtitle_lines);
   g_test_add_func("/Adwaita/ActionRow/subtitle_selectable",
                   test_adw_action_row_subtitle_selectable);
   g_test_add_func("/Adwaita/ActionRow/activate", test_adw_action_row_activate);

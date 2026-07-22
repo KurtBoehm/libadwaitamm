@@ -11,14 +11,15 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_shortcut_label_accelerator(void) {
+static void test_adw_shortcut_label_accelerator() {
   Adw::ShortcutLabel label("<Control>C");
 
   notified = 0;
-  label.property_accelerator().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  label.property_accelerator().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::ustring accel = label.get_property<Glib::ustring>("accelerator");
   g_assert_true(accel == "<Control>C");
@@ -33,12 +34,11 @@ static void test_adw_shortcut_label_accelerator(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_shortcut_label_disabled_text(void) {
+static void test_adw_shortcut_label_disabled_text() {
   Adw::ShortcutLabel label("<Control>C");
 
   notified = 0;
-  label.property_disabled_text().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  label.property_disabled_text().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::ustring text = label.get_property<Glib::ustring>("disabled-text");
   g_assert_true(text == "");
@@ -57,10 +57,8 @@ int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/ShortcutLabel/accelerator",
-                  test_adw_shortcut_label_accelerator);
-  g_test_add_func("/Adwaita/ShortcutLabel/disabled_text",
-                  test_adw_shortcut_label_disabled_text);
+  g_test_add_func("/Adwaita/ShortcutLabel/accelerator", test_adw_shortcut_label_accelerator);
+  g_test_add_func("/Adwaita/ShortcutLabel/disabled_text", test_adw_shortcut_label_disabled_text);
 
   return g_test_run();
 }

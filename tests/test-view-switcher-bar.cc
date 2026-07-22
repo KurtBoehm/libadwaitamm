@@ -7,9 +7,9 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
-static void test_adw_view_switcher_bar_stack(void) {
+static void test_adw_view_switcher_bar_stack() {
   Adw::ViewSwitcherBar bar;
-  Adw::ViewStack *stack = Gtk::make_managed<Adw::ViewStack>();
+  Adw::ViewStack* stack = Gtk::make_managed<Adw::ViewStack>();
 
   bar.set_stack(stack);
   g_assert_true(bar.get_stack() == stack);
@@ -18,7 +18,7 @@ static void test_adw_view_switcher_bar_stack(void) {
   g_assert_true(bar.get_stack() == nullptr);
 }
 
-static void test_adw_view_switcher_bar_reveal(void) {
+static void test_adw_view_switcher_bar_reveal() {
   Adw::ViewSwitcherBar bar;
 
   g_assert_false(bar.get_reveal());
@@ -30,14 +30,12 @@ static void test_adw_view_switcher_bar_reveal(void) {
   g_assert_false(bar.get_reveal());
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/ViewSwitcherBar/stack",
-                  test_adw_view_switcher_bar_stack);
-  g_test_add_func("/Adwaita/ViewSwitcherBar/reveal",
-                  test_adw_view_switcher_bar_reveal);
+  g_test_add_func("/Adwaita/ViewSwitcherBar/stack", test_adw_view_switcher_bar_stack);
+  g_test_add_func("/Adwaita/ViewSwitcherBar/reveal", test_adw_view_switcher_bar_reveal);
 
   return g_test_run();
 }

@@ -11,15 +11,17 @@
 
 int notified;
 
-static void notify_cb(void) { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_bin_child(void) {
+static void test_adw_bin_child() {
   Adw::Bin bin;
 
   notified = 0;
   bin.property_child().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  Gtk::Widget *widget = bin.get_property<Gtk::Widget *>("child");
+  Gtk::Widget* widget = bin.get_property<Gtk::Widget*>("child");
   g_assert_null(widget);
 
   bin.set_child(nullptr);
@@ -30,11 +32,11 @@ static void test_adw_bin_child(void) {
   g_assert_true(bin.get_child() == widget);
   g_assert_true(notified == 1);
 
-  bin.set_property<Gtk::Widget *>("child", nullptr);
+  bin.set_property<Gtk::Widget*>("child", nullptr);
   g_assert_true(notified == 2);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 

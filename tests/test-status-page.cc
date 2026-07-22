@@ -9,17 +9,17 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_status_page_icon_name(void) {
+static void test_adw_status_page_icon_name() {
   Adw::StatusPage status_page;
 
   notified = 0;
-  status_page.property_icon_name().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  status_page.property_icon_name().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  Glib::ustring icon_name =
-      status_page.get_property<Glib::ustring>("icon-name");
+  Glib::ustring icon_name = status_page.get_property<Glib::ustring>("icon-name");
   g_assert_true(icon_name == "");
 
   status_page.set_icon_name("");
@@ -37,12 +37,11 @@ static void test_adw_status_page_icon_name(void) {
   g_assert_cmpint(notified, ==, 3);
 }
 
-static void test_adw_status_page_title(void) {
+static void test_adw_status_page_title() {
   Adw::StatusPage status_page;
 
   notified = 0;
-  status_page.property_title().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  status_page.property_title().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::ustring title = status_page.get_property<Glib::ustring>("title");
   g_assert_true(title == "");
@@ -59,15 +58,13 @@ static void test_adw_status_page_title(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_status_page_description(void) {
+static void test_adw_status_page_description() {
   Adw::StatusPage status_page;
 
   notified = 0;
-  status_page.property_description().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  status_page.property_description().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  Glib::ustring description =
-      status_page.get_property<Glib::ustring>("description");
+  Glib::ustring description = status_page.get_property<Glib::ustring>("description");
   g_assert_true(description == "");
 
   status_page.set_description("");
@@ -86,11 +83,9 @@ int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/StatusPage/icon_name",
-                  test_adw_status_page_icon_name);
+  g_test_add_func("/Adwaita/StatusPage/icon_name", test_adw_status_page_icon_name);
   g_test_add_func("/Adwaita/StatusPage/title", test_adw_status_page_title);
-  g_test_add_func("/Adwaita/StatusPage/description",
-                  test_adw_status_page_description);
+  g_test_add_func("/Adwaita/StatusPage/description", test_adw_status_page_description);
 
   return g_test_run();
 }

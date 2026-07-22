@@ -7,13 +7,13 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
-static void test_adw_enum_list_model_enum_type(void) {
+static void test_adw_enum_list_model_enum_type() {
   auto model = Adw::EnumListModel::create(GTK_TYPE_ORIENTATION);
 
   g_assert_true(model->get_enum_type() == GTK_TYPE_ORIENTATION);
 }
 
-static void test_adw_enum_list_model_find_position(void) {
+static void test_adw_enum_list_model_find_position() {
   auto model = Adw::EnumListModel::create(GTK_TYPE_ORIENTATION);
 
   // GtkOrientation: HORIZONTAL = 0, VERTICAL = 1
@@ -21,7 +21,7 @@ static void test_adw_enum_list_model_find_position(void) {
   g_assert_cmpuint(model->find_position(GTK_ORIENTATION_VERTICAL), ==, 1);
 }
 
-static void test_adw_enum_list_model_n_items(void) {
+static void test_adw_enum_list_model_n_items() {
   auto model = Adw::EnumListModel::create(GTK_TYPE_ORIENTATION);
 
   // Exercises the inherited Gio::ListModel method, present since introduction.
@@ -34,16 +34,13 @@ static void test_adw_enum_list_model_n_items(void) {
   g_assert_cmpuint(n_items, ==, 2);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/EnumListModel/enum_type",
-                  test_adw_enum_list_model_enum_type);
-  g_test_add_func("/Adwaita/EnumListModel/find_position",
-                  test_adw_enum_list_model_find_position);
-  g_test_add_func("/Adwaita/EnumListModel/n_items",
-                  test_adw_enum_list_model_n_items);
+  g_test_add_func("/Adwaita/EnumListModel/enum_type", test_adw_enum_list_model_enum_type);
+  g_test_add_func("/Adwaita/EnumListModel/find_position", test_adw_enum_list_model_find_position);
+  g_test_add_func("/Adwaita/EnumListModel/n_items", test_adw_enum_list_model_n_items);
 
   return g_test_run();
 }

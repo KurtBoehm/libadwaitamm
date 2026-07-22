@@ -8,33 +8,33 @@
 #include <libadwaitamm/init.h> // Adw::init
 
 int notified;
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_clamp_layout_maximum_size(void) {
+static void test_adw_clamp_layout_maximum_size() {
   auto layout = Adw::ClampLayout::create();
 
   notified = 0;
-  layout->property_maximum_size().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  layout->property_maximum_size().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   layout->set_maximum_size(100);
   g_assert_true(layout->get_maximum_size() == 100);
   g_assert_true(notified == 1);
 }
 
-static void test_adw_clamp_layout_tightening_threshold(void) {
+static void test_adw_clamp_layout_tightening_threshold() {
   auto layout = Adw::ClampLayout::create();
 
   notified = 0;
-  layout->property_tightening_threshold().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  layout->property_tightening_threshold().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   layout->set_tightening_threshold(50);
   g_assert_true(layout->get_tightening_threshold() == 50);
   g_assert_true(notified == 1);
 }
 
-static void test_adw_clamp_layout_unit(void) {
+static void test_adw_clamp_layout_unit() {
   auto layout = Adw::ClampLayout::create();
 
   notified = 0;
@@ -46,12 +46,11 @@ static void test_adw_clamp_layout_unit(void) {
   g_assert_true(notified == 1);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/ClampLayout/maximum_size",
-                  test_adw_clamp_layout_maximum_size);
+  g_test_add_func("/Adwaita/ClampLayout/maximum_size", test_adw_clamp_layout_maximum_size);
   g_test_add_func("/Adwaita/ClampLayout/tightening_threshold",
                   test_adw_clamp_layout_tightening_threshold);
   g_test_add_func("/Adwaita/ClampLayout/unit", test_adw_clamp_layout_unit);

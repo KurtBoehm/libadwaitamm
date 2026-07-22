@@ -72,5 +72,4 @@ public:
   _WRAP_PROPERTY("target-css-class", Glib::ustring, newin "1.10")
   _WRAP_PROPERTY("flags", Glib::Binding::Flags, newin "1.10")
 };
-
 } // namespace Adw

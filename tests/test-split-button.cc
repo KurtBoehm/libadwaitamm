@@ -11,14 +11,15 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_split_button_icon_name(void) {
+static void test_adw_split_button_icon_name() {
   Adw::SplitButton button;
 
   notified = 0;
-  button.property_icon_name().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  button.property_icon_name().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::ustring icon_name = button.get_property<Glib::ustring>("icon-name");
   g_assert_true(icon_name == "");
@@ -47,7 +48,7 @@ static void test_adw_split_button_icon_name(void) {
   g_assert_true(notified == 5);
 }
 
-static void test_adw_split_button_label(void) {
+static void test_adw_split_button_label() {
   Adw::SplitButton button;
 
   notified = 0;
@@ -80,12 +81,11 @@ static void test_adw_split_button_label(void) {
   g_assert_true(notified == 5);
 }
 
-static void test_adw_split_button_use_underline(void) {
+static void test_adw_split_button_use_underline() {
   Adw::SplitButton button;
 
   notified = 0;
-  button.property_use_underline().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  button.property_use_underline().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   bool use_underline = button.get_property<bool>("use-underline");
   g_assert_false(use_underline);
@@ -102,17 +102,17 @@ static void test_adw_split_button_use_underline(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_split_button_child(void) {
+static void test_adw_split_button_child() {
   Adw::SplitButton button;
 
-  Gtk::Button *child1 = new Gtk::Button();
-  Gtk::Button *child2 = new Gtk::Button();
-  Gtk::Button *child3 = new Gtk::Button();
+  Gtk::Button* child1 = new Gtk::Button();
+  Gtk::Button* child2 = new Gtk::Button();
+  Gtk::Button* child3 = new Gtk::Button();
 
   notified = 0;
   button.property_child().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  Gtk::Widget *child = button.get_property<Gtk::Widget *>("child");
+  Gtk::Widget* child = button.get_property<Gtk::Widget*>("child");
   g_assert_true(child == nullptr);
 
   button.set_child(nullptr);
@@ -122,7 +122,7 @@ static void test_adw_split_button_child(void) {
   g_assert_true(button.get_child() == child1);
   g_assert_true(notified == 1);
 
-  button.set_property<Gtk::Widget *>("child", child2);
+  button.set_property<Gtk::Widget*>("child", child2);
   g_assert_true(button.get_child() == child2);
   g_assert_true(notified == 2);
 
@@ -143,18 +143,17 @@ static void test_adw_split_button_child(void) {
   delete child1;
 }
 
-static void test_adw_split_button_menu_model(void) {
+static void test_adw_split_button_menu_model() {
   Adw::SplitButton button;
 
   Glib::RefPtr<Gio::MenuModel> model1 = Gio::Menu::create();
   Glib::RefPtr<Gio::MenuModel> model2 = Gio::Menu::create();
 
   notified = 0;
-  button.property_menu_model().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  button.property_menu_model().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::RefPtr<Gio::MenuModel> model =
-      button.get_property<Glib::RefPtr<Gio::MenuModel>>("menu-model");
+    button.get_property<Glib::RefPtr<Gio::MenuModel>>("menu-model");
   g_assert_true(model == nullptr);
   g_assert_true(notified == 0);
 
@@ -171,16 +170,16 @@ static void test_adw_split_button_menu_model(void) {
   g_assert_true(notified == 3);
 }
 
-static void test_adw_split_button_popover(void) {
+static void test_adw_split_button_popover() {
   Adw::SplitButton button;
 
-  Gtk::Popover *popover1 = new Gtk::Popover();
-  Gtk::Popover *popover2 = new Gtk::Popover();
+  Gtk::Popover* popover1 = new Gtk::Popover();
+  Gtk::Popover* popover2 = new Gtk::Popover();
 
   notified = 0;
   button.property_popover().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  Gtk::Popover *popover = button.get_property<Gtk::Popover *>("popover");
+  Gtk::Popover* popover = button.get_property<Gtk::Popover*>("popover");
   g_assert_true(popover == nullptr);
   g_assert_true(notified == 0);
 
@@ -188,7 +187,7 @@ static void test_adw_split_button_popover(void) {
   g_assert_true(button.get_popover() == popover1);
   g_assert_true(notified == 1);
 
-  button.set_property<Gtk::Popover *>("popover", popover2);
+  button.set_property<Gtk::Popover*>("popover", popover2);
   g_assert_true(button.get_popover() == popover2);
   g_assert_true(notified == 2);
 
@@ -201,12 +200,11 @@ static void test_adw_split_button_popover(void) {
   delete popover1;
 }
 
-static void test_adw_split_button_direction(void) {
+static void test_adw_split_button_direction() {
   Adw::SplitButton button;
 
   notified = 0;
-  button.property_direction().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  button.property_direction().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Gtk::ArrowType direction = button.get_property<Gtk::ArrowType>("direction");
   g_assert_true(direction == Gtk::ArrowType::DOWN);
@@ -223,15 +221,13 @@ static void test_adw_split_button_direction(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_split_button_dropdown_tooltip(void) {
+static void test_adw_split_button_dropdown_tooltip() {
   Adw::SplitButton button;
 
   notified = 0;
-  button.property_dropdown_tooltip().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  button.property_dropdown_tooltip().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  Glib::ustring tooltip =
-      button.get_property<Glib::ustring>("dropdown-tooltip");
+  Glib::ustring tooltip = button.get_property<Glib::ustring>("dropdown-tooltip");
   g_assert_true(tooltip == "");
   g_assert_true(notified == 0);
 
@@ -244,24 +240,18 @@ static void test_adw_split_button_dropdown_tooltip(void) {
   g_assert_true(notified == 2);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/SplitButton/icon_name",
-                  test_adw_split_button_icon_name);
+  g_test_add_func("/Adwaita/SplitButton/icon_name", test_adw_split_button_icon_name);
   g_test_add_func("/Adwaita/SplitButton/label", test_adw_split_button_label);
-  g_test_add_func("/Adwaita/SplitButton/use_underline",
-                  test_adw_split_button_use_underline);
+  g_test_add_func("/Adwaita/SplitButton/use_underline", test_adw_split_button_use_underline);
   g_test_add_func("/Adwaita/SplitButton/child", test_adw_split_button_child);
-  g_test_add_func("/Adwaita/SplitButton/menu_model",
-                  test_adw_split_button_menu_model);
-  g_test_add_func("/Adwaita/SplitButton/popover",
-                  test_adw_split_button_popover);
-  g_test_add_func("/Adwaita/SplitButton/direction",
-                  test_adw_split_button_direction);
-  g_test_add_func("/Adwaita/SplitButton/dropdown_tooltip",
-                  test_adw_split_button_dropdown_tooltip);
+  g_test_add_func("/Adwaita/SplitButton/menu_model", test_adw_split_button_menu_model);
+  g_test_add_func("/Adwaita/SplitButton/popover", test_adw_split_button_popover);
+  g_test_add_func("/Adwaita/SplitButton/direction", test_adw_split_button_direction);
+  g_test_add_func("/Adwaita/SplitButton/dropdown_tooltip", test_adw_split_button_dropdown_tooltip);
 
   return g_test_run();
 }

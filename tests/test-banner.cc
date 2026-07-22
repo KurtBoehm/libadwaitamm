@@ -8,12 +8,16 @@
 #include <libadwaitamm/init.h> // Adw::init
 
 int notified;
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
 int button_clicked_count;
-static void on_button_clicked() { button_clicked_count++; }
+static void on_button_clicked() {
+  button_clicked_count++;
+}
 
-static void test_adw_banner_title(void) {
+static void test_adw_banner_title() {
   Adw::Banner banner;
 
   notified = 0;
@@ -34,12 +38,11 @@ static void test_adw_banner_title(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_banner_button_label(void) {
+static void test_adw_banner_button_label() {
   Adw::Banner banner;
 
   notified = 0;
-  banner.property_button_label().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  banner.property_button_label().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::ustring label = banner.get_property<Glib::ustring>("button-label");
   g_assert_true(label == "");
@@ -52,7 +55,7 @@ static void test_adw_banner_button_label(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_banner_revealed(void) {
+static void test_adw_banner_revealed() {
   Adw::Banner banner;
 
   notified = 0;
@@ -69,12 +72,11 @@ static void test_adw_banner_revealed(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_banner_use_markup(void) {
+static void test_adw_banner_use_markup() {
   Adw::Banner banner;
 
   notified = 0;
-  banner.property_use_markup().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  banner.property_use_markup().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   bool orig = banner.get_use_markup();
 
@@ -86,12 +88,11 @@ static void test_adw_banner_use_markup(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_banner_button_style(void) {
+static void test_adw_banner_button_style() {
   Adw::Banner banner;
 
   notified = 0;
-  banner.property_button_style().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  banner.property_button_style().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(banner.get_button_style() == Adw::Banner::ButtonStyle::DEFAULT);
 
@@ -99,12 +100,11 @@ static void test_adw_banner_button_style(void) {
   g_assert_true(notified == 0);
 
   banner.set_button_style(Adw::Banner::ButtonStyle::SUGGESTED);
-  g_assert_true(banner.get_button_style() ==
-                Adw::Banner::ButtonStyle::SUGGESTED);
+  g_assert_true(banner.get_button_style() == Adw::Banner::ButtonStyle::SUGGESTED);
   g_assert_true(notified == 1);
 }
 
-static void test_adw_banner_button_clicked(void) {
+static void test_adw_banner_button_clicked() {
   Adw::Banner banner;
 
   button_clicked_count = 0;
@@ -117,12 +117,12 @@ static void test_adw_banner_button_clicked(void) {
   g_assert_true(button_clicked_count == 2);
 }
 
-static void test_adw_banner_new(void) {
+static void test_adw_banner_new() {
   Adw::Banner banner("Hello");
   g_assert_true(banner.get_title() == "Hello");
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
@@ -131,8 +131,7 @@ int main(int argc, char *argv[]) {
   g_test_add_func("/Adwaita/Banner/revealed", test_adw_banner_revealed);
   g_test_add_func("/Adwaita/Banner/use_markup", test_adw_banner_use_markup);
   g_test_add_func("/Adwaita/Banner/button_style", test_adw_banner_button_style);
-  g_test_add_func("/Adwaita/Banner/button_clicked",
-                  test_adw_banner_button_clicked);
+  g_test_add_func("/Adwaita/Banner/button_clicked", test_adw_banner_button_clicked);
   g_test_add_func("/Adwaita/Banner/new", test_adw_banner_new);
 
   return g_test_run();

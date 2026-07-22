@@ -7,37 +7,35 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
-static void assert_page_position(Glib::RefPtr<Gtk::SelectionModel> pages,
-                                 Gtk::Widget *widget, int position) {
-  Glib::RefPtr<Gio::ListModel> list_model =
-      std::dynamic_pointer_cast<Gio::ListModel>(pages);
+static void assert_page_position(Glib::RefPtr<Gtk::SelectionModel> pages, Gtk::Widget* widget,
+                                 int position) {
+  Glib::RefPtr<Gio::ListModel> list_model = std::dynamic_pointer_cast<Gio::ListModel>(pages);
   g_assert_true(list_model != nullptr);
 
   Glib::RefPtr<Adw::LeafletPage> page =
-      std::dynamic_pointer_cast<Adw::LeafletPage>(
-          list_model->get_object(position));
+    std::dynamic_pointer_cast<Adw::LeafletPage>(list_model->get_object(position));
   g_assert_true(page != nullptr);
 
   g_assert_true(widget->gobj() == page->get_child()->gobj());
 }
 
-static void test_adw_leaflet_adjacent_child(void) {
+static void test_adw_leaflet_adjacent_child() {
   Adw::Leaflet leaflet;
-  std::array<Gtk::Widget *, 3> children;
+  std::array<Gtk::Widget*, 3> children;
 
   for (int i = 0; i < 3; i++) {
     children[i] = Gtk::make_managed<Gtk::Button>();
 
     Glib::RefPtr<Adw::LeafletPage> page = leaflet.append(*children[i]);
 
-    if (i == 1)
+    if (i == 1) {
       page->set_navigatable(false);
+    }
   }
 
   leaflet.set_visible_child(*children[0]);
 
-  Gtk::Widget *result =
-      leaflet.get_adjacent_child(Adw::NavigationDirection::BACK);
+  Gtk::Widget* result = leaflet.get_adjacent_child(Adw::NavigationDirection::BACK);
   g_assert_null(result);
 
   result = leaflet.get_adjacent_child(Adw::NavigationDirection::FORWARD);
@@ -60,9 +58,9 @@ static void test_adw_leaflet_adjacent_child(void) {
   g_assert_null(result);
 }
 
-static void test_adw_leaflet_navigate(void) {
+static void test_adw_leaflet_navigate() {
   Adw::Leaflet leaflet;
-  std::array<Gtk::Widget *, 3> children;
+  std::array<Gtk::Widget*, 3> children;
 
   bool result = leaflet.navigate(Adw::NavigationDirection::BACK);
   g_assert_false(result);
@@ -75,8 +73,9 @@ static void test_adw_leaflet_navigate(void) {
 
     Glib::RefPtr<Adw::LeafletPage> page = leaflet.append(*children[i]);
 
-    if (i == 1)
+    if (i == 1) {
       page->set_navigatable(false);
+    }
   }
 
   leaflet.set_visible_child(*children[0]);
@@ -96,9 +95,9 @@ static void test_adw_leaflet_navigate(void) {
   g_assert_true(leaflet.get_visible_child()->gobj() == children[0]->gobj());
 }
 
-static void test_adw_leaflet_prepend(void) {
+static void test_adw_leaflet_prepend() {
   Adw::Leaflet leaflet;
-  std::array<Gtk::Widget *, 2> labels;
+  std::array<Gtk::Widget*, 2> labels;
 
   for (int i = 0; i < 2; i++) {
     labels[i] = Gtk::make_managed<Gtk::Label>("");
@@ -114,9 +113,9 @@ static void test_adw_leaflet_prepend(void) {
   assert_page_position(pages, labels[1], 1);
 }
 
-static void test_adw_leaflet_insert_child_after(void) {
+static void test_adw_leaflet_insert_child_after() {
   Adw::Leaflet leaflet;
-  std::array<Gtk::Widget *, 3> labels;
+  std::array<Gtk::Widget*, 3> labels;
 
   for (int i = 0; i < 3; i++) {
     labels[i] = Gtk::make_managed<Gtk::Label>("");
@@ -138,9 +137,9 @@ static void test_adw_leaflet_insert_child_after(void) {
   assert_page_position(pages, labels[2], 2);
 }
 
-static void test_adw_leaflet_reorder_child_after(void) {
+static void test_adw_leaflet_reorder_child_after() {
   Adw::Leaflet leaflet;
-  std::array<Gtk::Widget *, 3> labels;
+  std::array<Gtk::Widget*, 3> labels;
 
   for (int i = 0; i < 3; i++) {
     labels[i] = Gtk::make_managed<Gtk::Label>("");
@@ -170,9 +169,9 @@ static void test_adw_leaflet_reorder_child_after(void) {
 // already exists. Calling Leaflet::get_pages() repeatedly must keep
 // returning the same C++ wrapper around the same GObject, without
 // leaking the extra reference obtained on subsequent calls.
-static void test_adw_leaflet_get_pages_returns_same_object(void) {
+static void test_adw_leaflet_get_pages_returns_same_object() {
   Adw::Leaflet leaflet;
-  Gtk::Widget *label = Gtk::make_managed<Gtk::Label>("");
+  Gtk::Widget* label = Gtk::make_managed<Gtk::Label>("");
   leaflet.append(*label);
 
   Glib::RefPtr<Gtk::SelectionModel> pages1 = leaflet.get_pages();
@@ -188,13 +187,12 @@ static void test_adw_leaflet_get_pages_returns_same_object(void) {
   g_assert_true(pages2->gobj() == pages3->gobj());
 }
 
-static void test_adw_leaflet_pages_n_items(void) {
+static void test_adw_leaflet_pages_n_items() {
   Adw::Leaflet leaflet;
-  std::array<Gtk::Widget *, 3> labels;
+  std::array<Gtk::Widget*, 3> labels;
 
   Glib::RefPtr<Gtk::SelectionModel> pages = leaflet.get_pages();
-  Glib::RefPtr<Gio::ListModel> list_model =
-      std::dynamic_pointer_cast<Gio::ListModel>(pages);
+  Glib::RefPtr<Gio::ListModel> list_model = std::dynamic_pointer_cast<Gio::ListModel>(pages);
   g_assert_true(list_model != nullptr);
 
   g_assert_cmpuint(list_model->get_n_items(), ==, 0);
@@ -213,9 +211,9 @@ static void test_adw_leaflet_pages_n_items(void) {
   assert_page_position(pages, labels[2], 1);
 }
 
-static void test_adw_leaflet_pages_selection(void) {
+static void test_adw_leaflet_pages_selection() {
   Adw::Leaflet leaflet;
-  std::array<Gtk::Widget *, 3> children;
+  std::array<Gtk::Widget*, 3> children;
 
   for (int i = 0; i < 3; i++) {
     children[i] = Gtk::make_managed<Gtk::Button>();
@@ -239,25 +237,23 @@ static void test_adw_leaflet_pages_selection(void) {
   g_assert_true(pages->is_selected(2));
 }
 
-static void test_adw_leaflet_pages_items_changed_signal(void) {
+static void test_adw_leaflet_pages_items_changed_signal() {
   Adw::Leaflet leaflet;
   Glib::RefPtr<Gtk::SelectionModel> pages = leaflet.get_pages();
-  Glib::RefPtr<Gio::ListModel> list_model =
-      std::dynamic_pointer_cast<Gio::ListModel>(pages);
+  Glib::RefPtr<Gio::ListModel> list_model = std::dynamic_pointer_cast<Gio::ListModel>(pages);
   g_assert_true(list_model != nullptr);
 
   int signal_count = 0;
   guint last_position = 0, last_removed = 0, last_added = 0;
 
-  list_model->signal_items_changed().connect(
-      [&](guint position, guint removed, guint added) {
-        signal_count++;
-        last_position = position;
-        last_removed = removed;
-        last_added = added;
-      });
+  list_model->signal_items_changed().connect([&](guint position, guint removed, guint added) {
+    signal_count++;
+    last_position = position;
+    last_removed = removed;
+    last_added = added;
+  });
 
-  Gtk::Widget *label = Gtk::make_managed<Gtk::Label>("");
+  Gtk::Widget* label = Gtk::make_managed<Gtk::Label>("");
   leaflet.append(*label);
 
   g_assert_cmpint(signal_count, ==, 1);
@@ -273,24 +269,19 @@ static void test_adw_leaflet_pages_items_changed_signal(void) {
   g_assert_cmpuint(last_added, ==, 0);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/Leaflet/adjacent_child",
-                  test_adw_leaflet_adjacent_child);
+  g_test_add_func("/Adwaita/Leaflet/adjacent_child", test_adw_leaflet_adjacent_child);
   g_test_add_func("/Adwaita/Leaflet/navigate", test_adw_leaflet_navigate);
   g_test_add_func("/Adwaita/Leaflet/prepend", test_adw_leaflet_prepend);
-  g_test_add_func("/Adwaita/Leaflet/insert_child_after",
-                  test_adw_leaflet_insert_child_after);
-  g_test_add_func("/Adwaita/Leaflet/reorder_child_after",
-                  test_adw_leaflet_reorder_child_after);
+  g_test_add_func("/Adwaita/Leaflet/insert_child_after", test_adw_leaflet_insert_child_after);
+  g_test_add_func("/Adwaita/Leaflet/reorder_child_after", test_adw_leaflet_reorder_child_after);
   g_test_add_func("/Adwaita/Leaflet/get_pages_returns_same_object",
                   test_adw_leaflet_get_pages_returns_same_object);
-  g_test_add_func("/Adwaita/Leaflet/pages_n_items",
-                  test_adw_leaflet_pages_n_items);
-  g_test_add_func("/Adwaita/Leaflet/pages_selection",
-                  test_adw_leaflet_pages_selection);
+  g_test_add_func("/Adwaita/Leaflet/pages_n_items", test_adw_leaflet_pages_n_items);
+  g_test_add_func("/Adwaita/Leaflet/pages_selection", test_adw_leaflet_pages_selection);
   g_test_add_func("/Adwaita/Leaflet/pages_items_changed_signal",
                   test_adw_leaflet_pages_items_changed_signal);
 

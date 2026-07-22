@@ -12,9 +12,9 @@
 
 #include "adwaita-test-resources.h"
 
-static void test_adw_about_window_from_appdata(void) {
+static void test_adw_about_window_from_appdata() {
   const Glib::ustring resource_path =
-      "/org/gnome/Adwaita1/Test/org.gnome.Adwaita1.Test.metainfo.xml";
+    "/org/gnome/Adwaita1/Test/org.gnome.Adwaita1.Test.metainfo.xml";
 
   {
     Adw::AboutWindow window(resource_path, "1.0");
@@ -25,12 +25,9 @@ static void test_adw_about_window_from_appdata(void) {
     g_assert_true(window.get_application_icon() == "org.gnome.Adwaita1.Test");
     g_assert_true(window.get_application_name() == "Adwaita Test");
     g_assert_true(window.get_developer_name() == "The GNOME Project");
-    g_assert_true(window.get_issue_url() ==
-                  "https://github.com/KurtBoehm/libadwaitamm/issues");
-    g_assert_true(window.get_support_url() ==
-                  "https://github.com/KurtBoehm/libadwaitamm/issues");
-    g_assert_true(window.get_website() ==
-                  "https://github.com/KurtBoehm/libadwaitamm");
+    g_assert_true(window.get_issue_url() == "https://github.com/KurtBoehm/libadwaitamm/issues");
+    g_assert_true(window.get_support_url() == "https://github.com/KurtBoehm/libadwaitamm/issues");
+    g_assert_true(window.get_website() == "https://github.com/KurtBoehm/libadwaitamm");
     g_assert_true(window.get_license_type() == Gtk::License::LGPL_2_1);
   }
 
@@ -53,8 +50,8 @@ static void test_adw_about_window_from_appdata(void) {
   }
 }
 
-static void test_adw_about_window_create(void) {
-  Adw::AboutWindow *window = new Adw::AboutWindow();
+static void test_adw_about_window_create() {
+  Adw::AboutWindow* window = new Adw::AboutWindow();
   g_assert_nonnull(window);
 
   std::vector<Glib::ustring> developers{"Angela Avery"};
@@ -110,24 +107,21 @@ static void test_adw_about_window_create(void) {
   window->add_link("Example", "https://example.org");
   window->add_credit_section("Example", credits);
   window->add_acknowledgement_section("Example", acknowledgements);
-  window->add_legal_section("Example", "© 2022 Example", Gtk::License::GPL_3_0,
-                            "");
-  window->add_legal_section("Example", "© 2022 Example", Gtk::License::GPL_3_0,
-                            "License");
+  window->add_legal_section("Example", "© 2022 Example", Gtk::License::GPL_3_0, "");
+  window->add_legal_section("Example", "© 2022 Example", Gtk::License::GPL_3_0, "License");
 
   delete window;
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  GResource *test_resources = test_get_resource();
+  GResource* test_resources = test_get_resource();
   g_resources_register(test_resources);
 
   g_test_add_func("/Adwaita/AboutWindow/create", test_adw_about_window_create);
-  g_test_add_func("/Adwaita/AboutWindow/from_appdata",
-                  test_adw_about_window_from_appdata);
+  g_test_add_func("/Adwaita/AboutWindow/from_appdata", test_adw_about_window_from_appdata);
 
   return g_test_run();
 }

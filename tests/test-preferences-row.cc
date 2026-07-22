@@ -7,7 +7,7 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
-static void test_adw_preferences_row_title(void) {
+static void test_adw_preferences_row_title() {
   Adw::PreferencesRow row;
 
   g_assert_true(row.get_title() == "");
@@ -23,7 +23,7 @@ static void test_adw_preferences_row_title(void) {
   g_assert_true(row.get_title() == "Invalid <b>markup");
 }
 
-static void test_adw_preferences_row_use_underline(void) {
+static void test_adw_preferences_row_use_underline() {
   Adw::PreferencesRow row;
 
   g_assert_false(row.get_use_underline());
@@ -35,14 +35,12 @@ static void test_adw_preferences_row_use_underline(void) {
   g_assert_false(row.get_use_underline());
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/PreferencesRow/title",
-                  test_adw_preferences_row_title);
-  g_test_add_func("/Adwaita/PreferencesRow/use_underline",
-                  test_adw_preferences_row_use_underline);
+  g_test_add_func("/Adwaita/PreferencesRow/title", test_adw_preferences_row_title);
+  g_test_add_func("/Adwaita/PreferencesRow/use_underline", test_adw_preferences_row_use_underline);
 
   return g_test_run();
 }

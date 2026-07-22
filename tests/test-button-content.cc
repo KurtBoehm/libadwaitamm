@@ -12,14 +12,15 @@
 #include <libadwaitamm/init.h> // Adw::init
 
 int notified;
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_button_content_icon_name(void) {
+static void test_adw_button_content_icon_name() {
   Adw::ButtonContent content;
 
   notified = 0;
-  content.property_icon_name().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  content.property_icon_name().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::ustring icon_name;
 
@@ -38,7 +39,7 @@ static void test_adw_button_content_icon_name(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_button_content_label(void) {
+static void test_adw_button_content_label() {
   Adw::ButtonContent content;
 
   notified = 0;
@@ -61,13 +62,12 @@ static void test_adw_button_content_label(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_button_content_use_underline(void) {
+static void test_adw_button_content_use_underline() {
   Adw::ButtonContent content;
   bool use_underline;
 
   notified = 0;
-  content.property_use_underline().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  content.property_use_underline().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   use_underline = content.get_property<bool>("use-underline");
   g_assert_false(use_underline);
@@ -84,13 +84,12 @@ static void test_adw_button_content_use_underline(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_button_content_can_shrink(void) {
+static void test_adw_button_content_can_shrink() {
   Adw::ButtonContent content;
   bool can_shrink;
 
   notified = 0;
-  content.property_can_shrink().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  content.property_can_shrink().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   can_shrink = content.get_property<bool>("can-shrink");
   g_assert_false(can_shrink);
@@ -107,7 +106,7 @@ static void test_adw_button_content_can_shrink(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_button_content_style_class_button(void) {
+static void test_adw_button_content_style_class_button() {
   Gtk::Window window;
   Gtk::Button button;
   Adw::ButtonContent content;
@@ -122,7 +121,7 @@ static void test_adw_button_content_style_class_button(void) {
   g_assert_false(button.has_css_class("image-text-button"));
 }
 
-static void test_adw_button_content_style_class_split_button(void) {
+static void test_adw_button_content_style_class_split_button() {
   Gtk::Window window;
   Adw::SplitButton button;
   Adw::ButtonContent content;
@@ -137,18 +136,14 @@ static void test_adw_button_content_style_class_split_button(void) {
   g_assert_false(button.has_css_class("image-text-button"));
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/ButtonContent/icon_name",
-                  test_adw_button_content_icon_name);
-  g_test_add_func("/Adwaita/ButtonContent/label",
-                  test_adw_button_content_label);
-  g_test_add_func("/Adwaita/ButtonContent/use_underline",
-                  test_adw_button_content_use_underline);
-  g_test_add_func("/Adwaita/ButtonContent/can_shrink",
-                  test_adw_button_content_can_shrink);
+  g_test_add_func("/Adwaita/ButtonContent/icon_name", test_adw_button_content_icon_name);
+  g_test_add_func("/Adwaita/ButtonContent/label", test_adw_button_content_label);
+  g_test_add_func("/Adwaita/ButtonContent/use_underline", test_adw_button_content_use_underline);
+  g_test_add_func("/Adwaita/ButtonContent/can_shrink", test_adw_button_content_can_shrink);
   g_test_add_func("/Adwaita/ButtonContent/style_class_button",
                   test_adw_button_content_style_class_button);
   g_test_add_func("/Adwaita/ButtonContent/style_class_split_button",

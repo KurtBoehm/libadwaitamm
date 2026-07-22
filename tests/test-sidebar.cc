@@ -11,17 +11,19 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
 static Glib::RefPtr<Adw::SidebarSection>
-create_section(const Glib::ustring& title,
-               std::initializer_list<Glib::ustring> item_titles) {
+create_section(const Glib::ustring& title, std::initializer_list<Glib::ustring> item_titles) {
   Glib::RefPtr<Adw::SidebarSection> section = Adw::SidebarSection::create();
 
   section->set_title(title);
 
-  for (const Glib::ustring& item_title : item_titles)
+  for (const Glib::ustring& item_title : item_titles) {
     section->append(Adw::SidebarItem::create(item_title));
+  }
 
   return section;
 }
@@ -29,8 +31,7 @@ create_section(const Glib::ustring& title,
 static void check_items(const Adw::Sidebar& sidebar, guint selected,
                         std::initializer_list<Glib::ustring> titles) {
   Glib::RefPtr<Gtk::SelectionModel> items = sidebar.get_items();
-  Glib::RefPtr<Gio::ListModel> items_model =
-      std::dynamic_pointer_cast<Gio::ListModel>(items);
+  Glib::RefPtr<Gio::ListModel> items_model = std::dynamic_pointer_cast<Gio::ListModel>(items);
 
   g_assert_true(sidebar.get_selected() == selected);
   g_assert_true(items_model->get_n_items() == titles.size());
@@ -38,7 +39,7 @@ static void check_items(const Adw::Sidebar& sidebar, guint selected,
   guint i = 0;
   for (const Glib::ustring& title : titles) {
     Glib::RefPtr<Adw::SidebarItem> item =
-        std::dynamic_pointer_cast<Adw::SidebarItem>(items_model->get_object(i));
+      std::dynamic_pointer_cast<Adw::SidebarItem>(items_model->get_object(i));
 
     g_assert_true(item == sidebar.get_item(i));
 
@@ -60,10 +61,9 @@ static void check_sections(const Adw::Sidebar& sidebar,
                            std::initializer_list<Glib::ustring> titles) {
   std::vector<Glib::RefPtr<Adw::SidebarSection>> sections = sidebar.get_sections();
   Glib::RefPtr<Gtk::SelectionModel> items = sidebar.get_items();
-  Glib::RefPtr<Gio::ListModel> items_model =
-      std::dynamic_pointer_cast<Gio::ListModel>(items);
+  Glib::RefPtr<Gio::ListModel> items_model = std::dynamic_pointer_cast<Gio::ListModel>(items);
   Glib::RefPtr<Gtk::SectionModel> items_sections =
-      std::dynamic_pointer_cast<Gtk::SectionModel>(items);
+    std::dynamic_pointer_cast<Gtk::SectionModel>(items);
 
   g_assert_true(sections.size() == titles.size());
 
@@ -81,18 +81,15 @@ static void check_sections(const Adw::Sidebar& sidebar,
     guint n_items = section_items->get_n_items();
     for (guint j = 0; j < n_items; j++) {
       Glib::RefPtr<Adw::SidebarItem> item1 =
-          std::dynamic_pointer_cast<Adw::SidebarItem>(
-              section_items->get_object(j));
+        std::dynamic_pointer_cast<Adw::SidebarItem>(section_items->get_object(j));
       Glib::RefPtr<Adw::SidebarItem> item2 =
-          std::dynamic_pointer_cast<Adw::SidebarItem>(
-              items_model->get_object(section_start + j));
+        std::dynamic_pointer_cast<Adw::SidebarItem>(items_model->get_object(section_start + j));
 
       g_assert_true(item1 == item2);
       g_assert_true(item2->get_section() == section);
       g_assert_true(item2->get_section_index() == j);
 
-      std::pair<guint, guint> range =
-          items_sections->get_section(section_start + j);
+      std::pair<guint, guint> range = items_sections->get_section(section_start + j);
 
       g_assert_true(range.first == section_start);
       g_assert_true(range.second == section_start + n_items);
@@ -103,7 +100,7 @@ static void check_sections(const Adw::Sidebar& sidebar,
   }
 }
 
-static void test_adw_sidebar_mode(void) {
+static void test_adw_sidebar_mode() {
   Adw::Sidebar sidebar;
 
   notified = 0;
@@ -121,14 +118,13 @@ static void test_adw_sidebar_mode(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_sidebar_filter(void) {
+static void test_adw_sidebar_filter() {
   Adw::Sidebar sidebar;
 
   notified = 0;
   sidebar.property_filter().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  Glib::RefPtr<Gtk::Filter> filter =
-      sidebar.get_property<Glib::RefPtr<Gtk::Filter>>("filter");
+  Glib::RefPtr<Gtk::Filter> filter = sidebar.get_property<Glib::RefPtr<Gtk::Filter>>("filter");
   g_assert_true(filter == nullptr);
 
   sidebar.set_filter(Glib::RefPtr<Gtk::Filter>());
@@ -139,18 +135,16 @@ static void test_adw_sidebar_filter(void) {
   g_assert_true(sidebar.get_filter() == filter);
   g_assert_true(notified == 1);
 
-  sidebar.set_property<Glib::RefPtr<Gtk::Filter>>("filter",
-                                                  Glib::RefPtr<Gtk::Filter>());
+  sidebar.set_property<Glib::RefPtr<Gtk::Filter>>("filter", Glib::RefPtr<Gtk::Filter>());
   g_assert_true(sidebar.get_filter() == nullptr);
   g_assert_true(notified == 2);
 }
 
-static void test_adw_sidebar_placeholder(void) {
+static void test_adw_sidebar_placeholder() {
   Adw::Sidebar sidebar;
 
   notified = 0;
-  sidebar.property_placeholder().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  sidebar.property_placeholder().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Gtk::Widget* placeholder = sidebar.get_property<Gtk::Widget*>("placeholder");
   g_assert_true(placeholder == nullptr);
@@ -169,7 +163,7 @@ static void test_adw_sidebar_placeholder(void) {
 }
 
 #if ADW_CHECK_VERSION(1, 10, 0)
-static void test_adw_sidebar_prefix(void) {
+static void test_adw_sidebar_prefix() {
   Adw::Sidebar sidebar;
   Gtk::Button* prefix1 = new Gtk::Button();
   Gtk::Button* prefix2 = new Gtk::Button();
@@ -203,7 +197,7 @@ static void test_adw_sidebar_prefix(void) {
   delete prefix2;
 }
 
-static void test_adw_sidebar_suffix(void) {
+static void test_adw_sidebar_suffix() {
   Adw::Sidebar sidebar;
   Gtk::Button* suffix1 = new Gtk::Button();
   Gtk::Button* suffix2 = new Gtk::Button();
@@ -238,14 +232,11 @@ static void test_adw_sidebar_suffix(void) {
 }
 #endif
 
-static void test_adw_sidebar_add_remove(void) {
+static void test_adw_sidebar_add_remove() {
   Adw::Sidebar sidebar;
-  Glib::RefPtr<Adw::SidebarSection> section1 =
-      create_section("Section 1", {"1"});
-  Glib::RefPtr<Adw::SidebarSection> section2 =
-      create_section("Section 2", {"2a", "2b"});
-  Glib::RefPtr<Adw::SidebarSection> section3 =
-      create_section("Section 3", {"3a", "3b", "3c"});
+  Glib::RefPtr<Adw::SidebarSection> section1 = create_section("Section 1", {"1"});
+  Glib::RefPtr<Adw::SidebarSection> section2 = create_section("Section 2", {"2a", "2b"});
+  Glib::RefPtr<Adw::SidebarSection> section3 = create_section("Section 3", {"3a", "3b", "3c"});
 
   check_items(sidebar, GTK_INVALID_LIST_POSITION, {});
   check_sections(sidebar, {});
@@ -319,18 +310,17 @@ static void test_adw_sidebar_add_remove(void) {
   check_sections(sidebar, {"Section 1", "Section 2", "Section 3"});
 }
 
-static void test_adw_sidebar_menu_model(void) {
+static void test_adw_sidebar_menu_model() {
   Adw::Sidebar sidebar;
 
   Glib::RefPtr<Gio::MenuModel> model1 = Gio::Menu::create();
   Glib::RefPtr<Gio::MenuModel> model2 = Gio::Menu::create();
 
   notified = 0;
-  sidebar.property_menu_model().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  sidebar.property_menu_model().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::RefPtr<Gio::MenuModel> model =
-      sidebar.get_property<Glib::RefPtr<Gio::MenuModel>>("menu-model");
+    sidebar.get_property<Glib::RefPtr<Gio::MenuModel>>("menu-model");
   g_assert_true(model == nullptr);
   g_assert_true(notified == 0);
 

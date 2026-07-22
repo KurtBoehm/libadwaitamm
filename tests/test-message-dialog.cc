@@ -14,9 +14,11 @@ int responses;
 int responses_cancel;
 int responses_save;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void response_cb(const Glib::ustring &response) {
+static void response_cb(const Glib::ustring& response) {
   responses++;
   if (response == "cancel") {
     responses_cancel++;
@@ -27,7 +29,7 @@ static void response_cb(const Glib::ustring &response) {
   }
 }
 
-static void test_adw_message_dialog_heading(void) {
+static void test_adw_message_dialog_heading() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   notified = 0;
@@ -45,12 +47,11 @@ static void test_adw_message_dialog_heading(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_message_dialog_heading_use_markup(void) {
+static void test_adw_message_dialog_heading_use_markup() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   notified = 0;
-  dialog.property_heading_use_markup().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  dialog.property_heading_use_markup().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   bool use_markup = dialog.get_property<bool>("heading-use-markup");
   g_assert_false(use_markup);
@@ -64,7 +65,7 @@ static void test_adw_message_dialog_heading_use_markup(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_message_dialog_body(void) {
+static void test_adw_message_dialog_body() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   notified = 0;
@@ -82,12 +83,11 @@ static void test_adw_message_dialog_body(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_message_dialog_body_use_markup(void) {
+static void test_adw_message_dialog_body_use_markup() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   notified = 0;
-  dialog.property_body_use_markup().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  dialog.property_body_use_markup().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   bool use_markup = dialog.get_property<bool>("body-use-markup");
   g_assert_false(use_markup);
@@ -101,7 +101,7 @@ static void test_adw_message_dialog_body_use_markup(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_message_dialog_format(void) {
+static void test_adw_message_dialog_format() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   // FIXME: We are not currently wrapping the format_* conveniences of
@@ -135,14 +135,13 @@ static void test_adw_message_dialog_format(void) {
   g_assert_false(dialog.get_body_use_markup());
 }
 
-static void test_adw_message_dialog_extra_child(void) {
+static void test_adw_message_dialog_extra_child() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   notified = 0;
-  dialog.property_extra_child().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  dialog.property_extra_child().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  Gtk::Widget *widget = dialog.get_property<Gtk::Widget *>("extra-child");
+  Gtk::Widget* widget = dialog.get_property<Gtk::Widget*>("extra-child");
   g_assert_true(widget == nullptr);
 
   dialog.set_extra_child(nullptr);
@@ -153,12 +152,12 @@ static void test_adw_message_dialog_extra_child(void) {
   g_assert_true(dialog.get_extra_child() == widget);
   g_assert_true(notified == 1);
 
-  dialog.set_property<Gtk::Widget *>("extra-child", nullptr);
+  dialog.set_property<Gtk::Widget*>("extra-child", nullptr);
   g_assert_true(dialog.get_extra_child() == nullptr);
   g_assert_true(notified == 2);
 }
 
-static void test_adw_message_dialog_add_response(void) {
+static void test_adw_message_dialog_add_response() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   dialog.add_response("response1", "Response 1");
@@ -166,16 +165,14 @@ static void test_adw_message_dialog_add_response(void) {
 
   g_assert_true(dialog.get_response_label("response1") == "Response 1");
   g_assert_true(dialog.get_response_enabled("response1"));
-  g_assert_true(dialog.get_response_appearance("response1") ==
-                Adw::ResponseAppearance::DEFAULT);
+  g_assert_true(dialog.get_response_appearance("response1") == Adw::ResponseAppearance::DEFAULT);
 
   g_assert_true(dialog.get_response_label("response2") == "Response 2");
   g_assert_true(dialog.get_response_enabled("response2"));
-  g_assert_true(dialog.get_response_appearance("response2") ==
-                Adw::ResponseAppearance::DEFAULT);
+  g_assert_true(dialog.get_response_appearance("response2") == Adw::ResponseAppearance::DEFAULT);
 }
 
-static void test_adw_message_dialog_add_responses(void) {
+static void test_adw_message_dialog_add_responses() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   // FIXME: The convenience to add many responses at once has not been
@@ -187,16 +184,14 @@ static void test_adw_message_dialog_add_responses(void) {
 
   g_assert_true(dialog.get_response_label("response1") == "Response 1");
   g_assert_true(dialog.get_response_enabled("response1"));
-  g_assert_true(dialog.get_response_appearance("response1") ==
-                Adw::ResponseAppearance::DEFAULT);
+  g_assert_true(dialog.get_response_appearance("response1") == Adw::ResponseAppearance::DEFAULT);
 
   g_assert_true(dialog.get_response_label("response2") == "Response 2");
   g_assert_true(dialog.get_response_enabled("response2"));
-  g_assert_true(dialog.get_response_appearance("response2") ==
-                Adw::ResponseAppearance::DEFAULT);
+  g_assert_true(dialog.get_response_appearance("response2") == Adw::ResponseAppearance::DEFAULT);
 }
 
-static void test_adw_message_dialog_remove_response(void) {
+static void test_adw_message_dialog_remove_response() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   dialog.add_response("response1", "Response 1");
@@ -207,7 +202,7 @@ static void test_adw_message_dialog_remove_response(void) {
   g_assert_true(dialog.get_response_label("response2") == "Response 2");
 }
 
-static void test_adw_message_dialog_response_label(void) {
+static void test_adw_message_dialog_response_label() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   dialog.add_response("response", "Response");
@@ -217,7 +212,7 @@ static void test_adw_message_dialog_response_label(void) {
   g_assert_true(dialog.get_response_label("response") == "Label");
 }
 
-static void test_adw_message_dialog_response_enabled(void) {
+static void test_adw_message_dialog_response_enabled() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   dialog.add_response("response", "Response");
@@ -230,20 +225,17 @@ static void test_adw_message_dialog_response_enabled(void) {
   g_assert_true(dialog.get_response_enabled("response"));
 }
 
-static void test_adw_message_dialog_response_appearance(void) {
+static void test_adw_message_dialog_response_appearance() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   dialog.add_response("response", "Response");
-  g_assert_true(dialog.get_response_appearance("response") ==
-           Adw::ResponseAppearance::DEFAULT);
+  g_assert_true(dialog.get_response_appearance("response") == Adw::ResponseAppearance::DEFAULT);
 
-  dialog.set_response_appearance("response",
-                                 Adw::ResponseAppearance::DESTRUCTIVE);
-  g_assert_true(dialog.get_response_appearance("response") ==
-           Adw::ResponseAppearance::DESTRUCTIVE);
+  dialog.set_response_appearance("response", Adw::ResponseAppearance::DESTRUCTIVE);
+  g_assert_true(dialog.get_response_appearance("response") == Adw::ResponseAppearance::DESTRUCTIVE);
 }
 
-static void test_adw_message_dialog_response_signal(void) {
+static void test_adw_message_dialog_response_signal() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   responses = responses_cancel = responses_save = 0;
@@ -263,15 +255,13 @@ static void test_adw_message_dialog_response_signal(void) {
   g_assert_true(responses_save == 1);
 }
 
-static void test_adw_message_dialog_default_response(void) {
+static void test_adw_message_dialog_default_response() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   notified = 0;
-  dialog.property_default_response().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  dialog.property_default_response().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  Glib::ustring response =
-      dialog.get_property<Glib::ustring>("default-response");
+  Glib::ustring response = dialog.get_property<Glib::ustring>("default-response");
   g_assert_true(response == "");
 
   dialog.set_default_response("save");
@@ -283,12 +273,11 @@ static void test_adw_message_dialog_default_response(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_message_dialog_close_response(void) {
+static void test_adw_message_dialog_close_response() {
   Adw::MessageDialog dialog(nullptr, "", "");
 
   notified = 0;
-  dialog.property_close_response().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  dialog.property_close_response().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::ustring response = dialog.get_property<Glib::ustring>("close-response");
   g_assert_true(response == "close");
@@ -302,7 +291,7 @@ static void test_adw_message_dialog_close_response(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_message_dialog_choose(void) {
+static void test_adw_message_dialog_choose() {
   Adw::MessageDialog dialog(nullptr, "Heading", "Body");
 
   dialog.add_response("cancel", "Cancel");
@@ -312,7 +301,7 @@ static void test_adw_message_dialog_choose(void) {
   Glib::ustring chosen_response;
   bool got_result = false;
 
-  auto slot = [&](const Glib::RefPtr<Gio::AsyncResult> &result) {
+  auto slot = [&](const Glib::RefPtr<Gio::AsyncResult>& result) {
     chosen_response = dialog.choose_finish(result);
     got_result = true;
   };
@@ -320,35 +309,30 @@ static void test_adw_message_dialog_choose(void) {
   dialog.choose(Glib::RefPtr<Gio::Cancellable>(), slot);
   g_signal_emit_by_name(dialog.gobj(), "response", "save");
 
-  while (!got_result)
+  while (!got_result) {
     g_main_context_iteration(nullptr, TRUE);
+  }
 
   g_assert_true(chosen_response == "save");
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/MessageDialog/heading",
-                  test_adw_message_dialog_heading);
+  g_test_add_func("/Adwaita/MessageDialog/heading", test_adw_message_dialog_heading);
   g_test_add_func("/Adwaita/MessageDialog/heading_use_markup",
                   test_adw_message_dialog_heading_use_markup);
   g_test_add_func("/Adwaita/MessageDialog/body", test_adw_message_dialog_body);
   g_test_add_func("/Adwaita/MessageDialog/body_use_markup",
                   test_adw_message_dialog_body_use_markup);
-  g_test_add_func("/Adwaita/MessageDialog/format",
-                  test_adw_message_dialog_format);
-  g_test_add_func("/Adwaita/MessageDialog/extra_child",
-                  test_adw_message_dialog_extra_child);
-  g_test_add_func("/Adwaita/MessageDialog/add_response",
-                  test_adw_message_dialog_add_response);
-  g_test_add_func("/Adwaita/MessageDialog/add_responses",
-                  test_adw_message_dialog_add_responses);
+  g_test_add_func("/Adwaita/MessageDialog/format", test_adw_message_dialog_format);
+  g_test_add_func("/Adwaita/MessageDialog/extra_child", test_adw_message_dialog_extra_child);
+  g_test_add_func("/Adwaita/MessageDialog/add_response", test_adw_message_dialog_add_response);
+  g_test_add_func("/Adwaita/MessageDialog/add_responses", test_adw_message_dialog_add_responses);
   g_test_add_func("/Adwaita/MessageDialog/remove_response",
                   test_adw_message_dialog_remove_response);
-  g_test_add_func("/Adwaita/MessageDialog/response_label",
-                  test_adw_message_dialog_response_label);
+  g_test_add_func("/Adwaita/MessageDialog/response_label", test_adw_message_dialog_response_label);
   g_test_add_func("/Adwaita/MessageDialog/response_enabled",
                   test_adw_message_dialog_response_enabled);
   g_test_add_func("/Adwaita/MessageDialog/response_appearance",
@@ -357,10 +341,8 @@ int main(int argc, char *argv[]) {
                   test_adw_message_dialog_response_signal);
   g_test_add_func("/Adwaita/MessageDialog/default_response",
                   test_adw_message_dialog_default_response);
-  g_test_add_func("/Adwaita/MessageDialog/close_response",
-                  test_adw_message_dialog_close_response);
-  g_test_add_func("/Adwaita/MessageDialog/choose",
-                  test_adw_message_dialog_choose);
+  g_test_add_func("/Adwaita/MessageDialog/close_response", test_adw_message_dialog_close_response);
+  g_test_add_func("/Adwaita/MessageDialog/choose", test_adw_message_dialog_choose);
 
   return g_test_run();
 }

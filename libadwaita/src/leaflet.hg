@@ -149,5 +149,4 @@ public:
   _WRAP_PROPERTY("can-navigate-forward", bool, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
   _WRAP_PROPERTY("pages", Glib::RefPtr<Gtk::SelectionModel>, deprecated "AdwLeaflet is deprecated in libadwaita 1.4.")
 };
-
 } // namespace Adw

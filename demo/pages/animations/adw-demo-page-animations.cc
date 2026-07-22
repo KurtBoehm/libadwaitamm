@@ -3,11 +3,9 @@
 #include <glib/gi18n.h>
 
 namespace Adw {
-
 const char DemoPageAnimations::class_name[] = "AdwDemoPageAnimations";
 
-void DemoPageAnimations::setup_template(Gtk::TemplateWidgetSetup &s) {
-
+void DemoPageAnimations::setup_template(Gtk::TemplateWidgetSetup& s) {
   s.set_resource("/org/gnome/Adwaitamm1/Demo/ui/pages/animations/"
                  "adw-demo-page-animations.ui");
 
@@ -27,34 +25,25 @@ void DemoPageAnimations::setup_template(Gtk::TemplateWidgetSetup &s) {
   s.bind_widget("spring_animation_clamp_switch");
 
   s.bind_callback("animations_easing_name", GCallback(animations_easing_name));
-  s.bind_callback(
-      "timed_animation_reset",
-      Gtk::ptr_fun_to_mem_fun<&DemoPageAnimations::timed_animation_reset>());
+  s.bind_callback("timed_animation_reset",
+                  Gtk::ptr_fun_to_mem_fun<&DemoPageAnimations::timed_animation_reset>());
   s.bind_callback("timed_animation_play_pause",
-                  Gtk::ptr_fun_to_mem_fun<
-                      &DemoPageAnimations::timed_animation_play_pause>());
-  s.bind_callback(
-      "timed_animation_skip",
-      Gtk::ptr_fun_to_mem_fun<&DemoPageAnimations::timed_animation_skip>());
-  s.bind_callback("get_play_pause_icon_name",
-                  GCallback(get_play_pause_icon_name));
-  s.bind_callback("timed_animation_can_reset",
-                  GCallback(timed_animation_can_reset));
-  s.bind_callback("timed_animation_can_skip",
-                  GCallback(timed_animation_can_skip));
+                  Gtk::ptr_fun_to_mem_fun<&DemoPageAnimations::timed_animation_play_pause>());
+  s.bind_callback("timed_animation_skip",
+                  Gtk::ptr_fun_to_mem_fun<&DemoPageAnimations::timed_animation_skip>());
+  s.bind_callback("get_play_pause_icon_name", GCallback(get_play_pause_icon_name));
+  s.bind_callback("timed_animation_can_reset", GCallback(timed_animation_can_reset));
+  s.bind_callback("timed_animation_can_skip", GCallback(timed_animation_can_skip));
   s.bind_callback("notify_spring_params_change",
-                  Gtk::ptr_fun_to_mem_fun<
-                      &DemoPageAnimations::notify_spring_params_change>());
+                  Gtk::ptr_fun_to_mem_fun<&DemoPageAnimations::notify_spring_params_change>());
 }
 
-void DemoPageAnimations::init_widget(Gtk::TemplateWidgetInit &i) {
+void DemoPageAnimations::init_widget(Gtk::TemplateWidgetInit& i) {
   // Register properties.
   p_timed_animation =
-      std::make_unique<Glib::Property<Glib::RefPtr<Adw::Animation>>>(
-          *this, "timed-animation");
+    std::make_unique<Glib::Property<Glib::RefPtr<Adw::Animation>>>(*this, "timed-animation");
   p_spring_animation =
-      std::make_unique<Glib::Property<Glib::RefPtr<Adw::Animation>>>(
-          *this, "spring-animation");
+    std::make_unique<Glib::Property<Glib::RefPtr<Adw::Animation>>>(*this, "spring-animation");
 
   i.init_template();
 
@@ -73,60 +62,50 @@ void DemoPageAnimations::init_widget(Gtk::TemplateWidgetInit &i) {
   i.bind_widget(spring_animation_epsilon, "spring_animation_epsilon");
   i.bind_widget(spring_animation_clamp_switch, "spring_animation_clamp_switch");
 
-  auto target = Adw::CallbackAnimationTarget::create(sigc::bind(
-      sigc::ptr_fun(timed_animation_cb), Glib::unwrap(timed_animation_sample)));
+  auto target = Adw::CallbackAnimationTarget::create(
+    sigc::bind(sigc::ptr_fun(timed_animation_cb), Glib::unwrap(timed_animation_sample)));
 
-  timed_animation =
-      Adw::TimedAnimation::create(timed_animation_sample, 0, 1, 100, target);
+  timed_animation = Adw::TimedAnimation::create(timed_animation_sample, 0, 1, 100, target);
 
   spring_animation = Adw::SpringAnimation::create(
-      timed_animation_sample, 0, 1, SpringParams::create(Damping{10}, 1, 100),
-      target);
+    timed_animation_sample, 0, 1, SpringParams::create(Damping{10}, 1, 100), target);
 
   notify_spring_params_change();
 
-  Glib::Binding::bind_property(timed_animation_repeat_count->property_value(),
-                               timed_animation->property_repeat_count(),
-                               Glib::Binding::Flags::SYNC_CREATE |
-                                   Glib::Binding::Flags::BIDIRECTIONAL);
-  Glib::Binding::bind_property(timed_animation_reverse->property_state(),
-                               timed_animation->property_reverse(),
-                               Glib::Binding::Flags::SYNC_CREATE |
-                                   Glib::Binding::Flags::BIDIRECTIONAL);
+  Glib::Binding::bind_property(
+    timed_animation_repeat_count->property_value(), timed_animation->property_repeat_count(),
+    Glib::Binding::Flags::SYNC_CREATE | Glib::Binding::Flags::BIDIRECTIONAL);
+  Glib::Binding::bind_property(
+    timed_animation_reverse->property_state(), timed_animation->property_reverse(),
+    Glib::Binding::Flags::SYNC_CREATE | Glib::Binding::Flags::BIDIRECTIONAL);
 
-  Glib::Binding::bind_property(timed_animation_alternate->property_state(),
-                               timed_animation->property_alternate(),
-                               Glib::Binding::Flags::SYNC_CREATE |
-                                   Glib::Binding::Flags::BIDIRECTIONAL);
-  Glib::Binding::bind_property(timed_animation_duration->property_value(),
-                               timed_animation->property_duration(),
-                               Glib::Binding::Flags::SYNC_CREATE |
-                                   Glib::Binding::Flags::BIDIRECTIONAL);
-  Glib::Binding::bind_property(timed_animation_easing->property_selected(),
-                               timed_animation->property_easing(),
-                               Glib::Binding::Flags::SYNC_CREATE |
-                                   Glib::Binding::Flags::BIDIRECTIONAL);
+  Glib::Binding::bind_property(
+    timed_animation_alternate->property_state(), timed_animation->property_alternate(),
+    Glib::Binding::Flags::SYNC_CREATE | Glib::Binding::Flags::BIDIRECTIONAL);
+  Glib::Binding::bind_property(
+    timed_animation_duration->property_value(), timed_animation->property_duration(),
+    Glib::Binding::Flags::SYNC_CREATE | Glib::Binding::Flags::BIDIRECTIONAL);
+  Glib::Binding::bind_property(
+    timed_animation_easing->property_selected(), timed_animation->property_easing(),
+    Glib::Binding::Flags::SYNC_CREATE | Glib::Binding::Flags::BIDIRECTIONAL);
 
-  Glib::Binding::bind_property(spring_animation_velocity->property_value(),
-                               spring_animation->property_initial_velocity(),
-                               Glib::Binding::Flags::SYNC_CREATE |
-                                   Glib::Binding::Flags::BIDIRECTIONAL);
-  Glib::Binding::bind_property(spring_animation_epsilon->property_value(),
-                               spring_animation->property_epsilon(),
-                               Glib::Binding::Flags::SYNC_CREATE |
-                                   Glib::Binding::Flags::BIDIRECTIONAL);
-  Glib::Binding::bind_property(spring_animation_clamp_switch->property_active(),
-                               spring_animation->property_clamp(),
-                               Glib::Binding::Flags::SYNC_CREATE |
-                                   Glib::Binding::Flags::BIDIRECTIONAL);
+  Glib::Binding::bind_property(
+    spring_animation_velocity->property_value(), spring_animation->property_initial_velocity(),
+    Glib::Binding::Flags::SYNC_CREATE | Glib::Binding::Flags::BIDIRECTIONAL);
+  Glib::Binding::bind_property(
+    spring_animation_epsilon->property_value(), spring_animation->property_epsilon(),
+    Glib::Binding::Flags::SYNC_CREATE | Glib::Binding::Flags::BIDIRECTIONAL);
+  Glib::Binding::bind_property(
+    spring_animation_clamp_switch->property_active(), spring_animation->property_clamp(),
+    Glib::Binding::Flags::SYNC_CREATE | Glib::Binding::Flags::BIDIRECTIONAL);
 
   timed_animation->set_easing(Adw::Easing::EASE_IN_OUT_CUBIC);
 
   p_timed_animation->set_value(timed_animation);
   p_spring_animation->set_value(spring_animation);
 
-  Glib::RefPtr<Gtk::LayoutManager> manager = Glib::wrap(gtk_custom_layout_new(
-      NULL, timed_animation_measure, timed_animation_allocate));
+  Glib::RefPtr<Gtk::LayoutManager> manager =
+    Glib::wrap(gtk_custom_layout_new(NULL, timed_animation_measure, timed_animation_allocate));
 
   timed_animation_sample->set_layout_manager(manager);
   timed_animation_button_box->set_direction(Gtk::TextDirection::LTR);
@@ -138,8 +117,7 @@ void DemoPageAnimations::timed_animation_reset() {
 }
 
 Glib::RefPtr<Adw::Animation> DemoPageAnimations::get_current_animation() {
-  auto current_animation =
-      animation_preferences_stack->get_visible_child_name();
+  auto current_animation = animation_preferences_stack->get_visible_child_name();
 
   if (current_animation == "Timed") {
     return timed_animation;
@@ -175,16 +153,14 @@ void DemoPageAnimations::timed_animation_skip() {
 }
 
 void DemoPageAnimations::notify_spring_params_change() {
-  Glib::RefPtr<Adw::SpringParams> spring_params =
-      Adw::SpringParams::create(Damping{spring_animation_damping->get_value()},
-                                spring_animation_mass->get_value(),
-                                spring_animation_stiffness->get_value());
+  Glib::RefPtr<Adw::SpringParams> spring_params = Adw::SpringParams::create(
+    Damping{spring_animation_damping->get_value()}, spring_animation_mass->get_value(),
+    spring_animation_stiffness->get_value());
 
   spring_animation->set_spring_params(spring_params);
 }
 
-char *DemoPageAnimations::animations_easing_name(AdwEnumListItem *value,
-                                                 gpointer /*user_data*/) {
+char* DemoPageAnimations::animations_easing_name(AdwEnumListItem* value, gpointer /*user_data*/) {
   switch (adw_enum_list_item_get_value(value)) {
   case ADW_LINEAR:
     return g_strdup(_("Linear"));
@@ -253,32 +229,34 @@ char *DemoPageAnimations::animations_easing_name(AdwEnumListItem *value,
   }
 }
 
-void DemoPageAnimations::timed_animation_measure(
-    GtkWidget *widget_, GtkOrientation orientation, int for_size, int *minimum,
-    int *natural, int *minimum_baseline, int *natural_baseline) {
-  Gtk::Widget *widget = Glib::wrap(widget_);
+void DemoPageAnimations::timed_animation_measure(GtkWidget* widget_, GtkOrientation orientation,
+                                                 int for_size, int* minimum, int* natural,
+                                                 int* minimum_baseline, int* natural_baseline) {
+  Gtk::Widget* widget = Glib::wrap(widget_);
 
-  Gtk::Widget *child = widget->get_first_child();
+  Gtk::Widget* child = widget->get_first_child();
 
-  if (!child)
+  if (!child) {
     return;
+  }
 
-  child->measure(Gtk::Orientation(orientation), for_size, *minimum, *natural,
-                 *minimum_baseline, *natural_baseline);
+  child->measure(Gtk::Orientation(orientation), for_size, *minimum, *natural, *minimum_baseline,
+                 *natural_baseline);
   // gtk_widget_measure(child, orientation, for_size, minimum, natural,
   //                    minimum_baseline, natural_baseline);
 }
 
-void DemoPageAnimations::timed_animation_allocate(GtkWidget *widget_, int width,
-                                                  int height, int baseline) {
-  Gtk::Widget *widget = Glib::wrap(widget_);
-  Adw::DemoPageAnimations *self = dynamic_cast<Adw::DemoPageAnimations *>(
-      widget->get_ancestor(Adw::DemoPageAnimations::get_type()));
+void DemoPageAnimations::timed_animation_allocate(GtkWidget* widget_, int width, int height,
+                                                  int baseline) {
+  Gtk::Widget* widget = Glib::wrap(widget_);
+  Adw::DemoPageAnimations* self = dynamic_cast<Adw::DemoPageAnimations*>(
+    widget->get_ancestor(Adw::DemoPageAnimations::get_type()));
 
-  Gtk::Widget *child = widget->get_first_child();
+  Gtk::Widget* child = widget->get_first_child();
 
-  if (!child)
+  if (!child) {
     return;
+  }
 
   Glib::RefPtr<Adw::Animation> animation = self->get_current_animation();
 
@@ -290,8 +268,8 @@ void DemoPageAnimations::timed_animation_allocate(GtkWidget *widget_, int width,
   int minimum_baseline;
   int natural_baseline;
 
-  child->measure(Gtk::Orientation::HORIZONTAL, -1, child_width, natural,
-                 minimum_baseline, natural_baseline);
+  child->measure(Gtk::Orientation::HORIZONTAL, -1, child_width, natural, minimum_baseline,
+                 natural_baseline);
 
   int offset = (int)((width - child_width) * (progress - 0.5));
 
@@ -301,35 +279,27 @@ void DemoPageAnimations::timed_animation_allocate(GtkWidget *widget_, int width,
                       gsk_transform_translate(NULL, &p));
 }
 
-char *
-DemoPageAnimations::get_play_pause_icon_name(gpointer /*user_data*/,
-                                             AdwAnimationState timed_state,
-                                             AdwAnimationState spring_state) {
-  gboolean playing = timed_state == ADW_ANIMATION_PLAYING ||
-                     spring_state == ADW_ANIMATION_PLAYING;
+char* DemoPageAnimations::get_play_pause_icon_name(gpointer /*user_data*/,
+                                                   AdwAnimationState timed_state,
+                                                   AdwAnimationState spring_state) {
+  gboolean playing = timed_state == ADW_ANIMATION_PLAYING || spring_state == ADW_ANIMATION_PLAYING;
 
-  return g_strdup(playing ? "media-playback-pause-symbolic"
-                          : "media-playback-start-symbolic");
+  return g_strdup(playing ? "media-playback-pause-symbolic" : "media-playback-start-symbolic");
 }
 
-gboolean
-DemoPageAnimations::timed_animation_can_reset(gpointer /*user_data*/,
-                                              AdwAnimationState timed_state,
-                                              AdwAnimationState spring_state) {
-  return timed_state != ADW_ANIMATION_IDLE ||
-         spring_state != ADW_ANIMATION_IDLE;
+gboolean DemoPageAnimations::timed_animation_can_reset(gpointer /*user_data*/,
+                                                       AdwAnimationState timed_state,
+                                                       AdwAnimationState spring_state) {
+  return timed_state != ADW_ANIMATION_IDLE || spring_state != ADW_ANIMATION_IDLE;
 }
 
-gboolean
-DemoPageAnimations::timed_animation_can_skip(gpointer /*user_data*/,
-                                             AdwAnimationState timed_state,
-                                             AdwAnimationState spring_state) {
-  return timed_state != ADW_ANIMATION_FINISHED &&
-         spring_state != ADW_ANIMATION_FINISHED;
+gboolean DemoPageAnimations::timed_animation_can_skip(gpointer /*user_data*/,
+                                                      AdwAnimationState timed_state,
+                                                      AdwAnimationState spring_state) {
+  return timed_state != ADW_ANIMATION_FINISHED && spring_state != ADW_ANIMATION_FINISHED;
 }
 
-void DemoPageAnimations::timed_animation_cb(double /*value*/, GtkWidget *self) {
+void DemoPageAnimations::timed_animation_cb(double /*value*/, GtkWidget* self) {
   gtk_widget_queue_allocate(self);
 }
-
 } // namespace Adw

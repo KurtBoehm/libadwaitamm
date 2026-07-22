@@ -3,27 +3,24 @@
 #include <glib/gi18n.h>
 
 namespace Adw {
-
 ///////////////////
 // DemoPageAbout //
 ///////////////////
 
 const char DemoPageAbout::class_name[] = "AdwDemoPageAbout";
 
-void DemoPageAbout::setup_template(Gtk::TemplateWidgetSetup &s) {
-  s.set_resource(
-      "/org/gnome/Adwaitamm1/Demo/ui/pages/about/adw-demo-page-about.ui");
+void DemoPageAbout::setup_template(Gtk::TemplateWidgetSetup& s) {
+  s.set_resource("/org/gnome/Adwaitamm1/Demo/ui/pages/about/adw-demo-page-about.ui");
 
-  s.install_action("demo.run",
-                   Gtk::ptr_fun_to_mem_fun<&DemoPageAbout::demo_run>());
+  s.install_action("demo.run", Gtk::ptr_fun_to_mem_fun<&DemoPageAbout::demo_run>());
 }
 
-void DemoPageAbout::init_widget(Gtk::TemplateWidgetInit &i) {
+void DemoPageAbout::init_widget(Gtk::TemplateWidgetInit& i) {
   i.init_template();
 }
 
 void DemoPageAbout::demo_run() {
-  Gtk::Root *root = get_root();
+  Gtk::Root* root = get_root();
 
   std::vector<Glib::ustring> developers{"Angela Avery <angela@example.org>"};
 
@@ -31,7 +28,7 @@ void DemoPageAbout::demo_run() {
 
   std::vector<Glib::ustring> special_thanks{"My cat"};
 
-  const char *release_notes = "\
+  const char* release_notes = "\
 <p>\
   This release adds the following features:\
 </p>\
@@ -45,7 +42,7 @@ void DemoPageAbout::demo_run() {
   ";
 
   auto about = new Adw::AboutWindow();
-  about->set_transient_for(*dynamic_cast<Gtk::Window *>(root));
+  about->set_transient_for(*dynamic_cast<Gtk::Window*>(root));
   about->set_application_icon("org.example.Typeset");
   about->set_application_name(_("Typeset"));
   about->set_developer_name(_("Angela Avery"));
@@ -63,9 +60,8 @@ void DemoPageAbout::demo_run() {
   about->set_artists(artists);
   about->set_translator_credits(_("translator-credits"));
 
-  about->add_link(_("Documentation"),
-                  "https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/"
-                  "class.AboutWindow.html");
+  about->add_link(_("Documentation"), "https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/"
+                                      "class.AboutWindow.html");
 
   about->add_legal_section(_("Fonts"), "", Gtk::License::CUSTOM,
                            "This application uses font data from <a "
@@ -75,5 +71,4 @@ void DemoPageAbout::demo_run() {
 
   about->present();
 }
-
 } // namespace Adw

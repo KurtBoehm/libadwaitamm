@@ -7,7 +7,7 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
-static void test_adw_squeezer_homogeneous(void) {
+static void test_adw_squeezer_homogeneous() {
   Adw::Squeezer squeezer;
 
   g_assert_true(squeezer.get_homogeneous());
@@ -19,7 +19,7 @@ static void test_adw_squeezer_homogeneous(void) {
   g_assert_true(squeezer.get_homogeneous());
 }
 
-static void test_adw_squeezer_allow_none(void) {
+static void test_adw_squeezer_allow_none() {
   Adw::Squeezer squeezer;
 
   g_assert_false(squeezer.get_allow_none());
@@ -31,7 +31,7 @@ static void test_adw_squeezer_allow_none(void) {
   g_assert_false(squeezer.get_allow_none());
 }
 
-static void test_adw_squeezer_transition_duration(void) {
+static void test_adw_squeezer_transition_duration() {
   Adw::Squeezer squeezer;
 
   g_assert_true(squeezer.get_transition_duration() == 200);
@@ -43,33 +43,30 @@ static void test_adw_squeezer_transition_duration(void) {
   g_assert_true(squeezer.get_transition_duration() == G_MAXUINT);
 }
 
-static void test_adw_squeezer_transition_type(void) {
+static void test_adw_squeezer_transition_type() {
   Adw::Squeezer squeezer;
 
-  g_assert_true(squeezer.get_transition_type() ==
-                Adw::Squeezer::TransitionType::NONE);
+  g_assert_true(squeezer.get_transition_type() == Adw::Squeezer::TransitionType::NONE);
 
   squeezer.set_transition_type(Adw::Squeezer::TransitionType::CROSSFADE);
-  g_assert_true(squeezer.get_transition_type() ==
-                Adw::Squeezer::TransitionType::CROSSFADE);
+  g_assert_true(squeezer.get_transition_type() == Adw::Squeezer::TransitionType::CROSSFADE);
 
   squeezer.set_transition_type(Adw::Squeezer::TransitionType::NONE);
-  g_assert_true(squeezer.get_transition_type() ==
-                Adw::Squeezer::TransitionType::NONE);
+  g_assert_true(squeezer.get_transition_type() == Adw::Squeezer::TransitionType::NONE);
 }
 
-static void test_adw_squeezer_transition_running(void) {
+static void test_adw_squeezer_transition_running() {
   Adw::Squeezer squeezer;
 
   g_assert_false(squeezer.get_transition_running());
 }
 
-static void test_adw_squeezer_show_hide_child(void) {
+static void test_adw_squeezer_show_hide_child() {
   Adw::Squeezer squeezer;
 
   g_assert_true(squeezer.get_visible_child() == nullptr);
 
-  Gtk::Label *child = Gtk::make_managed<Gtk::Label>("");
+  Gtk::Label* child = Gtk::make_managed<Gtk::Label>("");
 
   squeezer.add(*child);
   g_assert_true(squeezer.get_visible_child() == child);
@@ -84,7 +81,7 @@ static void test_adw_squeezer_show_hide_child(void) {
   g_assert_true(squeezer.get_visible_child() == nullptr);
 }
 
-static void test_adw_squeezer_interpolate_size(void) {
+static void test_adw_squeezer_interpolate_size() {
   Adw::Squeezer squeezer;
 
   g_assert_false(squeezer.get_interpolate_size());
@@ -96,10 +93,10 @@ static void test_adw_squeezer_interpolate_size(void) {
   g_assert_false(squeezer.get_interpolate_size());
 }
 
-static void test_adw_squeezer_page_enabled(void) {
+static void test_adw_squeezer_page_enabled() {
   Adw::Squeezer squeezer;
 
-  Gtk::Label *child = Gtk::make_managed<Gtk::Label>();
+  Gtk::Label* child = Gtk::make_managed<Gtk::Label>();
 
   Glib::RefPtr<Adw::SqueezerPage> page = squeezer.add(*child);
   g_assert_true(page->get_enabled());
@@ -111,26 +108,19 @@ static void test_adw_squeezer_page_enabled(void) {
   g_assert_true(page->get_enabled());
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/ViewSwitcher/homogeneous",
-                  test_adw_squeezer_homogeneous);
-  g_test_add_func("/Adwaita/ViewSwitcher/allow_none",
-                  test_adw_squeezer_allow_none);
+  g_test_add_func("/Adwaita/ViewSwitcher/homogeneous", test_adw_squeezer_homogeneous);
+  g_test_add_func("/Adwaita/ViewSwitcher/allow_none", test_adw_squeezer_allow_none);
   g_test_add_func("/Adwaita/ViewSwitcher/transition_duration",
                   test_adw_squeezer_transition_duration);
-  g_test_add_func("/Adwaita/ViewSwitcher/transition_type",
-                  test_adw_squeezer_transition_type);
-  g_test_add_func("/Adwaita/ViewSwitcher/transition_running",
-                  test_adw_squeezer_transition_running);
-  g_test_add_func("/Adwaita/ViewSwitcher/show_hide_child",
-                  test_adw_squeezer_show_hide_child);
-  g_test_add_func("/Adwaita/ViewSwitcher/interpolate_size",
-                  test_adw_squeezer_interpolate_size);
-  g_test_add_func("/Adwaita/ViewSwitcher/page_enabled",
-                  test_adw_squeezer_page_enabled);
+  g_test_add_func("/Adwaita/ViewSwitcher/transition_type", test_adw_squeezer_transition_type);
+  g_test_add_func("/Adwaita/ViewSwitcher/transition_running", test_adw_squeezer_transition_running);
+  g_test_add_func("/Adwaita/ViewSwitcher/show_hide_child", test_adw_squeezer_show_hide_child);
+  g_test_add_func("/Adwaita/ViewSwitcher/interpolate_size", test_adw_squeezer_interpolate_size);
+  g_test_add_func("/Adwaita/ViewSwitcher/page_enabled", test_adw_squeezer_page_enabled);
 
   return g_test_run();
 }

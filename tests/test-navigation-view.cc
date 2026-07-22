@@ -10,35 +10,32 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void check_navigation_stack(Adw::NavigationView &view,
-                                   const std::vector<Glib::ustring> &tags) {
-  std::vector<Adw::NavigationPage *> stack = view.get_navigation_stack();
+static void check_navigation_stack(Adw::NavigationView& view,
+                                   const std::vector<Glib::ustring>& tags) {
+  std::vector<Adw::NavigationPage*> stack = view.get_navigation_stack();
 
   g_assert_cmpint((int)stack.size(), ==, (int)tags.size());
 
-  for (size_t i = 0; i < tags.size(); i++)
+  for (size_t i = 0; i < tags.size(); i++) {
     g_assert_true(stack[i]->get_tag() == tags[i]);
+  }
 }
 
-static void test_adw_navigation_view_add_remove(void) {
+static void test_adw_navigation_view_add_remove() {
   Adw::NavigationView view;
-  Adw::NavigationPage page_1(Gtk::make_managed<Gtk::Button>(), "Page 1",
-                             "page-1");
-  Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Page 2",
-                             "page-2");
-  Adw::NavigationPage page_3(Gtk::make_managed<Gtk::Button>(),
-                             "Page 2 again", "page-2");
+  Adw::NavigationPage page_1(Gtk::make_managed<Gtk::Button>(), "Page 1", "page-1");
+  Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Page 2", "page-2");
+  Adw::NavigationPage page_3(Gtk::make_managed<Gtk::Button>(), "Page 2 again", "page-2");
   int local_notified = 0, notified_tag = 0, pushed = 0, popped = 0;
 
   view.signal_pushed().connect([&pushed]() { pushed++; });
-  view.signal_popped().connect(
-      [&popped](Adw::NavigationPage *) { popped++; });
-  view.property_visible_page().signal_changed().connect(
-      [&local_notified]() { local_notified++; });
-  view.property_visible_page_tag().signal_changed().connect(
-      [&notified_tag]() { notified_tag++; });
+  view.signal_popped().connect([&popped](Adw::NavigationPage*) { popped++; });
+  view.property_visible_page().signal_changed().connect([&local_notified]() { local_notified++; });
+  view.property_visible_page_tag().signal_changed().connect([&notified_tag]() { notified_tag++; });
 
   g_assert_true(view.get_visible_page() == nullptr);
   g_assert_true(view.get_visible_page_tag() == "");
@@ -51,8 +48,7 @@ static void test_adw_navigation_view_add_remove(void) {
   view.add(&page_1);
   view.add(&page_2);
 
-  g_test_expect_message(ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
-                        "*Duplicate page tag*");
+  g_test_expect_message(ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "*Duplicate page tag*");
   view.add(&page_3);
   g_test_assert_expected_messages();
 
@@ -82,25 +78,19 @@ static void test_adw_navigation_view_add_remove(void) {
   g_assert_true(notified_tag == 1);
 }
 
-static void test_adw_navigation_view_push_pop(void) {
+static void test_adw_navigation_view_push_pop() {
   Adw::NavigationView view;
-  Adw::NavigationPage page_1(Gtk::make_managed<Gtk::Button>(), "Page 1",
-                             "page-1");
-  Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Page 2",
-                             "page-2");
+  Adw::NavigationPage page_1(Gtk::make_managed<Gtk::Button>(), "Page 1", "page-1");
+  Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Page 2", "page-2");
   Adw::NavigationPage page_3(Gtk::make_managed<Gtk::Button>(), "Page 3");
   Adw::NavigationPage page_4(Gtk::make_managed<Gtk::Button>(), "Page 4");
-  Adw::NavigationPage page_5(Gtk::make_managed<Gtk::Button>(),
-                             "Page 2 again", "page-2");
+  Adw::NavigationPage page_5(Gtk::make_managed<Gtk::Button>(), "Page 2 again", "page-2");
   int local_notified = 0, notified_tag = 0, pushed = 0, popped = 0;
 
   view.signal_pushed().connect([&pushed]() { pushed++; });
-  view.signal_popped().connect(
-      [&popped](Adw::NavigationPage *) { popped++; });
-  view.property_visible_page().signal_changed().connect(
-      [&local_notified]() { local_notified++; });
-  view.property_visible_page_tag().signal_changed().connect(
-      [&notified_tag]() { notified_tag++; });
+  view.signal_popped().connect([&popped](Adw::NavigationPage*) { popped++; });
+  view.property_visible_page().signal_changed().connect([&local_notified]() { local_notified++; });
+  view.property_visible_page_tag().signal_changed().connect([&notified_tag]() { notified_tag++; });
 
   g_assert_true(pushed == 0);
   g_assert_true(popped == 0);
@@ -130,8 +120,7 @@ static void test_adw_navigation_view_push_pop(void) {
   g_assert_true(local_notified == 2);
   g_assert_true(notified_tag == 2);
 
-  g_test_expect_message(ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
-                        "*already in navigation stack*");
+  g_test_expect_message(ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "*already in navigation stack*");
   view.push(&page_2);
   g_test_assert_expected_messages();
   check_navigation_stack(view, {"page-1", "page-2"});
@@ -156,8 +145,7 @@ static void test_adw_navigation_view_push_pop(void) {
   g_assert_true(pushed == 4);
   g_assert_true(popped == 0);
 
-  g_test_expect_message(ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
-                        "*Duplicate page tag*");
+  g_test_expect_message(ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "*Duplicate page tag*");
   view.push(&page_5);
   g_test_assert_expected_messages();
   g_assert_true(view.get_visible_page() == &page_4);
@@ -194,21 +182,16 @@ static void test_adw_navigation_view_push_pop(void) {
   g_assert_true(pushed == 4);
 }
 
-static void test_adw_navigation_view_push_pop_by_tag(void) {
+static void test_adw_navigation_view_push_pop_by_tag() {
   Adw::NavigationView view;
-  Adw::NavigationPage page_1(Gtk::make_managed<Gtk::Button>(), "Page 1",
-                             "page-1");
-  Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Page 2",
-                             "page-2");
-  Adw::NavigationPage page_3(Gtk::make_managed<Gtk::Button>(), "Page 3",
-                             "page-3");
-  Adw::NavigationPage page_4(Gtk::make_managed<Gtk::Button>(), "Page 4",
-                             "page-4");
+  Adw::NavigationPage page_1(Gtk::make_managed<Gtk::Button>(), "Page 1", "page-1");
+  Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Page 2", "page-2");
+  Adw::NavigationPage page_3(Gtk::make_managed<Gtk::Button>(), "Page 3", "page-3");
+  Adw::NavigationPage page_4(Gtk::make_managed<Gtk::Button>(), "Page 4", "page-4");
   int pushed = 0, popped = 0;
 
   view.signal_pushed().connect([&pushed]() { pushed++; });
-  view.signal_popped().connect(
-      [&popped](Adw::NavigationPage *) { popped++; });
+  view.signal_popped().connect([&popped](Adw::NavigationPage*) { popped++; });
 
   view.add(&page_1);
   view.add(&page_2);
@@ -224,8 +207,7 @@ static void test_adw_navigation_view_push_pop_by_tag(void) {
   g_test_assert_expected_messages();
   g_assert_true(pushed == 1);
 
-  g_test_expect_message(ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
-                        "*already in navigation stack*");
+  g_test_expect_message(ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "*already in navigation stack*");
   view.push_by_tag("page-1");
   g_test_assert_expected_messages();
   g_assert_true(pushed == 1);
@@ -267,22 +249,16 @@ static void test_adw_navigation_view_push_pop_by_tag(void) {
   g_assert_true(popped == 3);
 }
 
-static void test_adw_navigation_view_pop_to_page(void) {
+static void test_adw_navigation_view_pop_to_page() {
   Adw::NavigationView view;
-  Adw::NavigationPage page_1(Gtk::make_managed<Gtk::Button>(), "Page 1",
-                             "page-1");
-  Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Page 2",
-                             "page-2");
-  Adw::NavigationPage page_3(Gtk::make_managed<Gtk::Button>(), "Page 3",
-                             "page-3");
-  Adw::NavigationPage page_4(Gtk::make_managed<Gtk::Button>(), "Page 4",
-                             "page-4");
-  Adw::NavigationPage page_5(Gtk::make_managed<Gtk::Button>(), "Page 5",
-                             "page-5");
+  Adw::NavigationPage page_1(Gtk::make_managed<Gtk::Button>(), "Page 1", "page-1");
+  Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Page 2", "page-2");
+  Adw::NavigationPage page_3(Gtk::make_managed<Gtk::Button>(), "Page 3", "page-3");
+  Adw::NavigationPage page_4(Gtk::make_managed<Gtk::Button>(), "Page 4", "page-4");
+  Adw::NavigationPage page_5(Gtk::make_managed<Gtk::Button>(), "Page 5", "page-5");
   int popped = 0;
 
-  view.signal_popped().connect(
-      [&popped](Adw::NavigationPage *) { popped++; });
+  view.signal_popped().connect([&popped](Adw::NavigationPage*) { popped++; });
 
   view.add(&page_1);
   view.add(&page_3);
@@ -293,8 +269,7 @@ static void test_adw_navigation_view_pop_to_page(void) {
   g_assert_true(view.get_visible_page() == &page_4);
   check_navigation_stack(view, {"page-1", "page-2", "page-3", "page-4"});
 
-  g_test_expect_message(ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
-                        "*not in the navigation stack*");
+  g_test_expect_message(ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "*not in the navigation stack*");
   g_assert_false(view.pop_to_page(&page_5));
   g_test_assert_expected_messages();
   g_assert_true(popped == 0);
@@ -316,19 +291,15 @@ static void test_adw_navigation_view_pop_to_page(void) {
   g_assert_true(view.find_page("page-3") == &page_3);
 }
 
-static void test_adw_navigation_view_replace(void) {
+static void test_adw_navigation_view_replace() {
   Adw::NavigationView view;
-  Adw::NavigationPage page_1(Gtk::make_managed<Gtk::Button>(), "Page 1",
-                             "page-1");
-  Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Page 2",
-                             "page-2");
-  Adw::NavigationPage page_3(Gtk::make_managed<Gtk::Button>(), "Page 3",
-                             "page-3");
+  Adw::NavigationPage page_1(Gtk::make_managed<Gtk::Button>(), "Page 1", "page-1");
+  Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Page 2", "page-2");
+  Adw::NavigationPage page_3(Gtk::make_managed<Gtk::Button>(), "Page 3", "page-3");
   int pushed = 0, popped = 0, replaced = 0;
 
   view.signal_pushed().connect([&pushed]() { pushed++; });
-  view.signal_popped().connect(
-      [&popped](Adw::NavigationPage *) { popped++; });
+  view.signal_popped().connect([&popped](Adw::NavigationPage*) { popped++; });
   view.signal_replaced().connect([&replaced]() { replaced++; });
 
   check_navigation_stack(view, {});
@@ -377,16 +348,12 @@ static void test_adw_navigation_view_replace(void) {
   g_assert_true(popped == 0);
 }
 
-static void test_adw_navigation_view_previous_page(void) {
+static void test_adw_navigation_view_previous_page() {
   Adw::NavigationView view;
-  Adw::NavigationPage page_1(Gtk::make_managed<Gtk::Button>(), "Page 1",
-                             "page-1");
-  Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Page 2",
-                             "page-2");
-  Adw::NavigationPage page_3(Gtk::make_managed<Gtk::Button>(), "Page 3",
-                             "page-3");
-  Adw::NavigationPage page_4(Gtk::make_managed<Gtk::Button>(), "Page 4",
-                             "page-4");
+  Adw::NavigationPage page_1(Gtk::make_managed<Gtk::Button>(), "Page 1", "page-1");
+  Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Page 2", "page-2");
+  Adw::NavigationPage page_3(Gtk::make_managed<Gtk::Button>(), "Page 3", "page-3");
+  Adw::NavigationPage page_4(Gtk::make_managed<Gtk::Button>(), "Page 4", "page-4");
 
   view.add(&page_1);
   view.add(&page_2);
@@ -401,12 +368,10 @@ static void test_adw_navigation_view_previous_page(void) {
   g_assert_true(view.get_previous_page(&page_4) == nullptr);
 }
 
-static void test_adw_navigation_view_find_page(void) {
+static void test_adw_navigation_view_find_page() {
   Adw::NavigationView view;
-  Adw::NavigationPage page_1(Gtk::make_managed<Gtk::Button>(), "Page 1",
-                             "page-1");
-  Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Page 2",
-                             "page-2");
+  Adw::NavigationPage page_1(Gtk::make_managed<Gtk::Button>(), "Page 1", "page-1");
+  Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Page 2", "page-2");
   g_assert_true(view.find_page("page-1") == nullptr);
   g_assert_true(view.find_page("page-2") == nullptr);
 
@@ -415,8 +380,7 @@ static void test_adw_navigation_view_find_page(void) {
   g_assert_true(view.find_page("page-1") == &page_1);
   g_assert_true(view.find_page("page-2") == &page_2);
 
-  g_test_expect_message(ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
-                        "*Duplicate page tag*");
+  g_test_expect_message(ADW_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "*Duplicate page tag*");
   page_1.set_tag("page-2");
   g_test_assert_expected_messages();
   g_assert_true(view.find_page("page-1") == &page_1);
@@ -435,12 +399,11 @@ static void test_adw_navigation_view_find_page(void) {
   g_assert_true(view.find_page("page-3") == nullptr);
 }
 
-static void test_adw_navigation_view_animate_transitions(void) {
+static void test_adw_navigation_view_animate_transitions() {
   Adw::NavigationView view;
 
   notified = 0;
-  view.property_animate_transitions().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  view.property_animate_transitions().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(view.get_animate_transitions());
 
@@ -456,12 +419,11 @@ static void test_adw_navigation_view_animate_transitions(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_navigation_view_pop_on_escape(void) {
+static void test_adw_navigation_view_pop_on_escape() {
   Adw::NavigationView view;
 
   notified = 0;
-  view.property_pop_on_escape().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  view.property_pop_on_escape().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(view.get_pop_on_escape());
 
@@ -477,15 +439,15 @@ static void test_adw_navigation_view_pop_on_escape(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_navigation_page_child(void) {
-  Gtk::Widget *button = Gtk::make_managed<Gtk::Button>();
+static void test_adw_navigation_page_child() {
+  Gtk::Widget* button = Gtk::make_managed<Gtk::Button>();
   Adw::NavigationPage page(button, "Title");
-  Gtk::Widget *widget;
+  Gtk::Widget* widget;
 
   notified = 0;
   page.property_child().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  widget = page.get_property<Gtk::Widget *>("child");
+  widget = page.get_property<Gtk::Widget*>("child");
   g_assert_true(widget == button);
   g_assert_true(notified == 0);
 
@@ -493,13 +455,13 @@ static void test_adw_navigation_page_child(void) {
   g_assert_null(page.get_child());
   g_assert_true(notified == 1);
 
-  Gtk::Widget *button2 = Gtk::make_managed<Gtk::Button>();
-  page.set_property<Gtk::Widget *>("child", button2);
+  Gtk::Widget* button2 = Gtk::make_managed<Gtk::Button>();
+  page.set_property<Gtk::Widget*>("child", button2);
   g_assert_true(page.get_child() == button2);
   g_assert_true(notified == 2);
 }
 
-static void test_adw_navigation_page_title(void) {
+static void test_adw_navigation_page_title() {
   Adw::NavigationPage page(Gtk::make_managed<Gtk::Button>(), "Title");
 
   notified = 0;
@@ -518,7 +480,7 @@ static void test_adw_navigation_page_title(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_navigation_page_tag(void) {
+static void test_adw_navigation_page_tag() {
   Adw::NavigationPage page(Gtk::make_managed<Gtk::Button>(), "Title");
 
   notified = 0;
@@ -537,7 +499,7 @@ static void test_adw_navigation_page_tag(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_navigation_page_can_pop(void) {
+static void test_adw_navigation_page_can_pop() {
   Adw::NavigationPage page(Gtk::make_managed<Gtk::Button>(), "Title");
 
   notified = 0;
@@ -557,7 +519,7 @@ static void test_adw_navigation_page_can_pop(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_navigation_page_signals(void) {
+static void test_adw_navigation_page_signals() {
   Adw::NavigationView view;
   Adw::NavigationPage page(Gtk::make_managed<Gtk::Button>(), "Title");
   Adw::NavigationPage page_2(Gtk::make_managed<Gtk::Button>(), "Title");
@@ -623,37 +585,26 @@ static void test_adw_navigation_page_signals(void) {
   g_assert_true(hidden == 3);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/NavigationView/add_remove",
-                  test_adw_navigation_view_add_remove);
-  g_test_add_func("/Adwaita/NavigationView/push_pop",
-                  test_adw_navigation_view_push_pop);
+  g_test_add_func("/Adwaita/NavigationView/add_remove", test_adw_navigation_view_add_remove);
+  g_test_add_func("/Adwaita/NavigationView/push_pop", test_adw_navigation_view_push_pop);
   g_test_add_func("/Adwaita/NavigationView/push_pop_by_tag",
                   test_adw_navigation_view_push_pop_by_tag);
-  g_test_add_func("/Adwaita/NavigationView/pop_to_page",
-                  test_adw_navigation_view_pop_to_page);
-  g_test_add_func("/Adwaita/NavigationView/replace",
-                  test_adw_navigation_view_replace);
-  g_test_add_func("/Adwaita/NavigationView/previous_page",
-                  test_adw_navigation_view_previous_page);
-  g_test_add_func("/Adwaita/NavigationView/find_page",
-                  test_adw_navigation_view_find_page);
+  g_test_add_func("/Adwaita/NavigationView/pop_to_page", test_adw_navigation_view_pop_to_page);
+  g_test_add_func("/Adwaita/NavigationView/replace", test_adw_navigation_view_replace);
+  g_test_add_func("/Adwaita/NavigationView/previous_page", test_adw_navigation_view_previous_page);
+  g_test_add_func("/Adwaita/NavigationView/find_page", test_adw_navigation_view_find_page);
   g_test_add_func("/Adwaita/NavigationView/animate_transitions",
                   test_adw_navigation_view_animate_transitions);
-  g_test_add_func("/Adwaita/NavigationView/pop_on_escape",
-                  test_adw_navigation_view_pop_on_escape);
-  g_test_add_func("/Adwaita/NavigationPage/child",
-                  test_adw_navigation_page_child);
-  g_test_add_func("/Adwaita/NavigationPage/title",
-                  test_adw_navigation_page_title);
+  g_test_add_func("/Adwaita/NavigationView/pop_on_escape", test_adw_navigation_view_pop_on_escape);
+  g_test_add_func("/Adwaita/NavigationPage/child", test_adw_navigation_page_child);
+  g_test_add_func("/Adwaita/NavigationPage/title", test_adw_navigation_page_title);
   g_test_add_func("/Adwaita/NavigationPage/tag", test_adw_navigation_page_tag);
-  g_test_add_func("/Adwaita/NavigationPage/can_pop",
-                  test_adw_navigation_page_can_pop);
-  g_test_add_func("/Adwaita/NavigationPage/signals",
-                  test_adw_navigation_page_signals);
+  g_test_add_func("/Adwaita/NavigationPage/can_pop", test_adw_navigation_page_can_pop);
+  g_test_add_func("/Adwaita/NavigationPage/signals", test_adw_navigation_page_signals);
 
   return g_test_run();
 }

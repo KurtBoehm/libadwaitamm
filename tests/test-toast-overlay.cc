@@ -9,16 +9,17 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_toast_overlay_child(void) {
+static void test_adw_toast_overlay_child() {
   Adw::ToastOverlay toast_overlay;
 
   notified = 0;
-  toast_overlay.property_child().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  toast_overlay.property_child().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  Gtk::Widget *widget = toast_overlay.get_property<Gtk::Widget *>("child");
+  Gtk::Widget* widget = toast_overlay.get_property<Gtk::Widget*>("child");
   g_assert_true(widget == nullptr);
 
   toast_overlay.set_child(nullptr);
@@ -34,10 +35,9 @@ static void test_adw_toast_overlay_child(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_toast_overlay_add_toast(void) {
+static void test_adw_toast_overlay_add_toast() {
   Adw::ToastOverlay toast_overlay;
-  std::unique_ptr<Adw::Toast> toast =
-      std::make_unique<Adw::Toast>("Test Notification");
+  std::unique_ptr<Adw::Toast> toast = std::make_unique<Adw::Toast>("Test Notification");
 
   toast->reference();
   toast_overlay.add_toast(toast.get());
@@ -47,13 +47,12 @@ static void test_adw_toast_overlay_add_toast(void) {
   toast_overlay.add_toast(toast.get());
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
   g_test_add_func("/Adwaita/ToastOverlay/child", test_adw_toast_overlay_child);
-  g_test_add_func("/Adwaita/ToastOverlay/add_toast",
-                  test_adw_toast_overlay_add_toast);
+  g_test_add_func("/Adwaita/ToastOverlay/add_toast", test_adw_toast_overlay_add_toast);
 
   return g_test_run();
 }

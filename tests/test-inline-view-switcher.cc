@@ -11,11 +11,13 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_inline_view_switcher_stack(void) {
+static void test_adw_inline_view_switcher_stack() {
   Adw::InlineViewSwitcher switcher;
-  Adw::ViewStack *stack = Gtk::make_managed<Adw::ViewStack>();
+  Adw::ViewStack* stack = Gtk::make_managed<Adw::ViewStack>();
 
   notified = 0;
   switcher.property_stack().signal_changed().connect(sigc::ptr_fun(notify_cb));
@@ -44,39 +46,32 @@ static void test_adw_inline_view_switcher_stack(void) {
   g_assert_true(notified == 3);
 }
 
-static void test_adw_inline_view_switcher_display_mode(void) {
+static void test_adw_inline_view_switcher_display_mode() {
   Adw::InlineViewSwitcher switcher;
 
   notified = 0;
-  switcher.property_display_mode().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  switcher.property_display_mode().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
-  g_assert_true(switcher.get_display_mode() ==
-                Adw::InlineViewSwitcher::DisplayMode::LABELS);
+  g_assert_true(switcher.get_display_mode() == Adw::InlineViewSwitcher::DisplayMode::LABELS);
 
   switcher.set_display_mode(Adw::InlineViewSwitcher::DisplayMode::LABELS);
-  g_assert_true(switcher.get_display_mode() ==
-                Adw::InlineViewSwitcher::DisplayMode::LABELS);
+  g_assert_true(switcher.get_display_mode() == Adw::InlineViewSwitcher::DisplayMode::LABELS);
   g_assert_true(notified == 0);
 
-  switcher.property_display_mode() =
-      Adw::InlineViewSwitcher::DisplayMode::ICONS;
-  g_assert_true(switcher.get_display_mode() ==
-                Adw::InlineViewSwitcher::DisplayMode::ICONS);
+  switcher.property_display_mode() = Adw::InlineViewSwitcher::DisplayMode::ICONS;
+  g_assert_true(switcher.get_display_mode() == Adw::InlineViewSwitcher::DisplayMode::ICONS);
   g_assert_true(notified == 1);
 
   switcher.set_display_mode(Adw::InlineViewSwitcher::DisplayMode::BOTH);
-  g_assert_true(switcher.get_display_mode() ==
-                Adw::InlineViewSwitcher::DisplayMode::BOTH);
+  g_assert_true(switcher.get_display_mode() == Adw::InlineViewSwitcher::DisplayMode::BOTH);
   g_assert_true(notified == 2);
 }
 
-static void test_adw_inline_view_switcher_homogeneous(void) {
+static void test_adw_inline_view_switcher_homogeneous() {
   Adw::InlineViewSwitcher switcher;
 
   notified = 0;
-  switcher.property_homogeneous().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  switcher.property_homogeneous().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_false(switcher.get_homogeneous());
 
@@ -93,12 +88,11 @@ static void test_adw_inline_view_switcher_homogeneous(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_inline_view_switcher_can_shrink(void) {
+static void test_adw_inline_view_switcher_can_shrink() {
   Adw::InlineViewSwitcher switcher;
 
   notified = 0;
-  switcher.property_can_shrink().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  switcher.property_can_shrink().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   g_assert_true(switcher.get_can_shrink());
 
@@ -115,12 +109,11 @@ static void test_adw_inline_view_switcher_can_shrink(void) {
   g_assert_true(notified == 2);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/InlineViewSwitcher/stack",
-                  test_adw_inline_view_switcher_stack);
+  g_test_add_func("/Adwaita/InlineViewSwitcher/stack", test_adw_inline_view_switcher_stack);
   g_test_add_func("/Adwaita/InlineViewSwitcher/display_mode",
                   test_adw_inline_view_switcher_display_mode);
   g_test_add_func("/Adwaita/InlineViewSwitcher/homogeneous",

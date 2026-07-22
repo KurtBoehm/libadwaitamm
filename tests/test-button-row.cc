@@ -8,17 +8,20 @@
 #include <libadwaitamm/init.h> // Adw::init
 
 int notified;
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
 int activated_count;
-static void on_activated() { activated_count++; }
+static void on_activated() {
+  activated_count++;
+}
 
-static void test_adw_button_row_start_icon_name(void) {
+static void test_adw_button_row_start_icon_name() {
   Adw::ButtonRow row;
 
   notified = 0;
-  row.property_start_icon_name().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  row.property_start_icon_name().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::ustring name = row.get_property<Glib::ustring>("start-icon-name");
   g_assert_true(name == "");
@@ -31,12 +34,11 @@ static void test_adw_button_row_start_icon_name(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_button_row_end_icon_name(void) {
+static void test_adw_button_row_end_icon_name() {
   Adw::ButtonRow row;
 
   notified = 0;
-  row.property_end_icon_name().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  row.property_end_icon_name().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   Glib::ustring name = row.get_property<Glib::ustring>("end-icon-name");
   g_assert_true(name == "");
@@ -49,7 +51,7 @@ static void test_adw_button_row_end_icon_name(void) {
   g_assert_true(notified == 1);
 }
 
-static void test_adw_button_row_activated(void) {
+static void test_adw_button_row_activated() {
   Adw::ButtonRow row;
 
   activated_count = 0;
@@ -59,16 +61,13 @@ static void test_adw_button_row_activated(void) {
   g_assert_true(activated_count == 1);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/ButtonRow/start_icon_name",
-                  test_adw_button_row_start_icon_name);
-  g_test_add_func("/Adwaita/ButtonRow/end_icon_name",
-                  test_adw_button_row_end_icon_name);
-  g_test_add_func("/Adwaita/ButtonRow/activated",
-                  test_adw_button_row_activated);
+  g_test_add_func("/Adwaita/ButtonRow/start_icon_name", test_adw_button_row_start_icon_name);
+  g_test_add_func("/Adwaita/ButtonRow/end_icon_name", test_adw_button_row_end_icon_name);
+  g_test_add_func("/Adwaita/ButtonRow/activated", test_adw_button_row_activated);
 
   return g_test_run();
 }

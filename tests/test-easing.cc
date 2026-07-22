@@ -16,16 +16,16 @@ static void test_easing_ease(gconstpointer data) {
   g_assert_cmpfloat_with_epsilon(Adw::ease(easing, 1), 1, 0.005);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
   // This does not seem wrapped at all in gtkmm.
-  GEnumClass *enum_class = (GEnumClass*)g_type_class_ref(ADW_TYPE_EASING);
+  GEnumClass* enum_class = (GEnumClass*)g_type_class_ref(ADW_TYPE_EASING);
 
   for (guint i = 0; i < enum_class->n_values; i++) {
-    GEnumValue *value = &enum_class->values[i];
-    char *path = g_strdup_printf("/Adwaita/Easing/%s", value->value_nick);
+    GEnumValue* value = &enum_class->values[i];
+    char* path = g_strdup_printf("/Adwaita/Easing/%s", value->value_nick);
 
     g_test_add_data_func(path, GINT_TO_POINTER(value->value), test_easing_ease);
 

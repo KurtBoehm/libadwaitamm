@@ -11,9 +11,11 @@
 
 int notified;
 
-static void notify_cb() { notified++; }
+static void notify_cb() {
+  ++notified;
+}
 
-static void test_adw_sidebar_item_title(void) {
+static void test_adw_sidebar_item_title() {
   Glib::RefPtr<Adw::SidebarItem> item = Adw::SidebarItem::create("");
 
   notified = 0;
@@ -32,7 +34,7 @@ static void test_adw_sidebar_item_title(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_sidebar_item_subtitle(void) {
+static void test_adw_sidebar_item_subtitle() {
   Glib::RefPtr<Adw::SidebarItem> item = Adw::SidebarItem::create("Item");
 
   notified = 0;
@@ -51,12 +53,11 @@ static void test_adw_sidebar_item_subtitle(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_sidebar_item_use_underline(void) {
+static void test_adw_sidebar_item_use_underline() {
   Glib::RefPtr<Adw::SidebarItem> item = Adw::SidebarItem::create("Item");
 
   notified = 0;
-  item->property_use_underline().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  item->property_use_underline().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   bool use_underline = item->get_property<bool>("use-underline");
   g_assert_false(use_underline);
@@ -71,7 +72,7 @@ static void test_adw_sidebar_item_use_underline(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_sidebar_item_icon(void) {
+static void test_adw_sidebar_item_icon() {
   Glib::RefPtr<Adw::SidebarItem> item = Adw::SidebarItem::create("Item");
   int notified_name = 0;
   int notified_paintable = 0;
@@ -84,7 +85,7 @@ static void test_adw_sidebar_item_icon(void) {
 
   Glib::ustring icon_name = item->get_property<Glib::ustring>("icon-name");
   Glib::RefPtr<Gdk::Paintable> icon_paintable =
-      item->get_property<Glib::RefPtr<Gdk::Paintable>>("icon-paintable");
+    item->get_property<Glib::RefPtr<Gdk::Paintable>>("icon-paintable");
 
   g_assert_true(icon_name == "");
   g_assert_true(icon_paintable == nullptr);
@@ -104,8 +105,7 @@ static void test_adw_sidebar_item_icon(void) {
   g_assert_true(notified_name == 2);
   g_assert_true(notified_paintable == 0);
 
-  Glib::RefPtr<Adw::SpinnerPaintable> paintable =
-      Adw::SpinnerPaintable::create();
+  Glib::RefPtr<Adw::SpinnerPaintable> paintable = Adw::SpinnerPaintable::create();
   item->set_icon_paintable(paintable);
   g_assert_true(item->get_icon_name() == "");
   g_assert_true(item->get_icon_paintable() == paintable);
@@ -120,7 +120,7 @@ static void test_adw_sidebar_item_icon(void) {
 }
 
 #if ADW_CHECK_VERSION(1, 10, 0)
-static void test_adw_sidebar_item_prefix(void) {
+static void test_adw_sidebar_item_prefix() {
   Glib::RefPtr<Adw::SidebarItem> item = Adw::SidebarItem::create("Item");
 
   notified = 0;
@@ -141,7 +141,7 @@ static void test_adw_sidebar_item_prefix(void) {
 }
 #endif
 
-static void test_adw_sidebar_item_suffix(void) {
+static void test_adw_sidebar_item_suffix() {
   Glib::RefPtr<Adw::SidebarItem> item = Adw::SidebarItem::create("Item");
 
   notified = 0;
@@ -161,7 +161,7 @@ static void test_adw_sidebar_item_suffix(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_sidebar_item_visible(void) {
+static void test_adw_sidebar_item_visible() {
   Glib::RefPtr<Adw::SidebarItem> item = Adw::SidebarItem::create("Item");
 
   notified = 0;
@@ -180,7 +180,7 @@ static void test_adw_sidebar_item_visible(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_sidebar_item_enabled(void) {
+static void test_adw_sidebar_item_enabled() {
   Glib::RefPtr<Adw::SidebarItem> item = Adw::SidebarItem::create("Item");
 
   notified = 0;
@@ -199,12 +199,11 @@ static void test_adw_sidebar_item_enabled(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_sidebar_item_drag_motion_activate(void) {
+static void test_adw_sidebar_item_drag_motion_activate() {
   Glib::RefPtr<Adw::SidebarItem> item = Adw::SidebarItem::create("Item");
 
   notified = 0;
-  item->property_drag_motion_activate().signal_changed().connect(
-      sigc::ptr_fun(notify_cb));
+  item->property_drag_motion_activate().signal_changed().connect(sigc::ptr_fun(notify_cb));
 
   bool drag_motion_activate = item->get_property<bool>("drag-motion-activate");
   g_assert_true(drag_motion_activate);
@@ -219,7 +218,7 @@ static void test_adw_sidebar_item_drag_motion_activate(void) {
   g_assert_true(notified == 2);
 }
 
-static void test_adw_sidebar_item_get_section(void) {
+static void test_adw_sidebar_item_get_section() {
   Glib::RefPtr<Adw::SidebarItem> item = Adw::SidebarItem::create("Item");
   Glib::RefPtr<Adw::SidebarSection> section = Adw::SidebarSection::create();
 
@@ -246,7 +245,7 @@ static void test_adw_sidebar_item_get_section(void) {
   g_assert_true(notified == 4);
 }
 
-static void test_adw_sidebar_item_get_section_index(void) {
+static void test_adw_sidebar_item_get_section_index() {
   Glib::RefPtr<Adw::SidebarSection> section = Adw::SidebarSection::create();
   Glib::RefPtr<Adw::SidebarItem> item1 = Adw::SidebarItem::create("Item 1");
   Glib::RefPtr<Adw::SidebarItem> item2 = Adw::SidebarItem::create("Item 2");
@@ -282,23 +281,18 @@ int main(int argc, char* argv[]) {
   Adw::init();
 
   g_test_add_func("/Adwaita/SidebarItem/title", test_adw_sidebar_item_title);
-  g_test_add_func("/Adwaita/SidebarItem/subtitle",
-                  test_adw_sidebar_item_subtitle);
-  g_test_add_func("/Adwaita/SidebarItem/use_underline",
-                  test_adw_sidebar_item_use_underline);
+  g_test_add_func("/Adwaita/SidebarItem/subtitle", test_adw_sidebar_item_subtitle);
+  g_test_add_func("/Adwaita/SidebarItem/use_underline", test_adw_sidebar_item_use_underline);
   g_test_add_func("/Adwaita/SidebarItem/icon", test_adw_sidebar_item_icon);
 #if ADW_CHECK_VERSION(1, 10, 0)
   g_test_add_func("/Adwaita/SidebarItem/prefix", test_adw_sidebar_item_prefix);
 #endif
   g_test_add_func("/Adwaita/SidebarItem/suffix", test_adw_sidebar_item_suffix);
-  g_test_add_func("/Adwaita/SidebarItem/visible",
-                  test_adw_sidebar_item_visible);
-  g_test_add_func("/Adwaita/SidebarItem/enabled",
-                  test_adw_sidebar_item_enabled);
+  g_test_add_func("/Adwaita/SidebarItem/visible", test_adw_sidebar_item_visible);
+  g_test_add_func("/Adwaita/SidebarItem/enabled", test_adw_sidebar_item_enabled);
   g_test_add_func("/Adwaita/SidebarItem/drag_motion_activate",
                   test_adw_sidebar_item_drag_motion_activate);
-  g_test_add_func("/Adwaita/SidebarItem/get_section",
-                  test_adw_sidebar_item_get_section);
+  g_test_add_func("/Adwaita/SidebarItem/get_section", test_adw_sidebar_item_get_section);
   g_test_add_func("/Adwaita/SidebarItem/get_section_index",
                   test_adw_sidebar_item_get_section_index);
 

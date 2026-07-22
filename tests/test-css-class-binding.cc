@@ -8,14 +8,13 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
-static void test_adw_css_class_binding_default(void) {
+static void test_adw_css_class_binding_default() {
   Adw::Bin source, target;
 
   source.set_visible(false);
 
-  Glib::RefPtr<Adw::CssClassBinding> binding =
-      Adw::CssClassBinding::bind_property_to_css_class(
-          Glib::wrap(source.gobj(), true), "visible", &target, "test-class");
+  Glib::RefPtr<Adw::CssClassBinding> binding = Adw::CssClassBinding::bind_property_to_css_class(
+    Glib::wrap(source.gobj(), true), "visible", &target, "test-class");
 
   g_assert_true(binding->get_source()->gobj() == source.gobj());
   g_assert_true(binding->get_target() == &target);
@@ -35,18 +34,17 @@ static void test_adw_css_class_binding_default(void) {
   g_assert_false(target.has_css_class("test-class"));
 }
 
-static void test_adw_css_class_binding_custom_map(void) {
+static void test_adw_css_class_binding_custom_map() {
   Adw::Bin source, target;
   bool called = false;
 
   Glib::RefPtr<Adw::CssClassBinding> binding =
-      Adw::CssClassBinding::bind_property_to_css_class_full(
-          Glib::wrap(source.gobj(), true), "opacity", &target, "test-class",
-          Glib::Binding::Flags::DEFAULT,
-          [&called](const Glib::ValueBase& value) {
-            called = true;
-            return g_value_get_double(value.gobj()) < 0.5;
-          });
+    Adw::CssClassBinding::bind_property_to_css_class_full(
+      Glib::wrap(source.gobj(), true), "opacity", &target, "test-class",
+      Glib::Binding::Flags::DEFAULT, [&called](const Glib::ValueBase& value) {
+        called = true;
+        return g_value_get_double(value.gobj()) < 0.5;
+      });
 
   source.set_opacity(0.0);
   g_assert_true(called);
@@ -62,10 +60,8 @@ int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/CssClassBinding/default",
-                  test_adw_css_class_binding_default);
-  g_test_add_func("/Adwaita/CssClassBinding/custom_map",
-                  test_adw_css_class_binding_custom_map);
+  g_test_add_func("/Adwaita/CssClassBinding/default", test_adw_css_class_binding_default);
+  g_test_add_func("/Adwaita/CssClassBinding/custom_map", test_adw_css_class_binding_custom_map);
 
   return g_test_run();
 }

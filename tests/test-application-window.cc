@@ -8,12 +8,12 @@
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
-static void test_adw_application_window_new(void) {
+static void test_adw_application_window_new() {
   Glib::RefPtr<Gtk::Application> app; // none
   Adw::ApplicationWindow window(app);
 }
 
-static void test_adw_application_window_content(void) {
+static void test_adw_application_window_content() {
   Adw::ApplicationWindow window;
 
   // No content set yet.
@@ -28,7 +28,7 @@ static void test_adw_application_window_content(void) {
   g_assert_null(window.get_content());
 }
 
-static void test_adw_application_window_adaptive_preview(void) {
+static void test_adw_application_window_adaptive_preview() {
   Adw::ApplicationWindow window;
 
   // Closed by default.
@@ -41,7 +41,7 @@ static void test_adw_application_window_adaptive_preview(void) {
   g_assert_false(window.get_adaptive_preview());
 }
 
-static void test_adw_application_window_breakpoint(void) {
+static void test_adw_application_window_breakpoint() {
   Adw::ApplicationWindow window;
 
   // No breakpoint applied on a freshly constructed window.
@@ -58,7 +58,7 @@ static void test_adw_application_window_breakpoint(void) {
                 window.get_current_breakpoint() != nullptr);
 }
 
-static void test_adw_application_window_dialogs(void) {
+static void test_adw_application_window_dialogs() {
   Adw::ApplicationWindow window;
 
   // No dialogs open on a freshly constructed window.
@@ -68,20 +68,16 @@ static void test_adw_application_window_dialogs(void) {
   g_assert_null(window.get_visible_dialog());
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
 
-  g_test_add_func("/Adwaita/ApplicationWindow/new",
-                  test_adw_application_window_new);
-  g_test_add_func("/Adwaita/ApplicationWindow/content",
-                  test_adw_application_window_content);
+  g_test_add_func("/Adwaita/ApplicationWindow/new", test_adw_application_window_new);
+  g_test_add_func("/Adwaita/ApplicationWindow/content", test_adw_application_window_content);
   g_test_add_func("/Adwaita/ApplicationWindow/adaptive_preview",
                   test_adw_application_window_adaptive_preview);
-  g_test_add_func("/Adwaita/ApplicationWindow/breakpoint",
-                  test_adw_application_window_breakpoint);
-  g_test_add_func("/Adwaita/ApplicationWindow/dialogs",
-                  test_adw_application_window_dialogs);
+  g_test_add_func("/Adwaita/ApplicationWindow/breakpoint", test_adw_application_window_breakpoint);
+  g_test_add_func("/Adwaita/ApplicationWindow/dialogs", test_adw_application_window_dialogs);
 
   return g_test_run();
 }
