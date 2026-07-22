@@ -16,8 +16,8 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <glibmm/wrap.h>
 #include <adwaita.h>
+#include <glibmm/wrap.h>
 #include <libadwaitamm/breakpoint.h>
 #include <libadwaitamm/private/breakpoint_p.h>
 

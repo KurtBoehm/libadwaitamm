@@ -21,10 +21,10 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
-#include <gtkmm/widget.h>
+#include <adwaita.h>
 #include <gdkmm/paintable.h>
 #include <gdkmm/texture.h>
-#include <adwaita.h>
+#include <gtkmm/widget.h>
 
 namespace Adw {
 class Avatar : public Gtk::Widget {

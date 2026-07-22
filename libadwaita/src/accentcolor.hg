@@ -19,8 +19,8 @@
 _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 
-#include <gdkmm/rgba.h>
 #include <adwaita.h>
+#include <gdkmm/rgba.h>
 
 namespace Adw {
 // Enumerations

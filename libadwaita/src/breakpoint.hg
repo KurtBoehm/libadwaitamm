@@ -20,11 +20,11 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
+#include <adwaita.h>
 #include <glibmm/object.h>
 #include <glibmm/ustring.h>
 #include <glibmm/value.h>
 #include <glibmm/wrap.h>
-#include <adwaita.h>
 #include <libadwaitamm/lengthunit.h>
 
 namespace Adw {

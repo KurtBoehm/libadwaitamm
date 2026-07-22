@@ -20,8 +20,8 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/window_p.h)
 
-#include <gtkmm/widget.h>
 #include <adwaita.h>
+#include <gtkmm/widget.h>
 #include <libadwaitamm/breakpoint.h>
 
 namespace Adw {

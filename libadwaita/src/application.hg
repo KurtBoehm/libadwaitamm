@@ -21,8 +21,8 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/application_p.h)
 
-#include <gtkmm.h>
 #include <adwaita.h>
+#include <gtkmm.h>
 #include <libadwaitamm/stylemanager.h>
 
 namespace Adw {

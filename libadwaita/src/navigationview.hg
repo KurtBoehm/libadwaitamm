@@ -20,10 +20,10 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
+#include <adwaita.h>
 #include <gtkmm.h>
 #include <giomm/listmodel.h>
 #include <libadwaitamm/navigationpage.h>
-#include <adwaita.h>
 
 namespace Adw {
 #m4 _CONVERSION(`GListModel*', `std::vector<NavigationPage*>', `listmodel_to_vector<Adw::NavigationPage>($3)')

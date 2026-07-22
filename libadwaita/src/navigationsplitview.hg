@@ -20,10 +20,10 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
+#include <adwaita.h>
 #include <gtkmm.h>
 #include <libadwaitamm/lengthunit.h>
 #include <libadwaitamm/navigationview.h>
-#include <adwaita.h>
 
 namespace Adw {
 class NavigationSplitView : public Gtk::Widget {

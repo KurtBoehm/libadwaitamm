@@ -21,8 +21,8 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(libadwaitamm/private/actionrow_p.h)
 
-#include <gtkmm/stringfilter.h>
 #include <adwaita.h>
+#include <gtkmm/stringfilter.h>
 #include <libadwaitamm/actionrow.h>
 
 namespace Adw {

@@ -20,11 +20,11 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
+#include <adwaita.h>
 #include <gtkmm.h>
 #include <libadwaitamm/foldthresholdpolicy.h>
 #include <libadwaitamm/springparams.h>
 #include <libadwaitamm/swipeable.h>
-#include <adwaita.h>
 
 namespace Adw {
 class Flap : public Gtk::Widget, public Gtk::Orientable, public Adw::Swipeable {

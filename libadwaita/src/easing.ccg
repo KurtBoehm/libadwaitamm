@@ -28,4 +28,4 @@ double lerp(double a, double b, double t) {
 bool get_enable_animations(Gtk::Widget& widget) {
   return adw_get_enable_animations(widget.gobj());
 }
-}
+} // namespace Adw

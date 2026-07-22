@@ -16,9 +16,6 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <gtkmm.h>
-#include <adwaita.h>
-
 namespace {
 template<typename CppType, typename CType = typename CppType::BaseObjectType>
 std::vector<CppType*> listmodel_to_vector(GListModel* listmodel) {

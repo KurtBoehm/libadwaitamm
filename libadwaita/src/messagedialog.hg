@@ -21,6 +21,7 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/window_p.h)
 
+#include <adwaita.h>
 #include <gtkmm.h>
 #include <giomm/asyncresult.h>
 #include <giomm/cancellable.h>

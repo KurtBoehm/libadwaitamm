@@ -20,8 +20,8 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
-#include <gtkmm.h>
 #include <adwaita.h>
+#include <gtkmm.h>
 
 namespace Adw {
 class BottomSheet : public Gtk::Widget {

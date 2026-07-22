@@ -20,9 +20,9 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
+#include <adwaita.h>
 #include <glibmm.h>
 #include <gtkmm.h>
-#include <adwaita.h>
 
 namespace Adw {
 class CssClassBinding : public Glib::Object {

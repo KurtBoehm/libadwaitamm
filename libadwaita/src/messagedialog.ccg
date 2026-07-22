@@ -17,9 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <adwaita.h>
-#include <gtkmm.h>
-
 namespace Adw {
 namespace {
 static void MessageDialog_choose_callback(GObject* source_object, GAsyncResult* res, void* data) {

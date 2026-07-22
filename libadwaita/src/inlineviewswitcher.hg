@@ -20,8 +20,8 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
-#include <libadwaitamm/viewstack.h>
 #include <adwaita.h>
+#include <libadwaitamm/viewstack.h>
 
 namespace Adw {
 class InlineViewSwitcher : public Gtk::Widget {

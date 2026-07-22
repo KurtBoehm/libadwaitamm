@@ -21,9 +21,9 @@ _DEFS(libadwaitamm,libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/applicationwindow_p.h)
 
-#include <gtkmm/applicationwindow.h>
-#include <giomm/listmodel.h>
 #include <adwaita.h>
+#include <giomm/listmodel.h>
+#include <gtkmm/applicationwindow.h>
 #include <libadwaitamm/breakpoint.h>
 #include <libadwaitamm/dialog.h>
 
