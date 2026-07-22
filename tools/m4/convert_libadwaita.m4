@@ -15,6 +15,9 @@ _CONVERSION(`const Glib::RefPtr<Gtk::Application>&', `GtkApplication*', __CONVER
 
 _CONVERSION(`GdkRGBA*', `Gdk::RGBA', `Gdk::RGBA($3)')
 
+_CONVERSION(`const char* const*', `std::vector<Glib::ustring>', `Glib::ArrayHandler<Glib::ustring>::array_to_vector($3, Glib::OWNERSHIP_NONE)')
+_CONVERSION(`const std::vector<Glib::ustring>&', `const char**', `Glib::ArrayHandler<Glib::ustring>::vector_to_array($3).data ()')
+
 dnl libadwaita's GValue-carrying signals (e.g. Adw::Sidebar::signal_drop())
 dnl declare their "value" parameter as a plain (non-const) GValue*, unlike
 dnl the "const GValue*'/`Glib::ValueBase&'" combinations glibmm registers.
