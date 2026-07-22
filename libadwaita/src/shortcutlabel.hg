@@ -16,7 +16,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
@@ -30,15 +30,19 @@ class ShortcutLabel : public Gtk::Widget {
   _DO_NOT_DERIVE_GTYPE
 
 public:
-  // Constructors
+  // Creation
   _WRAP_CTOR(ShortcutLabel(const Glib::ustring& accelerator), adw_shortcut_label_new)
 
   // Methods
-  _WRAP_METHOD(Glib::ustring get_accelerator() const, adw_shortcut_label_get_accelerator, newin "1.8")
-  _WRAP_METHOD(void set_accelerator(const Glib::ustring& accelerator), adw_shortcut_label_set_accelerator, newin "1.8")
+  _WRAP_METHOD(Glib::ustring get_accelerator() const, adw_shortcut_label_get_accelerator,
+               newin "1.8")
+  _WRAP_METHOD(void set_accelerator(const Glib::ustring& accelerator),
+               adw_shortcut_label_set_accelerator, newin "1.8")
 
-  _WRAP_METHOD(Glib::ustring get_disabled_text() const, adw_shortcut_label_get_disabled_text, newin "1.8")
-  _WRAP_METHOD(void set_disabled_text(const Glib::ustring& disabled_text), adw_shortcut_label_set_disabled_text, newin "1.8")
+  _WRAP_METHOD(Glib::ustring get_disabled_text() const, adw_shortcut_label_get_disabled_text,
+               newin "1.8")
+  _WRAP_METHOD(void set_disabled_text(const Glib::ustring& disabled_text),
+               adw_shortcut_label_set_disabled_text, newin "1.8")
 
   // Properties
   _WRAP_PROPERTY("accelerator", Glib::ustring, newin "1.8")

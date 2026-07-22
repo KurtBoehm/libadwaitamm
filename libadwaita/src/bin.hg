@@ -16,7 +16,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
@@ -28,7 +28,7 @@ class Bin : public Gtk::Widget {
   _CLASS_GTKOBJECT(Bin, AdwBin, ADW_BIN, Gtk::Widget, GtkWidget)
 
 public:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 
   // Methods

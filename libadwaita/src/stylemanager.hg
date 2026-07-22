@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
@@ -38,31 +38,44 @@ protected:
   _CTOR_DEFAULT
 
 public:
+  // Creation
   _WRAP_CREATE()
 
-  _WRAP_METHOD(static Glib::RefPtr<StyleManager> get_default(), adw_style_manager_get_default, refreturn)
-  _WRAP_METHOD(static Glib::RefPtr<StyleManager> get_for_display(const Glib::RefPtr<Gdk::Display>& display), adw_style_manager_get_for_display, refreturn)
+  // Methods
+  _WRAP_METHOD(static Glib::RefPtr<StyleManager> get_default(), adw_style_manager_get_default,
+               refreturn)
+  _WRAP_METHOD(
+    static Glib::RefPtr<StyleManager> get_for_display(const Glib::RefPtr<Gdk::Display>& display),
+    adw_style_manager_get_for_display, refreturn)
 
-  _WRAP_METHOD(Glib::RefPtr<Gdk::Display> get_display() const, adw_style_manager_get_display, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Gdk::Display> get_display() const, adw_style_manager_get_display,
+               refreturn)
 
   _WRAP_METHOD(ColorScheme get_color_scheme() const, adw_style_manager_get_color_scheme)
   _WRAP_METHOD(void set_color_scheme(ColorScheme color_scheme), adw_style_manager_set_color_scheme)
 
-  _WRAP_METHOD(bool get_system_supports_color_schemes() const, adw_style_manager_get_system_supports_color_schemes)
+  _WRAP_METHOD(bool get_system_supports_color_schemes() const,
+               adw_style_manager_get_system_supports_color_schemes)
 
   _WRAP_METHOD(bool get_dark() const, adw_style_manager_get_dark)
   _WRAP_METHOD(bool get_high_contrast() const, adw_style_manager_get_high_contrast)
 
-  _WRAP_METHOD(bool get_system_supports_accent_colors() const, adw_style_manager_get_system_supports_accent_colors, newin "1.6")
+  _WRAP_METHOD(bool get_system_supports_accent_colors() const,
+               adw_style_manager_get_system_supports_accent_colors, newin "1.6")
 
-  _WRAP_METHOD(AccentColor get_accent_color() const, adw_style_manager_get_accent_color, newin "1.6")
+  _WRAP_METHOD(AccentColor get_accent_color() const, adw_style_manager_get_accent_color,
+               newin "1.6")
 
-  _WRAP_METHOD(Gdk::RGBA get_accent_color_rgba() const, adw_style_manager_get_accent_color_rgba, newin "1.6")
+  _WRAP_METHOD(Gdk::RGBA get_accent_color_rgba() const, adw_style_manager_get_accent_color_rgba,
+               newin "1.6")
 
-  _WRAP_METHOD(Glib::ustring get_document_font_name() const, adw_style_manager_get_document_font_name, newin "1.7")
+  _WRAP_METHOD(Glib::ustring get_document_font_name() const,
+               adw_style_manager_get_document_font_name, newin "1.7")
 
-  _WRAP_METHOD(Glib::ustring get_monospace_font_name() const, adw_style_manager_get_monospace_font_name, newin "1.7")
+  _WRAP_METHOD(Glib::ustring get_monospace_font_name() const,
+               adw_style_manager_get_monospace_font_name, newin "1.7")
 
+  // Properties
   _WRAP_PROPERTY("display", Glib::RefPtr<Gdk::Display>)
   _WRAP_PROPERTY("color-scheme", ColorScheme)
   _WRAP_PROPERTY("system-supports-color-schemes", bool)

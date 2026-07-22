@@ -17,12 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
-#include <gtkmm.h>
 #include <adwaita.h>
+#include <gtkmm.h>
 
 namespace Adw {
 class SplitButton : public Gtk::Widget, public Gtk::Actionable {
@@ -32,7 +32,7 @@ class SplitButton : public Gtk::Widget, public Gtk::Actionable {
   _DO_NOT_DERIVE_GTYPE
 
 public:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 
   // Methods
@@ -51,8 +51,10 @@ public:
   _WRAP_METHOD(bool get_can_shrink() const, adw_split_button_get_can_shrink, newin "1.4")
   _WRAP_METHOD(void set_can_shrink(bool can_shrink), adw_split_button_set_can_shrink, newin "1.4")
 
-  _WRAP_METHOD(Glib::RefPtr<Gio::MenuModel> get_menu_model() const, adw_split_button_get_menu_model, refreturn)
-  _WRAP_METHOD(void set_menu_model(const Glib::RefPtr<Gio::MenuModel>& menu_model), adw_split_button_set_menu_model)
+  _WRAP_METHOD(Glib::RefPtr<Gio::MenuModel> get_menu_model() const, adw_split_button_get_menu_model,
+               refreturn)
+  _WRAP_METHOD(void set_menu_model(const Glib::RefPtr<Gio::MenuModel>& menu_model),
+               adw_split_button_set_menu_model)
 
   _WRAP_METHOD(Gtk::Popover* get_popover() const, adw_split_button_get_popover)
   _WRAP_METHOD(void set_popover(Gtk::Popover* popover), adw_split_button_set_popover)
@@ -60,8 +62,10 @@ public:
   _WRAP_METHOD(Gtk::ArrowType get_direction() const, adw_split_button_get_direction)
   _WRAP_METHOD(void set_direction(Gtk::ArrowType direction), adw_split_button_set_direction)
 
-  _WRAP_METHOD(Glib::ustring get_dropdown_tooltip() const, adw_split_button_get_dropdown_tooltip, newin "1.2")
-  _WRAP_METHOD(void set_dropdown_tooltip(const Glib::ustring& dropdown_tooltip), adw_split_button_set_dropdown_tooltip, newin "1.2")
+  _WRAP_METHOD(Glib::ustring get_dropdown_tooltip() const, adw_split_button_get_dropdown_tooltip,
+               newin "1.2")
+  _WRAP_METHOD(void set_dropdown_tooltip(const Glib::ustring& dropdown_tooltip),
+               adw_split_button_set_dropdown_tooltip, newin "1.2")
 
   _WRAP_METHOD(void popup(), adw_split_button_popup)
   _WRAP_METHOD(void popdown(), adw_split_button_popdown)

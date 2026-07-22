@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 
 #include <adwaita.h>
@@ -28,9 +28,11 @@ _WRAP_ENUM(LengthUnit, AdwLengthUnit)
 
 // Functions
 inline double length_unit_to_px(LengthUnit unit, double value, Gtk::Settings* settings) {
-  return adw_length_unit_to_px(static_cast<AdwLengthUnit>(unit), value, settings ? settings->gobj() : nullptr);
+  return adw_length_unit_to_px(static_cast<AdwLengthUnit>(unit), value,
+                               settings ? settings->gobj() : nullptr);
 }
 inline double length_unit_from_px(LengthUnit unit, double value, Gtk::Settings* settings) {
-  return adw_length_unit_from_px(static_cast<AdwLengthUnit>(unit), value, settings ? settings->gobj() : nullptr);
+  return adw_length_unit_from_px(static_cast<AdwLengthUnit>(unit), value,
+                                 settings ? settings->gobj() : nullptr);
 }
 } // namespace Adw

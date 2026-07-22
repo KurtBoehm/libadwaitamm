@@ -17,14 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
-#include <gtkmm.h>
-#include <libadwaitamm/squeezerpage.h>
-#include <libadwaitamm/foldthresholdpolicy.h>
 #include <adwaita.h>
+#include <gtkmm.h>
+#include <libadwaitamm/foldthresholdpolicy.h>
+#include <libadwaitamm/squeezerpage.h>
 
 namespace Adw {
 class Squeezer : public Gtk::Widget, public Gtk::Orientable {
@@ -35,60 +35,93 @@ class Squeezer : public Gtk::Widget, public Gtk::Orientable {
 
 public:
   // Enumerations
-  _WRAP_ENUM(TransitionType, AdwSqueezerTransitionType, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_ENUM(TransitionType, AdwSqueezerTransitionType,
+             deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 
-  // Construction
+  // Creation
   _CTOR_DEFAULT
 
   // Methods
-  _WRAP_METHOD(Glib::RefPtr<SqueezerPage> add(Gtk::Widget&), adw_squeezer_add, refreturn, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_METHOD(void remove(Gtk::Widget&), adw_squeezer_remove, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(Glib::RefPtr<SqueezerPage> add(Gtk::Widget&), adw_squeezer_add, refreturn,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void remove(Gtk::Widget&), adw_squeezer_remove,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 
-  _WRAP_METHOD(Glib::RefPtr<SqueezerPage> get(Gtk::Widget&) const, adw_squeezer_get_page, refreturn, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(Glib::RefPtr<SqueezerPage> get(Gtk::Widget&) const, adw_squeezer_get_page, refreturn,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 
-  _WRAP_METHOD(Gtk::Widget* get_visible_child() const, adw_squeezer_get_visible_child, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(Gtk::Widget* get_visible_child() const, adw_squeezer_get_visible_child,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 
-  _WRAP_METHOD(bool get_homogeneous() const, adw_squeezer_get_homogeneous, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_METHOD(void set_homogeneous(bool homogeneous), adw_squeezer_set_homogeneous, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(bool get_homogeneous() const, adw_squeezer_get_homogeneous,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_homogeneous(bool homogeneous), adw_squeezer_set_homogeneous,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 
-  _WRAP_METHOD(FoldThresholdPolicy get_switch_threshold_policy() const, adw_squeezer_get_switch_threshold_policy, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_METHOD(void set_switch_threshold_policy(FoldThresholdPolicy policy), adw_squeezer_set_switch_threshold_policy, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(FoldThresholdPolicy get_switch_threshold_policy() const,
+               adw_squeezer_get_switch_threshold_policy,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_switch_threshold_policy(FoldThresholdPolicy policy),
+               adw_squeezer_set_switch_threshold_policy,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 
-  _WRAP_METHOD(bool get_allow_none() const, adw_squeezer_get_allow_none, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_METHOD(void set_allow_none(bool allow_none), adw_squeezer_set_allow_none, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(bool get_allow_none() const, adw_squeezer_get_allow_none,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_allow_none(bool allow_none), adw_squeezer_set_allow_none,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 
-  _WRAP_METHOD(guint get_transition_duration() const, adw_squeezer_get_transition_duration, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_METHOD(void set_transition_duration(guint duration), adw_squeezer_set_transition_duration, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(guint get_transition_duration() const, adw_squeezer_get_transition_duration,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_transition_duration(guint duration), adw_squeezer_set_transition_duration,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 
-  _WRAP_METHOD(Squeezer::TransitionType get_transition_type() const, adw_squeezer_get_transition_type, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_METHOD(void set_transition_type(TransitionType transition), adw_squeezer_set_transition_type, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(Squeezer::TransitionType get_transition_type() const,
+               adw_squeezer_get_transition_type,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_transition_type(TransitionType transition),
+               adw_squeezer_set_transition_type,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 
-  _WRAP_METHOD(bool get_transition_running() const, adw_squeezer_get_transition_running, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(bool get_transition_running() const, adw_squeezer_get_transition_running,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 
-  _WRAP_METHOD(bool get_interpolate_size() const, adw_squeezer_get_interpolate_size, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_METHOD(void set_interpolate_size(bool homogeneous), adw_squeezer_set_interpolate_size, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(bool get_interpolate_size() const, adw_squeezer_get_interpolate_size,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_interpolate_size(bool homogeneous), adw_squeezer_set_interpolate_size,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 
-  _WRAP_METHOD(float get_xalign() const, adw_squeezer_get_xalign, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_METHOD(void set_xalign(float xalign), adw_squeezer_set_xalign, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(float get_xalign() const, adw_squeezer_get_xalign,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_xalign(float xalign), adw_squeezer_set_xalign,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 
-  _WRAP_METHOD(float get_yalign() const, adw_squeezer_get_yalign, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_METHOD(void set_yalign(float xalign), adw_squeezer_set_yalign, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(float get_yalign() const, adw_squeezer_get_yalign,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_yalign(float xalign), adw_squeezer_set_yalign,
+               deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 
   /** @deprecated Adw::Squeezer is deprecated in libadwaita 1.4. */
   _IGNORE(adw_squeezer_get_pages)
   Glib::RefPtr<Gtk::SelectionModel> get_pages() const;
 
   // Properties
-  _WRAP_PROPERTY("visible-child", Gtk::Widget*, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("visible-child", Gtk::Widget*,
+                 deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
   _WRAP_PROPERTY("homogeneous", bool, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_PROPERTY("switch-threshold-policy", FoldThresholdPolicy, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("switch-threshold-policy", FoldThresholdPolicy,
+                 deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
   _WRAP_PROPERTY("allow-none", bool, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_PROPERTY("transition-duration", guint, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_PROPERTY("transition-type", Squeezer::TransitionType, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_PROPERTY("transition-running", bool, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_PROPERTY("interpolate-size", bool, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("transition-duration", guint,
+                 deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("transition-type", Squeezer::TransitionType,
+                 deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("transition-running", bool,
+                 deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("interpolate-size", bool,
+                 deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
   _WRAP_PROPERTY("xalign", float, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
   _WRAP_PROPERTY("yalign", float, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
-  _WRAP_PROPERTY("pages", Glib::RefPtr<Gtk::SelectionModel>, deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("pages", Glib::RefPtr<Gtk::SelectionModel>,
+                 deprecated "Adw::Squeezer is deprecated in libadwaita 1.4.")
 };
 } // namespace Adw

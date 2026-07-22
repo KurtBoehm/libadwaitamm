@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
@@ -30,11 +30,11 @@ class Layout : public Glib::Object {
   _DO_NOT_DERIVE_GTYPE
 
 protected:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 
 public:
-  // Constructors
+  // Creation
   _WRAP_CTOR(Layout(Gtk::Widget* content), adw_layout_new)
 
   // Methods

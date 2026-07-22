@@ -16,7 +16,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
@@ -34,9 +34,13 @@ public:
   using SlotMapToClass = sigc::slot<bool(const Glib::ValueBase&)>;
   using SlotMapToProperty = sigc::slot<void(bool, Glib::ValueBase&)>;
 
-  // Constructors
-#m4 _CONVERSION(`const Glib::RefPtr<Glib::Object>&',`gpointer',`Glib::unwrap($3)')
-  _WRAP_METHOD(static Glib::RefPtr<CssClassBinding> bind_property_to_css_class(const Glib::RefPtr<Glib::Object>& source, const Glib::ustring& source_property, Gtk::Widget* target, const Glib::ustring& target_css_class, Glib::Binding::Flags flags = Glib::Binding::Flags::DEFAULT), adw_bind_property_to_css_class, refreturn, newin "1.10")
+  // Creation
+#m4 _CONVERSION(`const Glib::RefPtr<Glib::Object> & ',`gpointer',`Glib::unwrap($3)')
+  _WRAP_METHOD(static Glib::RefPtr<CssClassBinding> bind_property_to_css_class(
+                 const Glib::RefPtr<Glib::Object>& source, const Glib::ustring& source_property,
+                 Gtk::Widget* target, const Glib::ustring& target_css_class,
+                 Glib::Binding::Flags flags = Glib::Binding::Flags::DEFAULT),
+               adw_bind_property_to_css_class, refreturn, newin "1.10")
 
   /** Creates a binding between a property on @a source and a CSS class on
    * @a target, with a custom mapping.
@@ -54,15 +58,23 @@ public:
    *   a value, or an empty slot to use the default.
    * @return The new binding.
    */
-  static Glib::RefPtr<CssClassBinding> bind_property_to_css_class_full(const Glib::RefPtr<Glib::Object>& source, const Glib::ustring& source_property, Gtk::Widget* target, const Glib::ustring& target_css_class, Glib::Binding::Flags flags = Glib::Binding::Flags::DEFAULT, const SlotMapToClass& map_to_class = {}, const SlotMapToProperty& map_to_property = {});
+  static Glib::RefPtr<CssClassBinding> bind_property_to_css_class_full(
+    const Glib::RefPtr<Glib::Object>& source, const Glib::ustring& source_property,
+    Gtk::Widget* target, const Glib::ustring& target_css_class,
+    Glib::Binding::Flags flags = Glib::Binding::Flags::DEFAULT,
+    const SlotMapToClass& map_to_class = {}, const SlotMapToProperty& map_to_property = {});
   _IGNORE(adw_bind_property_to_css_class_full, adw_bind_property_to_css_class_with_closures)
 
   // Methods
-  _WRAP_METHOD(Glib::Binding::Flags get_flags() const, adw_css_class_binding_get_flags, newin "1.10")
-  _WRAP_METHOD(Glib::RefPtr<Glib::Object> get_source() const, adw_css_class_binding_get_source, refreturn, newin "1.10")
+  _WRAP_METHOD(Glib::Binding::Flags get_flags() const, adw_css_class_binding_get_flags,
+               newin "1.10")
+  _WRAP_METHOD(Glib::RefPtr<Glib::Object> get_source() const, adw_css_class_binding_get_source,
+               refreturn, newin "1.10")
   _WRAP_METHOD(Gtk::Widget* get_target() const, adw_css_class_binding_get_target, newin "1.10")
-  _WRAP_METHOD(Glib::ustring get_source_property() const, adw_css_class_binding_get_source_property, newin "1.10")
-  _WRAP_METHOD(Glib::ustring get_target_css_class() const, adw_css_class_binding_get_target_css_class, newin "1.10")
+  _WRAP_METHOD(Glib::ustring get_source_property() const, adw_css_class_binding_get_source_property,
+               newin "1.10")
+  _WRAP_METHOD(Glib::ustring get_target_css_class() const,
+               adw_css_class_binding_get_target_css_class, newin "1.10")
   _WRAP_METHOD(void unbind(), adw_css_class_binding_unbind, newin "1.10")
 
   // Properties

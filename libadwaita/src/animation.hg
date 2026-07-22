@@ -17,7 +17,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
@@ -39,8 +39,10 @@ public:
   // Methods
   _WRAP_METHOD(Gtk::Widget* get_widget() const, adw_animation_get_widget)
 
-  _WRAP_METHOD(Glib::RefPtr<AnimationTarget> get_target() const, adw_animation_get_target, refreturn)
-  _WRAP_METHOD(void set_target(const Glib::RefPtr<AnimationTarget>& target), adw_animation_set_target)
+  _WRAP_METHOD(Glib::RefPtr<AnimationTarget> get_target() const, adw_animation_get_target,
+               refreturn)
+  _WRAP_METHOD(void set_target(const Glib::RefPtr<AnimationTarget>& target),
+               adw_animation_set_target)
 
   _WRAP_METHOD(double get_value() const, adw_animation_get_value)
 
@@ -52,8 +54,10 @@ public:
   _WRAP_METHOD(void reset(), adw_animation_reset)
   _WRAP_METHOD(void skip(), adw_animation_skip)
 
-  _WRAP_METHOD(bool get_follow_enable_animations_setting() const, adw_animation_get_follow_enable_animations_setting, newin "1.3")
-  _WRAP_METHOD(void set_follow_enable_animations_setting(bool setting), adw_animation_set_follow_enable_animations_setting, newin "1.3")
+  _WRAP_METHOD(bool get_follow_enable_animations_setting() const,
+               adw_animation_get_follow_enable_animations_setting, newin "1.3")
+  _WRAP_METHOD(void set_follow_enable_animations_setting(bool setting),
+               adw_animation_set_follow_enable_animations_setting, newin "1.3")
 
   // Properties
   _WRAP_PROPERTY("widget", Gtk::Widget*)

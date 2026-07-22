@@ -17,7 +17,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
@@ -33,7 +33,7 @@ class Clamp : public Gtk::Widget, public Gtk::Orientable {
   _DO_NOT_DERIVE_GTYPE
 
 public:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 
   // Methods
@@ -44,7 +44,8 @@ public:
   _WRAP_METHOD(void set_maximum_size(int maximum_size), adw_clamp_set_maximum_size)
 
   _WRAP_METHOD(int get_tightening_threshold() const, adw_clamp_get_tightening_threshold)
-  _WRAP_METHOD(void set_tightening_threshold(int tightening_threshold), adw_clamp_set_tightening_threshold)
+  _WRAP_METHOD(void set_tightening_threshold(int tightening_threshold),
+               adw_clamp_set_tightening_threshold)
 
   _WRAP_METHOD(LengthUnit get_unit() const, adw_clamp_get_unit, newin "1.4")
   _WRAP_METHOD(void set_unit(LengthUnit unit), adw_clamp_set_unit, newin "1.4")

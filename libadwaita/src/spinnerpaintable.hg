@@ -16,7 +16,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
@@ -26,7 +26,8 @@ _PINCLUDE(glibmm/private/object_p.h)
 
 namespace Adw {
 class SpinnerPaintable : public Glib::Object, public Gdk::Paintable, public Gtk::SymbolicPaintable {
-  _CLASS_GOBJECT(SpinnerPaintable, AdwSpinnerPaintable, ADW_SPINNER_PAINTABLE, Glib::Object, GObject)
+  _CLASS_GOBJECT(SpinnerPaintable, AdwSpinnerPaintable, ADW_SPINNER_PAINTABLE, Glib::Object,
+                 GObject)
   _IMPLEMENTS_INTERFACE(Gdk::Paintable)
   _IMPLEMENTS_INTERFACE(Gtk::SymbolicPaintable)
   _STRUCT_NOT_HIDDEN

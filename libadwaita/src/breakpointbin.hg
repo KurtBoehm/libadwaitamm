@@ -16,7 +16,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
@@ -29,16 +29,19 @@ class BreakpointBin : public Gtk::Widget {
   _CLASS_GTKOBJECT(BreakpointBin, AdwBreakpointBin, ADW_BREAKPOINT_BIN, Gtk::Widget, GtkWidget)
 
 public:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 
   // Methods
   _WRAP_METHOD(Gtk::Widget* get_child() const, adw_breakpoint_bin_get_child, newin "1.4")
   _WRAP_METHOD(void set_child(Gtk::Widget* child), adw_breakpoint_bin_set_child, newin "1.4")
 
-  _WRAP_METHOD(void add_breakpoint(Adw::Breakpoint* breakpoint), adw_breakpoint_bin_add_breakpoint, newin "1.4")
-  _WRAP_METHOD(void remove_breakpoint(Adw::Breakpoint* breakpoint), adw_breakpoint_bin_remove_breakpoint, newin "1.5")
-  _WRAP_METHOD(Glib::RefPtr<Adw::Breakpoint> get_current_breakpoint() const, adw_breakpoint_bin_get_current_breakpoint, newin "1.4")
+  _WRAP_METHOD(void add_breakpoint(Adw::Breakpoint* breakpoint), adw_breakpoint_bin_add_breakpoint,
+               newin "1.4")
+  _WRAP_METHOD(void remove_breakpoint(Adw::Breakpoint* breakpoint),
+               adw_breakpoint_bin_remove_breakpoint, newin "1.5")
+  _WRAP_METHOD(Glib::RefPtr<Adw::Breakpoint> get_current_breakpoint() const,
+               adw_breakpoint_bin_get_current_breakpoint, newin "1.4")
 
   // Properties
   _WRAP_PROPERTY("child", Gtk::Widget*, newin "1.4")

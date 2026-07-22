@@ -17,8 +17,8 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <glibmm.h>
 #include <adwaita.h>
+#include <glibmm.h>
 
 namespace Adw {
 // CallbackAnimationTarget
@@ -31,12 +31,16 @@ void CallbackAnimationTarget::callback_function(double value, gpointer user_data
   }
 }
 
-CallbackAnimationTarget::CallbackAnimationTarget(const SlotTarget &slot_target) {
+CallbackAnimationTarget::CallbackAnimationTarget(const SlotTarget& slot_target) {
   auto slot_copy = new SlotTarget(slot_target);
-  gobject_ = G_OBJECT(adw_callback_animation_target_new(callback_function, slot_copy, Glib::destroy_notify_delete<SlotTarget>));
+  gobject_ = G_OBJECT(adw_callback_animation_target_new(callback_function, slot_copy,
+                                                        Glib::destroy_notify_delete<SlotTarget>));
 }
 
 // PropertyAnimationTarget
-PropertyAnimationTarget::PropertyAnimationTarget(const Glib::RefPtr<Glib::Object>& object, const Glib::ustring& property_name)
-  : _CONSTRUCT("object", Glib::unwrap(object), "pspec", g_object_class_find_property(G_OBJECT_GET_CLASS(object->gobj()), property_name.c_str())) {}
-}
+PropertyAnimationTarget::PropertyAnimationTarget(const Glib::RefPtr<Glib::Object>& object,
+                                                 const Glib::ustring& property_name)
+    : _CONSTRUCT(
+        "object", Glib::unwrap(object), "pspec",
+        g_object_class_find_property(G_OBJECT_GET_CLASS(object->gobj()), property_name.c_str())) {}
+} // namespace Adw

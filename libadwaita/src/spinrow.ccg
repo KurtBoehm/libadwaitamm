@@ -22,8 +22,10 @@ namespace Adw {
 // _WRAP_CTOR. Delegate to the generated cast constructor instead, and sink
 // the floating reference ourselves, since that constructor is normally
 // used for wrapping already-owned widgets.
-SpinRow::SpinRow(double min, double max, double step) : SpinRow(reinterpret_cast<AdwSpinRow*>(adw_spin_row_new_with_range(min, max, step))) {
-  if (gobject_ && g_object_is_floating(gobject_))
+SpinRow::SpinRow(double min, double max, double step)
+    : SpinRow(reinterpret_cast<AdwSpinRow*>(adw_spin_row_new_with_range(min, max, step))) {
+  if (gobject_ && g_object_is_floating(gobject_)) {
     g_object_ref_sink(gobject_);
+  }
 }
 } // namespace Adw

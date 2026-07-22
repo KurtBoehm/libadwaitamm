@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/window_p.h)
 
@@ -33,7 +33,7 @@ public:
   // Enumerations
   _WRAP_ENUM(PresentationMode, AdwDialogPresentationMode, newin "1.5")
 
-  // Constructors
+  // Creation
   _WRAP_CTOR(Dialog(), adw_dialog_new)
 
   // Methods
@@ -50,25 +50,33 @@ public:
   _WRAP_METHOD(void set_content_width(int content_width), adw_dialog_set_content_width, newin "1.5")
 
   _WRAP_METHOD(int get_content_height() const, adw_dialog_get_content_height, newin "1.5")
-  _WRAP_METHOD(void set_content_height(int content_height), adw_dialog_set_content_height, newin "1.5")
+  _WRAP_METHOD(void set_content_height(int content_height), adw_dialog_set_content_height,
+               newin "1.5")
 
-  _WRAP_METHOD(bool get_follows_content_size() const, adw_dialog_get_follows_content_size, newin "1.5")
-  _WRAP_METHOD(void set_follows_content_size(bool follows_content_size), adw_dialog_set_follows_content_size, newin "1.5")
+  _WRAP_METHOD(bool get_follows_content_size() const, adw_dialog_get_follows_content_size,
+               newin "1.5")
+  _WRAP_METHOD(void set_follows_content_size(bool follows_content_size),
+               adw_dialog_set_follows_content_size, newin "1.5")
 
-  _WRAP_METHOD(Dialog::PresentationMode get_presentation_mode() const, adw_dialog_get_presentation_mode, newin "1.5")
-  _WRAP_METHOD(void set_presentation_mode(PresentationMode presentation_mode), adw_dialog_set_presentation_mode, newin "1.5")
+  _WRAP_METHOD(Dialog::PresentationMode get_presentation_mode() const,
+               adw_dialog_get_presentation_mode, newin "1.5")
+  _WRAP_METHOD(void set_presentation_mode(PresentationMode presentation_mode),
+               adw_dialog_set_presentation_mode, newin "1.5")
 
   _WRAP_METHOD(Gtk::Widget* get_focus() const, adw_dialog_get_focus, newin "1.5")
   _WRAP_METHOD(void set_focus(Gtk::Widget* focus), adw_dialog_set_focus, newin "1.5")
 
   _WRAP_METHOD(Gtk::Widget* get_default_widget() const, adw_dialog_get_default_widget, newin "1.5")
-  _WRAP_METHOD(void set_default_widget(Gtk::Widget* default_widget), adw_dialog_set_default_widget, newin "1.5")
+  _WRAP_METHOD(void set_default_widget(Gtk::Widget* default_widget), adw_dialog_set_default_widget,
+               newin "1.5")
 
   _WRAP_METHOD(bool close(), adw_dialog_close, newin "1.5")
   _WRAP_METHOD(void force_close(), adw_dialog_force_close, newin "1.5")
 
-  _WRAP_METHOD(void add_breakpoint(const Glib::RefPtr<Adw::Breakpoint>& breakpoint), adw_dialog_add_breakpoint, newin "1.5")
-  _WRAP_METHOD(Glib::RefPtr<Adw::Breakpoint> get_current_breakpoint() const, adw_dialog_get_current_breakpoint, newin "1.5")
+  _WRAP_METHOD(void add_breakpoint(const Glib::RefPtr<Adw::Breakpoint>& breakpoint),
+               adw_dialog_add_breakpoint, newin "1.5")
+  _WRAP_METHOD(Glib::RefPtr<Adw::Breakpoint> get_current_breakpoint() const,
+               adw_dialog_get_current_breakpoint, newin "1.5")
 
   _WRAP_METHOD(void present(Gtk::Widget* parent), adw_dialog_present, newin "1.5")
 

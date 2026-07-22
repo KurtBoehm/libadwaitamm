@@ -8,3 +8,4 @@ InsertBraces: true
 PointerAlignment: Left
 SpaceAfterTemplateKeyword: false
 UseTab: Never
+WhitespaceSensitiveMacros: ['_PINCLUDE']

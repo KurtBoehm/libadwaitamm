@@ -30,6 +30,7 @@ Glib::RefPtr<Gtk::SelectionModel> Leaflet::get_pages() const {
   if (!pCppObject) {
     pCppObject = new Adw::SelectionListModelImpl((GObject*)pages);
   }
-  return Glib::make_refptr_for_instance<Gtk::SelectionModel>(dynamic_cast<Gtk::SelectionModel*>(pCppObject));
+  return Glib::make_refptr_for_instance<Gtk::SelectionModel>(
+    dynamic_cast<Gtk::SelectionModel*>(pCppObject));
 }
 } // namespace Adw

@@ -40,13 +40,11 @@ void preferences_group_create_row_callback_destroy(gpointer data) {
 } // anonymous namespace
 
 namespace Adw {
-void PreferencesGroup::bind_model(const Glib::RefPtr<Gio::ListModel>& model, const SlotCreateRowWidget& slot_create_widget) {
+void PreferencesGroup::bind_model(const Glib::RefPtr<Gio::ListModel>& model,
+                                  const SlotCreateRowWidget& slot_create_widget) {
   auto slot_copy = new SlotCreateRowWidget(slot_create_widget);
-  adw_preferences_group_bind_model(
-    gobj(),
-    Glib::unwrap(model),
-    &preferences_group_create_row_callback, slot_copy,
-    &preferences_group_create_row_callback_destroy
-  );
+  adw_preferences_group_bind_model(gobj(), Glib::unwrap(model),
+                                   &preferences_group_create_row_callback, slot_copy,
+                                   &preferences_group_create_row_callback_destroy);
 }
 } // namespace Adw

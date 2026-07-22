@@ -32,15 +32,11 @@ static void AlertDialog_choose_callback(GObject* source_object, GAsyncResult* re
 }
 } // anonymous namespace
 
-void AlertDialog::choose(Gtk::Widget* parent, const Glib::RefPtr<Gio::Cancellable>& cancellable, const Gio::SlotAsyncReady& slot) {
+void AlertDialog::choose(Gtk::Widget* parent, const Glib::RefPtr<Gio::Cancellable>& cancellable,
+                         const Gio::SlotAsyncReady& slot) {
   auto slot_copy = new Gio::SlotAsyncReady(slot);
 
-  adw_alert_dialog_choose(
-    gobj(),
-    parent ? parent->gobj() : nullptr,
-    Glib::unwrap(cancellable),
-    &AlertDialog_choose_callback,
-    slot_copy
-  );
+  adw_alert_dialog_choose(gobj(), parent ? parent->gobj() : nullptr, Glib::unwrap(cancellable),
+                          &AlertDialog_choose_callback, slot_copy);
 }
 } // namespace Adw

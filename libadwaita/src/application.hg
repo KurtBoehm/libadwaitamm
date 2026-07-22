@@ -17,7 +17,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/application_p.h)
 
@@ -38,16 +38,17 @@ protected:
   _UNMANAGEABLE
   _CUSTOM_DTOR
 
-  // Constructors
+  // Creation
   _IGNORE(adw_application_new)
   Application(const Glib::ustring& application_id, Gio::Application::Flags flags);
 
 public:
-  // Construction
+  // Creation
   _WRAP_CREATE(const Glib::ustring& application_id, Gio::Application::Flags flags)
 
   // Methods
-  _WRAP_METHOD(Glib::RefPtr<StyleManager> get_style_manager() const, adw_application_get_style_manager, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<StyleManager> get_style_manager() const,
+               adw_application_get_style_manager, refreturn)
 
   // Properties
   _WRAP_PROPERTY("style-manager", Glib::RefPtr<StyleManager>)

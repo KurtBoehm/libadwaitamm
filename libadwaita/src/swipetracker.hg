@@ -17,14 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
+#include <adwaita.h>
 #include <glibmm.h>
 #include <gtkmm.h>
 #include <libadwaitamm/swipeable.h>
-#include <adwaita.h>
 
 namespace Adw {
 class SwipeTracker : public Glib::Object, public Gtk::Orientable {
@@ -42,7 +42,8 @@ public:
   _WRAP_CREATE(const Glib::RefPtr<Swipeable>& swipeable)
 
   // Methods
-  _WRAP_METHOD(Glib::RefPtr<Swipeable> get_swipeable() const, adw_swipe_tracker_get_swipeable, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Swipeable> get_swipeable() const, adw_swipe_tracker_get_swipeable,
+               refreturn)
 
   _WRAP_METHOD(bool get_enabled() const, adw_swipe_tracker_get_enabled)
   _WRAP_METHOD(void set_enabled(bool enabled), adw_swipe_tracker_set_enabled)
@@ -51,19 +52,25 @@ public:
   _WRAP_METHOD(void set_reversed(bool enabled), adw_swipe_tracker_set_reversed)
 
   _WRAP_METHOD(bool get_allow_mouse_drag() const, adw_swipe_tracker_get_allow_mouse_drag)
-  _WRAP_METHOD(void set_allow_mouse_drag(bool allow_mouse_drag), adw_swipe_tracker_set_allow_mouse_drag)
+  _WRAP_METHOD(void set_allow_mouse_drag(bool allow_mouse_drag),
+               adw_swipe_tracker_set_allow_mouse_drag)
 
   _WRAP_METHOD(bool get_allow_long_swipes() const, adw_swipe_tracker_get_allow_long_swipes)
-  _WRAP_METHOD(void set_allow_long_swipes(bool allow_long_swipes), adw_swipe_tracker_set_allow_long_swipes)
+  _WRAP_METHOD(void set_allow_long_swipes(bool allow_long_swipes),
+               adw_swipe_tracker_set_allow_long_swipes)
 
   _WRAP_METHOD(bool get_lower_overshoot() const, adw_swipe_tracker_get_lower_overshoot, newin "1.4")
-  _WRAP_METHOD(void set_lower_overshoot(bool lower_overshoot), adw_swipe_tracker_set_lower_overshoot, newin "1.4")
+  _WRAP_METHOD(void set_lower_overshoot(bool lower_overshoot),
+               adw_swipe_tracker_set_lower_overshoot, newin "1.4")
 
   _WRAP_METHOD(bool get_upper_overshoot() const, adw_swipe_tracker_get_upper_overshoot, newin "1.4")
-  _WRAP_METHOD(void set_upper_overshoot(bool upper_overshoot), adw_swipe_tracker_set_upper_overshoot, newin "1.4")
+  _WRAP_METHOD(void set_upper_overshoot(bool upper_overshoot),
+               adw_swipe_tracker_set_upper_overshoot, newin "1.4")
 
-  _WRAP_METHOD(bool get_allow_window_handle() const, adw_swipe_tracker_get_allow_window_handle, newin "1.5")
-  _WRAP_METHOD(void set_allow_window_handle(bool allow_window_handle), adw_swipe_tracker_set_allow_window_handle, newin "1.5")
+  _WRAP_METHOD(bool get_allow_window_handle() const, adw_swipe_tracker_get_allow_window_handle,
+               newin "1.5")
+  _WRAP_METHOD(void set_allow_window_handle(bool allow_window_handle),
+               adw_swipe_tracker_set_allow_window_handle, newin "1.5")
 
   _WRAP_METHOD(void shift_position(double delta), adw_swipe_tracker_shift_position)
 

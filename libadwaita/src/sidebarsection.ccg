@@ -21,13 +21,15 @@
 #include <libadwaitamm/sidebar.h>
 
 namespace {
-using SlotCreateItem = sigc::slot<Glib::RefPtr<Adw::SidebarItem>(const Glib::RefPtr<Glib::Object>&)>;
+using SlotCreateItem =
+  sigc::slot<Glib::RefPtr<Adw::SidebarItem>(const Glib::RefPtr<Glib::Object>&)>;
 
 AdwSidebarItem* sidebar_section_create_item_callback(gpointer item, gpointer user_data) {
   auto slot = static_cast<SlotCreateItem*>(user_data);
 
   try {
-    Glib::RefPtr<Adw::SidebarItem> new_item = (*slot)(Glib::wrap(static_cast<GObject*>(item), true));
+    Glib::RefPtr<Adw::SidebarItem> new_item =
+      (*slot)(Glib::wrap(static_cast<GObject*>(item), true));
     return static_cast<AdwSidebarItem*>(g_object_ref(new_item->gobj()));
   } catch (...) {
     Glib::exception_handlers_invoke();
@@ -53,17 +55,15 @@ void SidebarSection::prepend(const Glib::RefPtr<SidebarItem>& item) {
 
 void SidebarSection::insert(const Glib::RefPtr<SidebarItem>& item, int position) {
   // adw_sidebar_section_insert() takes ownership of the reference passed to it.
-  adw_sidebar_section_insert(gobj(), static_cast<AdwSidebarItem*>(g_object_ref(item->gobj())), position);
+  adw_sidebar_section_insert(gobj(), static_cast<AdwSidebarItem*>(g_object_ref(item->gobj())),
+                             position);
 }
 
-void SidebarSection::bind_model(const Glib::RefPtr<Gio::ListModel>& model, const SlotCreateItem& slot_create_item) {
+void SidebarSection::bind_model(const Glib::RefPtr<Gio::ListModel>& model,
+                                const SlotCreateItem& slot_create_item) {
   auto slot_copy = new SlotCreateItem(slot_create_item);
-  adw_sidebar_section_bind_model(
-    gobj(),
-    Glib::unwrap(model),
-    &sidebar_section_create_item_callback, slot_copy,
-    &sidebar_section_create_item_callback_destroy
-  );
+  adw_sidebar_section_bind_model(gobj(), Glib::unwrap(model), &sidebar_section_create_item_callback,
+                                 slot_copy, &sidebar_section_create_item_callback_destroy);
 }
 
 Sidebar* SidebarSection::get_sidebar() const {

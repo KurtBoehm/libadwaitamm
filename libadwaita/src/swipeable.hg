@@ -17,19 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
+#include <adwaita.h>
 #include <glibmm.h>
 #include <gtkmm.h>
 #include <libadwaitamm/navigationdirection.h>
-#include <adwaita.h>
 
 namespace Adw {
 class Swipeable : public Glib::Interface {
-
-_CLASS_INTERFACE(Swipeable, AdwSwipeable, ADW_SWIPEABLE, AdwSwipeableInterface)
+  _CLASS_INTERFACE(Swipeable, AdwSwipeable, ADW_SWIPEABLE, AdwSwipeableInterface)
 
 public:
   _WRAP_METHOD(double get_distance() const, adw_swipeable_get_distance)
@@ -38,17 +37,21 @@ public:
   std::vector<double> get_snap_points() const {
     int snap_points;
     double* p = adw_swipeable_get_snap_points(const_cast<AdwSwipeable*>(gobj()), &snap_points);
-    if (p)
-      return Glib::ArrayHandler<double>::array_to_vector(p, (size_t)snap_points, Glib::OWNERSHIP_DEEP);
-    else
+    if (p) {
+      return Glib::ArrayHandler<double>::array_to_vector(p, (size_t)snap_points,
+                                                         Glib::OWNERSHIP_DEEP);
+    } else {
       return {};
+    }
   }
 
   _WRAP_METHOD(double get_progress() const, adw_swipeable_get_progress)
 
   _WRAP_METHOD(double get_cancel_progress() const, adw_swipeable_get_cancel_progress)
 
-#m4 _CONVERSION(`GdkRectangle*',`Gdk::Rectangle&',`Glib::wrap($3)')
-  _WRAP_METHOD(void get_swipe_area(NavigationDirection navigation_direction, bool is_drag, Gdk::Rectangle& rect) const, adw_swipeable_get_swipe_area)
+#m4 _CONVERSION(`GdkRectangle*', `Gdk::Rectangle&', `Glib::wrap($3)')
+  _WRAP_METHOD(void get_swipe_area(NavigationDirection navigation_direction, bool is_drag,
+                                   Gdk::Rectangle& rect) const,
+               adw_swipeable_get_swipe_area)
 };
 } // namespace Adw

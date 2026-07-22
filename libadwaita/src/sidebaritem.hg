@@ -16,13 +16,13 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
+#include <adwaita.h>
 #include <glibmm.h>
 #include <gtkmm.h>
-#include <adwaita.h>
 
 namespace Adw {
 // SidebarSection is forward-declared here (rather than fully included) to
@@ -35,12 +35,12 @@ class SidebarItem : public Glib::Object {
   _STRUCT_NOT_HIDDEN
 
 protected:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
   _WRAP_CTOR(SidebarItem(const Glib::ustring& title), adw_sidebar_item_new)
 
 public:
-  // Construction
+  // Creation
   _WRAP_CREATE(const Glib::ustring& title)
 
   // Methods
@@ -48,19 +48,25 @@ public:
   _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_sidebar_item_set_title, newin "1.9")
 
   _WRAP_METHOD(Glib::ustring get_subtitle() const, adw_sidebar_item_get_subtitle, newin "1.9")
-  _WRAP_METHOD(void set_subtitle(const Glib::ustring& subtitle), adw_sidebar_item_set_subtitle, newin "1.9")
+  _WRAP_METHOD(void set_subtitle(const Glib::ustring& subtitle), adw_sidebar_item_set_subtitle,
+               newin "1.9")
 
   _WRAP_METHOD(bool get_use_underline() const, adw_sidebar_item_get_use_underline, newin "1.9")
-  _WRAP_METHOD(void set_use_underline(bool use_underline), adw_sidebar_item_set_use_underline, newin "1.9")
+  _WRAP_METHOD(void set_use_underline(bool use_underline), adw_sidebar_item_set_use_underline,
+               newin "1.9")
 
   _WRAP_METHOD(Glib::ustring get_icon_name() const, adw_sidebar_item_get_icon_name, newin "1.9")
-  _WRAP_METHOD(void set_icon_name(const Glib::ustring& icon_name), adw_sidebar_item_set_icon_name, newin "1.9")
+  _WRAP_METHOD(void set_icon_name(const Glib::ustring& icon_name), adw_sidebar_item_set_icon_name,
+               newin "1.9")
 
-  _WRAP_METHOD(Glib::RefPtr<Gdk::Paintable> get_icon_paintable() const, adw_sidebar_item_get_icon_paintable, refreturn, newin "1.9")
-  _WRAP_METHOD(void set_icon_paintable(const Glib::RefPtr<Gdk::Paintable>& paintable), adw_sidebar_item_set_icon_paintable, newin "1.9")
+  _WRAP_METHOD(Glib::RefPtr<Gdk::Paintable> get_icon_paintable() const,
+               adw_sidebar_item_get_icon_paintable, refreturn, newin "1.9")
+  _WRAP_METHOD(void set_icon_paintable(const Glib::RefPtr<Gdk::Paintable>& paintable),
+               adw_sidebar_item_set_icon_paintable, newin "1.9")
 
   _WRAP_METHOD(Glib::ustring get_tooltip() const, adw_sidebar_item_get_tooltip, newin "1.9")
-  _WRAP_METHOD(void set_tooltip(const Glib::ustring& tooltip), adw_sidebar_item_set_tooltip, newin "1.9")
+  _WRAP_METHOD(void set_tooltip(const Glib::ustring& tooltip), adw_sidebar_item_set_tooltip,
+               newin "1.9")
 
   _WRAP_METHOD(Gtk::Widget* get_prefix() const, adw_sidebar_item_get_prefix, newin "1.9")
   _WRAP_METHOD(void set_prefix(Gtk::Widget* prefix), adw_sidebar_item_set_prefix, newin "1.9")
@@ -74,8 +80,10 @@ public:
   _WRAP_METHOD(bool get_enabled() const, adw_sidebar_item_get_enabled, newin "1.9")
   _WRAP_METHOD(void set_enabled(bool enabled), adw_sidebar_item_set_enabled, newin "1.9")
 
-  _WRAP_METHOD(bool get_drag_motion_activate() const, adw_sidebar_item_get_drag_motion_activate, newin "1.9")
-  _WRAP_METHOD(void set_drag_motion_activate(bool drag_motion_activate), adw_sidebar_item_set_drag_motion_activate, newin "1.9")
+  _WRAP_METHOD(bool get_drag_motion_activate() const, adw_sidebar_item_get_drag_motion_activate,
+               newin "1.9")
+  _WRAP_METHOD(void set_drag_motion_activate(bool drag_motion_activate),
+               adw_sidebar_item_set_drag_motion_activate, newin "1.9")
 
   /** Gets the section @a self is in.
    *

@@ -22,30 +22,30 @@
 #include <libadwaitamm/private/breakpoint_p.h>
 
 namespace Adw {
-BreakpointCondition BreakpointCondition::create_length(LengthType type, double value, LengthUnit unit) {
+BreakpointCondition BreakpointCondition::create_length(LengthType type, double value,
+                                                       LengthUnit unit) {
   return Glib::wrap(
-    adw_breakpoint_condition_new_length(
-      static_cast<AdwBreakpointConditionLengthType>(type),
-      value,
-      static_cast<AdwLengthUnit>(unit)),
+    adw_breakpoint_condition_new_length(static_cast<AdwBreakpointConditionLengthType>(type), value,
+                                        static_cast<AdwLengthUnit>(unit)),
     false);
 }
 
 BreakpointCondition BreakpointCondition::create_ratio(RatioType type, int width, int height) {
-  return Glib::wrap(
-    adw_breakpoint_condition_new_ratio(
-      static_cast<AdwBreakpointConditionRatioType>(type),
-      width,
-      height),
-    false);
+  return Glib::wrap(adw_breakpoint_condition_new_ratio(
+                      static_cast<AdwBreakpointConditionRatioType>(type), width, height),
+                    false);
 }
 
-BreakpointCondition BreakpointCondition::create_and(BreakpointCondition condition_1, BreakpointCondition condition_2) {
-  return Glib::wrap(adw_breakpoint_condition_new_and(condition_1.steal(), condition_2.steal()), false);
+BreakpointCondition BreakpointCondition::create_and(BreakpointCondition condition_1,
+                                                    BreakpointCondition condition_2) {
+  return Glib::wrap(adw_breakpoint_condition_new_and(condition_1.steal(), condition_2.steal()),
+                    false);
 }
 
-BreakpointCondition BreakpointCondition::create_or(BreakpointCondition condition_1, BreakpointCondition condition_2) {
-  return Glib::wrap(adw_breakpoint_condition_new_or(condition_1.steal(), condition_2.steal()), false);
+BreakpointCondition BreakpointCondition::create_or(BreakpointCondition condition_1,
+                                                   BreakpointCondition condition_2) {
+  return Glib::wrap(adw_breakpoint_condition_new_or(condition_1.steal(), condition_2.steal()),
+                    false);
 }
 
 BreakpointCondition BreakpointCondition::parse(const Glib::ustring& str) {

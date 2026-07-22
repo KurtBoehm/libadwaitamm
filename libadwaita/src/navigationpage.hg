@@ -16,7 +16,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
@@ -29,9 +29,12 @@ class NavigationPage : public Gtk::Widget {
   _STRUCT_NOT_HIDDEN
 
 public:
-  // Constructors
-  _WRAP_CTOR(NavigationPage(Gtk::Widget* child, const Glib::ustring& title), adw_navigation_page_new)
-  _WRAP_CTOR(NavigationPage(Gtk::Widget* child, const Glib::ustring& title, const Glib::ustring& tag), adw_navigation_page_new_with_tag)
+  // Creation
+  _WRAP_CTOR(NavigationPage(Gtk::Widget* child, const Glib::ustring& title),
+             adw_navigation_page_new)
+  _WRAP_CTOR(NavigationPage(Gtk::Widget* child, const Glib::ustring& title,
+                            const Glib::ustring& tag),
+             adw_navigation_page_new_with_tag)
 
   // Methods
   _WRAP_METHOD(Gtk::Widget* get_child() const, adw_navigation_page_get_child, newin "1.4")
@@ -41,7 +44,8 @@ public:
   _WRAP_METHOD(void set_tag(const Glib::ustring& tag), adw_navigation_page_set_tag, newin "1.4")
 
   _WRAP_METHOD(Glib::ustring get_title() const, adw_navigation_page_get_title, newin "1.4")
-  _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_navigation_page_set_title, newin "1.4")
+  _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_navigation_page_set_title,
+               newin "1.4")
 
   _WRAP_METHOD(bool get_can_pop() const, adw_navigation_page_get_can_pop, newin "1.4")
   _WRAP_METHOD(void set_can_pop(bool can_pop), adw_navigation_page_set_can_pop, newin "1.4")

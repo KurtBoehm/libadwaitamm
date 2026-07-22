@@ -23,7 +23,8 @@ struct CssClassBindingMapSlots {
   CssClassBinding::SlotMapToProperty map_to_property;
 };
 
-gboolean CssClassBinding_map_to_class_callback(AdwCssClassBinding*, const GValue* property_value, gpointer user_data) {
+gboolean CssClassBinding_map_to_class_callback(AdwCssClassBinding*, const GValue* property_value,
+                                               gpointer user_data) {
   auto slots = static_cast<CssClassBindingMapSlots*>(user_data);
   try {
     return slots->map_to_class(*reinterpret_cast<const Glib::ValueBase*>(property_value));
@@ -33,7 +34,8 @@ gboolean CssClassBinding_map_to_class_callback(AdwCssClassBinding*, const GValue
   }
 }
 
-void CssClassBinding_map_to_property_callback(AdwCssClassBinding*, gboolean class_applied, GValue* property_value, gpointer user_data) {
+void CssClassBinding_map_to_property_callback(AdwCssClassBinding*, gboolean class_applied,
+                                              GValue* property_value, gpointer user_data) {
   auto slots = static_cast<CssClassBindingMapSlots*>(user_data);
   try {
     slots->map_to_property(class_applied, *reinterpret_cast<Glib::ValueBase*>(property_value));
@@ -44,18 +46,17 @@ void CssClassBinding_map_to_property_callback(AdwCssClassBinding*, gboolean clas
 } // anonymous namespace
 
 Glib::RefPtr<CssClassBinding> CssClassBinding::bind_property_to_css_class_full(
-    const Glib::RefPtr<Glib::Object>& source, const Glib::ustring& source_property,
-    Gtk::Widget* target, const Glib::ustring& target_css_class, Glib::Binding::Flags flags,
-    const SlotMapToClass& map_to_class, const SlotMapToProperty& map_to_property) {
+  const Glib::RefPtr<Glib::Object>& source, const Glib::ustring& source_property,
+  Gtk::Widget* target, const Glib::ustring& target_css_class, Glib::Binding::Flags flags,
+  const SlotMapToClass& map_to_class, const SlotMapToProperty& map_to_property) {
   auto slots = new CssClassBindingMapSlots{map_to_class, map_to_property};
 
   auto binding = adw_bind_property_to_css_class_full(
-    Glib::unwrap(source), source_property.c_str(),
-    target ? target->gobj() : nullptr, target_css_class.c_str(),
-    static_cast<GBindingFlags>(flags),
+    Glib::unwrap(source), source_property.c_str(), target ? target->gobj() : nullptr,
+    target_css_class.c_str(), static_cast<GBindingFlags>(flags),
     slots->map_to_class ? &CssClassBinding_map_to_class_callback : nullptr,
-    slots->map_to_property ? &CssClassBinding_map_to_property_callback : nullptr,
-    slots, Glib::destroy_notify_delete<CssClassBindingMapSlots>);
+    slots->map_to_property ? &CssClassBinding_map_to_property_callback : nullptr, slots,
+    Glib::destroy_notify_delete<CssClassBindingMapSlots>);
 
   return Glib::wrap(binding, true);
 }

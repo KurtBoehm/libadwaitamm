@@ -17,12 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
-#include <gtkmm.h>
 #include <adwaita.h>
+#include <gtkmm.h>
 
 namespace Adw {
 class StatusPage : public Gtk::Widget {
@@ -31,24 +31,27 @@ class StatusPage : public Gtk::Widget {
   _DO_NOT_DERIVE_GTYPE
 
 public:
-  // Construction
+  // Creation
   _CTOR_DEFAULT
 
   // Methods
   _WRAP_METHOD(Glib::ustring get_icon_name() const, adw_status_page_get_icon_name)
   _WRAP_METHOD(void set_icon_name(const Glib::ustring& icon_name), adw_status_page_set_icon_name)
 
-  _WRAP_METHOD(Glib::RefPtr<Gdk::Paintable> get_paintable() const, adw_status_page_get_paintable, refreturn)
-  _WRAP_METHOD(void set_paintable(const Glib::RefPtr<Gdk::Paintable>& paintable), adw_status_page_set_paintable)
+  _WRAP_METHOD(Glib::RefPtr<Gdk::Paintable> get_paintable() const, adw_status_page_get_paintable,
+               refreturn)
+  _WRAP_METHOD(void set_paintable(const Glib::RefPtr<Gdk::Paintable>& paintable),
+               adw_status_page_set_paintable)
 
   _WRAP_METHOD(Glib::ustring get_title() const, adw_status_page_get_title)
   _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_status_page_set_title)
 
   _WRAP_METHOD(Glib::ustring get_description() const, adw_status_page_get_description)
-  _WRAP_METHOD(void set_description(const Glib::ustring& description), adw_status_page_set_description)
+  _WRAP_METHOD(void set_description(const Glib::ustring& description),
+               adw_status_page_set_description)
 
   _WRAP_METHOD(Gtk::Widget* get_child() const, adw_status_page_get_child)
-  _WRAP_METHOD(void set_child(Gtk::Widget *child), adw_status_page_set_child)
+  _WRAP_METHOD(void set_child(Gtk::Widget* child), adw_status_page_set_child)
 
   // Properties
   _WRAP_PROPERTY("icon-name", Glib::ustring)

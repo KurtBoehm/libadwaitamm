@@ -33,14 +33,11 @@ static void MessageDialog_choose_callback(GObject* source_object, GAsyncResult* 
 }
 } // anonymous namespace
 
-void MessageDialog::choose(const Glib::RefPtr<Gio::Cancellable>& cancellable, const Gio::SlotAsyncReady& slot) {
+void MessageDialog::choose(const Glib::RefPtr<Gio::Cancellable>& cancellable,
+                           const Gio::SlotAsyncReady& slot) {
   auto slot_copy = new Gio::SlotAsyncReady(slot);
 
-  adw_message_dialog_choose(
-    gobj(),
-    Glib::unwrap(cancellable),
-    &MessageDialog_choose_callback,
-    slot_copy
-  );
+  adw_message_dialog_choose(gobj(), Glib::unwrap(cancellable), &MessageDialog_choose_callback,
+                            slot_copy);
 }
 } // namespace Adw

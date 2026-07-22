@@ -17,7 +17,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(libadwaitamm/private/window_p.h)
 
@@ -32,7 +32,7 @@ class AboutWindow : public Adw::Window {
   _DO_NOT_DERIVE_GTYPE
 
 public:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
   _IGNORE(adw_about_window_new_from_appdata)
   /** Creates a new AdwAboutWindow using AppStream metadata.
@@ -53,75 +53,126 @@ public:
    * @param appdata_resource_path The resource to use.
    * @param release_notes_version The version to retrieve release notes for.
    */
-  AboutWindow(const Glib::ustring& appdata_resource_path, const Glib::ustring& release_notes_version);
+  AboutWindow(const Glib::ustring& appdata_resource_path,
+              const Glib::ustring& release_notes_version);
 
   // Methods
-  _WRAP_METHOD(Glib::ustring get_application_name() const, adw_about_window_get_application_name, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_application_name(const Glib::ustring& application_name), adw_about_window_set_application_name, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_application_name() const, adw_about_window_get_application_name,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_application_name(const Glib::ustring& application_name),
+               adw_about_window_set_application_name, deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Glib::ustring get_application_icon() const, adw_about_window_get_application_icon, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_application_icon(const Glib::ustring& application_icon), adw_about_window_set_application_icon, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_application_icon() const, adw_about_window_get_application_icon,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_application_icon(const Glib::ustring& application_icon),
+               adw_about_window_set_application_icon, deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Glib::ustring get_developer_name() const, adw_about_window_get_developer_name, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_developer_name(const Glib::ustring& developer_name), adw_about_window_set_developer_name, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_developer_name() const, adw_about_window_get_developer_name,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_developer_name(const Glib::ustring& developer_name),
+               adw_about_window_set_developer_name, deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Glib::ustring get_version() const, adw_about_window_get_version, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_version(const Glib::ustring& version), adw_about_window_set_version, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_version() const, adw_about_window_get_version,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_version(const Glib::ustring& version), adw_about_window_set_version,
+               deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Glib::ustring get_release_notes_version() const, adw_about_window_get_release_notes_version, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_release_notes_version(const Glib::ustring& version), adw_about_window_set_release_notes_version, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_release_notes_version() const,
+               adw_about_window_get_release_notes_version,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_release_notes_version(const Glib::ustring& version),
+               adw_about_window_set_release_notes_version,
+               deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Glib::ustring get_release_notes() const, adw_about_window_get_release_notes, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_release_notes(const Glib::ustring& release_notes), adw_about_window_set_release_notes, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_release_notes() const, adw_about_window_get_release_notes,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_release_notes(const Glib::ustring& release_notes),
+               adw_about_window_set_release_notes, deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Glib::ustring get_comments() const, adw_about_window_get_comments, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_comments(const Glib::ustring& comments), adw_about_window_set_comments, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_comments() const, adw_about_window_get_comments,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_comments(const Glib::ustring& comments), adw_about_window_set_comments,
+               deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Glib::ustring get_website() const, adw_about_window_get_website, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_website(const Glib::ustring& website), adw_about_window_set_website, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_website() const, adw_about_window_get_website,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_website(const Glib::ustring& website), adw_about_window_set_website,
+               deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Glib::ustring get_support_url() const, adw_about_window_get_support_url, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_support_url(const Glib::ustring& support_url), adw_about_window_set_support_url, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_support_url() const, adw_about_window_get_support_url,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_support_url(const Glib::ustring& support_url),
+               adw_about_window_set_support_url, deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Glib::ustring get_issue_url() const, adw_about_window_get_issue_url, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_issue_url(const Glib::ustring& issue_url), adw_about_window_set_issue_url, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_issue_url() const, adw_about_window_get_issue_url,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_issue_url(const Glib::ustring& issue_url), adw_about_window_set_issue_url,
+               deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(void add_link(const Glib::ustring& title, const Glib::ustring& url), adw_about_window_add_link, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void add_link(const Glib::ustring& title, const Glib::ustring& url),
+               adw_about_window_add_link, deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Glib::ustring get_debug_info() const, adw_about_window_get_debug_info, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_debug_info(const Glib::ustring& debug_info), adw_about_window_set_debug_info, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_debug_info() const, adw_about_window_get_debug_info,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_debug_info(const Glib::ustring& debug_info),
+               adw_about_window_set_debug_info, deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Glib::ustring get_debug_info_filename() const, adw_about_window_get_debug_info_filename, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_debug_info_filename(const Glib::ustring& filename), adw_about_window_set_debug_info_filename, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_debug_info_filename() const,
+               adw_about_window_get_debug_info_filename, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_debug_info_filename(const Glib::ustring& filename),
+               adw_about_window_set_debug_info_filename, deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(std::vector<Glib::ustring> get_developers() const, adw_about_window_get_developers, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_developers(const std::vector<Glib::ustring>& developers), adw_about_window_set_developers, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(std::vector<Glib::ustring> get_developers() const, adw_about_window_get_developers,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_developers(const std::vector<Glib::ustring>& developers),
+               adw_about_window_set_developers, deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(std::vector<Glib::ustring> get_designers() const, adw_about_window_get_designers, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_designers(const std::vector<Glib::ustring>& designers), adw_about_window_set_designers, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(std::vector<Glib::ustring> get_designers() const, adw_about_window_get_designers,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_designers(const std::vector<Glib::ustring>& designers),
+               adw_about_window_set_designers, deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(std::vector<Glib::ustring> get_artists() const, adw_about_window_get_artists, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_artists(const std::vector<Glib::ustring>& artists), adw_about_window_set_artists, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(std::vector<Glib::ustring> get_artists() const, adw_about_window_get_artists,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_artists(const std::vector<Glib::ustring>& artists),
+               adw_about_window_set_artists, deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(std::vector<Glib::ustring> get_documenters() const, adw_about_window_get_documenters, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_documenters(const std::vector<Glib::ustring>& documenters), adw_about_window_set_documenters, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(std::vector<Glib::ustring> get_documenters() const, adw_about_window_get_documenters,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_documenters(const std::vector<Glib::ustring>& documenters),
+               adw_about_window_set_documenters, deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Glib::ustring get_translator_credits() const, adw_about_window_get_translator_credits, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_translator_credits(const Glib::ustring& translator_credits), adw_about_window_set_translator_credits, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_translator_credits() const,
+               adw_about_window_get_translator_credits, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_translator_credits(const Glib::ustring& translator_credits),
+               adw_about_window_set_translator_credits, deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(void add_credit_section(const Glib::ustring& name, const std::vector<Glib::ustring>& people), adw_about_window_add_credit_section, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void add_acknowledgement_section(const Glib::ustring& name, const std::vector<Glib::ustring>& people), adw_about_window_add_acknowledgement_section, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void add_credit_section(const Glib::ustring& name,
+                                       const std::vector<Glib::ustring>& people),
+               adw_about_window_add_credit_section, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void add_acknowledgement_section(const Glib::ustring& name,
+                                                const std::vector<Glib::ustring>& people),
+               adw_about_window_add_acknowledgement_section,
+               deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Glib::ustring get_copyright() const, adw_about_window_get_copyright, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_copyright(const Glib::ustring& copyright), adw_about_window_set_copyright, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_copyright() const, adw_about_window_get_copyright,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_copyright(const Glib::ustring& copyright), adw_about_window_set_copyright,
+               deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Gtk::License get_license_type() const, adw_about_window_get_license_type, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_license_type(Gtk::License license_type), adw_about_window_set_license_type, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Gtk::License get_license_type() const, adw_about_window_get_license_type,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_license_type(Gtk::License license_type), adw_about_window_set_license_type,
+               deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(Glib::ustring get_license() const, adw_about_window_get_license, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_METHOD(void set_license(const Glib::ustring& license), adw_about_window_set_license, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(Glib::ustring get_license() const, adw_about_window_get_license,
+               deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void set_license(const Glib::ustring& license), adw_about_window_set_license,
+               deprecated "Use Adw::AboutDialog instead.")
 
-  _WRAP_METHOD(void add_legal_section(const Glib::ustring& title, const Glib::ustring& copyright, Gtk::License license_type, const Glib::ustring& license), adw_about_window_add_legal_section, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_METHOD(void add_legal_section(const Glib::ustring& title, const Glib::ustring& copyright,
+                                      Gtk::License license_type, const Glib::ustring& license),
+               adw_about_window_add_legal_section, deprecated "Use Adw::AboutDialog instead.")
 
   // Properties
   _WRAP_PROPERTY("application-icon", Glib::ustring, deprecated "Use Adw::AboutDialog instead.")
@@ -136,16 +187,20 @@ public:
   _WRAP_PROPERTY("issue-url", Glib::ustring, deprecated "Use Adw::AboutDialog instead.")
   _WRAP_PROPERTY("debug-info", Glib::ustring, deprecated "Use Adw::AboutDialog instead.")
   _WRAP_PROPERTY("debug-info-filename", Glib::ustring, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_PROPERTY("developers", std::vector<Glib::ustring>, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_PROPERTY("designers", std::vector<Glib::ustring>, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_PROPERTY("developers", std::vector<Glib::ustring>,
+                 deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_PROPERTY("designers", std::vector<Glib::ustring>,
+                 deprecated "Use Adw::AboutDialog instead.")
   _WRAP_PROPERTY("artists", std::vector<Glib::ustring>, deprecated "Use Adw::AboutDialog instead.")
-  _WRAP_PROPERTY("documenters", std::vector<Glib::ustring>, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_PROPERTY("documenters", std::vector<Glib::ustring>,
+                 deprecated "Use Adw::AboutDialog instead.")
   _WRAP_PROPERTY("translator-credits", Glib::ustring, deprecated "Use Adw::AboutDialog instead.")
   _WRAP_PROPERTY("copyright", Glib::ustring, deprecated "Use Adw::AboutDialog instead.")
   _WRAP_PROPERTY("license-type", Gtk::License, deprecated "Use Adw::AboutDialog instead.")
   _WRAP_PROPERTY("license", Glib::ustring, deprecated "Use Adw::AboutDialog instead.")
 
   // Signals
-  _WRAP_SIGNAL(bool activate_link(const Glib::ustring& url), "activate-link", no_default_handler, deprecated "Use Adw::AboutDialog instead.")
+  _WRAP_SIGNAL(bool activate_link(const Glib::ustring& url), "activate-link", no_default_handler,
+               deprecated "Use Adw::AboutDialog instead.")
 };
 } // namespace Adw

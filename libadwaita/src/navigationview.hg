@@ -16,13 +16,13 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
 #include <adwaita.h>
-#include <gtkmm.h>
 #include <giomm/listmodel.h>
+#include <gtkmm.h>
 #include <libadwaitamm/navigationpage.h>
 
 namespace Adw {
@@ -34,21 +34,24 @@ class NavigationView : public Gtk::Widget {
   _DO_NOT_DERIVE_GTYPE
 
 public:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 
   // Methods
   _WRAP_METHOD(void add(NavigationPage* page), adw_navigation_view_add, newin "1.4")
   _WRAP_METHOD(void remove(NavigationPage* page), adw_navigation_view_remove, newin "1.4")
 
-  _WRAP_METHOD(NavigationPage* find_page(const Glib::ustring& tag) const, adw_navigation_view_find_page, newin "1.4")
+  _WRAP_METHOD(NavigationPage* find_page(const Glib::ustring& tag) const,
+               adw_navigation_view_find_page, newin "1.4")
 
   _WRAP_METHOD(void push(NavigationPage* page), adw_navigation_view_push, newin "1.4")
-  _WRAP_METHOD(void push_by_tag(const Glib::ustring& tag), adw_navigation_view_push_by_tag, newin "1.4")
+  _WRAP_METHOD(void push_by_tag(const Glib::ustring& tag), adw_navigation_view_push_by_tag,
+               newin "1.4")
 
   _WRAP_METHOD(bool pop(), adw_navigation_view_pop, newin "1.4")
   _WRAP_METHOD(bool pop_to_page(NavigationPage* page), adw_navigation_view_pop_to_page, newin "1.4")
-  _WRAP_METHOD(bool pop_to_tag(const Glib::ustring& tag), adw_navigation_view_pop_to_tag, newin "1.4")
+  _WRAP_METHOD(bool pop_to_tag(const Glib::ustring& tag), adw_navigation_view_pop_to_tag,
+               newin "1.4")
 
   /** Replaces the current navigation stack with @a pages.
    *
@@ -68,24 +71,33 @@ public:
   void replace_with_tags(const std::vector<Glib::ustring>& tags);
   _IGNORE(adw_navigation_view_replace_with_tags)
 
-  _WRAP_METHOD(NavigationPage* get_visible_page() const, adw_navigation_view_get_visible_page, newin "1.4")
-  _WRAP_METHOD(Glib::ustring get_visible_page_tag() const, adw_navigation_view_get_visible_page_tag, newin "1.7")
+  _WRAP_METHOD(NavigationPage* get_visible_page() const, adw_navigation_view_get_visible_page,
+               newin "1.4")
+  _WRAP_METHOD(Glib::ustring get_visible_page_tag() const, adw_navigation_view_get_visible_page_tag,
+               newin "1.7")
 
-  _WRAP_METHOD(NavigationPage* get_previous_page(NavigationPage* page) const, adw_navigation_view_get_previous_page, newin "1.4")
+  _WRAP_METHOD(NavigationPage* get_previous_page(NavigationPage* page) const,
+               adw_navigation_view_get_previous_page, newin "1.4")
 
   _WRAP_METHOD(bool get_hhomogeneous() const, adw_navigation_view_get_hhomogeneous, newin "1.7")
-  _WRAP_METHOD(void set_hhomogeneous(bool hhomogeneous), adw_navigation_view_set_hhomogeneous, newin "1.7")
+  _WRAP_METHOD(void set_hhomogeneous(bool hhomogeneous), adw_navigation_view_set_hhomogeneous,
+               newin "1.7")
 
   _WRAP_METHOD(bool get_vhomogeneous() const, adw_navigation_view_get_vhomogeneous, newin "1.7")
-  _WRAP_METHOD(void set_vhomogeneous(bool vhomogeneous), adw_navigation_view_set_vhomogeneous, newin "1.7")
+  _WRAP_METHOD(void set_vhomogeneous(bool vhomogeneous), adw_navigation_view_set_vhomogeneous,
+               newin "1.7")
 
-  _WRAP_METHOD(bool get_animate_transitions() const, adw_navigation_view_get_animate_transitions, newin "1.4")
-  _WRAP_METHOD(void set_animate_transitions(bool animate_transitions), adw_navigation_view_set_animate_transitions, newin "1.4")
+  _WRAP_METHOD(bool get_animate_transitions() const, adw_navigation_view_get_animate_transitions,
+               newin "1.4")
+  _WRAP_METHOD(void set_animate_transitions(bool animate_transitions),
+               adw_navigation_view_set_animate_transitions, newin "1.4")
 
   _WRAP_METHOD(bool get_pop_on_escape() const, adw_navigation_view_get_pop_on_escape, newin "1.4")
-  _WRAP_METHOD(void set_pop_on_escape(bool pop_on_escape), adw_navigation_view_set_pop_on_escape, newin "1.4")
+  _WRAP_METHOD(void set_pop_on_escape(bool pop_on_escape), adw_navigation_view_set_pop_on_escape,
+               newin "1.4")
 
-  _WRAP_METHOD(std::vector<NavigationPage*> get_navigation_stack() const, adw_navigation_view_get_navigation_stack, newin "1.4")
+  _WRAP_METHOD(std::vector<NavigationPage*> get_navigation_stack() const,
+               adw_navigation_view_get_navigation_stack, newin "1.4")
 
   // Properties
   _WRAP_PROPERTY("animate-transitions", bool, newin "1.4")

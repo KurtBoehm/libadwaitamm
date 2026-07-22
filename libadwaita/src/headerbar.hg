@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
@@ -32,7 +32,7 @@ class HeaderBar : public Gtk::Widget {
   _DO_NOT_DERIVE_GTYPE
 
 public:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 
   // Methods
@@ -43,20 +43,26 @@ public:
   _WRAP_METHOD(Gtk::Widget* get_title_widget() const, adw_header_bar_get_title_widget)
   _WRAP_METHOD(void set_title_widget(Gtk::Widget* title_widget), adw_header_bar_set_title_widget)
 
-  _WRAP_METHOD(bool get_show_start_title_buttons() const, adw_header_bar_get_show_start_title_buttons)
-  _WRAP_METHOD(void set_show_start_title_buttons(bool setting), adw_header_bar_set_show_start_title_buttons)
+  _WRAP_METHOD(bool get_show_start_title_buttons() const,
+               adw_header_bar_get_show_start_title_buttons)
+  _WRAP_METHOD(void set_show_start_title_buttons(bool setting),
+               adw_header_bar_set_show_start_title_buttons)
 
   _WRAP_METHOD(bool get_show_end_title_buttons() const, adw_header_bar_get_show_end_title_buttons)
-  _WRAP_METHOD(void set_show_end_title_buttons(bool setting), adw_header_bar_set_show_end_title_buttons)
+  _WRAP_METHOD(void set_show_end_title_buttons(bool setting),
+               adw_header_bar_set_show_end_title_buttons)
 
   _WRAP_METHOD(bool get_show_back_button() const, adw_header_bar_get_show_back_button, newin "1.4")
-  _WRAP_METHOD(void set_show_back_button(bool show_back_button), adw_header_bar_set_show_back_button, newin "1.4")
+  _WRAP_METHOD(void set_show_back_button(bool show_back_button),
+               adw_header_bar_set_show_back_button, newin "1.4")
 
   _WRAP_METHOD(Glib::ustring get_decoration_layout() const, adw_header_bar_get_decoration_layout)
-  _WRAP_METHOD(void set_decoration_layout(const Glib::ustring& layout), adw_header_bar_set_decoration_layout)
+  _WRAP_METHOD(void set_decoration_layout(const Glib::ustring& layout),
+               adw_header_bar_set_decoration_layout)
 
   _WRAP_METHOD(CenteringPolicy get_centering_policy() const, adw_header_bar_get_centering_policy)
-  _WRAP_METHOD(void set_centering_policy(CenteringPolicy centering_policy), adw_header_bar_set_centering_policy)
+  _WRAP_METHOD(void set_centering_policy(CenteringPolicy centering_policy),
+               adw_header_bar_set_centering_policy)
 
   _WRAP_METHOD(bool get_show_title() const, adw_header_bar_get_show_title, newin "1.4")
   _WRAP_METHOD(void set_show_title(bool show_title), adw_header_bar_set_show_title, newin "1.4")

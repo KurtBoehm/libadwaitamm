@@ -17,7 +17,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(libadwaitamm/private/actionrow_p.h)
 
@@ -31,7 +31,7 @@ class ComboRow : public Adw::ActionRow {
   _STRUCT_NOT_HIDDEN
 
 public:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 
   // Methods
@@ -41,28 +41,40 @@ public:
   _WRAP_METHOD(guint get_selected() const, adw_combo_row_get_selected)
   _WRAP_METHOD(void set_selected(guint position), adw_combo_row_set_selected)
 
-  _WRAP_METHOD(Glib::RefPtr<Glib::ObjectBase> get_selected_item() const, adw_combo_row_get_selected_item, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Glib::ObjectBase> get_selected_item() const,
+               adw_combo_row_get_selected_item, refreturn)
 
-  _WRAP_METHOD(Glib::RefPtr<Gtk::ListItemFactory> get_factory() const, adw_combo_row_get_factory, refreturn)
-  _WRAP_METHOD(void set_factory(const Glib::RefPtr<Gtk::ListItemFactory>& factory), adw_combo_row_set_factory)
+  _WRAP_METHOD(Glib::RefPtr<Gtk::ListItemFactory> get_factory() const, adw_combo_row_get_factory,
+               refreturn)
+  _WRAP_METHOD(void set_factory(const Glib::RefPtr<Gtk::ListItemFactory>& factory),
+               adw_combo_row_set_factory)
 
-  _WRAP_METHOD(Glib::RefPtr<Gtk::ListItemFactory> get_header_factory() const, adw_combo_row_get_header_factory, refreturn, newin "1.6")
-  _WRAP_METHOD(void set_header_factory(const Glib::RefPtr<Gtk::ListItemFactory>& factory), adw_combo_row_set_header_factory, newin "1.6")
+  _WRAP_METHOD(Glib::RefPtr<Gtk::ListItemFactory> get_header_factory() const,
+               adw_combo_row_get_header_factory, refreturn, newin "1.6")
+  _WRAP_METHOD(void set_header_factory(const Glib::RefPtr<Gtk::ListItemFactory>& factory),
+               adw_combo_row_set_header_factory, newin "1.6")
 
-  _WRAP_METHOD(Glib::RefPtr<Gtk::ListItemFactory> get_list_factory() const, adw_combo_row_get_list_factory, refreturn)
-  _WRAP_METHOD(void set_list_factory(const Glib::RefPtr<Gtk::ListItemFactory>& factory), adw_combo_row_set_list_factory)
+  _WRAP_METHOD(Glib::RefPtr<Gtk::ListItemFactory> get_list_factory() const,
+               adw_combo_row_get_list_factory, refreturn)
+  _WRAP_METHOD(void set_list_factory(const Glib::RefPtr<Gtk::ListItemFactory>& factory),
+               adw_combo_row_set_list_factory)
 
-  _WRAP_METHOD(Glib::RefPtr<Gtk::Expression<Glib::ustring>> get_expression() const, adw_combo_row_get_expression, refreturn)
-  _WRAP_METHOD(void set_expression(const Glib::RefPtr<Gtk::Expression<Glib::ustring>>& expression), adw_combo_row_set_expression)
+  _WRAP_METHOD(Glib::RefPtr<Gtk::Expression<Glib::ustring>> get_expression() const,
+               adw_combo_row_get_expression, refreturn)
+  _WRAP_METHOD(void set_expression(const Glib::RefPtr<Gtk::Expression<Glib::ustring>>& expression),
+               adw_combo_row_set_expression)
 
   _WRAP_METHOD(bool get_use_subtitle() const, adw_combo_row_get_use_subtitle)
   _WRAP_METHOD(void set_use_subtitle(bool use_subtitle), adw_combo_row_set_use_subtitle)
 
   _WRAP_METHOD(bool get_enable_search() const, adw_combo_row_get_enable_search, newin "1.4")
-  _WRAP_METHOD(void set_enable_search(bool enable_search), adw_combo_row_set_enable_search, newin "1.4")
+  _WRAP_METHOD(void set_enable_search(bool enable_search), adw_combo_row_set_enable_search,
+               newin "1.4")
 
-  _WRAP_METHOD(Gtk::StringFilter::MatchMode get_search_match_mode() const, adw_combo_row_get_search_match_mode, newin "1.6")
-  _WRAP_METHOD(void set_search_match_mode(Gtk::StringFilter::MatchMode search_match_mode), adw_combo_row_set_search_match_mode, newin "1.6")
+  _WRAP_METHOD(Gtk::StringFilter::MatchMode get_search_match_mode() const,
+               adw_combo_row_get_search_match_mode, newin "1.6")
+  _WRAP_METHOD(void set_search_match_mode(Gtk::StringFilter::MatchMode search_match_mode),
+               adw_combo_row_set_search_match_mode, newin "1.6")
 
   // Properties
   _WRAP_PROPERTY("selected", guint)

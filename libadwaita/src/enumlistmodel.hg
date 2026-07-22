@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
@@ -32,9 +32,12 @@ class EnumListItem : public Glib::Object {
 
 public:
   // Methods
-  _WRAP_METHOD(int get_value() const, adw_enum_list_item_get_value, deprecated "Use Gtk::EnumListItem::get_value() instead.")
-  _WRAP_METHOD(Glib::ustring get_name() const, adw_enum_list_item_get_name, deprecated "Use Gtk::EnumListItem::get_name() instead.")
-  _WRAP_METHOD(Glib::ustring get_nick() const, adw_enum_list_item_get_nick, deprecated "Use Gtk::EnumListItem::get_nick() instead.")
+  _WRAP_METHOD(int get_value() const, adw_enum_list_item_get_value,
+               deprecated "Use Gtk::EnumListItem::get_value() instead.")
+  _WRAP_METHOD(Glib::ustring get_name() const, adw_enum_list_item_get_name,
+               deprecated "Use Gtk::EnumListItem::get_name() instead.")
+  _WRAP_METHOD(Glib::ustring get_nick() const, adw_enum_list_item_get_nick,
+               deprecated "Use Gtk::EnumListItem::get_nick() instead.")
 
   // Properties
   _WRAP_PROPERTY("value", int)
@@ -55,8 +58,10 @@ public:
   _WRAP_CREATE(GType enum_type)
 
   // Methods
-  _WRAP_METHOD(GType get_enum_type() const, adw_enum_list_model_get_enum_type, deprecated "Use Gtk::EnumList::get_enum_type() instead.")
-  _WRAP_METHOD(guint find_position(int value) const, adw_enum_list_model_find_position, deprecated "Use Gtk::EnumList::find_position() instead.")
+  _WRAP_METHOD(GType get_enum_type() const, adw_enum_list_model_get_enum_type,
+               deprecated "Use Gtk::EnumList::get_enum_type() instead.")
+  _WRAP_METHOD(guint find_position(int value) const, adw_enum_list_model_find_position,
+               deprecated "Use Gtk::EnumList::find_position() instead.")
 
   // Properties
   //

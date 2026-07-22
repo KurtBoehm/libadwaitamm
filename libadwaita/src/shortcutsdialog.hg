@@ -16,7 +16,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(libadwaitamm/private/dialog_p.h)
 
@@ -26,15 +26,17 @@ _PINCLUDE(libadwaitamm/private/dialog_p.h)
 
 namespace Adw {
 class ShortcutsDialog : public Adw::Dialog {
-  _CLASS_GTKOBJECT(ShortcutsDialog, AdwShortcutsDialog, ADW_SHORTCUTS_DIALOG, Adw::Dialog, AdwDialog)
+  _CLASS_GTKOBJECT(ShortcutsDialog, AdwShortcutsDialog, ADW_SHORTCUTS_DIALOG, Adw::Dialog,
+                   AdwDialog)
   _STRUCT_NOT_HIDDEN
   _DO_NOT_DERIVE_GTYPE
 
 public:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 
   // Methods
-  _WRAP_METHOD(void add(const Glib::RefPtr<ShortcutsSection>& section), adw_shortcuts_dialog_add, newin "1.8")
+  _WRAP_METHOD(void add(const Glib::RefPtr<ShortcutsSection>& section), adw_shortcuts_dialog_add,
+               newin "1.8")
 };
 } // namespace Adw

@@ -16,7 +16,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(libadwaitamm/private/preferencesrow_p.h)
 
@@ -30,15 +30,19 @@ class ButtonRow : public Adw::PreferencesRow {
   _DO_NOT_DERIVE_GTYPE
 
 public:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 
   // Methods
-  _WRAP_METHOD(Glib::ustring get_start_icon_name() const, adw_button_row_get_start_icon_name, newin "1.6")
-  _WRAP_METHOD(void set_start_icon_name(const Glib::ustring& icon_name), adw_button_row_set_start_icon_name, newin "1.6")
+  _WRAP_METHOD(Glib::ustring get_start_icon_name() const, adw_button_row_get_start_icon_name,
+               newin "1.6")
+  _WRAP_METHOD(void set_start_icon_name(const Glib::ustring& icon_name),
+               adw_button_row_set_start_icon_name, newin "1.6")
 
-  _WRAP_METHOD(Glib::ustring get_end_icon_name() const, adw_button_row_get_end_icon_name, newin "1.6")
-  _WRAP_METHOD(void set_end_icon_name(const Glib::ustring& icon_name), adw_button_row_set_end_icon_name, newin "1.6")
+  _WRAP_METHOD(Glib::ustring get_end_icon_name() const, adw_button_row_get_end_icon_name,
+               newin "1.6")
+  _WRAP_METHOD(void set_end_icon_name(const Glib::ustring& icon_name),
+               adw_button_row_set_end_icon_name, newin "1.6")
 
   // Properties
   _WRAP_PROPERTY("start-icon-name", Glib::ustring, newin "1.6")

@@ -16,7 +16,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
@@ -27,23 +27,25 @@ _PINCLUDE(glibmm/private/object_p.h)
 
 namespace Adw {
 class ShortcutsSection : public Glib::Object, public Gio::ListModel {
-  _CLASS_GOBJECT(ShortcutsSection, AdwShortcutsSection, ADW_SHORTCUTS_SECTION, Glib::Object, GObject)
+  _CLASS_GOBJECT(ShortcutsSection, AdwShortcutsSection, ADW_SHORTCUTS_SECTION, Glib::Object,
+                 GObject)
   _IMPLEMENTS_INTERFACE(Gio::ListModel)
   _STRUCT_NOT_HIDDEN
   _DO_NOT_DERIVE_GTYPE
 
 protected:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
   _WRAP_CTOR(ShortcutsSection(const Glib::ustring& title), adw_shortcuts_section_new)
 
 public:
-  // Construction
+  // Creation
   _WRAP_CREATE(const Glib::ustring& title)
 
   // Methods
   _WRAP_METHOD(Glib::ustring get_title() const, adw_shortcuts_section_get_title, newin "1.8")
-  _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_shortcuts_section_set_title, newin "1.8")
+  _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_shortcuts_section_set_title,
+               newin "1.8")
 
   /** Adds @a item to the section.
    *

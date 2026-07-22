@@ -17,7 +17,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(glibmm/private/object_p.h)
 
@@ -29,25 +29,27 @@ class AnimationTarget : public Glib::Object {
   _CLASS_GOBJECT(AnimationTarget, AdwAnimationTarget, ADW_ANIMATION_TARGET, Glib::Object, GObject)
 
 protected:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 };
 
 class NoneAnimationTarget : public AnimationTarget {
-  _CLASS_GOBJECT(NoneAnimationTarget, AdwNoneAnimationTarget, ADW_NONE_ANIMATION_TARGET, AnimationTarget, AdwAnimationTarget)
+  _CLASS_GOBJECT(NoneAnimationTarget, AdwNoneAnimationTarget, ADW_NONE_ANIMATION_TARGET,
+                 AnimationTarget, AdwAnimationTarget)
   _DO_NOT_DERIVE_GTYPE
 
 protected:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 
 public:
-  // Construction
+  // Creation
   _WRAP_CREATE()
 };
 
 class CallbackAnimationTarget : public AnimationTarget {
-  _CLASS_GOBJECT(CallbackAnimationTarget, AdwCallbackAnimationTarget, ADW_CALLBACK_ANIMATION_TARGET, AnimationTarget, AdwAnimationTarget)
+  _CLASS_GOBJECT(CallbackAnimationTarget, AdwCallbackAnimationTarget, ADW_CALLBACK_ANIMATION_TARGET,
+                 AnimationTarget, AdwAnimationTarget)
   _DO_NOT_DERIVE_GTYPE
 
   static void callback_function(double value, gpointer user_data);
@@ -56,34 +58,38 @@ public:
   using SlotTarget = sigc::slot<void(double)>;
 
 protected:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 
   CallbackAnimationTarget(const SlotTarget& slot_target);
 
 public:
-  // Construction
+  // Creation
   _WRAP_CREATE(const SlotTarget& slot_target)
 };
 
 class PropertyAnimationTarget : public AnimationTarget {
-  _CLASS_GOBJECT(PropertyAnimationTarget, AdwPropertyAnimationTarget, ADW_PROPERTY_ANIMATION_TARGET, AnimationTarget, AdwAnimationTarget)
+  _CLASS_GOBJECT(PropertyAnimationTarget, AdwPropertyAnimationTarget, ADW_PROPERTY_ANIMATION_TARGET,
+                 AnimationTarget, AdwAnimationTarget)
   _DO_NOT_DERIVE_GTYPE
 
 protected:
-  // Constructors
-  PropertyAnimationTarget(const Glib::RefPtr<Glib::Object>& object, const Glib::ustring& property_name);
-  _WRAP_CTOR(PropertyAnimationTarget(const Glib::RefPtr<Glib::Object>& object, GParamSpec* pspec), adw_property_animation_target_new_for_pspec)
+  // Creation
+  PropertyAnimationTarget(const Glib::RefPtr<Glib::Object>& object,
+                          const Glib::ustring& property_name);
+  _WRAP_CTOR(PropertyAnimationTarget(const Glib::RefPtr<Glib::Object>& object, GParamSpec* pspec),
+             adw_property_animation_target_new_for_pspec)
 
   _CTOR_DEFAULT
 
 public:
-  // Construction
+  // Creation
   _WRAP_CREATE(const Glib::RefPtr<Glib::Object>& object, const Glib::ustring& property_name)
   _WRAP_CREATE(const Glib::RefPtr<Glib::Object>& object, GParamSpec* pspec)
 
   // Methods
-  _WRAP_METHOD(Glib::RefPtr<Glib::Object> get_object() const, adw_property_animation_target_get_object, refreturn, newin "1.2")
+  _WRAP_METHOD(Glib::RefPtr<Glib::Object> get_object() const,
+               adw_property_animation_target_get_object, refreturn, newin "1.2")
   _WRAP_METHOD(GParamSpec* get_pspec() const, adw_property_animation_target_get_pspec, newin "1.2")
 
   // Properties

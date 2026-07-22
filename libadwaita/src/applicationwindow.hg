@@ -17,7 +17,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/applicationwindow_p.h)
 
@@ -31,26 +31,34 @@ namespace Adw {
 #m4 _CONVERSION(`GListModel*', `std::vector<Adw::Dialog*>', `listmodel_to_vector<Adw::Dialog>($3)')
 
 class ApplicationWindow : public Gtk::ApplicationWindow {
-  _CLASS_GTKOBJECT(ApplicationWindow, AdwApplicationWindow, ADW_APPLICATION_WINDOW, Gtk::ApplicationWindow, GtkApplicationWindow)
+  _CLASS_GTKOBJECT(ApplicationWindow, AdwApplicationWindow, ADW_APPLICATION_WINDOW,
+                   Gtk::ApplicationWindow, GtkApplicationWindow)
   _UNMANAGEABLE
 
 public:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
-  _WRAP_CTOR(ApplicationWindow(const Glib::RefPtr<Gtk::Application>& application), adw_application_window_new)
+  _WRAP_CTOR(ApplicationWindow(const Glib::RefPtr<Gtk::Application>& application),
+             adw_application_window_new)
 
   // Methods
   _WRAP_METHOD(void set_content(Gtk::Widget* content), adw_application_window_set_content)
   _WRAP_METHOD(Gtk::Widget* get_content() const, adw_application_window_get_content)
 
-  _WRAP_METHOD(void add_breakpoint(const Glib::RefPtr<Adw::Breakpoint>& breakpoint), adw_application_window_add_breakpoint, newin "1.4")
-  _WRAP_METHOD(Glib::RefPtr<Adw::Breakpoint> get_current_breakpoint() const, adw_application_window_get_current_breakpoint, newin "1.4")
+  _WRAP_METHOD(void add_breakpoint(const Glib::RefPtr<Adw::Breakpoint>& breakpoint),
+               adw_application_window_add_breakpoint, newin "1.4")
+  _WRAP_METHOD(Glib::RefPtr<Adw::Breakpoint> get_current_breakpoint() const,
+               adw_application_window_get_current_breakpoint, newin "1.4")
 
-  _WRAP_METHOD(std::vector<Adw::Dialog*> get_dialogs() const, adw_application_window_get_dialogs, newin "1.5")
-  _WRAP_METHOD(Adw::Dialog* get_visible_dialog() const, adw_application_window_get_visible_dialog, newin "1.5")
+  _WRAP_METHOD(std::vector<Adw::Dialog*> get_dialogs() const, adw_application_window_get_dialogs,
+               newin "1.5")
+  _WRAP_METHOD(Adw::Dialog* get_visible_dialog() const, adw_application_window_get_visible_dialog,
+               newin "1.5")
 
-  _WRAP_METHOD(bool get_adaptive_preview() const, adw_application_window_get_adaptive_preview, newin "1.7")
-  _WRAP_METHOD(void set_adaptive_preview(bool adaptive_preview), adw_application_window_set_adaptive_preview, newin "1.7")
+  _WRAP_METHOD(bool get_adaptive_preview() const, adw_application_window_get_adaptive_preview,
+               newin "1.7")
+  _WRAP_METHOD(void set_adaptive_preview(bool adaptive_preview),
+               adw_application_window_set_adaptive_preview, newin "1.7")
 
   // Properties
   _WRAP_PROPERTY("content", Gtk::Widget*)

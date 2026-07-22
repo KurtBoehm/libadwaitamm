@@ -16,7 +16,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
@@ -26,50 +26,70 @@ _PINCLUDE(gtkmm/private/widget_p.h)
 
 namespace Adw {
 class OverlaySplitView : public Gtk::Widget {
-  _CLASS_GTKOBJECT(OverlaySplitView, AdwOverlaySplitView, ADW_OVERLAY_SPLIT_VIEW, Gtk::Widget, GtkWidget)
+  _CLASS_GTKOBJECT(OverlaySplitView, AdwOverlaySplitView, ADW_OVERLAY_SPLIT_VIEW, Gtk::Widget,
+                   GtkWidget)
   _STRUCT_NOT_HIDDEN
   _DO_NOT_DERIVE_GTYPE
 
 public:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 
   // Methods
   _WRAP_METHOD(Gtk::Widget* get_sidebar() const, adw_overlay_split_view_get_sidebar, newin "1.4")
-  _WRAP_METHOD(void set_sidebar(Gtk::Widget* sidebar), adw_overlay_split_view_set_sidebar, newin "1.4")
+  _WRAP_METHOD(void set_sidebar(Gtk::Widget* sidebar), adw_overlay_split_view_set_sidebar,
+               newin "1.4")
 
   _WRAP_METHOD(Gtk::Widget* get_content() const, adw_overlay_split_view_get_content, newin "1.4")
-  _WRAP_METHOD(void set_content(Gtk::Widget* content), adw_overlay_split_view_set_content, newin "1.4")
+  _WRAP_METHOD(void set_content(Gtk::Widget* content), adw_overlay_split_view_set_content,
+               newin "1.4")
 
   _WRAP_METHOD(bool get_collapsed() const, adw_overlay_split_view_get_collapsed, newin "1.4")
-  _WRAP_METHOD(void set_collapsed(bool collapsed), adw_overlay_split_view_set_collapsed, newin "1.4")
+  _WRAP_METHOD(void set_collapsed(bool collapsed), adw_overlay_split_view_set_collapsed,
+               newin "1.4")
 
-  _WRAP_METHOD(Gtk::PackType get_sidebar_position() const, adw_overlay_split_view_get_sidebar_position, newin "1.4")
-  _WRAP_METHOD(void set_sidebar_position(Gtk::PackType position), adw_overlay_split_view_set_sidebar_position, newin "1.4")
+  _WRAP_METHOD(Gtk::PackType get_sidebar_position() const,
+               adw_overlay_split_view_get_sidebar_position, newin "1.4")
+  _WRAP_METHOD(void set_sidebar_position(Gtk::PackType position),
+               adw_overlay_split_view_set_sidebar_position, newin "1.4")
 
   _WRAP_METHOD(bool get_show_sidebar() const, adw_overlay_split_view_get_show_sidebar, newin "1.4")
-  _WRAP_METHOD(void set_show_sidebar(bool show_sidebar), adw_overlay_split_view_set_show_sidebar, newin "1.4")
+  _WRAP_METHOD(void set_show_sidebar(bool show_sidebar), adw_overlay_split_view_set_show_sidebar,
+               newin "1.4")
 
   _WRAP_METHOD(bool get_pin_sidebar() const, adw_overlay_split_view_get_pin_sidebar, newin "1.4")
-  _WRAP_METHOD(void set_pin_sidebar(bool pin_sidebar), adw_overlay_split_view_set_pin_sidebar, newin "1.4")
+  _WRAP_METHOD(void set_pin_sidebar(bool pin_sidebar), adw_overlay_split_view_set_pin_sidebar,
+               newin "1.4")
 
-  _WRAP_METHOD(bool get_enable_show_gesture() const, adw_overlay_split_view_get_enable_show_gesture, newin "1.4")
-  _WRAP_METHOD(void set_enable_show_gesture(bool enable_show_gesture), adw_overlay_split_view_set_enable_show_gesture, newin "1.4")
+  _WRAP_METHOD(bool get_enable_show_gesture() const, adw_overlay_split_view_get_enable_show_gesture,
+               newin "1.4")
+  _WRAP_METHOD(void set_enable_show_gesture(bool enable_show_gesture),
+               adw_overlay_split_view_set_enable_show_gesture, newin "1.4")
 
-  _WRAP_METHOD(bool get_enable_hide_gesture() const, adw_overlay_split_view_get_enable_hide_gesture, newin "1.4")
-  _WRAP_METHOD(void set_enable_hide_gesture(bool enable_hide_gesture), adw_overlay_split_view_set_enable_hide_gesture, newin "1.4")
+  _WRAP_METHOD(bool get_enable_hide_gesture() const, adw_overlay_split_view_get_enable_hide_gesture,
+               newin "1.4")
+  _WRAP_METHOD(void set_enable_hide_gesture(bool enable_hide_gesture),
+               adw_overlay_split_view_set_enable_hide_gesture, newin "1.4")
 
-  _WRAP_METHOD(double get_min_sidebar_width() const, adw_overlay_split_view_get_min_sidebar_width, newin "1.4")
-  _WRAP_METHOD(void set_min_sidebar_width(double width), adw_overlay_split_view_set_min_sidebar_width, newin "1.4")
+  _WRAP_METHOD(double get_min_sidebar_width() const, adw_overlay_split_view_get_min_sidebar_width,
+               newin "1.4")
+  _WRAP_METHOD(void set_min_sidebar_width(double width),
+               adw_overlay_split_view_set_min_sidebar_width, newin "1.4")
 
-  _WRAP_METHOD(double get_max_sidebar_width() const, adw_overlay_split_view_get_max_sidebar_width, newin "1.4")
-  _WRAP_METHOD(void set_max_sidebar_width(double width), adw_overlay_split_view_set_max_sidebar_width, newin "1.4")
+  _WRAP_METHOD(double get_max_sidebar_width() const, adw_overlay_split_view_get_max_sidebar_width,
+               newin "1.4")
+  _WRAP_METHOD(void set_max_sidebar_width(double width),
+               adw_overlay_split_view_set_max_sidebar_width, newin "1.4")
 
-  _WRAP_METHOD(double get_sidebar_width_fraction() const, adw_overlay_split_view_get_sidebar_width_fraction, newin "1.4")
-  _WRAP_METHOD(void set_sidebar_width_fraction(double fraction), adw_overlay_split_view_set_sidebar_width_fraction, newin "1.4")
+  _WRAP_METHOD(double get_sidebar_width_fraction() const,
+               adw_overlay_split_view_get_sidebar_width_fraction, newin "1.4")
+  _WRAP_METHOD(void set_sidebar_width_fraction(double fraction),
+               adw_overlay_split_view_set_sidebar_width_fraction, newin "1.4")
 
-  _WRAP_METHOD(LengthUnit get_sidebar_width_unit() const, adw_overlay_split_view_get_sidebar_width_unit, newin "1.4")
-  _WRAP_METHOD(void set_sidebar_width_unit(LengthUnit unit), adw_overlay_split_view_set_sidebar_width_unit, newin "1.4")
+  _WRAP_METHOD(LengthUnit get_sidebar_width_unit() const,
+               adw_overlay_split_view_get_sidebar_width_unit, newin "1.4")
+  _WRAP_METHOD(void set_sidebar_width_unit(LengthUnit unit),
+               adw_overlay_split_view_set_sidebar_width_unit, newin "1.4")
 
   // Properties
   _WRAP_PROPERTY("sidebar", Gtk::Widget*, newin "1.4")

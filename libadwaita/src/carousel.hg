@@ -17,7 +17,7 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(gtkmm/private/widget_p.h)
 
@@ -35,7 +35,7 @@ class Carousel : public Gtk::Widget, public Gtk::Orientable, public Adw::Swipeab
   _DO_NOT_DERIVE_GTYPE
 
 public:
-  // Constructors
+  // Creation
   _CTOR_DEFAULT
 
   // Methods
@@ -57,17 +57,21 @@ public:
   _WRAP_METHOD(guint get_spacing() const, adw_carousel_get_spacing)
   _WRAP_METHOD(void set_spacing(guint spacing), adw_carousel_set_spacing)
 
-  _WRAP_METHOD(Glib::RefPtr<SpringParams> get_scroll_params() const, adw_carousel_get_scroll_params, refreturn)
-  _WRAP_METHOD(void set_scroll_params(const Glib::RefPtr<SpringParams>& params), adw_carousel_set_scroll_params)
+  _WRAP_METHOD(Glib::RefPtr<SpringParams> get_scroll_params() const, adw_carousel_get_scroll_params,
+               refreturn)
+  _WRAP_METHOD(void set_scroll_params(const Glib::RefPtr<SpringParams>& params),
+               adw_carousel_set_scroll_params)
 
   _WRAP_METHOD(bool get_allow_mouse_drag() const, adw_carousel_get_allow_mouse_drag)
   _WRAP_METHOD(void set_allow_mouse_drag(bool allow_mouse_drag), adw_carousel_set_allow_mouse_drag)
 
   _WRAP_METHOD(bool get_allow_scroll_wheel() const, adw_carousel_get_allow_scroll_wheel)
-  _WRAP_METHOD(void set_allow_scroll_wheel(bool allow_scroll_wheel), adw_carousel_set_allow_scroll_wheel)
+  _WRAP_METHOD(void set_allow_scroll_wheel(bool allow_scroll_wheel),
+               adw_carousel_set_allow_scroll_wheel)
 
   _WRAP_METHOD(bool get_allow_long_swipes() const, adw_carousel_get_allow_long_swipes)
-  _WRAP_METHOD(void set_allow_long_swipes(bool allow_long_swipes), adw_carousel_set_allow_long_swipes)
+  _WRAP_METHOD(void set_allow_long_swipes(bool allow_long_swipes),
+               adw_carousel_set_allow_long_swipes)
 
   _WRAP_METHOD(guint get_reveal_duration() const, adw_carousel_get_reveal_duration)
   _WRAP_METHOD(void set_reveal_duration(guint reveal_duration), adw_carousel_set_reveal_duration)

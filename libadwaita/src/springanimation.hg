@@ -17,27 +17,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-_DEFS(libadwaitamm,libadwaita)
+_DEFS(libadwaitamm, libadwaita)
 _CONFIGINCLUDE(libadwaitammconfig.h)
 _PINCLUDE(libadwaitamm/private/animation_p.h)
 
+#include <adwaita.h>
 #include <glibmm.h>
 #include <gtkmm.h>
 #include <libadwaitamm/animation.h>
 #include <libadwaitamm/springparams.h>
-#include <adwaita.h>
 
 namespace Adw {
 class SpringAnimation : public Animation {
   _CLASS_GOBJECT(SpringAnimation, AdwSpringAnimation, ADW_SPRING_ANIMATION, Animation, AdwAnimation)
-  _WRAP_CTOR(SpringAnimation(Gtk::Widget* widget, double value_from, double value_to, const Glib::RefPtr<SpringParams>& spring_params, const Glib::RefPtr<AnimationTarget>& target), adw_spring_animation_new)
+  _WRAP_CTOR(SpringAnimation(Gtk::Widget* widget, double value_from, double value_to,
+                             const Glib::RefPtr<SpringParams>& spring_params,
+                             const Glib::RefPtr<AnimationTarget>& target),
+             adw_spring_animation_new)
 
 protected:
   _CTOR_DEFAULT
 
 public:
-  // Construction
-  _WRAP_CREATE(Gtk::Widget* widget, double value_from, double value_to, const Glib::RefPtr<SpringParams>& spring_params, const Glib::RefPtr<AnimationTarget>& target)
+  // Creation
+  _WRAP_CREATE(Gtk::Widget* widget, double value_from, double value_to,
+               const Glib::RefPtr<SpringParams>& spring_params,
+               const Glib::RefPtr<AnimationTarget>& target)
 
   // Methods
   _WRAP_METHOD(double get_value_from() const, adw_spring_animation_get_value_from)
@@ -46,11 +51,14 @@ public:
   _WRAP_METHOD(double get_value_to() const, adw_spring_animation_get_value_to)
   _WRAP_METHOD(void set_value_to(double epsilon), adw_spring_animation_set_value_to)
 
-  _WRAP_METHOD(Glib::RefPtr<SpringParams> get_spring_params() const, adw_spring_animation_get_spring_params, refreturn)
-  _WRAP_METHOD(void set_spring_params(const Glib::RefPtr<SpringParams>& spring_params), adw_spring_animation_set_spring_params)
+  _WRAP_METHOD(Glib::RefPtr<SpringParams> get_spring_params() const,
+               adw_spring_animation_get_spring_params, refreturn)
+  _WRAP_METHOD(void set_spring_params(const Glib::RefPtr<SpringParams>& spring_params),
+               adw_spring_animation_set_spring_params)
 
   _WRAP_METHOD(double get_initial_velocity() const, adw_spring_animation_get_initial_velocity)
-  _WRAP_METHOD(void set_initial_velocity(double velocity), adw_spring_animation_set_initial_velocity)
+  _WRAP_METHOD(void set_initial_velocity(double velocity),
+               adw_spring_animation_set_initial_velocity)
 
   _WRAP_METHOD(double get_epsilon() const, adw_spring_animation_get_epsilon)
   _WRAP_METHOD(void set_epsilon(double epsilon), adw_spring_animation_set_epsilon)
@@ -62,8 +70,10 @@ public:
 
   _WRAP_METHOD(double get_velocity() const, adw_spring_animation_get_velocity)
 
-  _WRAP_METHOD(double calculate_value(guint time) const, adw_spring_animation_calculate_value, newin "1.3")
-  _WRAP_METHOD(double calculate_velocity(guint time) const, adw_spring_animation_calculate_velocity, newin "1.3")
+  _WRAP_METHOD(double calculate_value(guint time) const, adw_spring_animation_calculate_value,
+               newin "1.3")
+  _WRAP_METHOD(double calculate_velocity(guint time) const, adw_spring_animation_calculate_velocity,
+               newin "1.3")
 
   // Properties
   _WRAP_PROPERTY("value-from", double)
