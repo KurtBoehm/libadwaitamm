@@ -24,7 +24,6 @@ _PINCLUDE(gtkmm/private/widget_p.h)
 #include <gtkmm.h>
 
 namespace Adw {
-// Banner widget
 class Banner : public Gtk::Widget, public Gtk::Actionable {
   _CLASS_GTKOBJECT(Banner, AdwBanner, ADW_BANNER, Gtk::Widget, GtkWidget)
   _IMPLEMENTS_INTERFACE(Gtk::Actionable)
