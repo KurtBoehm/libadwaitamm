@@ -4185,6 +4185,174 @@
   (default-value "GDK_ACTION_NONE")
 )
 
+;; From AdwTabButton
+
+(define-signal activate
+  (of-object "AdwTabButton")
+  (return-type "void")
+  (flags "Run First, Action")
+)
+
+(define-signal clicked
+  (of-object "AdwTabButton")
+  (return-type "void")
+  (flags "Run First, Action")
+)
+
+(define-property view
+  (of-object "AdwTabButton")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From AdwTabOverview
+
+(define-signal extra-drag-drop
+  (of-object "AdwTabOverview")
+  (return-type "gboolean")
+  (flags "Run Last")
+  (parameters
+    '("AdwTabPage*" "p0")
+    '("GValue*" "p1")
+  )
+)
+
+(define-signal extra-drag-value
+  (of-object "AdwTabOverview")
+  (return-type "GdkDragAction")
+  (flags "Run Last")
+  (parameters
+    '("AdwTabPage*" "p0")
+    '("GValue*" "p1")
+  )
+)
+
+(define-signal create-tab
+  (of-object "AdwTabOverview")
+  (return-type "AdwTabPage*")
+  (flags "Run Last")
+)
+
+(define-property view
+  (of-object "AdwTabOverview")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property child
+  (of-object "AdwTabOverview")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property open
+  (of-object "AdwTabOverview")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property inverted
+  (of-object "AdwTabOverview")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property enable-search
+  (of-object "AdwTabOverview")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property search-active
+  (of-object "AdwTabOverview")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property enable-new-tab
+  (of-object "AdwTabOverview")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property secondary-menu
+  (of-object "AdwTabOverview")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property show-start-title-buttons
+  (of-object "AdwTabOverview")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property show-end-title-buttons
+  (of-object "AdwTabOverview")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property extra-drag-preferred-action
+  (of-object "AdwTabOverview")
+  (prop-type "GParamFlags")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+  (default-value "GDK_ACTION_NONE")
+)
+
+(define-property extra-drag-preload
+  (of-object "AdwTabOverview")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
 ;; From AdwTabPage
 
 (define-property child
@@ -4659,6 +4827,148 @@
   (construct-only #f)
 )
 
+;; From AdwToggle
+
+(define-property name
+  (of-object "AdwToggle")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property label
+  (of-object "AdwToggle")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property use-underline
+  (of-object "AdwToggle")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property icon-name
+  (of-object "AdwToggle")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property tooltip
+  (of-object "AdwToggle")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property description
+  (of-object "AdwToggle")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property child
+  (of-object "AdwToggle")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property enabled
+  (of-object "AdwToggle")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+;; From AdwToggleGroup
+
+(define-property n-toggles
+  (of-object "AdwToggleGroup")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+  (default-value "0")
+)
+
+(define-property active
+  (of-object "AdwToggleGroup")
+  (prop-type "GParamUInt")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "4294967295")
+)
+
+(define-property active-name
+  (of-object "AdwToggleGroup")
+  (prop-type "GParamString")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "")
+)
+
+(define-property homogeneous
+  (of-object "AdwToggleGroup")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property can-shrink
+  (of-object "AdwToggleGroup")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "TRUE")
+)
+
+(define-property toggles
+  (of-object "AdwToggleGroup")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
 ;; From AdwToolbarView
 
 (define-property content
@@ -4971,6 +5281,51 @@
   (writable #t)
   (construct-only #f)
   (default-value "FALSE")
+)
+
+;; From AdwViewSwitcherSidebar
+
+(define-signal activated
+  (of-object "AdwViewSwitcherSidebar")
+  (return-type "void")
+  (flags "Run Last")
+)
+
+(define-property stack
+  (of-object "AdwViewSwitcherSidebar")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property mode
+  (of-object "AdwViewSwitcherSidebar")
+  (prop-type "GParamEnum")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+  (default-value "ADW_SIDEBAR_MODE_SIDEBAR")
+)
+
+(define-property filter
+  (of-object "AdwViewSwitcherSidebar")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property placeholder
+  (of-object "AdwViewSwitcherSidebar")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
 )
 
 ;; From AdwViewSwitcherTitle

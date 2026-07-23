@@ -55,6 +55,7 @@ protected:
   friend class Sidebar;
   friend class Squeezer;
   friend class TabView;
+  friend class ToggleGroup;
   friend class ViewStack;
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */

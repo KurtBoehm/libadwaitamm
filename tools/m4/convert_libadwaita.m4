@@ -128,6 +128,7 @@ _CONVERSION(`const Glib::RefPtr<Swipeable>&', `AdwSwipeable*', __CONVERT_REFPTR_
 _CONVERSION(`AdwTabPage*', `Glib::RefPtr<TabPage>', __RP2P)
 _CONVERSION(`AdwTabPage*', `const Glib::RefPtr<TabPage>&', __RP2P)
 _CONVERSION(`const Glib::RefPtr<TabPage>&', `AdwTabPage*', __CONVERT_REFPTR_TO_P($3))
+_CONVERSION(`TabPage*', `AdwTabPage*', __FP2P)
 
 _CONVERSION(`AdwTabView*', `TabView*', __RP2P)
 _CONVERSION(`TabView*', `AdwTabView*', __FP2P)
@@ -135,6 +136,9 @@ _CONVERSION(`const TabView*', `AdwTabView*', __FP2P)
 
 _CONVERSION(`AdwToast*', `Toast*', __RP2P)
 _CONVERSION(`Toast*', `AdwToast*', __FP2P)
+
+_CONVERSION(`AdwToggle*', `Glib::RefPtr<Toggle>', __RP2P)
+_CONVERSION(`Toggle*', `AdwToggle*', __FP2P)
 
 _CONVERSION(`AdwViewStack*', `ViewStack*', __RP2P)
 _CONVERSION(`ViewStack*', `AdwViewStack*', __FP2P)

@@ -35,44 +35,78 @@ protected:
   _CTOR_DEFAULT
 
 public:
+  // Creation
   _WRAP_CREATE()
 
+  // Methods
   _WRAP_METHOD(Gtk::Widget* get_child() const, adw_tab_page_get_child)
-  _WRAP_METHOD(Glib::RefPtr<Gio::Icon> get_icon() const, adw_tab_page_get_icon, refreturn)
-  _WRAP_METHOD(bool get_indicator_activatable() const, adw_tab_page_get_indicator_activatable)
-  _WRAP_METHOD(Glib::RefPtr<Gio::Icon> get_indicator_icon() const, adw_tab_page_get_indicator_icon,
-               refreturn)
-  _WRAP_METHOD(Glib::ustring get_indicator_tooltip() const, adw_tab_page_get_indicator_tooltip)
-  _WRAP_METHOD(bool get_loading() const, adw_tab_page_get_loading)
-  _WRAP_METHOD(bool get_needs_attention() const, adw_tab_page_get_needs_attention)
   _WRAP_METHOD(Glib::RefPtr<TabPage> get_parent() const, adw_tab_page_get_parent, refreturn)
-  _WRAP_METHOD(bool get_pinned() const, adw_tab_page_get_pinned)
   _WRAP_METHOD(bool get_selected() const, adw_tab_page_get_selected)
+  _WRAP_METHOD(bool get_pinned() const, adw_tab_page_get_pinned)
+
   _WRAP_METHOD(Glib::ustring get_title() const, adw_tab_page_get_title)
-  _WRAP_METHOD(Glib::ustring get_tooltip() const, adw_tab_page_get_tooltip)
-  _WRAP_METHOD(void set_icon(const Glib::RefPtr<Gio::Icon>& icon), adw_tab_page_set_icon)
-  _WRAP_METHOD(void set_indicator_activatable(bool activatable),
-               adw_tab_page_set_indicator_activatable)
-  _WRAP_METHOD(void set_indicator_icon(const Glib::RefPtr<Gio::Icon>& indicator_icon),
-               adw_tab_page_set_indicator_icon)
-  _WRAP_METHOD(void set_indicator_tooltip(const Glib::ustring& indicator_tooltip),
-               adw_tab_page_set_indicator_tooltip)
-  _WRAP_METHOD(void set_loading(bool loading), adw_tab_page_set_loading)
-  _WRAP_METHOD(void set_needs_attention(bool needs_attention), adw_tab_page_set_needs_attention)
   _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_tab_page_set_title)
+
+  _WRAP_METHOD(Glib::ustring get_tooltip() const, adw_tab_page_get_tooltip)
   _WRAP_METHOD(void set_tooltip(const Glib::ustring& tooltip), adw_tab_page_set_tooltip)
 
+  _WRAP_METHOD(Glib::RefPtr<Gio::Icon> get_icon() const, adw_tab_page_get_icon, refreturn)
+  _WRAP_METHOD(void set_icon(const Glib::RefPtr<Gio::Icon>& icon), adw_tab_page_set_icon)
+
+  _WRAP_METHOD(bool get_loading() const, adw_tab_page_get_loading)
+  _WRAP_METHOD(void set_loading(bool loading), adw_tab_page_set_loading)
+
+  _WRAP_METHOD(Glib::RefPtr<Gio::Icon> get_indicator_icon() const, adw_tab_page_get_indicator_icon,
+               refreturn)
+  _WRAP_METHOD(void set_indicator_icon(const Glib::RefPtr<Gio::Icon>& indicator_icon),
+               adw_tab_page_set_indicator_icon)
+
+  _WRAP_METHOD(Glib::ustring get_indicator_tooltip() const, adw_tab_page_get_indicator_tooltip,
+               newin "1.2")
+  _WRAP_METHOD(void set_indicator_tooltip(const Glib::ustring& indicator_tooltip),
+               adw_tab_page_set_indicator_tooltip, newin "1.2")
+
+  _WRAP_METHOD(bool get_indicator_activatable() const, adw_tab_page_get_indicator_activatable)
+  _WRAP_METHOD(void set_indicator_activatable(bool activatable),
+               adw_tab_page_set_indicator_activatable)
+
+  _WRAP_METHOD(bool get_needs_attention() const, adw_tab_page_get_needs_attention)
+  _WRAP_METHOD(void set_needs_attention(bool needs_attention), adw_tab_page_set_needs_attention)
+
+  _WRAP_METHOD(Glib::ustring get_keyword() const, adw_tab_page_get_keyword, newin "1.3")
+  _WRAP_METHOD(void set_keyword(const Glib::ustring& keyword), adw_tab_page_set_keyword,
+               newin "1.3")
+
+  _WRAP_METHOD(float get_thumbnail_xalign() const, adw_tab_page_get_thumbnail_xalign, newin "1.3")
+  _WRAP_METHOD(void set_thumbnail_xalign(float xalign), adw_tab_page_set_thumbnail_xalign,
+               newin "1.3")
+
+  _WRAP_METHOD(float get_thumbnail_yalign() const, adw_tab_page_get_thumbnail_yalign, newin "1.3")
+  _WRAP_METHOD(void set_thumbnail_yalign(float yalign), adw_tab_page_set_thumbnail_yalign,
+               newin "1.3")
+
+  _WRAP_METHOD(bool get_live_thumbnail() const, adw_tab_page_get_live_thumbnail, newin "1.3")
+  _WRAP_METHOD(void set_live_thumbnail(bool live_thumbnail), adw_tab_page_set_live_thumbnail,
+               newin "1.3")
+
+  _WRAP_METHOD(void invalidate_thumbnail(), adw_tab_page_invalidate_thumbnail, newin "1.3")
+
+  // Properties
   _WRAP_PROPERTY("child", Gtk::Widget*)
-  _WRAP_PROPERTY("icon", Glib::RefPtr<Gio::Icon>)
-  _WRAP_PROPERTY("indicator-activatable", bool)
-  _WRAP_PROPERTY("indicator-icon", Glib::RefPtr<Gio::Icon>)
-  _WRAP_PROPERTY("indicator-tooltip", Glib::ustring)
-  _WRAP_PROPERTY("loading", bool)
-  _WRAP_PROPERTY("needs-attention", bool)
   _WRAP_PROPERTY("parent", Glib::RefPtr<TabPage>)
-  _WRAP_PROPERTY("pinned", bool)
   _WRAP_PROPERTY("selected", bool)
+  _WRAP_PROPERTY("pinned", bool)
   _WRAP_PROPERTY("title", Glib::ustring)
   _WRAP_PROPERTY("tooltip", Glib::ustring)
+  _WRAP_PROPERTY("icon", Glib::RefPtr<Gio::Icon>)
+  _WRAP_PROPERTY("loading", bool)
+  _WRAP_PROPERTY("indicator-icon", Glib::RefPtr<Gio::Icon>)
+  _WRAP_PROPERTY("indicator-tooltip", Glib::ustring, newin "1.2")
+  _WRAP_PROPERTY("indicator-activatable", bool)
+  _WRAP_PROPERTY("needs-attention", bool)
+  _WRAP_PROPERTY("keyword", Glib::ustring, newin "1.3")
+  _WRAP_PROPERTY("thumbnail-xalign", float, newin "1.3")
+  _WRAP_PROPERTY("thumbnail-yalign", float, newin "1.3")
+  _WRAP_PROPERTY("live-thumbnail", bool, newin "1.3")
 };
 } // namespace Adw

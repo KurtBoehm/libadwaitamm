@@ -33,25 +33,46 @@ class ViewSwitcherTitle : public Gtk::Widget {
   _DO_NOT_DERIVE_GTYPE
 
 public:
+  // Creation
   _CTOR_DEFAULT
 
-  _WRAP_METHOD(ViewStack* get_stack() const, adw_view_switcher_title_get_stack)
-  _WRAP_METHOD(Glib::ustring get_subtitle() const, adw_view_switcher_title_get_subtitle)
-  _WRAP_METHOD(Glib::ustring get_title() const, adw_view_switcher_title_get_title)
-  _WRAP_METHOD(bool get_title_visible() const, adw_view_switcher_title_get_title_visible)
-  _WRAP_METHOD(bool get_view_switcher_enabled() const,
-               adw_view_switcher_title_get_view_switcher_enabled)
-  _WRAP_METHOD(void set_stack(ViewStack* stack), adw_view_switcher_title_set_stack)
-  _WRAP_METHOD(void set_subtitle(const Glib::ustring& subtitle),
-               adw_view_switcher_title_set_subtitle)
-  _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_view_switcher_title_set_title)
-  _WRAP_METHOD(void set_view_switcher_enabled(bool enabled),
-               adw_view_switcher_title_set_view_switcher_enabled)
+  // Methods
+  _WRAP_METHOD(ViewStack* get_stack() const, adw_view_switcher_title_get_stack,
+               deprecated "ViewSwitcherTitle is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_stack(ViewStack* stack), adw_view_switcher_title_set_stack,
+               deprecated "ViewSwitcherTitle is deprecated in libadwaita 1.4.")
 
-  _WRAP_PROPERTY("stack", ViewStack*)
-  _WRAP_PROPERTY("subtitle", Glib::ustring)
-  _WRAP_PROPERTY("title", Glib::ustring)
-  _WRAP_PROPERTY("title-visible", bool)
-  _WRAP_PROPERTY("view-switcher-enabled", bool)
+  _WRAP_METHOD(Glib::ustring get_title() const, adw_view_switcher_title_get_title,
+               deprecated "ViewSwitcherTitle is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_view_switcher_title_set_title,
+               deprecated "ViewSwitcherTitle is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(Glib::ustring get_subtitle() const, adw_view_switcher_title_get_subtitle,
+               deprecated "ViewSwitcherTitle is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_subtitle(const Glib::ustring& subtitle),
+               adw_view_switcher_title_set_subtitle,
+               deprecated "ViewSwitcherTitle is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_view_switcher_enabled() const,
+               adw_view_switcher_title_get_view_switcher_enabled,
+               deprecated "ViewSwitcherTitle is deprecated in libadwaita 1.4.")
+  _WRAP_METHOD(void set_view_switcher_enabled(bool enabled),
+               adw_view_switcher_title_set_view_switcher_enabled,
+               deprecated "ViewSwitcherTitle is deprecated in libadwaita 1.4.")
+
+  _WRAP_METHOD(bool get_title_visible() const, adw_view_switcher_title_get_title_visible,
+               deprecated "ViewSwitcherTitle is deprecated in libadwaita 1.4.")
+
+  // Properties
+  _WRAP_PROPERTY("stack", ViewStack*,
+                 deprecated "ViewSwitcherTitle is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("title", Glib::ustring,
+                 deprecated "ViewSwitcherTitle is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("subtitle", Glib::ustring,
+                 deprecated "ViewSwitcherTitle is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("view-switcher-enabled", bool,
+                 deprecated "ViewSwitcherTitle is deprecated in libadwaita 1.4.")
+  _WRAP_PROPERTY("title-visible", bool,
+                 deprecated "ViewSwitcherTitle is deprecated in libadwaita 1.4.")
 };
 } // namespace Adw

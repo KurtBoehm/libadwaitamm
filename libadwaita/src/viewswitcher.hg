@@ -32,15 +32,20 @@ class ViewSwitcher : public Gtk::Widget {
   _DO_NOT_DERIVE_GTYPE
 
 public:
+  // Enumerations
   _WRAP_ENUM(Policy, AdwViewSwitcherPolicy)
 
+  // Creation
   _CTOR_DEFAULT
 
+  // Methods
   _WRAP_METHOD(ViewSwitcher::Policy get_policy() const, adw_view_switcher_get_policy)
-  _WRAP_METHOD(ViewStack* get_stack() const, adw_view_switcher_get_stack)
   _WRAP_METHOD(void set_policy(Policy policy), adw_view_switcher_set_policy)
+
+  _WRAP_METHOD(ViewStack* get_stack() const, adw_view_switcher_get_stack)
   _WRAP_METHOD(void set_stack(ViewStack* stack), adw_view_switcher_set_stack)
 
+  // Properties
   _WRAP_PROPERTY("policy", ViewSwitcher::Policy)
   _WRAP_PROPERTY("stack", ViewStack*)
 };

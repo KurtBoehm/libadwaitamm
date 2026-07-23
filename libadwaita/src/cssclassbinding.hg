@@ -35,7 +35,7 @@ public:
   using SlotMapToProperty = sigc::slot<void(bool, Glib::ValueBase&)>;
 
   // Creation
-#m4 _CONVERSION(`const Glib::RefPtr<Glib::Object> & ',`gpointer',`Glib::unwrap($3)')
+#m4 _CONVERSION(`const Glib::RefPtr<Glib::Object>&', `gpointer', `Glib::unwrap($3)')
   _WRAP_METHOD(static Glib::RefPtr<CssClassBinding> bind_property_to_css_class(
                  const Glib::RefPtr<Glib::Object>& source, const Glib::ustring& source_property,
                  Gtk::Widget* target, const Glib::ustring& target_css_class,

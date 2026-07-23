@@ -1,0 +1,75 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm, libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(gtkmm/private/widget_p.h)
+
+#include <adwaita.h>
+#include <gtkmm.h>
+#include <libadwaitamm/sidebar.h>
+#include <libadwaitamm/viewstack.h>
+
+namespace Adw {
+class ViewSwitcherSidebar : public Gtk::Widget {
+  _CLASS_GTKOBJECT(ViewSwitcherSidebar, AdwViewSwitcherSidebar, ADW_VIEW_SWITCHER_SIDEBAR,
+                   Gtk::Widget, GtkWidget)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+public:
+  // Creation
+  _CTOR_DEFAULT
+
+  // Methods
+  _WRAP_METHOD(ViewStack* get_stack() const, adw_view_switcher_sidebar_get_stack, newin "1.9")
+  _WRAP_METHOD(void set_stack(ViewStack* stack), adw_view_switcher_sidebar_set_stack, newin "1.9")
+
+  _WRAP_METHOD(Sidebar::Mode get_mode() const, adw_view_switcher_sidebar_get_mode, newin "1.9")
+  _WRAP_METHOD(void set_mode(Sidebar::Mode mode), adw_view_switcher_sidebar_set_mode, newin "1.9")
+
+  _WRAP_METHOD(Glib::RefPtr<Gtk::Filter> get_filter() const, adw_view_switcher_sidebar_get_filter,
+               refreturn, newin "1.9")
+  _WRAP_METHOD(void set_filter(const Glib::RefPtr<Gtk::Filter>& filter),
+               adw_view_switcher_sidebar_set_filter, newin "1.9")
+
+  _WRAP_METHOD(Gtk::Widget* get_placeholder() const, adw_view_switcher_sidebar_get_placeholder,
+               newin "1.9")
+  _WRAP_METHOD(void set_placeholder(Gtk::Widget* placeholder),
+               adw_view_switcher_sidebar_set_placeholder, newin "1.9")
+
+  _WRAP_METHOD(Gtk::Widget* get_prefix() const, adw_view_switcher_sidebar_get_prefix, newin "1.10")
+  _WRAP_METHOD(void set_prefix(Gtk::Widget* prefix), adw_view_switcher_sidebar_set_prefix,
+               newin "1.10")
+
+  _WRAP_METHOD(Gtk::Widget* get_suffix() const, adw_view_switcher_sidebar_get_suffix, newin "1.10")
+  _WRAP_METHOD(void set_suffix(Gtk::Widget* suffix), adw_view_switcher_sidebar_set_suffix,
+               newin "1.10")
+
+  // Properties
+  _WRAP_PROPERTY("stack", ViewStack*, newin "1.9")
+  _WRAP_PROPERTY("mode", Sidebar::Mode, newin "1.9")
+  _WRAP_PROPERTY("filter", Glib::RefPtr<Gtk::Filter>, newin "1.9")
+  _WRAP_PROPERTY("placeholder", Gtk::Widget*, newin "1.9")
+  _WRAP_PROPERTY("prefix", Gtk::Widget*, newin "1.10")
+  _WRAP_PROPERTY("suffix", Gtk::Widget*, newin "1.10")
+
+  // Signals
+  _WRAP_SIGNAL(void activated(), "activated", no_default_handler, newin "1.9")
+};
+} // namespace Adw

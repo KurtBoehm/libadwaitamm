@@ -32,12 +32,18 @@ class ToastOverlay : public Gtk::Widget {
   _DO_NOT_DERIVE_GTYPE
 
 public:
+  // Creation
   _CTOR_DEFAULT
 
-  _WRAP_METHOD(void add_toast(Toast* toast), adw_toast_overlay_add_toast)
+  // Methods
   _WRAP_METHOD(Gtk::Widget* get_child() const, adw_toast_overlay_get_child)
   _WRAP_METHOD(void set_child(Gtk::Widget* child), adw_toast_overlay_set_child)
 
+  _WRAP_METHOD(void add_toast(Toast* toast), adw_toast_overlay_add_toast)
+
+  _WRAP_METHOD(void dismiss_all(), adw_toast_overlay_dismiss_all, newin "1.7")
+
+  // Properties
   _WRAP_PROPERTY("child", Gtk::Widget*)
 };
 } // namespace Adw

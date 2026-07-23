@@ -1,12 +1,15 @@
 /*
  * Copyright (C) 2020 Purism SPC
+ * Copyright (C) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.1-or-later
  *
  * Author: Alexander Mikhaylenko <alexander.mikhaylenko@puri.sm>
+ * Author: Kurt Böhm <kurbo96@gmail.com>
  */
 
 #include <array>
+#include <cfloat>
 #include <libadwaitamm.h>
 #include <libadwaitamm/init.h> // Adw::init
 
@@ -780,6 +783,27 @@ static void test_adw_tab_page_tooltip() {
   g_assert_true(notified == 2);
 }
 
+static void test_adw_tab_page_keyword() {
+  Adw::TabView view;
+
+  Glib::RefPtr<Adw::TabPage> page = view.append(*Gtk::make_managed<Gtk::Button>());
+
+  notified = 0;
+  page->property_keyword().signal_changed().connect(sigc::ptr_fun(notify_cb));
+
+  Glib::ustring keyword = page->get_property<Glib::ustring>("keyword");
+  g_assert_true(keyword == "");
+  g_assert_true(notified == 0);
+
+  page->set_keyword("Some keyword");
+  g_assert_true(page->get_keyword() == "Some keyword");
+  g_assert_true(notified == 1);
+
+  page->set_property<Glib::ustring>("keyword", "Some other keyword");
+  g_assert_true(page->get_keyword() == "Some other keyword");
+  g_assert_true(notified == 2);
+}
+
 static void test_adw_tab_page_icon() {
   Adw::TabView view;
   Glib::RefPtr<Gio::Icon> icon1 = Gio::ThemedIcon::create("go-previous-symbolic");
@@ -913,6 +937,72 @@ static void test_adw_tab_page_needs_attention() {
   g_assert_true(notified == 2);
 }
 
+static void test_adw_tab_page_thumbnail_xalign() {
+  Adw::TabView view;
+
+  Glib::RefPtr<Adw::TabPage> page = view.append(*Gtk::make_managed<Gtk::Button>());
+
+  notified = 0;
+  page->property_thumbnail_xalign().signal_changed().connect(sigc::ptr_fun(notify_cb));
+
+  float xalign = page->get_property<float>("thumbnail-xalign");
+  g_assert_true(G_APPROX_VALUE(xalign, 0, FLT_EPSILON));
+  g_assert_true(notified == 0);
+
+  page->set_thumbnail_xalign(1);
+  xalign = page->get_property<float>("thumbnail-xalign");
+  g_assert_true(G_APPROX_VALUE(xalign, 1, FLT_EPSILON));
+  g_assert_true(notified == 1);
+
+  page->set_property<float>("thumbnail-xalign", 0.5);
+  g_assert_true(G_APPROX_VALUE(page->get_thumbnail_xalign(), 0.5, FLT_EPSILON));
+  g_assert_true(notified == 2);
+}
+
+static void test_adw_tab_page_thumbnail_yalign() {
+  Adw::TabView view;
+
+  Glib::RefPtr<Adw::TabPage> page = view.append(*Gtk::make_managed<Gtk::Button>());
+
+  notified = 0;
+  page->property_thumbnail_yalign().signal_changed().connect(sigc::ptr_fun(notify_cb));
+
+  float yalign = page->get_property<float>("thumbnail-yalign");
+  g_assert_true(G_APPROX_VALUE(yalign, 0, FLT_EPSILON));
+  g_assert_true(notified == 0);
+
+  page->set_thumbnail_yalign(1);
+  yalign = page->get_property<float>("thumbnail-yalign");
+  g_assert_true(G_APPROX_VALUE(yalign, 1, FLT_EPSILON));
+  g_assert_true(notified == 1);
+
+  page->set_property<float>("thumbnail-yalign", 0.5);
+  g_assert_true(G_APPROX_VALUE(page->get_thumbnail_yalign(), 0.5, FLT_EPSILON));
+  g_assert_true(notified == 2);
+}
+
+static void test_adw_tab_page_live_thumbnail() {
+  Adw::TabView view;
+
+  Glib::RefPtr<Adw::TabPage> page = view.append(*Gtk::make_managed<Gtk::Button>());
+
+  notified = 0;
+  page->property_live_thumbnail().signal_changed().connect(sigc::ptr_fun(notify_cb));
+
+  bool live_thumbnail = page->get_property<bool>("live-thumbnail");
+  g_assert_false(live_thumbnail);
+  g_assert_true(notified == 0);
+
+  page->set_live_thumbnail(true);
+  live_thumbnail = page->get_property<bool>("live-thumbnail");
+  g_assert_true(live_thumbnail);
+  g_assert_true(notified == 1);
+
+  page->set_property<bool>("live-thumbnail", false);
+  g_assert_false(page->get_live_thumbnail());
+  g_assert_true(notified == 2);
+}
+
 static void
 test_adw_tab_view_pages_to_list_view_setup(const Glib::RefPtr<Gtk::ListItem>& list_item) {
   list_item->set_child(*Gtk::make_managed<Gtk::Label>(""));
@@ -988,6 +1078,7 @@ int main(int argc, char* argv[]) {
   g_test_add_func("/Adwaita/TabView/pages_to_list_view", test_adw_tab_view_pages_to_list_view);
   g_test_add_func("/Adwaita/TabPage/title", test_adw_tab_page_title);
   g_test_add_func("/Adwaita/TabPage/tooltip", test_adw_tab_page_tooltip);
+  g_test_add_func("/Adwaita/TabPage/keyword", test_adw_tab_page_keyword);
   g_test_add_func("/Adwaita/TabPage/icon", test_adw_tab_page_icon);
   g_test_add_func("/Adwaita/TabPage/loading", test_adw_tab_page_loading);
   g_test_add_func("/Adwaita/TabPage/indicator_icon", test_adw_tab_page_indicator_icon);
@@ -995,6 +1086,9 @@ int main(int argc, char* argv[]) {
   g_test_add_func("/Adwaita/TabPage/indicator_activatable",
                   test_adw_tab_page_indicator_activatable);
   g_test_add_func("/Adwaita/TabPage/needs_attention", test_adw_tab_page_needs_attention);
+  g_test_add_func("/Adwaita/TabPage/thumbnail_xalign", test_adw_tab_page_thumbnail_xalign);
+  g_test_add_func("/Adwaita/TabPage/thumbnail_yalign", test_adw_tab_page_thumbnail_yalign);
+  g_test_add_func("/Adwaita/TabPage/live_thumbnail", test_adw_tab_page_live_thumbnail);
 
   return g_test_run();
 }

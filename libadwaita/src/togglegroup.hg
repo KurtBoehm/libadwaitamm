@@ -1,0 +1,75 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm, libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(gtkmm/private/widget_p.h)
+
+#include <adwaita.h>
+#include <gtkmm.h>
+#include <libadwaitamm/toggle.h>
+
+namespace Adw {
+class ToggleGroup : public Gtk::Widget, public Gtk::Orientable {
+  _CLASS_GTKOBJECT(ToggleGroup, AdwToggleGroup, ADW_TOGGLE_GROUP, Gtk::Widget, GtkWidget)
+  _IMPLEMENTS_INTERFACE(Gtk::Orientable)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+public:
+  // Creation
+  _CTOR_DEFAULT
+
+  // Methods
+  _WRAP_METHOD(void add(Toggle* toggle), adw_toggle_group_add, newin "1.7")
+  _WRAP_METHOD(void remove(Toggle* toggle), adw_toggle_group_remove, newin "1.7")
+  _WRAP_METHOD(void remove_all(), adw_toggle_group_remove_all, newin "1.7")
+
+  _WRAP_METHOD(Glib::RefPtr<Toggle> get_toggle(guint index) const, adw_toggle_group_get_toggle,
+               refreturn, newin "1.7")
+  _WRAP_METHOD(Glib::RefPtr<Toggle> get_toggle_by_name(const Glib::ustring& name) const,
+               adw_toggle_group_get_toggle_by_name, refreturn, newin "1.7")
+
+  _WRAP_METHOD(guint get_n_toggles() const, adw_toggle_group_get_n_toggles, newin "1.7")
+
+  _WRAP_METHOD(guint get_active() const, adw_toggle_group_get_active, newin "1.7")
+  _WRAP_METHOD(void set_active(guint active), adw_toggle_group_set_active, newin "1.7")
+
+  _WRAP_METHOD(Glib::ustring get_active_name() const, adw_toggle_group_get_active_name, newin "1.7")
+  _WRAP_METHOD(void set_active_name(const Glib::ustring& name), adw_toggle_group_set_active_name,
+               newin "1.7")
+
+  _WRAP_METHOD(bool get_homogeneous() const, adw_toggle_group_get_homogeneous, newin "1.7")
+  _WRAP_METHOD(void set_homogeneous(bool homogeneous), adw_toggle_group_set_homogeneous,
+               newin "1.7")
+
+  _WRAP_METHOD(bool get_can_shrink() const, adw_toggle_group_get_can_shrink, newin "1.7")
+  _WRAP_METHOD(void set_can_shrink(bool can_shrink), adw_toggle_group_set_can_shrink, newin "1.7")
+
+  Glib::RefPtr<Gtk::SelectionModel> get_toggles() const;
+  _IGNORE(adw_toggle_group_get_toggles)
+
+  // Properties
+  _WRAP_PROPERTY("n-toggles", guint, newin "1.7")
+  _WRAP_PROPERTY("active", guint, newin "1.7")
+  _WRAP_PROPERTY("active-name", Glib::ustring, newin "1.7")
+  _WRAP_PROPERTY("homogeneous", bool, newin "1.7")
+  _WRAP_PROPERTY("can-shrink", bool, newin "1.7")
+  _WRAP_PROPERTY("toggles", Glib::RefPtr<Gtk::SelectionModel>, newin "1.7")
+};
+} // namespace Adw

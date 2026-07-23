@@ -29,14 +29,14 @@ class ToolbarView : public Gtk::Widget {
   _STRUCT_NOT_HIDDEN
   _DO_NOT_DERIVE_GTYPE
 
-protected:
-  _CTOR_DEFAULT
-
 public:
+  // Enumerations
   _WRAP_ENUM(Style, AdwToolbarStyle)
 
-  _WRAP_CREATE()
+  // Creation
+  _CTOR_DEFAULT
 
+  // Methods
   _WRAP_METHOD(Gtk::Widget* get_content() const, adw_toolbar_view_get_content)
   _WRAP_METHOD(void set_content(Gtk::Widget& content), adw_toolbar_view_set_content)
 
@@ -71,6 +71,15 @@ public:
   _WRAP_METHOD(int get_top_bar_height() const, adw_toolbar_view_get_top_bar_height)
   _WRAP_METHOD(int get_bottom_bar_height() const, adw_toolbar_view_get_bottom_bar_height)
 
+  // Properties
   _WRAP_PROPERTY("content", Gtk::Widget*)
+  _WRAP_PROPERTY("top-bar-style", ToolbarView::Style)
+  _WRAP_PROPERTY("bottom-bar-style", ToolbarView::Style)
+  _WRAP_PROPERTY("reveal-top-bars", bool)
+  _WRAP_PROPERTY("reveal-bottom-bars", bool)
+  _WRAP_PROPERTY("extend-content-to-top-edge", bool)
+  _WRAP_PROPERTY("extend-content-to-bottom-edge", bool)
+  _WRAP_PROPERTY("top-bar-height", int)
+  _WRAP_PROPERTY("bottom-bar-height", int)
 };
 } // namespace Adw

@@ -1,0 +1,112 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm, libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(gtkmm/private/widget_p.h)
+
+#include <adwaita.h>
+#include <gtkmm.h>
+#include <libadwaitamm/tabview.h>
+
+namespace Adw {
+class TabOverview : public Gtk::Widget {
+  _CLASS_GTKOBJECT(TabOverview, AdwTabOverview, ADW_TAB_OVERVIEW, Gtk::Widget, GtkWidget)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+public:
+  // Creation
+  _CTOR_DEFAULT
+
+  // Methods
+  _WRAP_METHOD(TabView* get_view() const, adw_tab_overview_get_view, newin "1.3")
+  _WRAP_METHOD(void set_view(TabView* view), adw_tab_overview_set_view, newin "1.3")
+
+  _WRAP_METHOD(Gtk::Widget* get_child() const, adw_tab_overview_get_child, newin "1.3")
+  _WRAP_METHOD(void set_child(Gtk::Widget* child), adw_tab_overview_set_child, newin "1.3")
+
+  _WRAP_METHOD(bool get_open() const, adw_tab_overview_get_open, newin "1.3")
+  _WRAP_METHOD(void set_open(bool open), adw_tab_overview_set_open, newin "1.3")
+
+  _WRAP_METHOD(bool get_inverted() const, adw_tab_overview_get_inverted, newin "1.3")
+  _WRAP_METHOD(void set_inverted(bool inverted), adw_tab_overview_set_inverted, newin "1.3")
+
+  _WRAP_METHOD(bool get_enable_search() const, adw_tab_overview_get_enable_search, newin "1.3")
+  _WRAP_METHOD(void set_enable_search(bool enable_search), adw_tab_overview_set_enable_search,
+               newin "1.3")
+
+  _WRAP_METHOD(bool get_search_active() const, adw_tab_overview_get_search_active, newin "1.3")
+
+  _WRAP_METHOD(bool get_enable_new_tab() const, adw_tab_overview_get_enable_new_tab, newin "1.3")
+  _WRAP_METHOD(void set_enable_new_tab(bool enable_new_tab), adw_tab_overview_set_enable_new_tab,
+               newin "1.3")
+
+  _WRAP_METHOD(Glib::RefPtr<Gio::MenuModel> get_secondary_menu() const,
+               adw_tab_overview_get_secondary_menu, refreturn, newin "1.3")
+  _WRAP_METHOD(void set_secondary_menu(const Glib::RefPtr<Gio::MenuModel>& secondary_menu),
+               adw_tab_overview_set_secondary_menu, newin "1.3")
+
+  _WRAP_METHOD(bool get_show_start_title_buttons() const,
+               adw_tab_overview_get_show_start_title_buttons, newin "1.3")
+  _WRAP_METHOD(void set_show_start_title_buttons(bool show_start_title_buttons),
+               adw_tab_overview_set_show_start_title_buttons, newin "1.3")
+
+  _WRAP_METHOD(bool get_show_end_title_buttons() const, adw_tab_overview_get_show_end_title_buttons,
+               newin "1.3")
+  _WRAP_METHOD(void set_show_end_title_buttons(bool show_end_title_buttons),
+               adw_tab_overview_set_show_end_title_buttons, newin "1.3")
+
+  void setup_extra_drop_target(Gdk::DragAction actions, const std::vector<GType> types) {
+    adw_tab_overview_setup_extra_drop_target(
+      const_cast<AdwTabOverview*>(gobj()), static_cast<GdkDragAction>(actions),
+      Glib::ArrayHandler<GType>::vector_to_array(types).data(), types.size());
+  }
+  _IGNORE(adw_tab_overview_setup_extra_drop_target)
+
+  _WRAP_METHOD(Gdk::DragAction get_extra_drag_preferred_action() const,
+               adw_tab_overview_get_extra_drag_preferred_action, newin "1.4")
+
+  _WRAP_METHOD(bool get_extra_drag_preload() const, adw_tab_overview_get_extra_drag_preload,
+               newin "1.3")
+  _WRAP_METHOD(void set_extra_drag_preload(bool preload), adw_tab_overview_set_extra_drag_preload,
+               newin "1.3")
+
+  // Properties
+  _WRAP_PROPERTY("view", TabView*, newin "1.3")
+  _WRAP_PROPERTY("child", Gtk::Widget*, newin "1.3")
+  _WRAP_PROPERTY("open", bool, newin "1.3")
+  _WRAP_PROPERTY("inverted", bool, newin "1.3")
+  _WRAP_PROPERTY("enable-search", bool, newin "1.3")
+  _WRAP_PROPERTY("search-active", bool, newin "1.3")
+  _WRAP_PROPERTY("enable-new-tab", bool, newin "1.3")
+  _WRAP_PROPERTY("secondary-menu", Glib::RefPtr<Gio::MenuModel>, newin "1.3")
+  _WRAP_PROPERTY("show-start-title-buttons", bool, newin "1.3")
+  _WRAP_PROPERTY("show-end-title-buttons", bool, newin "1.3")
+  _WRAP_PROPERTY("extra-drag-preferred-action", Gdk::DragAction, newin "1.4")
+  _WRAP_PROPERTY("extra-drag-preload", bool, newin "1.3")
+
+  // Signals
+  _WRAP_SIGNAL(TabPage* create_tab(), "create-tab", no_default_handler, newin "1.3")
+  _WRAP_SIGNAL(bool extra_drag_drop(const Glib::RefPtr<TabPage>& page, Glib::ValueBase& value),
+               "extra-drag-drop", no_default_handler, newin "1.3")
+  _WRAP_SIGNAL(Gdk::DragAction extra_drag_value(const Glib::RefPtr<TabPage>& page,
+                                                Glib::ValueBase& value),
+               "extra-drag-value", no_default_handler, newin "1.3")
+};
+} // namespace Adw

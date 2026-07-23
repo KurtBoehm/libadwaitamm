@@ -145,16 +145,25 @@ int main(int, char**) {
   std::cout << get_defs(ADW_TYPE_SWITCH_ROW);
 #endif
   std::cout << get_defs(ADW_TYPE_TAB_BAR);
+  std::cout << get_defs(ADW_TYPE_TAB_BUTTON);
+  std::cout << get_defs(ADW_TYPE_TAB_OVERVIEW);
   std::cout << get_defs(ADW_TYPE_TAB_PAGE);
   std::cout << get_defs(ADW_TYPE_TAB_VIEW);
   std::cout << get_defs(ADW_TYPE_TIMED_ANIMATION);
   std::cout << get_defs(ADW_TYPE_TOAST);
   std::cout << get_defs(ADW_TYPE_TOAST_OVERLAY);
+#if ADW_CHECK_VERSION(1, 7, 0)
+  std::cout << get_defs(ADW_TYPE_TOGGLE);
+  std::cout << get_defs(ADW_TYPE_TOGGLE_GROUP);
+#endif
   std::cout << get_defs(ADW_TYPE_TOOLBAR_VIEW);
   std::cout << get_defs(ADW_TYPE_VIEW_STACK);
   std::cout << get_defs(ADW_TYPE_VIEW_STACK_PAGE);
   std::cout << get_defs(ADW_TYPE_VIEW_SWITCHER);
   std::cout << get_defs(ADW_TYPE_VIEW_SWITCHER_BAR);
+#if ADW_CHECK_VERSION(1, 9, 0)
+  std::cout << get_defs(ADW_TYPE_VIEW_SWITCHER_SIDEBAR);
+#endif
   std::cout << get_defs(ADW_TYPE_VIEW_SWITCHER_TITLE);
   std::cout << get_defs(ADW_TYPE_WINDOW);
   std::cout << get_defs(ADW_TYPE_WINDOW_TITLE);

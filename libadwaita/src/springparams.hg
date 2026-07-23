@@ -28,12 +28,12 @@ namespace Adw {
 struct DampingRatio {
   double damping_ratio;
 };
-_CONVERSION(`DampingRatio',`double',`$3.damping_ratio')
+_CONVERSION(`DampingRatio', `double', `$3.damping_ratio')
 
 struct Damping{
   double damping;
 };
-_CONVERSION(`Damping',`double',`$3.damping')
+_CONVERSION(`Damping', `double', `$3.damping')
 
 class SpringParams {
 _CLASS_OPAQUE_REFCOUNTED(SpringParams, AdwSpringParams, NONE, adw_spring_params_ref, adw_spring_params_unref)

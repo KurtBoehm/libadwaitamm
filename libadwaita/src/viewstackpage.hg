@@ -35,33 +35,54 @@ protected:
   _CTOR_DEFAULT
 
 public:
+  // Creation
   _WRAP_CREATE()
 
-  _WRAP_METHOD(guint get_badge_number() const, adw_view_stack_page_get_badge_number)
+  // Methods
   _WRAP_METHOD(Gtk::Widget* get_child() const, adw_view_stack_page_get_child)
-  _WRAP_METHOD(Glib::ustring get_icon_name() const, adw_view_stack_page_get_icon_name)
+
   _WRAP_METHOD(Glib::ustring get_name() const, adw_view_stack_page_get_name)
-  _WRAP_METHOD(bool get_needs_attention() const, adw_view_stack_page_get_needs_attention)
+  _WRAP_METHOD(void set_name(const Glib::ustring& name), adw_view_stack_page_set_name)
+
   _WRAP_METHOD(Glib::ustring get_title() const, adw_view_stack_page_get_title)
+  _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_view_stack_page_set_title)
+
   _WRAP_METHOD(bool get_use_underline() const, adw_view_stack_page_get_use_underline)
-  _WRAP_METHOD(bool get_visible() const, adw_view_stack_page_get_visible)
-  _WRAP_METHOD(void set_badge_number(guint badge_number), adw_view_stack_page_set_badge_number)
+  _WRAP_METHOD(void set_use_underline(bool use_underline), adw_view_stack_page_set_use_underline)
+
+  _WRAP_METHOD(Glib::ustring get_icon_name() const, adw_view_stack_page_get_icon_name)
   _WRAP_METHOD(void set_icon_name(const Glib::ustring& icon_name),
                adw_view_stack_page_set_icon_name)
-  _WRAP_METHOD(void set_name(const Glib::ustring& name), adw_view_stack_page_set_name)
+
+  _WRAP_METHOD(bool get_needs_attention() const, adw_view_stack_page_get_needs_attention)
   _WRAP_METHOD(void set_needs_attention(bool needs_attention),
                adw_view_stack_page_set_needs_attention)
-  _WRAP_METHOD(void set_title(const Glib::ustring& title), adw_view_stack_page_set_title)
-  _WRAP_METHOD(void set_use_underline(bool use_underline), adw_view_stack_page_set_use_underline)
+
+  _WRAP_METHOD(guint get_badge_number() const, adw_view_stack_page_get_badge_number)
+  _WRAP_METHOD(void set_badge_number(guint badge_number), adw_view_stack_page_set_badge_number)
+
+  _WRAP_METHOD(bool get_visible() const, adw_view_stack_page_get_visible)
   _WRAP_METHOD(void set_visible(bool visible), adw_view_stack_page_set_visible)
 
-  _WRAP_PROPERTY("badge-number", guint)
+  _WRAP_METHOD(bool get_starts_section() const, adw_view_stack_page_get_starts_section, newin "1.9")
+  _WRAP_METHOD(void set_starts_section(bool starts_section), adw_view_stack_page_set_starts_section,
+               newin "1.9")
+
+  _WRAP_METHOD(Glib::ustring get_section_title() const, adw_view_stack_page_get_section_title,
+               newin "1.9")
+  _WRAP_METHOD(void set_section_title(const Glib::ustring& section_title),
+               adw_view_stack_page_set_section_title, newin "1.9")
+
+  // Properties
   _WRAP_PROPERTY("child", Gtk::Widget*)
-  _WRAP_PROPERTY("icon-name", Glib::ustring)
   _WRAP_PROPERTY("name", Glib::ustring)
-  _WRAP_PROPERTY("needs-attention", bool)
   _WRAP_PROPERTY("title", Glib::ustring)
   _WRAP_PROPERTY("use-underline", bool)
+  _WRAP_PROPERTY("icon-name", Glib::ustring)
+  _WRAP_PROPERTY("needs-attention", bool)
+  _WRAP_PROPERTY("badge-number", guint)
   _WRAP_PROPERTY("visible", bool)
+  _WRAP_PROPERTY("starts-section", bool, newin "1.9")
+  _WRAP_PROPERTY("section-title", Glib::ustring, newin "1.9")
 };
 } // namespace Adw

@@ -1,0 +1,80 @@
+/* Copyright (c) 2026 Kurt Böhm <kurbo96@gmail.com>
+ *
+ * This file is part of libadwaitamm.
+ *
+ * libadwaitamm is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, either version 2.1 of the License,
+ * or (at your option) any later version.
+ *
+ * libadwaitamm is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+_DEFS(libadwaitamm, libadwaita)
+_CONFIGINCLUDE(libadwaitammconfig.h)
+_PINCLUDE(glibmm/private/object_p.h)
+
+#include <adwaita.h>
+#include <glibmm.h>
+#include <gtkmm.h>
+
+namespace Adw {
+class Toggle : public Glib::Object {
+  _CLASS_GOBJECT(Toggle, AdwToggle, ADW_TOGGLE, Glib::Object, GObject)
+  _STRUCT_NOT_HIDDEN
+  _DO_NOT_DERIVE_GTYPE
+
+protected:
+  _CTOR_DEFAULT
+
+public:
+  // Creation
+  _WRAP_CREATE()
+
+  // Methods
+  _WRAP_METHOD(Glib::ustring get_name() const, adw_toggle_get_name, newin "1.7")
+  _WRAP_METHOD(void set_name(const Glib::ustring& name), adw_toggle_set_name, newin "1.7")
+
+  _WRAP_METHOD(Glib::ustring get_label() const, adw_toggle_get_label, newin "1.7")
+  _WRAP_METHOD(void set_label(const Glib::ustring& label), adw_toggle_set_label, newin "1.7")
+
+  _WRAP_METHOD(bool get_use_underline() const, adw_toggle_get_use_underline, newin "1.7")
+  _WRAP_METHOD(void set_use_underline(bool use_underline), adw_toggle_set_use_underline,
+               newin "1.7")
+
+  _WRAP_METHOD(Glib::ustring get_icon_name() const, adw_toggle_get_icon_name, newin "1.7")
+  _WRAP_METHOD(void set_icon_name(const Glib::ustring& icon_name), adw_toggle_set_icon_name,
+               newin "1.7")
+
+  _WRAP_METHOD(Glib::ustring get_tooltip() const, adw_toggle_get_tooltip, newin "1.7")
+  _WRAP_METHOD(void set_tooltip(const Glib::ustring& tooltip), adw_toggle_set_tooltip, newin "1.7")
+
+  _WRAP_METHOD(Glib::ustring get_description() const, adw_toggle_get_description, newin "1.9")
+  _WRAP_METHOD(void set_description(const Glib::ustring& description), adw_toggle_set_description,
+               newin "1.9")
+
+  _WRAP_METHOD(Gtk::Widget* get_child() const, adw_toggle_get_child, newin "1.7")
+  _WRAP_METHOD(void set_child(Gtk::Widget* child), adw_toggle_set_child, newin "1.7")
+
+  _WRAP_METHOD(bool get_enabled() const, adw_toggle_get_enabled, newin "1.7")
+  _WRAP_METHOD(void set_enabled(bool enabled), adw_toggle_set_enabled, newin "1.7")
+
+  _WRAP_METHOD(guint get_index() const, adw_toggle_get_index, newin "1.7")
+
+  // Properties
+  _WRAP_PROPERTY("name", Glib::ustring, newin "1.7")
+  _WRAP_PROPERTY("label", Glib::ustring, newin "1.7")
+  _WRAP_PROPERTY("use-underline", bool, newin "1.7")
+  _WRAP_PROPERTY("icon-name", Glib::ustring, newin "1.7")
+  _WRAP_PROPERTY("tooltip", Glib::ustring, newin "1.7")
+  _WRAP_PROPERTY("description", Glib::ustring, newin "1.9")
+  _WRAP_PROPERTY("child", Gtk::Widget*, newin "1.7")
+  _WRAP_PROPERTY("enabled", bool, newin "1.7")
+};
+} // namespace Adw

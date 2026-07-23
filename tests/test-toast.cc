@@ -1,9 +1,11 @@
 /*
  * Copyright (C) 2021 Purism SPC
+ * Copyright (C) 2026 Kurt Böhm <kurbo96@gmail.com>
  *
  * SPDX-License-Identifier: LGPL-2.1-or-later
  *
  * Author: Alexander Mikhaylenko <alexander.mikhaylenko@puri.sm>
+ * Author: Kurt Böhm <kurbo96@gmail.com>
  */
 
 #include <libadwaitamm.h>
@@ -206,6 +208,18 @@ static void test_adw_toast_custom_title_overlay() {
   second_overlay.add_toast(toast.get());
 }
 
+static void test_adw_toast_use_markup() {
+  Adw::ToastOverlay toast_overlay;
+  std::unique_ptr<Adw::Toast> toast = std::make_unique<Adw::Toast>("");
+
+  toast->reference();
+  toast_overlay.add_toast(toast.get());
+  toast->set_use_markup(false);
+  toast->set_title("<span false>bad markup</sp>");
+
+  g_assert_true(toast->get_title() == "<span false>bad markup</sp>");
+}
+
 int main(int argc, char* argv[]) {
   gtk_test_init(&argc, &argv, NULL);
   Adw::init();
@@ -220,6 +234,7 @@ int main(int argc, char* argv[]) {
   g_test_add_func("/Adwaita/Toast/dismiss", test_adw_toast_dismiss);
   g_test_add_func("/Adwaita/Toast/custom_title", test_adw_toast_custom_title);
   g_test_add_func("/Adwaita/Toast/custom_title_overlay", test_adw_toast_custom_title_overlay);
+  g_test_add_func("/Adwaita/Toast/use_markup", test_adw_toast_use_markup);
 
   return g_test_run();
 }
